@@ -23,3 +23,16 @@ C:\Users\kozakp\Documents\Repositories\C#\CSharp-WFA-WindowsNotepadReplication\D
 C:\Users\kozakp\Documents\Repositories\C#\CSharp-WFA-WindowsNotepadReplication\DialogResult\obj\Debug\Notepad.Windows.SearchWindow.resources
 C:\Users\kozakp\Documents\Repositories\C#\CSharp-WFA-WindowsNotepadReplication\DialogResult\obj\Debug\Notepad.Windows.NotepadWindow.resources
 C:\Users\kozakp\Documents\Repositories\C#\CSharp-WFA-WindowsNotepadReplication\DialogResult\obj\Debug\Notepad.Windows.JumpWindow.resources
+C:\Users\kozakp\Documents\Repositories\C#\CSharp-WFA-WindowsNotepadReplication\Notepad\bin\Debug\Notepad.exe.config
+C:\Users\kozakp\Documents\Repositories\C#\CSharp-WFA-WindowsNotepadReplication\Notepad\bin\Debug\Notepad.exe
+C:\Users\kozakp\Documents\Repositories\C#\CSharp-WFA-WindowsNotepadReplication\Notepad\bin\Debug\Notepad.pdb
+C:\Users\kozakp\Documents\Repositories\C#\CSharp-WFA-WindowsNotepadReplication\Notepad\obj\Debug\Notepad.csprojAssemblyReference.cache
+C:\Users\kozakp\Documents\Repositories\C#\CSharp-WFA-WindowsNotepadReplication\Notepad\obj\Debug\Notepad.Windows.ReplacementWindow.resources
+C:\Users\kozakp\Documents\Repositories\C#\CSharp-WFA-WindowsNotepadReplication\Notepad\obj\Debug\Notepad.Windows.SearchWindow.resources
+C:\Users\kozakp\Documents\Repositories\C#\CSharp-WFA-WindowsNotepadReplication\Notepad\obj\Debug\Notepad.Windows.NotepadWindow.resources
+C:\Users\kozakp\Documents\Repositories\C#\CSharp-WFA-WindowsNotepadReplication\Notepad\obj\Debug\Notepad.Properties.Resources.resources
+C:\Users\kozakp\Documents\Repositories\C#\CSharp-WFA-WindowsNotepadReplication\Notepad\obj\Debug\Notepad.Windows.JumpWindow.resources
+C:\Users\kozakp\Documents\Repositories\C#\CSharp-WFA-WindowsNotepadReplication\Notepad\obj\Debug\Notepad.csproj.GenerateResource.cache
+C:\Users\kozakp\Documents\Repositories\C#\CSharp-WFA-WindowsNotepadReplication\Notepad\obj\Debug\Notepad.csproj.CoreCompileInputs.cache
+C:\Users\kozakp\Documents\Repositories\C#\CSharp-WFA-WindowsNotepadReplication\Notepad\obj\Debug\Notepad.exe
+C:\Users\kozakp\Documents\Repositories\C#\CSharp-WFA-WindowsNotepadReplication\Notepad\obj\Debug\Notepad.pdb
