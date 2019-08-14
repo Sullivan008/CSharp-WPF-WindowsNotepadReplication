@@ -1,0 +1,11 @@
+C:\Users\kozak\Documents\Visual Studio 2015\Projects\DialogResult\DialogResult\bin\Release\Notepad.exe.config
+C:\Users\kozak\Documents\Visual Studio 2015\Projects\DialogResult\DialogResult\bin\Release\Notepad.exe
+C:\Users\kozak\Documents\Visual Studio 2015\Projects\DialogResult\DialogResult\bin\Release\Notepad.pdb
+C:\Users\kozak\Documents\Visual Studio 2015\Projects\DialogResult\DialogResult\obj\Release\Notepad.Csere.resources
+C:\Users\kozak\Documents\Visual Studio 2015\Projects\DialogResult\DialogResult\obj\Release\Notepad.Kereses.resources
+C:\Users\kozak\Documents\Visual Studio 2015\Projects\DialogResult\DialogResult\obj\Release\Notepad.Notepad.resources
+C:\Users\kozak\Documents\Visual Studio 2015\Projects\DialogResult\DialogResult\obj\Release\Notepad.Properties.Resources.resources
+C:\Users\kozak\Documents\Visual Studio 2015\Projects\DialogResult\DialogResult\obj\Release\Notepad.Ugras.resources
+C:\Users\kozak\Documents\Visual Studio 2015\Projects\DialogResult\DialogResult\obj\Release\Notepad.csproj.GenerateResource.Cache
+C:\Users\kozak\Documents\Visual Studio 2015\Projects\DialogResult\DialogResult\obj\Release\Notepad.exe
+C:\Users\kozak\Documents\Visual Studio 2015\Projects\DialogResult\DialogResult\obj\Release\Notepad.pdb
