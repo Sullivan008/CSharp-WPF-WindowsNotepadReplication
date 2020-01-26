@@ -5,37 +5,40 @@ using System.Windows.Forms;
 namespace Notepad.Windows
 {
     public partial class NotepadWindow : Form
-	{
+    {
         #region CLASS VARIABLES
-        private readonly NotepadLogic notepadLogic;
-        private readonly SearchLogic searchLogic;
-        private readonly ReplacementLogic replacementLogic;
-        private readonly JumpLogic jumpLogic;
+
+        private readonly NotepadLogic _notepadLogic;
+
+        private readonly SearchLogic _searchLogic;
+
+        private readonly ReplacementLogic _replacementLogic;
+
+        private readonly JumpLogic _jumpLogic;
+
         #endregion
 
-        /// <summary>
-        ///     Konstruktor
-        /// </summary>
         public NotepadWindow()
-		{
-			InitializeComponent();
+        {
+            InitializeComponent();
 
-            notepadLogic = new NotepadLogic(notepadRichTextBox);
-            searchLogic = new SearchLogic(notepadRichTextBox);
-            replacementLogic = new ReplacementLogic(notepadRichTextBox);
-            jumpLogic = new JumpLogic(notepadRichTextBox);
-		}
+            _notepadLogic = new NotepadLogic(notepadRichTextBox);
+            _searchLogic = new SearchLogic(notepadRichTextBox);
+            _replacementLogic = new ReplacementLogic(notepadRichTextBox);
+            _jumpLogic = new JumpLogic(notepadRichTextBox);
+        }
 
         #region Events
+
         /// <summary>
         ///     Loaded esemény. A FORM betöltődésekor inicializálja a FORM-ot.
         /// </summary>
         private void Notepad_Load(object sender, EventArgs e)
-		{
+        {
             SetTSMenuItemsEnabledProperty(false, RedoTSMenuItem, UndoTSMenuItem, CutTSMenuItem, CopyTSMenuItem,
                 DeleteTSMenuItem, SearchTSMenuItem, FindNextTSMenuItem, RedoCTSMenuItem, UndoCTSMenuItem,
                 CutCTSMenuItem, CopyCTSMenuItem, DeleteCTSMenuItem, SelectAllCTSMenuItem, SelectAllTSMenuItem, SaveTSMenuItem, SaveAsTSMenuItem);
-		}
+        }
 
         /// <summary>
         ///     CLICK EVENT - Esemény, amely akkor fut le, hogyha valamelyik MENÜ ELEM-re (Menu Item) kattintunk.
@@ -43,8 +46,8 @@ namespace Notepad.Windows
         ///     alapján határozzuk majd meg, hogy melyik FUNCTION-t kell végrehajtani.
         /// </summary>
 		private void MenuItems_Click(object sender, EventArgs e)
-		{
-            switch(((ToolStripMenuItem)sender).Tag)
+        {
+            switch (((ToolStripMenuItem)sender).Tag)
             {
                 case "Undo":
                     Undo();
@@ -110,10 +113,10 @@ namespace Notepad.Windows
                     Jump();
                     break;
                 default:
-                    break;
+                    throw new ArgumentOutOfRangeException($@"Switching Type is not exists this method: {nameof(MenuItems_Click)}!");
 
             }
-		}
+        }
 
         /// <summary>
         ///     TEXT CHANGED EVENT - Esemény, amely akkor fut le, amikor a RichTextBox-ban található TEXT változik.
@@ -122,7 +125,7 @@ namespace Notepad.Windows
         /// </summary>
         private void NotepadRichTextBox_TextChanged(object sender, EventArgs e)
         {
-            notepadLogic.DocumentIsSaved = false;
+            _notepadLogic.DocumentIsSaved = false;
 
             SetTSMenuItemsEnabledProperty(true, UndoTSMenuItem, UndoCTSMenuItem, CutTSMenuItem, CopyTSMenuItem,
                 CutCTSMenuItem, CopyCTSMenuItem, SearchTSMenuItem, FindNextTSMenuItem, SelectAllCTSMenuItem,
@@ -142,25 +145,21 @@ namespace Notepad.Windows
         /// </summary>
         private void NotepadRichTextBox_SelectionChanged(object sender, EventArgs e)
         {
-            if (notepadRichTextBox.SelectedText.Length > 0)
-            {
-                SetTSMenuItemsEnabledProperty(true, DeleteTSMenuItem, DeleteCTSMenuItem);   
-            }
-            else
-            {
-                SetTSMenuItemsEnabledProperty(false, DeleteTSMenuItem, DeleteCTSMenuItem);
-            }
+            SetTSMenuItemsEnabledProperty(notepadRichTextBox.SelectedText.Length > 0, DeleteTSMenuItem,
+                DeleteCTSMenuItem);
         }
+
         #endregion
 
         #region Methods
+
         /// <summary>
         ///     A Szöveges INPUT mezőn egy Visszavonást hajt végre, majd a meghatározott
         ///     gombokat ELÉRHETŐVÉ teszi.
         /// </summary>
         private void Undo()
         {
-            notepadLogic.Undo();
+            _notepadLogic.Undo();
 
             SetTSMenuItemsEnabledProperty(true, RedoTSMenuItem, RedoCTSMenuItem);
         }
@@ -171,7 +170,7 @@ namespace Notepad.Windows
         /// </summary>
         private void Redo()
         {
-            if(!notepadLogic.Redo())
+            if (!_notepadLogic.Redo())
             {
                 SetTSMenuItemsEnabledProperty(false, RedoTSMenuItem, RedoCTSMenuItem);
             }
@@ -183,9 +182,9 @@ namespace Notepad.Windows
         /// </summary>
         private void Cut()
         {
-            if(notepadRichTextBox.SelectedText.Length > 0)
+            if (notepadRichTextBox.SelectedText.Length > 0)
             {
-                notepadLogic.CutOrCopy();
+                _notepadLogic.CutOrCopy();
 
                 SetTSMenuItemsEnabledProperty(true, PasteTSMenuItem, PasteCTSMenuItem);
             }
@@ -199,7 +198,7 @@ namespace Notepad.Windows
         {
             if (notepadRichTextBox.SelectedText.Length > 0)
             {
-                notepadLogic.CutOrCopy(false);
+                _notepadLogic.CutOrCopy(false);
 
                 SetTSMenuItemsEnabledProperty(true, PasteTSMenuItem, PasteCTSMenuItem);
             }
@@ -210,7 +209,7 @@ namespace Notepad.Windows
         /// </summary>
         private void Paste()
         {
-            notepadLogic.Paste();
+            _notepadLogic.Paste();
         }
 
         /// <summary>
@@ -218,9 +217,9 @@ namespace Notepad.Windows
         /// </summary>
         private void Delete()
         {
-            if(notepadRichTextBox.SelectedText.Length > 0)
+            if (notepadRichTextBox.SelectedText.Length > 0)
             {
-                notepadLogic.Delete();
+                _notepadLogic.Delete();
             }
         }
 
@@ -229,7 +228,7 @@ namespace Notepad.Windows
         /// </summary>
         private void SelectAll()
         {
-            notepadLogic.SelectAll();
+            _notepadLogic.SelectAll();
         }
 
         /// <summary>
@@ -237,26 +236,26 @@ namespace Notepad.Windows
         /// </summary>
         private void PutTimeDate()
         {
-            notepadLogic.PutDateTime();
+            _notepadLogic.PutDateTime();
         }
-        
+
         /// <summary>
         ///     A szöveges INPUT mezőn beállítja a SORTÖRÉS-es megejelenítést,
         ///     vagy annek levételét.
         /// </summary>
         private void WordWrap()
         {
-            if(!WordWrapTSMenuItem.Checked)
+            if (!WordWrapTSMenuItem.Checked)
             {
                 WordWrapTSMenuItem.CheckState = CheckState.Checked;
 
-                notepadLogic.SetWordWrap(true);
+                _notepadLogic.SetWordWrap(true);
             }
             else
             {
                 WordWrapTSMenuItem.CheckState = CheckState.Unchecked;
 
-                notepadLogic.SetWordWrap(false);
+                _notepadLogic.SetWordWrap(false);
             }
         }
 
@@ -265,9 +264,16 @@ namespace Notepad.Windows
         /// </summary>
         private void NewDocument()
         {
-            notepadLogic.NewDocument();
+            _notepadLogic.NewDocument();
 
-            ActiveForm.Text = "Unsaved - Notepad";
+            if (ActiveForm != null)
+            {
+                ActiveForm.Text = @"Unsaved - Notepad";
+            }
+            else
+            {
+                throw new ArgumentNullException(nameof(ActiveForm));
+            }
         }
 
         /// <summary>
@@ -275,15 +281,20 @@ namespace Notepad.Windows
         /// </summary>
         private void OpenDocument()
         {
-            /// Tároljuk, a függvény által visszatérített megnyitott dokumentum nevét.
-            string openedFileName = notepadLogic.OpenDocument();
+            string openedFileName = _notepadLogic.OpenDocument();
 
-            /// Beállítjuk a FORM új címsorát, ha az szükséges.
-            if(!openedFileName.Equals(string.Empty))
+            if (!openedFileName.Equals(string.Empty))
             {
-                ActiveForm.Text = $"{ openedFileName} - Notepad";
+                if (ActiveForm != null)
+                {
+                    ActiveForm.Text = $@"{ openedFileName} - Notepad";
 
-                SetTSMenuItemsEnabledProperty(true, SaveAsTSMenuItem);
+                    SetTSMenuItemsEnabledProperty(true, SaveAsTSMenuItem);
+                }
+                else
+                {
+                    throw new ArgumentNullException(nameof(ActiveForm));
+                }
             }
         }
 
@@ -295,13 +306,18 @@ namespace Notepad.Windows
         /// </param>
         private void SaveDocument(bool isSaveAsOperation = false)
         {
-            /// Tároljuk, a függvény által visszatérített megnyitott dokumentum nevét.
-            string openedFileName = notepadLogic.SaveDocument(isSaveAsOperation);
+            string openedFileName = _notepadLogic.SaveDocument(isSaveAsOperation);
 
-            /// Beállítjuk a FORM új címsorát, ha az szükséges.
             if (!openedFileName.Equals(string.Empty))
             {
-                ActiveForm.Text = $"{ openedFileName} - Notepad";
+                if (ActiveForm != null)
+                {
+                    ActiveForm.Text = $@"{ openedFileName} - Notepad";
+                }
+                else
+                {
+                    throw new ArgumentNullException(nameof(ActiveForm));
+                }
             }
         }
 
@@ -310,81 +326,83 @@ namespace Notepad.Windows
         /// </summary>
         private void Exit()
         {
-            notepadLogic.Exit();
+            _notepadLogic.Exit();
         }
-        
+
         /// <summary>
         ///     A betűtípus és betűszín beállításainak módosítását végrehajtó metódus.
         /// </summary>
         private void FontChange()
         {
-            notepadLogic.FontChange();
+            _notepadLogic.FontChange();
         }
-        
+
         /// <summary>
         ///     A háttérszín módosítását végrehajtó metódus.
         /// </summary>
         private void BackgroundColorChange()
         {
-            notepadLogic.BackgroundColorChange();
+            _notepadLogic.BackgroundColorChange();
         }
-        
+
         /// <summary>
         ///     A kijelölt szövegrész háttérszínének módosítását végrehajtó metódus.
         /// </summary>
         private void HighlightingColorChange()
         {
-            notepadLogic.HighlightingColorChange();
+            _notepadLogic.HighlightingColorChange();
         }
-        
+
         /// <summary>
         ///     Keresési ablak megnyitását végrehajtó metódus.
         /// </summary>
         private void Search()
         {
-            SearchWindow searchWindow = new SearchWindow(searchLogic);
+            SearchWindow searchWindow = new SearchWindow(_searchLogic);
 
             searchWindow.Show(this);
         }
-        
+
         /// <summary>
         ///     A keresési ablakban definiált keresési kifejezésnek megfelelően megkeresi a 
         ///     következő eredményt.
         /// </summary>
         private void FindNext()
         {
-            if(searchLogic.SearchingString.Equals(string.Empty))
+            if (_searchLogic.SearchingString.Equals(string.Empty))
             {
                 Search();
             }
             else
             {
-                searchLogic.NextSearch(searchLogic.SearchingString);
+                _searchLogic.NextSearch(_searchLogic.SearchingString);
             }
         }
-        
+
         /// <summary>
         ///     A csere ablak megnyitását végrehajtó metódus.
         /// </summary>
         private void Replace()
         {
-            ReplacementWindow replacementWindow = new ReplacementWindow(replacementLogic);
+            ReplacementWindow replacementWindow = new ReplacementWindow(_replacementLogic);
 
             replacementWindow.Show(this);
         }
-        
+
         /// <summary>
         ///     Az ugrás ablak megnyitását végrehajtó metódus.
         /// </summary>
         private void Jump()
         {
-            JumpWindow jumpWindow = new JumpWindow(jumpLogic);
+            JumpWindow jumpWindow = new JumpWindow(_jumpLogic);
 
             jumpWindow.Show(this);
         }
+
         #endregion
 
         #region PRIVATE HELPER Methods
+
         /// <summary>
         ///     A paraméterben átadott Menu gombok (Menu Items) elérhetőségét beállító metódus.
         ///     Minden gomb (Menu Item) az isEnabled változóban tárolt értéket fogja képviselni.
@@ -398,6 +416,7 @@ namespace Notepad.Windows
                 item.Enabled = isEnabled;
             }
         }
+
         #endregion
     }
 }

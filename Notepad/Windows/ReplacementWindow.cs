@@ -6,7 +6,7 @@ namespace Notepad.Windows
 {
     public partial class ReplacementWindow : Form
     {
-        private readonly ReplacementLogic replacementLogic;
+        private readonly ReplacementLogic _replacementLogic;
 
         public ReplacementWindow()
         {
@@ -24,10 +24,11 @@ namespace Notepad.Windows
         {
             InitializeComponent();
 
-            this.replacementLogic = replacementLogic;
+            _replacementLogic = replacementLogic;
         }
 
         #region EVENTS
+
         /// <summary>
         ///     LOAD EVENT - Az eseményben definiáljuk a felület alapértelmezett megjelenítését. 
         ///     (Gombok engedélyezése, stb...)
@@ -58,7 +59,7 @@ namespace Notepad.Windows
                     ReplaceAll();
                     break;
                 default:
-                    break;
+                    throw new ArgumentOutOfRangeException($@"Switching Type is not exists this method: {nameof(Buttons_Click)}!");
             }
         }
 
@@ -72,7 +73,7 @@ namespace Notepad.Windows
             {
                 SetButtonEnabledProperty(true, nextButton, replaceButton, replaceAllButton);
 
-                replacementLogic.SetReplacementStringFindIndexDefaultValue();
+                _replacementLogic.SetReplacementStringFindIndexDefaultValue();
             }
             else
             {
@@ -86,26 +87,21 @@ namespace Notepad.Windows
         /// </summary>
         private void SmallLargeLetterCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            if (((CheckBox)sender).Checked)
-            {
-                replacementLogic.LetterDiscrimination = true;
-            }
-            else
-            {
-                replacementLogic.LetterDiscrimination = false;
-            }
+            _replacementLogic.LetterDiscrimination = ((CheckBox)sender).Checked;
 
-            replacementLogic.SetRichTextBoxFindOptions();
+            _replacementLogic.SetRichTextBoxFindOptions();
         }
+
         #endregion
 
         #region Methods
+
         /// <summary>
         ///     A SEARCH Window felület bezárásáért felelős metódus.
         /// </summary>
         private void CloseWindow()
         {
-            this.Close();
+            Close();
         }
 
         /// <summary>
@@ -114,7 +110,7 @@ namespace Notepad.Windows
         /// </summary>
         private void NextSearch()
         {
-            replacementLogic.NextSearch(searchTermTextBox.Text, replacementExpTextBox.Text);
+            _replacementLogic.NextSearch(searchTermTextBox.Text, replacementExpTextBox.Text);
         }
 
         /// <summary>
@@ -122,19 +118,21 @@ namespace Notepad.Windows
         /// </summary>
         private void Replace()
         {
-            replacementLogic.Replace(searchTermTextBox.Text, replacementExpTextBox.Text);
+            _replacementLogic.Replace(searchTermTextBox.Text, replacementExpTextBox.Text);
         }
-        
+
         /// <summary>
         ///     A keresési feltételnek megfeleleő összes találati eredményt (ha van), kicseréli a cserélendő kifejezésre.
         /// </summary>
         private void ReplaceAll()
         {
-            replacementLogic.ReplaceAll(searchTermTextBox.Text, replacementExpTextBox.Text);
+            _replacementLogic.ReplaceAll(searchTermTextBox.Text, replacementExpTextBox.Text);
         }
+
         #endregion
 
         #region PRIVATE HELPER Methods
+
         /// <summary>
         ///     Metódus, amely a paraméterben átadott Button objektumok Enabled property-jét a paraméterben átadott
         ///     isEnabled paramétere alapján beállítja.
@@ -148,6 +146,7 @@ namespace Notepad.Windows
                 item.Enabled = isEnabled;
             }
         }
+
         #endregion
     }
 }

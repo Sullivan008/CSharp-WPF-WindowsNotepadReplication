@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Windows.Forms;
 
@@ -9,17 +10,13 @@ namespace Notepad.Logic
     public class NotepadLogic
     {
         #region CLASS VARIABLES AND PROPERTIES
-        private readonly RichTextBox notepadRichTextBox;
 
-        /// <summary>
-        ///     Ebben fogjuk eltárolni annak a fájlnak az elérési útvonalát, amelyet megnyitottunk szerkesztésre.
-        /// </summary>
-        private string openedFilePath;
+        private readonly RichTextBox _notepadRichTextBox;
 
-        /// <summary>
-        ///     Logikai változó, amelyben eltároljuk, hogy a Dokumentumunk mentett állapotban van-e.
-        /// </summary>
+        private string _openedFilePath;
+
         public bool? DocumentIsSaved { get; set; }
+
         #endregion
         
         /// <summary>
@@ -27,19 +24,20 @@ namespace Notepad.Logic
         /// </summary>
         public NotepadLogic(RichTextBox notepadRichTextBox)
         {
-            this.notepadRichTextBox = notepadRichTextBox;
+            _notepadRichTextBox = notepadRichTextBox ?? throw new ArgumentNullException(nameof(notepadRichTextBox));
 
             SetNotepadRichTextBoxAndPropertiesDefaultValue();
         }
 
-        #region Methods
+        #region PUBLIC Methods
+
         /// <summary>
         ///     Az osztályváltozóban meghatározott RichTextBox-on egy Visszavonást (Undo-t) 
         ///     hajt végre.
         /// </summary>
         public void Undo()
         {
-            notepadRichTextBox.Undo();
+            _notepadRichTextBox.Undo();
         }
 
         /// <summary>
@@ -52,9 +50,9 @@ namespace Notepad.Logic
         /// </returns>
         public bool Redo()
         {
-            notepadRichTextBox.Redo();
+            _notepadRichTextBox.Redo();
 
-            return notepadRichTextBox.CanRedo;
+            return _notepadRichTextBox.CanRedo;
         }
 
         /// <summary>
@@ -70,11 +68,11 @@ namespace Notepad.Logic
         /// </param>
         public void CutOrCopy(bool isCut = true)
         {
-            Clipboard.SetText(notepadRichTextBox.SelectedText);
+            Clipboard.SetText(_notepadRichTextBox.SelectedText);
 
             if (isCut)
             {
-                notepadRichTextBox.SelectedText = string.Empty;
+                _notepadRichTextBox.SelectedText = string.Empty;
             }
         }
 
@@ -86,7 +84,7 @@ namespace Notepad.Logic
         {
             if (Clipboard.ContainsText())
             {
-                notepadRichTextBox.SelectedText = Clipboard.GetText();
+                _notepadRichTextBox.SelectedText = Clipboard.GetText();
             }
         }
 
@@ -96,7 +94,7 @@ namespace Notepad.Logic
         /// </summary>
         public void Delete()
         {
-            notepadRichTextBox.SelectedText = string.Empty;
+            _notepadRichTextBox.SelectedText = string.Empty;
         }
 
         /// <summary>
@@ -105,7 +103,7 @@ namespace Notepad.Logic
         /// </summary>
         public void SelectAll()
         {
-            notepadRichTextBox.SelectAll();
+            _notepadRichTextBox.SelectAll();
         }
 
         /// <summary>
@@ -114,7 +112,7 @@ namespace Notepad.Logic
         /// </summary>
         public void PutDateTime()
         {
-            notepadRichTextBox.SelectedText = DateTime.Now.ToString();
+            _notepadRichTextBox.SelectedText = DateTime.Now.ToString(CultureInfo.InvariantCulture);
         }
 
         /// <summary>
@@ -122,49 +120,43 @@ namespace Notepad.Logic
         /// </summary>
         /// <param name="isWordWrap">
         ///     Meghatározza, hogy az osztályváltozó objektumán, be kell-e állítani a SORTÖRÉST.
-        ///     TRUE -  Ha be kell állítani.
-        ///     FALSE - Ha nem kell beállítani.
         /// </param>
         public void SetWordWrap(bool isWordWrap)
         {
-            notepadRichTextBox.WordWrap = isWordWrap;
+            _notepadRichTextBox.WordWrap = isWordWrap;
         }
 
         /// <summary>
-        ///     Új dokumentum inicializálását végrehajtó metódus. Vizsgálatra kerülnek benne a következők:
-        ///         - A dokumentum módosult-e, azaz volt-e már mentve, legyen az egy mentetlen dokuementum vagy egy megnyitott dokumentum.
-        ///         - Ha még nem volt mentve, akkor szeretnénk-e menteni.
-        ///             - Megvizsgáljuk, hogy volt-e megnyitásra bármilyen dokumentum is. Ha volt, akkor ugyan abba mentjük le.
-        ///             - Ha nem, egy új fájlnév megadása után kerül lementésre, az aktuális helyre a dokumentum.
+        ///     Új dokumentum inicializálását végrehajtó metódus.
         /// </summary>
         public void NewDocument()
         {
-            DialogResult result;
-
-            /// Vizsgáljuk, hogy a Dokumentum volt-e már mentve. Ez azt is befolyásolja, hogyha egy korábbi dokumentumot megnyitottunk,
-            /// de nem biztos hogy abban végeztünk módosítást.
             if (DocumentIsSaved == false)
             {
-                result = MessageBox.Show("The file is not saved. Do you want to save?", "New Document",
+                DialogResult result = MessageBox.Show(@"The file is not saved. Do you want to save?", @"New Document",
                     MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information);
 
-                if (result == DialogResult.Yes)
+                switch (result)
                 {
-                    /// Vizsgáljuk, hogy megnyitott fájlban dolgozunk-e vagy sem.
-                    if (openedFilePath.Equals(string.Empty))
+                    case DialogResult.Yes:
                     {
-                        NewFileSave();
-                    }
-                    else
-                    {
-                        ExistingFileSave();
-                    }
+                        if (_openedFilePath.Equals(string.Empty))
+                        {
+                            NewFileSave();
+                        }
+                        else
+                        {
+                            ExistingFileSave();
+                        }
 
-                    SetNotepadRichTextBoxAndPropertiesDefaultValue();
-                }
-                else if (result == DialogResult.No)
-                {
-                    SetNotepadRichTextBoxAndPropertiesDefaultValue();
+                        SetNotepadRichTextBoxAndPropertiesDefaultValue();
+                        break;
+                    }
+                    case DialogResult.No:
+                        SetNotepadRichTextBoxAndPropertiesDefaultValue();
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException($@"Switching Type is not exists this method: {nameof(NewDocument)}!");
                 }
             }
             else
@@ -183,28 +175,22 @@ namespace Notepad.Logic
         {
             using (OpenFileDialog dialog = new OpenFileDialog())
             {
-                dialog.Filter = "Text File (*txt)|*.txt|Rich Text Format (*rtf)|*.rtf|All File (*.*)|*.*";
+                dialog.Filter = @"Text File (*txt)|*.txt|Rich Text Format (*rtf)|*.rtf|All File (*.*)|*.*";
                 
                 if(dialog.ShowDialog() == DialogResult.OK && !dialog.FileName.Equals(string.Empty))
                 {
                     try
                     {
-                        /// A Stream lehetőségeknek megfelelően olvassuk be a fájl tartalmát.
-                        if(dialog.FileName.Contains(".rtf"))
-                        {
-                            notepadRichTextBox.LoadFile(dialog.FileName, RichTextBoxStreamType.RichText);
-                        }
-                        else
-                        {
-                            notepadRichTextBox.LoadFile(dialog.FileName, RichTextBoxStreamType.PlainText);
-                        }
+                        _notepadRichTextBox.LoadFile(dialog.FileName, dialog.FileName.Contains(".rtf")
+                                ? RichTextBoxStreamType.RichText
+                                : RichTextBoxStreamType.PlainText);
 
                         DocumentIsSaved = true;
-                        openedFilePath = dialog.FileName;
+                        _openedFilePath = dialog.FileName;
                     }
                     catch (IOException ex)
                     {
-                        MessageBox.Show("ERROR - Failed to open file!");
+                        MessageBox.Show(@"ERROR - Failed to open file!");
 
                         Debug.WriteLine($"++++ ERROR - Failed to open file! See more in Stack Trace: {ex.StackTrace}\n\n" +
                             $"See more in Inner Exception: {ex.InnerException}\n\nSee more in Message: {ex.Message}");
@@ -214,18 +200,17 @@ namespace Notepad.Logic
                 }
             }
 
-            return Path.GetFileName(openedFilePath);
+            return Path.GetFileName(_openedFilePath);
         }
 
         /// <summary>
-        ///     A dokumentum mentését végrehajtó metódus. A logikai paraméterben meghatározott értéknek megfelelően eldöntjük, hogy
-        ///     SaveAs vagy Save parancsot szeretnénk végrehajtani. 
+        ///     A dokumentum mentését végrehajtó metódus.
         /// </summary>
         /// <param name="isSaveAsOperation">
         ///     Logikai paraméter, amely meghatározza, hogy Mentés Másként parancsot szeretnénk végrehajtani, vagy csak sima mentést.
         /// </param>
         /// <returns>
-        ///     Az elmentett dokumentum neve. Ha SAVE parancs hajtódott végre, akkor ugyan az a név marad, a SaveAs-el ellentétben.
+        ///     Az elmentett dokumentum neve.
         /// </returns>
         public string SaveDocument(bool isSaveAsOperation)
         {
@@ -235,7 +220,7 @@ namespace Notepad.Logic
             }
             else
             {
-                if(openedFilePath.Equals(string.Empty))
+                if(_openedFilePath.Equals(string.Empty))
                 {
                     NewFileSave();
                 }
@@ -245,42 +230,32 @@ namespace Notepad.Logic
                 }
             }
 
-            return Path.GetFileName(openedFilePath);
+            return Path.GetFileName(_openedFilePath);
         }
 
         /// <summary>
-        ///     Az alkalmazás bezárását végrehajtó metódus. Vizsgálatra kerülnek benne a következők:
-        ///         - A dokumentum módosult-e, azaz volt-e már mentve, legyen az egy mentetlen dokuementum vagy egy megnyitott dokumentum.
-        ///         - Ha még nem volt mentve, akkor szeretnénk-e menteni.
-        ///             - Megvizsgáljuk, hogy volt-e megnyitásra bármilyen dokumentum is. Ha volt, akkor ugyan abba mentjük le.
-        ///             - Ha nem, egy új fájlnév megadása után kerül lementésre, az aktuális helyre a dokumentum.
+        ///     Az alkalmazás bezárását végrehajtó metódus.
         /// </summary>
         public void Exit()
         {
-            DialogResult result;
-
-            /// Vizsgáljuk, hogy a Dokumentum volt-e már mentve. Ez azt is befolyásolja, hogyha egy korábbi dokumentumot megnyitottunk,
-            /// de nem biztos hogy abban végeztünk módosítást.
             if (DocumentIsSaved == false)
             {
-                result = MessageBox.Show("The file is not saved. Do you want to save?", "Exit",
+                DialogResult result = MessageBox.Show(@"The file is not saved. Do you want to save?", @"Exit",
                     MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information);
 
-                if (result == DialogResult.Yes)
+                switch (result)
                 {
-                    /// Vizsgáljuk, hogy megnyitott fájlban dolgozunk-e vagy sem.
-                    if (openedFilePath.Equals(string.Empty))
-                    {
+                    case DialogResult.Yes when _openedFilePath.Equals(string.Empty):
                         NewFileSave();
-                    }
-                    else
-                    {
+                        break;
+                    case DialogResult.Yes:
                         ExistingFileSave();
-                    }
-                }
-                else if (result == DialogResult.No)
-                {
-                    Application.Exit();
+                        break;
+                    case DialogResult.No:
+                        Application.Exit();
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException($@"Switching Type is not exists this method: {nameof(Exit)}!");
                 }
             }
 
@@ -289,8 +264,6 @@ namespace Notepad.Logic
         
         /// <summary>
         ///     Metódus amely megváltoztatja a betűtípus beállításait (Betűtípus, méret, stb...) és betűszín beállításait.
-        ///     Ha van megfelelően kijelölt rész, akkor az új beállítások csak arra az egységre lesznek érvényesek, azonban
-        ///         ha nem jelölünk ki semmit, akkor az egész INPUT beviteli mezőre érvényes lesz!
         /// </summary>
         public void FontChange()
         {
@@ -300,15 +273,15 @@ namespace Notepad.Logic
                 
                 if(dialog.ShowDialog() == DialogResult.OK)
                 {
-                    if(notepadRichTextBox.SelectedText.Length > 0)
+                    if(_notepadRichTextBox.SelectedText.Length > 0)
                     {
-                        notepadRichTextBox.SelectionFont = dialog.Font;
-                        notepadRichTextBox.SelectionColor = dialog.Color;
+                        _notepadRichTextBox.SelectionFont = dialog.Font;
+                        _notepadRichTextBox.SelectionColor = dialog.Color;
                     }
                     else
                     {
-                        notepadRichTextBox.Font = dialog.Font;
-                        notepadRichTextBox.ForeColor = dialog.Color;
+                        _notepadRichTextBox.Font = dialog.Font;
+                        _notepadRichTextBox.ForeColor = dialog.Color;
                     }
                 }
             }
@@ -323,58 +296,54 @@ namespace Notepad.Logic
             {
                 if(dialog.ShowDialog() == DialogResult.OK)
                 {
-                    notepadRichTextBox.BackColor = dialog.Color;
+                    _notepadRichTextBox.BackColor = dialog.Color;
                 }
             }
         }
         
         /// <summary>
         ///     Metódus amely megváltoztatja az INPUT beviteli mezőben kijelölt szövegrész háttérszínét.
-        ///     Csak akkor jelenik meg dialógus ablak, amikor van kijelölt szövegrész.
         /// </summary>
         public void HighlightingColorChange()
         {
-            if(notepadRichTextBox.SelectedText.Length > 0)
+            if(_notepadRichTextBox.SelectedText.Length > 0)
             {
                 using (ColorDialog dialog = new ColorDialog())
                 {
                     if (dialog.ShowDialog() == DialogResult.OK)
                     {
-                        notepadRichTextBox.SelectionBackColor = dialog.Color;
+                        _notepadRichTextBox.SelectionBackColor = dialog.Color;
                     }
                 }
             }
         }
+
         #endregion
 
         #region PRIVATE HELPER Methods
+
         /// <summary>
         ///     Új dokumentum mentésekor végrehajtódó metódus.
-        ///     Egy dialógus ablak megnyitásával meghatározzuk a fájl mentési pozícióját és a fájl nevét (kiterjesztéssel
-        ///         együtt), majd annak megfelelően kerül mentésre a fájl. A mentés során eltároljuk az osztályváltozóban
-        ///         a fájl mentési helyét, annak érdekében, hogyha nem új dokumentumot hozunk létre, akkor ha új műveleteket
-        ///         hajtunk ezzel a dokumentummal végre, akkor ugyan abba a fájlba tudjuk a mentést végrehajtani.
         /// </summary>
         private void NewFileSave()
         {
             using (SaveFileDialog dialog = new SaveFileDialog())
             {
-                dialog.Filter = "Text File (*txt)|*.txt|Rich Text Formátum (*rtf)|*.rtf";
+                dialog.Filter = @"Text File (*txt)|*.txt|Rich Text Formátum (*rtf)|*.rtf";
 
                 if (dialog.ShowDialog() == DialogResult.OK && !dialog.FileName.Equals(string.Empty))
                 {
                     try
                     {
-                        /// A kiterjesztésnek megfelelően állítjuk be a fájl mentési beállításait.
-                        notepadRichTextBox.SaveFile(dialog.FileName,
+                        _notepadRichTextBox.SaveFile(dialog.FileName,
                             Path.GetExtension(dialog.FileName) == ".txt" ? RichTextBoxStreamType.PlainText : RichTextBoxStreamType.RichText);
 
                         DocumentIsSaved = true;
-                        openedFilePath = dialog.FileName;
+                        _openedFilePath = dialog.FileName;
                     }
                     catch (IOException ex)
                     {
-                        MessageBox.Show("ERROR - Failed to save file!");
+                        MessageBox.Show(@"ERROR - Failed to save file!");
 
                         Debug.WriteLine($"++++ ERROR - Failed to save file! See more in Stack Trace: {ex.StackTrace}\n\n" +
                             $"See more in Inner Exception: {ex.InnerException}\n\nSee more in Message: {ex.Message}");
@@ -385,22 +354,19 @@ namespace Notepad.Logic
 
         /// <summary>
         ///     Meglévő dokumentum mentésekor végrehajtódó metódus.
-        ///     Az osztályváltozóban található fájl elérés helyét tároló változóban (openedFilePath)-ben található elérési
-        ///     útvonalra elmentjük a fájl tartalmát.
         /// </summary>
         private void ExistingFileSave()
         {
             try
             {
-                /// A kiterjesztésnek megfelelően állítjuk be a fájl mentési beállításait.
-                notepadRichTextBox.SaveFile(openedFilePath,
-                    Path.GetExtension(openedFilePath) == ".txt" ? RichTextBoxStreamType.PlainText : RichTextBoxStreamType.RichText);
+                _notepadRichTextBox.SaveFile(_openedFilePath,
+                    Path.GetExtension(_openedFilePath) == ".txt" ? RichTextBoxStreamType.PlainText : RichTextBoxStreamType.RichText);
 
                 DocumentIsSaved = true;
             }
             catch (IOException ex)
             {
-                MessageBox.Show("ERROR - Failed to save file!");
+                MessageBox.Show(@"ERROR - Failed to save file!");
 
                 Debug.WriteLine($"++++ ERROR - Failed to save file! See more in Stack Trace: {ex.StackTrace}\n\n" +
                     $"See more in Inner Exception: {ex.InnerException}\n\nSee more in Message: {ex.Message}");
@@ -409,19 +375,16 @@ namespace Notepad.Logic
 
         /// <summary>
         ///      Az osztályváltozóban meghatározott RichTextBox-on beállítja az alapértelmezett beállításokat.
-        ///      - Kiüríti az objektumot.
-        ///      - Az új dokumentum mentetlen állapotban lesz.
-        ///      - Az objektum betütípus beállításat (szín, méret, stb...)
         /// </summary>
         private void SetNotepadRichTextBoxAndPropertiesDefaultValue()
         {
-            notepadRichTextBox.Clear();
-            notepadRichTextBox.BackColor = Color.White;
-            notepadRichTextBox.Font = new Font("Arial Narrow", 12);
-            notepadRichTextBox.ForeColor = Color.Black;
+            _notepadRichTextBox.Clear();
+            _notepadRichTextBox.BackColor = Color.White;
+            _notepadRichTextBox.Font = new Font("Arial Narrow", 12);
+            _notepadRichTextBox.ForeColor = Color.Black;
 
             DocumentIsSaved = null;
-            openedFilePath = string.Empty;
+            _openedFilePath = string.Empty;
         }
         #endregion
     }

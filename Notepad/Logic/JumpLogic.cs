@@ -6,7 +6,7 @@ namespace Notepad.Logic
 {
     public class JumpLogic
     {
-        private readonly RichTextBox notepadRichTextBox;
+        private readonly RichTextBox _notepadRichTextBox;
 
         /// <summary>
         ///     Konstruktor.
@@ -14,10 +14,11 @@ namespace Notepad.Logic
         /// <param name="notepadRichTextBox">Az az INPUT beviteli mező, amelyen a keresést szeretnénk végrehajtani.</param>
         public JumpLogic(RichTextBox notepadRichTextBox)
         {
-            this.notepadRichTextBox = notepadRichTextBox;
+            _notepadRichTextBox = notepadRichTextBox ?? throw new ArgumentNullException(nameof(notepadRichTextBox));
         }
 
         #region PUBLIC Methods
+        
         /// <summary>
         ///     A paraméterben megadott sorszámú sor elejére helyezi el a kurzort. Így biztosítva azt, hogy a paraméterben
         ///     megadott sorra kerülünk.
@@ -29,18 +30,17 @@ namespace Notepad.Logic
         /// </returns>
         public bool Jump(int lineNumber)
         {
-            if (notepadRichTextBox.SelectionLength > 0)
+            if (_notepadRichTextBox.SelectionLength > 0)
             {
-                notepadRichTextBox.SelectionLength = 0;
+                _notepadRichTextBox.SelectionLength = 0;
             }
 
-            if (notepadRichTextBox.Text.Length > 0)
+            if (_notepadRichTextBox.Text.Length > 0)
             {
                 try
                 {
-                    /// Kiolvassuk a Sorokat tartalmazó tömbből a paraméterben átadott sorszámú értéket, majd azt az értket megkeresve
-                    /// a RichTextBox-ban a kurzor a SOR elejére kerül.
-                    notepadRichTextBox.SelectionStart = notepadRichTextBox.Find(notepadRichTextBox.Lines[lineNumber - 1], RichTextBoxFinds.NoHighlight);
+                    _notepadRichTextBox.SelectionStart =
+                        _notepadRichTextBox.Find(_notepadRichTextBox.Lines[lineNumber - 1], RichTextBoxFinds.NoHighlight);
 
                     return true;
                 }
@@ -62,8 +62,9 @@ namespace Notepad.Logic
         /// <returns>A RichTextBox-ban található sorok száma.</returns>
         public int GetRichTextBoxLineNumbers()
         {
-            return notepadRichTextBox.Lines.Length;
+            return _notepadRichTextBox.Lines.Length;
         }
+
         #endregion
     }
 }

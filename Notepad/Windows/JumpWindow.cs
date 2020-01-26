@@ -7,7 +7,7 @@ namespace Notepad.Windows
 {
     public partial class JumpWindow : Form
 	{
-        private readonly JumpLogic jumpLogic;
+        private readonly JumpLogic _jumpLogic;
 
         /// <summary>
         ///     Konstruktor.
@@ -20,10 +20,11 @@ namespace Notepad.Windows
 		{
 			InitializeComponent();
 
-            this.jumpLogic = jumpLogic;
+            _jumpLogic = jumpLogic ?? throw new ArgumentNullException(nameof(jumpLogic));
 		}
 
         #region Events
+
         /// <summary>
         ///     CLICK EVENT - Esemény, amely akkor fut le, ha valamelyik gombot megnyomjuk a SEARCH Window
         ///     felületen.
@@ -39,7 +40,7 @@ namespace Notepad.Windows
                     LineJump();
                     break;
                 default:
-                    break;
+                    throw new ArgumentOutOfRangeException($@"Switching Type is not exists this method: {nameof(Buttons_Click)}!");
             }
         }
 
@@ -51,12 +52,14 @@ namespace Notepad.Windows
         {
             if (lineNumberTextBox.Text.Length < 0)
             {
-                lineNumberTextBox.Text = "1";
+                lineNumberTextBox.Text = @"1";
             }
         }
+
         #endregion
 
-        #region Methods
+        #region PRIVATE Helper Methods
+
         /// <summary>
         ///     Az INPUT beviteli mezőben meghatározott sorszámú sorra való ugrásért felelős metódus. 
         ///     A metódus lekezeli a kivételeket, illetve csak EGÉSZ SZÁM bevitelét engedélyezi.
@@ -69,25 +72,28 @@ namespace Notepad.Windows
                 
                 if(lineNumber < 0)
                 {
-                    MessageBox.Show("The sequence number must be at least 1!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(@"The sequence number must be at least 1!", @"Information",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
-                    if(jumpLogic.Jump(lineNumber))
+                    if(_jumpLogic.Jump(lineNumber))
                     {
-                        this.Close();
+                        Close();
                     }
                     else
                     {
-                        MessageBox.Show("The sequence number cannot contain characters!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show(@"The sequence number cannot contain characters!", @"Information",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                        lineNumberTextBox.Text = jumpLogic.GetRichTextBoxLineNumbers().ToString();
+                        lineNumberTextBox.Text = _jumpLogic.GetRichTextBoxLineNumbers().ToString();
                     }
                 }
             }
             catch (FormatException ex)
             {
-                MessageBox.Show("The sequence number cannot contain characters!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(@"The sequence number cannot contain characters!", @"Information",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 Debug.WriteLine($"++++ ERROR - The sequence number cannot contain characters! See more in Stack Trace: {ex.StackTrace}\n\n" +
                     $"See more in Inner Exception: {ex.InnerException}\n\nSee more in Message: {ex.Message}");
@@ -99,10 +105,9 @@ namespace Notepad.Windows
         /// </summary>
         private void CloseWindow()
         {
-            this.Close();
+            Close();
         }
+
         #endregion
-
-
-	}
+    }
 }

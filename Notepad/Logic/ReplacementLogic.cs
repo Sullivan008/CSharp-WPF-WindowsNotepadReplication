@@ -5,32 +5,19 @@ namespace Notepad.Logic
     public class ReplacementLogic
     {
         #region CLASS VARIABLES AND PROPERTIES
-        private readonly RichTextBox notepadRichTextBox;
 
-        /// <summary>
-        ///     Tároljuk a RichTextBox Keresési beállításait.
-        /// </summary>
-        private RichTextBoxFinds richTextBoxFindOptions;
+        private readonly RichTextBox _notepadRichTextBox;
 
-        /// <summary>
-        ///     Tároljuk a cserélendő keresett karakterlánc találati INDEX-ét az INPUT beviteli mezőben.
-        /// </summary>
-        private int replacementStringFindIndex;
+        private RichTextBoxFinds _richTextBoxFindOptions;
 
-        /// <summary>
-        ///     Tároljuk, hogy melyik INDEX-en fogjuk kezdeni a keresést a vizsgálandó karakterláncon.
-        /// </summary>
-        private int startIndex;
+        private int _replacementStringFindIndex;
 
-        /// <summary>
-        ///     Tároljuk, hogy hol lesz a vég INDEX ameddig kereshetünk a vizsgálandó karakterláncon.
-        /// </summary>
-        private int endIndex;
+        private int _startIndex;
 
-        /// <summary>
-        ///     Tároljuk, hogy Kis- Nagy betűs megkülönböztetési keresést hajtunk-e végre.
-        /// </summary>
+        private int _endIndex;
+
         public bool LetterDiscrimination { get; set; }
+        
         #endregion
 
         /// <summary>
@@ -39,7 +26,7 @@ namespace Notepad.Logic
         /// <param name="notepadRichTextBox">Az az INPUT beviteli mező, amelyen a keresést szeretnénk végrehajtani.</param>
         public ReplacementLogic(RichTextBox notepadRichTextBox)
         {
-            this.notepadRichTextBox = notepadRichTextBox;
+            _notepadRichTextBox = notepadRichTextBox;
 
             SetRichTextBoxFindOptions();
             SetPropertiesDefaultValue();
@@ -56,23 +43,23 @@ namespace Notepad.Logic
         {
             /// Ha még van keresési lehetőség, azaz még lehet hogy van találati lehetőség az INPUT beviteli mezőben
             /// akkor...
-            if (replacementStringFindIndex != -1)
+            if (_replacementStringFindIndex != -1)
             {
                 /// A kurzor indexét az INPUT beviteli mezőben beállítjuk arra az INDEX-re, ahol az utolsó találati indexünket
                 /// kaptuk, különben pedig onnantól kezdjük a keresést ahonnan esetlegesen kicseréltük a cserélendő karakterláncra. 
-                if (replacementStringFindIndex == 0)
+                if (_replacementStringFindIndex == 0)
                 {
-                    notepadRichTextBox.SelectionStart = replacementStringFindIndex;
+                    _notepadRichTextBox.SelectionStart = _replacementStringFindIndex;
                 }
                 else
                 {
-                    notepadRichTextBox.SelectionStart = replacementStringFindIndex + replacementExpString.Length;
+                    _notepadRichTextBox.SelectionStart = _replacementStringFindIndex + replacementExpString.Length;
                 }
             }
 
             Search(replacementString);
 
-            if (replacementStringFindIndex == -1)
+            if (_replacementStringFindIndex == -1)
             {
                 MessageBox.Show("\"" + replacementString + "\" - No more results found", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -80,15 +67,15 @@ namespace Notepad.Logic
         
         public void Replace(string replacementString, string replacementExpString)
         {
-            if (notepadRichTextBox.SelectedText.Length > 0)
+            if (_notepadRichTextBox.SelectedText.Length > 0)
             {
-                notepadRichTextBox.SelectedText = replacementExpString;
+                _notepadRichTextBox.SelectedText = replacementExpString;
 
                 /// Ha kicseréltük a karakterláncot, akkor a találati index-et meg kell növelni eggyel, mivel akkor mindig ugyan azt
                 /// a karakterláncot találná meg legközelebb.
-                if (replacementStringFindIndex == 0)
+                if (_replacementStringFindIndex == 0)
                 {
-                    replacementStringFindIndex++;
+                    _replacementStringFindIndex++;
                 }
             }
 
@@ -97,13 +84,13 @@ namespace Notepad.Logic
         
         public void ReplaceAll(string replacementString, string replacementExpString)
         {
-            while(replacementStringFindIndex != -1)
+            while(_replacementStringFindIndex != -1)
             {
                 NextSearch(replacementString, replacementExpString);
                 
-                if(notepadRichTextBox.SelectedText.Length > 0)
+                if(_notepadRichTextBox.SelectedText.Length > 0)
                 {
-                    notepadRichTextBox.SelectedText = replacementExpString;
+                    _notepadRichTextBox.SelectedText = replacementExpString;
                 }
             }
         }
@@ -116,15 +103,15 @@ namespace Notepad.Logic
             /// Kis-Nagy betű megkülönböztetésének beállítása.
             if (LetterDiscrimination)
             {
-                richTextBoxFindOptions = RichTextBoxFinds.MatchCase;
+                _richTextBoxFindOptions = RichTextBoxFinds.MatchCase;
             }
             else
             {
-                richTextBoxFindOptions = RichTextBoxFinds.None;
+                _richTextBoxFindOptions = RichTextBoxFinds.None;
             }
         }
 
-        public void SetReplacementStringFindIndexDefaultValue() => replacementStringFindIndex = 0;
+        public void SetReplacementStringFindIndexDefaultValue() => _replacementStringFindIndex = 0;
         #endregion
 
         #region PRIVATE HELPER Methods
@@ -142,16 +129,16 @@ namespace Notepad.Logic
             /// Csak akkor hajtjuk végre a Keresést, ha az END és a START index az nem egyenlő. Erre azért van szükség, mivel 
             /// ha visszafelé keresünk, akkor ha a START és az END Index megegyezik, akkor újra a végéről megismétli a keresési
             /// eljárást.
-            if (startIndex != endIndex)
+            if (_startIndex != _endIndex)
             {
-                replacementStringFindIndex = notepadRichTextBox.Find(searchingString, startIndex, endIndex, richTextBoxFindOptions);
+                _replacementStringFindIndex = _notepadRichTextBox.Find(searchingString, _startIndex, _endIndex, _richTextBoxFindOptions);
             }
             else
             {
-                replacementStringFindIndex = -1;
+                _replacementStringFindIndex = -1;
             }
 
-            notepadRichTextBox.Focus();
+            _notepadRichTextBox.Focus();
         }
 
         /// <summary>
@@ -160,8 +147,8 @@ namespace Notepad.Logic
         /// </summary>
         private void SetStartEndFindIndexes()
         {
-            startIndex = notepadRichTextBox.SelectionStart + notepadRichTextBox.SelectionLength;
-            endIndex = notepadRichTextBox.Text.Length;
+            _startIndex = _notepadRichTextBox.SelectionStart + _notepadRichTextBox.SelectionLength;
+            _endIndex = _notepadRichTextBox.Text.Length;
         }
 
         /// <summary>
@@ -174,7 +161,7 @@ namespace Notepad.Logic
             LetterDiscrimination = false;
             SetReplacementStringFindIndexDefaultValue();
 
-            richTextBoxFindOptions = RichTextBoxFinds.None;
+            _richTextBoxFindOptions = RichTextBoxFinds.None;
         }
         #endregion
     }
