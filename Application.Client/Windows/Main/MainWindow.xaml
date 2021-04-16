@@ -5,7 +5,96 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
+    <Window.Resources>
 
+        <ControlTemplate x:Key="MainInputTextBoxTemplate" TargetType="{x:Type TextBox}">
+            <Border x:Name="border" BorderBrush="#F0F0F0" BorderThickness="0,2.5,0,0">
+                <ScrollViewer x:Name="PART_ContentHost" />
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter Property="BorderBrush" TargetName="border" Value="#F0F0F0"/>
+                </Trigger>
+                <Trigger Property="IsFocused" Value="true">
+                    <Setter Property="BorderBrush" TargetName="border" Value="#F0F0F0"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+
+        <ControlTemplate x:Key="MainMenuItemControlTemplate" TargetType="{x:Type MenuItem}">
+            <Border x:Name="MenuItemBorder" BorderThickness="1.5">
+                <Grid>
+                    <ContentPresenter Margin="{TemplateBinding Padding}" ContentSource="Header"/>
+
+                    <Popup AllowsTransparency="True" PlacementRectangle="-1.5,18,0,0"
+                           IsOpen="{Binding IsSubmenuOpen, RelativeSource={RelativeSource TemplatedParent}}">
+                        <Border Margin="0,0,8,8" BorderBrush="#FF999999" BorderThickness="1" Background="#FFF0F0F0" Padding="2">
+                            <Border.Effect>
+                                <DropShadowEffect BlurRadius="5" Opacity="0.4"/>
+                            </Border.Effect>
+                            <ScrollViewer Style="{DynamicResource {ComponentResourceKey ResourceId=MenuScrollViewer, TypeInTargetAssembly={x:Type FrameworkElement}}}">
+                                <Grid>
+                                    <Rectangle Margin="29,2,0,2" Width="1" 
+                                               Fill="#FFD7D7D7" HorizontalAlignment="Left"/>
+                                    <ItemsPresenter/>
+                                </Grid>
+                            </ScrollViewer>
+                        </Border>
+                    </Popup>
+                </Grid>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsHighlighted" Value="True">
+                    <Setter Property="Background" TargetName="MenuItemBorder" Value="#E5F3FF"/>
+                    <Setter Property="BorderBrush" TargetName="MenuItemBorder" Value="#CCE8FD"/>
+                </Trigger>
+                <Trigger Property="IsKeyboardFocusWithin" Value="true">
+                    <Setter Property="Background" TargetName="MenuItemBorder" Value="#CCE8FD"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </Window.Resources>
+
+    <Grid>
+        <DockPanel>
+            <Menu Background="#FFFFFF"
+                  DockPanel.Dock="Top">
+                <MenuItem Template="{DynamicResource MainMenuItemControlTemplate}" Header="File">
+                    <MenuItem Header="_New"/>
+                    <MenuItem Header="_Open..."/>
+                    <MenuItem Header="_Save"/>
+                    <MenuItem Header="_Save as..."/>
+                    <Separator/>
+                    <MenuItem Header="Exit..."/>
+                </MenuItem>
+                <MenuItem Template="{DynamicResource MainMenuItemControlTemplate}" Header="Edit">
+                    <MenuItem Header="_Redo"/>
+                    <MenuItem Header="_Undo"/>
+                    <Separator/>
+                    <MenuItem Header="_Cut"/>
+                    <MenuItem Header="_Copy"/>
+                    <MenuItem Header="_Paste"/>
+                    <MenuItem Header="_Delete"/>
+                    <Separator/>
+                    <MenuItem Header="_Search"/>
+                    <MenuItem Header="_FindNext"/>
+                    <MenuItem Header="_Replace"/>
+                    <MenuItem Header="_Jump"/>
+                </MenuItem>
+                <MenuItem Template="{DynamicResource MainMenuItemControlTemplate}" Header="Format">
+                    <MenuItem Header="_Break words"/>
+                    <MenuItem Header="_Font"/>
+                </MenuItem>
+                <MenuItem Template="{DynamicResource MainMenuItemControlTemplate}" Header="View">
+                    <MenuItem Header="_Status bar"/>
+                </MenuItem>
+            </Menu>
+            <TextBox Template="{DynamicResource MainInputTextBoxTemplate}"
+                     DockPanel.Dock="Bottom" 
+                     AcceptsReturn="True"
+                     TextWrapping="NoWrap"
+                     VerticalScrollBarVisibility="Visible"
+                     HorizontalScrollBarVisibility="Visible"/>
+        </DockPanel>
     </Grid>
 </Window>
