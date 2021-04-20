@@ -1,6 +1,11 @@
-﻿using Application.Client.Core.Dialogs.MessageDialog.Interfaces;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Application.Client.Core.Dialogs.MessageDialog.Interfaces;
 using Application.Client.Core.Dialogs.OpenFileDialog.Interfaces;
 using Application.Client.Core.Dialogs.SaveFileDialog.Interfaces;
+using Application.Client.Core.Dialogs.StaticValues;
+using Application.Client.Core.Dialogs.StaticValues.Enums;
+using Application.Client.Core.Dialogs.StaticValues.Models;
 using Application.Client.Core.Services.FileReader.Interfaces;
 using Application.Client.Core.Services.FileWriter.Interfaces;
 using Application.Client.Core.ViewModels;
@@ -34,5 +39,33 @@ namespace Application.Client.Windows.Main.ViewModels
 
             _notepadStorageService = notepadStorageService;
         }
+
+        #region PROPERTIES GETTERS/ SETTERS
+
+        private string _windowTitle = "Unnamed";
+        public string WindowTitle
+        {
+            get => $"{_windowTitle} - Notepad";
+            set
+            {
+                _windowTitle = value;
+
+                OnPropertyChanged();
+            }
+        }
+
+        private string _content = string.Empty;
+        public string Content
+        {
+            get => _content;
+            set
+            {
+                _content = value;
+
+                OnPropertyChanged();
+            }
+        }
+
+        #endregion
     }
 }
