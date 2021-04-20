@@ -26,7 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Windows\Main\Commands\" />
+    <Folder Include="Services\" />
   </ItemGroup>
 
 </Project>
