@@ -9,6 +9,8 @@ using Application.Client.Core.Services.FileReader.Interfaces;
 using Application.Client.Core.Services.FileWriter;
 using Application.Client.Core.Services.FileWriter.Interfaces;
 using Application.Client.Windows.Main;
+using Application.Client.Windows.Main.Services;
+using Application.Client.Windows.Main.Services.Interfaces;
 using Application.Client.Windows.Main.ViewModels;
 using Application.Client.Windows.Main.ViewModels.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
@@ -39,6 +41,8 @@ namespace Application.Client.Core.Application.Providers
         {
             services.AddSingleton<MainWindow>();
             services.AddSingleton<IMainWindowViewModel, MainWindowViewModel>();
+
+            services.AddSingleton<INotepadStorageService, NotepadStorageService>();
 
             return services;
         }
