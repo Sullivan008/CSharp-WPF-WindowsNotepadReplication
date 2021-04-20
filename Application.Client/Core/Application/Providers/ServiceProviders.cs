@@ -1,4 +1,6 @@
-﻿using Application.Client.Core.Dialogs.OpenFileDialog;
+﻿using Application.Client.Core.Dialogs.MessageDialog;
+using Application.Client.Core.Dialogs.MessageDialog.Interfaces;
+using Application.Client.Core.Dialogs.OpenFileDialog;
 using Application.Client.Core.Dialogs.OpenFileDialog.Interfaces;
 using Application.Client.Core.Dialogs.SaveFileDialog;
 using Application.Client.Core.Dialogs.SaveFileDialog.Interfaces;
@@ -22,6 +24,8 @@ namespace Application.Client.Core.Application.Providers
 
             services.AddTransient<ITextFileWriterService, TextFileWriterService>();
             services.AddTransient<ITextFileReaderService, TextFileReaderService>();
+
+            services.AddTransient<IMessageDialogService, MessageDialogService>();
 
             return services;
         }
