@@ -31,7 +31,7 @@ namespace Application.Client.Core.Dialogs.OpenFileDialog
                         OpenFileDialogResultType = OpenFileDialogResultType.Cancel
                     };
                 default:
-                    throw new OpenFileDialogUnknownResultType("An unknown error occurred while reading the result of the dialog box!");
+                    throw new OpenFileDialogUnknownResultTypeException("An unknown error occurred while reading the result of the dialog box!");
             }
         }
 
