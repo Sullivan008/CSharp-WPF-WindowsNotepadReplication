@@ -22,13 +22,13 @@ namespace Application.Client.Core.Dialogs.SaveFileDialog
                 case true:
                     return new SaveFileDialogResult
                     {
-                        SavedFileDialogResultType = SaveFileDialogResultType.Ok,
+                        SaveFileDialogResultType = SaveFileDialogResultType.Ok,
                         SavedFilePath = saveFileDialog.FileName
                     };
                 case false:
                     return new SaveFileDialogResult
                     {
-                        SavedFileDialogResultType = SaveFileDialogResultType.Cancel
+                        SaveFileDialogResultType = SaveFileDialogResultType.Cancel
                     };
                 default:
                     throw new SaveFileDialogUnknownResultTypeException("An unknown error occurred while reading the result of the dialog box!");

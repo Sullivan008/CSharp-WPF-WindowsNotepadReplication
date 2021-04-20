@@ -6,19 +6,19 @@ namespace Application.Client.Core.Dialogs.SaveFileDialog.Models
 {
     public class SaveFileDialogResult
     {
-        private readonly SaveFileDialogResultType? _savedFileDialogResultType;
-        public SaveFileDialogResultType SavedFileDialogResultType
+        private readonly SaveFileDialogResultType? _saveFileDialogResultType;
+        public SaveFileDialogResultType SaveFileDialogResultType
         {
             get
             {
-                if (!_savedFileDialogResultType.HasValue)
+                if (!_saveFileDialogResultType.HasValue)
                 {
-                    throw new ArgumentNullException(nameof(_savedFileDialogResultType), @"The value cannot be null!");
+                    throw new ArgumentNullException(nameof(_saveFileDialogResultType), @"The value cannot be null!");
                 }
 
-                return _savedFileDialogResultType.Value;
+                return _saveFileDialogResultType.Value;
             }
-            init => _savedFileDialogResultType = value;
+            init => _saveFileDialogResultType = value;
         }
 
         private readonly string _savedFilePath;
@@ -27,12 +27,12 @@ namespace Application.Client.Core.Dialogs.SaveFileDialog.Models
             get => _savedFilePath;
             init
             {
-                if (!_savedFileDialogResultType.HasValue)
+                if (!_saveFileDialogResultType.HasValue)
                 {
                     throw new InvalidOperationException($"Without the result type of the save file dialog, the {nameof(SavedFilePath)} property cannot be set!");
                 }
 
-                if (_savedFileDialogResultType.Value == SaveFileDialogResultType.Cancel && !string.IsNullOrWhiteSpace(value))
+                if (_saveFileDialogResultType.Value == SaveFileDialogResultType.Cancel && !string.IsNullOrWhiteSpace(value))
                 {
                     throw new InvalidOperationException("It is not possible to set the saved file path when, the save file dialog result type is cancelled!");
                 }
