@@ -4,6 +4,8 @@ using System.IO;
 using System.Windows;
 using System.Windows.Threading;
 using Application.Client.Core.Application.Providers;
+using Application.Client.Core.Dialogs.MessageDialog.Interfaces;
+using Application.Client.Core.Dialogs.MessageDialog.Models;
 using Application.Client.Windows.Main;
 using Application.Core.Environment.StaticValues;
 using Application.Core.Environment.StaticValues.Enums;
@@ -29,7 +31,7 @@ namespace Application.Client
                     KeyValuePair<string, string> environment = new(HostDefaults.EnvironmentKey,
                         Environment.GetEnvironmentVariable(EnvironmentVariables.GetEnvironmentVariableKey(EnvironmentVariableKey.AspNetCoreEnvironment)));
 
-                    builder.AddInMemoryCollection(new[] {environment})
+                    builder.AddInMemoryCollection(new[] { environment })
                         .AddEnvironmentVariables();
                 })
                 .ConfigureAppConfiguration(builder =>
@@ -100,14 +102,19 @@ namespace Application.Client
             e.Handled = true;
         }
 
-        private static void ShowUnhandledException(ClientErrorModel errorModel)
+        private async void ShowUnhandledException(ClientErrorModel errorModel)
         {
-            string errorMessage = $"An application error occured.\n\n{errorModel.Message}.\n\n{errorModel.Exception}";
+            IMessageDialogService messageDialogService = _host.Services.GetRequiredService<IMessageDialogService>();
 
-            if (MessageBox.Show(errorMessage, "Application Error", MessageBoxButton.OK, MessageBoxImage.Error) == MessageBoxResult.OK)
+            await messageDialogService.ShowDialogAsync(new MessageDialogOptions
             {
-                Current.Shutdown();
-            }
+                Content = $"An application error occurred.\n\n{errorModel.Message}.\n\n{errorModel.Exception}",
+                Title = "Application Error",
+                Button = MessageBoxButton.OK,
+                Icon = MessageBoxImage.Error
+            });
+
+            Current.Shutdown();
         }
     }
 }
