@@ -2,6 +2,8 @@
 using Application.Client.Core.Dialogs.OpenFileDialog.Interfaces;
 using Application.Client.Core.Dialogs.SaveFileDialog;
 using Application.Client.Core.Dialogs.SaveFileDialog.Interfaces;
+using Application.Client.Core.Services.FileReader;
+using Application.Client.Core.Services.FileReader.Interfaces;
 using Application.Client.Core.Services.FileWriter;
 using Application.Client.Core.Services.FileWriter.Interfaces;
 using Application.Client.Windows.Main;
@@ -17,7 +19,9 @@ namespace Application.Client.Core.Application.Providers
         {
             services.AddTransient<ISaveFileDialogService, SaveFileDialogService>();
             services.AddTransient<IOpenFileDialogService, OpenFileDialogService>();
+
             services.AddTransient<ITextFileWriterService, TextFileWriterService>();
+            services.AddTransient<ITextFileReaderService, TextFileReaderService>();
 
             return services;
         }
