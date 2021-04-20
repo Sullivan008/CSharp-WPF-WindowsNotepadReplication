@@ -1,4 +1,6 @@
-﻿using Application.Client.Core.Dialogs.SaveFileDialog;
+﻿using Application.Client.Core.Dialogs.OpenFileDialog;
+using Application.Client.Core.Dialogs.OpenFileDialog.Interfaces;
+using Application.Client.Core.Dialogs.SaveFileDialog;
 using Application.Client.Core.Dialogs.SaveFileDialog.Interfaces;
 using Application.Client.Core.Services.FileWriter;
 using Application.Client.Core.Services.FileWriter.Interfaces;
@@ -13,8 +15,9 @@ namespace Application.Client.Core.Application.Providers
     {
         public static IServiceCollection AddTransientServices(this IServiceCollection services)
         {
-            services.AddScoped<ISaveFileDialogService, SaveFileDialogService>();
-            services.AddScoped<ITextFileWriterService, TextFileWriterService>();
+            services.AddTransient<ISaveFileDialogService, SaveFileDialogService>();
+            services.AddTransient<IOpenFileDialogService, OpenFileDialogService>();
+            services.AddTransient<ITextFileWriterService, TextFileWriterService>();
 
             return services;
         }
