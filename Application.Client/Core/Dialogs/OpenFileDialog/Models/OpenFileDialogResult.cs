@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using Application.Client.Core.Dialogs.OpenFileDialog.Enums;
 
 namespace Application.Client.Core.Dialogs.OpenFileDialog.Models
@@ -39,5 +40,9 @@ namespace Application.Client.Core.Dialogs.OpenFileDialog.Models
                 _filePath = value;
             }
         }
+
+        public string OpenedFileName => Path.GetFileName(_filePath);
+
+        public string OpenedFileNameWithoutExtension => Path.GetFileNameWithoutExtension(_filePath);
     }
 }
