@@ -9,10 +9,10 @@ namespace Application.Client.Windows.Main.ViewModels
 {
     public partial class MainWindowViewModel
     {
-        private ICommand _saveIntoNewFileCommand;
-        public ICommand SaveIntoNewFileCommand => _saveIntoNewFileCommand ??= new RelayCommandAsync(SaveIntoNewFileCommandExecute);
+        private ICommand _saveFileAsCommand;
+        public ICommand SaveFileAsCommand => _saveFileAsCommand ??= new RelayCommandAsync(SaveFileAsCommandExecute);
 
-        private async Task SaveIntoNewFileCommandExecute()
+        private async Task SaveFileAsCommandExecute()
         {
             SaveFileDialogResult saveFileDialogResult =
                 await _saveFileDialogService.ShowDialogAsync(new SaveFileDialogOptions { FileFilters = GetSaveFileDialogFilters() });

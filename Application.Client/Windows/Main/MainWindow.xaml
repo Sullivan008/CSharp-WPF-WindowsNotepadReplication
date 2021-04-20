@@ -63,7 +63,7 @@
                     <MenuItem Header="_New"/>
                     <MenuItem Header="_Open..."/>
                     <MenuItem Header="_Save"/>
-                    <MenuItem Header="_Save as..." Command="{Binding SaveIntoNewFileCommand}" />
+                    <MenuItem Header="_Save as..." Command="{Binding SaveFileAsCommand}" />
                     <Separator/>
                     <MenuItem Header="Exit..."/>
                 </MenuItem>
