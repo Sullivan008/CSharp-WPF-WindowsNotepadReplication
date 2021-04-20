@@ -67,5 +67,14 @@ namespace Application.Client.Windows.Main.ViewModels
         }
 
         #endregion
+
+        private static IReadOnlyDictionary<string, IReadOnlyList<string>> GetSaveFileDialogFilters()
+        {
+            IReadOnlyList<FileFilterType> fileFilterTypes = new[] { FileFilterType.Text };
+
+            IReadOnlyList<FileFilterModel> fileFilters = FileFilters.GetFileFiltersByFilterTypes(fileFilterTypes);
+
+            return fileFilters.ToDictionary(x => x.FilterName, y => y.Filters);
+        }
     }
 }
