@@ -79,6 +79,7 @@ namespace Application.Client
         {
             services.AddSingletonServices();
             services.AddScopedServices();
+            services.AddTransientServices();
         }
 
         private void AppDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
