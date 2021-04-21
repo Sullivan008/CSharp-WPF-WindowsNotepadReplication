@@ -19,11 +19,6 @@ namespace Application.Client.Windows.Main.Services
                 throw new ArgumentNullException(nameof(filePath), @"The value cannot be null!");
             }
 
-            if (!File.Exists(filePath))
-            {
-                throw new FileNotFoundException("Could not find file!", filePath);
-            }
-
             UsedFilePath = filePath;
         }
     }
