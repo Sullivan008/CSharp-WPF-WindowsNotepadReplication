@@ -4,7 +4,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="{Binding WindowTitle}" Height="450" Width="800">
+        Height="450" Width="800"
+        Title="{Binding WindowTitle}" Icon="/Resources/application-icon.ico">
     <Window.Resources>
 
         <ControlTemplate x:Key="MainInputTextBoxTemplate" TargetType="{x:Type TextBox}">

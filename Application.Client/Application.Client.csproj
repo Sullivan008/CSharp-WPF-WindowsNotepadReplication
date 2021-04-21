@@ -29,4 +29,10 @@
     <Folder Include="Services\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Resource Include="Resources\application-icon.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
 </Project>
