@@ -18,11 +18,11 @@ namespace Application.Client.Core.Services.FileReader
             return await GetFileContent<TContentType>(model.FilePath);
         }
 
-        public static Task<TContentType> GetFileContent<TContentType>(string filePath)
+        public static async Task<TContentType> GetFileContent<TContentType>(string filePath)
         {
             using StreamReader streamReader = new(filePath);
 
-            return streamReader.ReadToEndAsync() as Task<TContentType>;
+            return (TContentType)(object)await streamReader.ReadToEndAsync();
         }
     }
 }
