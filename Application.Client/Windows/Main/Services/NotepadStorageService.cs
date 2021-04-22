@@ -1,16 +1,21 @@
 ﻿using System;
 using System.IO;
+using Application.Client.Windows.Main.Services.Enums;
 using Application.Client.Windows.Main.Services.Interfaces;
 
 namespace Application.Client.Windows.Main.Services
 {
     public class NotepadStorageService : INotepadStorageService
     {
+        private DocumentState _documentState;
+
         public string UsedFilePath { get; private set; }
 
         public string UsedFileName => Path.GetFileNameWithoutExtension(UsedFilePath);
 
         public bool HasUsedFile => !string.IsNullOrWhiteSpace(UsedFilePath);
+
+        public bool HasDocumentModified => _documentState == DocumentState.Modified;
 
         public void SetUsedFilePath(string filePath)
         {
@@ -20,6 +25,11 @@ namespace Application.Client.Windows.Main.Services
             }
 
             UsedFilePath = filePath;
+        }
+
+        public void SetDocumentState(DocumentState documentState)
+        {
+            _documentState = documentState;
         }
     }
 }
