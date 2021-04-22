@@ -9,6 +9,7 @@ using Application.Client.Core.Dialogs.StaticValues.Models;
 using Application.Client.Core.Services.FileReader.Interfaces;
 using Application.Client.Core.Services.FileWriter.Interfaces;
 using Application.Client.Core.ViewModels;
+using Application.Client.Windows.Main.Services.Enums;
 using Application.Client.Windows.Main.Services.Interfaces;
 using Application.Client.Windows.Main.ViewModels.Interfaces;
 
@@ -61,6 +62,11 @@ namespace Application.Client.Windows.Main.ViewModels
             set
             {
                 _content = value;
+
+                if (!_notepadStorageService.HasDocumentModified)
+                {
+                    _notepadStorageService.SetDocumentState(DocumentState.Modified);
+                }
 
                 OnPropertyChanged();
             }
