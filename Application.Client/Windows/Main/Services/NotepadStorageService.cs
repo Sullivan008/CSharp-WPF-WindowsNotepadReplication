@@ -11,8 +11,10 @@ namespace Application.Client.Windows.Main.Services
 
         public string UsedFilePath { get; private set; }
 
-        public string UsedFileName => Path.GetFileNameWithoutExtension(UsedFilePath);
+        public string UsedFileNameWithExtension => Path.GetFileName(UsedFilePath) ?? "Unnamed.txt";
 
+        public string UsedFileNameWithoutExtension => Path.GetFileNameWithoutExtension(UsedFilePath) ?? "Unnamed";
+        
         public bool HasUsedFile => !string.IsNullOrWhiteSpace(UsedFilePath);
 
         public bool HasDocumentModified => _documentState == DocumentState.Modified;

@@ -6,7 +6,9 @@ namespace Application.Client.Windows.Main.Services.Interfaces
     {
         string UsedFilePath { get; }
 
-        string UsedFileName { get; }
+        string UsedFileNameWithExtension { get; }
+
+        string UsedFileNameWithoutExtension { get; }
 
         bool HasUsedFile { get; }
 

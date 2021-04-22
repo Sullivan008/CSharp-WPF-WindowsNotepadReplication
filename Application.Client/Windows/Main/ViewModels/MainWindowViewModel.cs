@@ -43,10 +43,10 @@ namespace Application.Client.Windows.Main.ViewModels
 
         #region PROPERTIES GETTERS/ SETTERS
 
-        private string _windowTitle = "Unnamed";
+        private string _windowTitle;
         public string WindowTitle
         {
-            get => $"{_windowTitle} - Notepad";
+            get => $"{_windowTitle ?? _notepadStorageService.UsedFileNameWithoutExtension} - Notepad";
             set
             {
                 _windowTitle = value;

@@ -25,7 +25,7 @@ namespace Application.Client.Windows.Main.ViewModels
                 _notepadStorageService.SetUsedFilePath(saveFileDialogResult.SavedFilePath);
                 _notepadStorageService.SetDocumentState(DocumentState.Unmodified);
 
-                WindowTitle = _notepadStorageService.UsedFileName;
+                WindowTitle = _notepadStorageService.UsedFileNameWithoutExtension;
             }
         }
     }
