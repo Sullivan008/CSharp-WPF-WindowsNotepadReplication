@@ -20,20 +20,7 @@ namespace Application.Client.Core.Dialogs.MessageDialog.Models
             init => _button = value;
         }
 
-        private readonly MessageBoxImage? _icon;
-        public MessageBoxImage Icon
-        {
-            get
-            {
-                if (!_icon.HasValue)
-                {
-                    throw new ArgumentNullException(nameof(Icon), @"The value cannot be null!");
-                }
-
-                return _icon.Value;
-            }
-            init => _icon = value;
-        }
+        public MessageBoxImage? Icon { get; init; }
 
         private readonly string _title;
         public string Title
