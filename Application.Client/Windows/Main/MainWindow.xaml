@@ -63,7 +63,7 @@
                 <MenuItem Template="{DynamicResource MainMenuItemControlTemplate}" Header="File">
                     <MenuItem Header="_New"/>
                     <MenuItem Header="_Open..."/>
-                    <MenuItem Header="_Save"/>
+                    <MenuItem Header="_Save" Command="{Binding SaveFileCommand}"/>
                     <MenuItem Header="_Save as..." Command="{Binding SaveFileAsCommand}" />
                     <Separator/>
                     <MenuItem Header="Exit..."/>
