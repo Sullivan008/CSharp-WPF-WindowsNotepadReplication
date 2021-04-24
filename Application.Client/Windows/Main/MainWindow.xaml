@@ -62,7 +62,7 @@
                   DockPanel.Dock="Top">
                 <MenuItem Template="{DynamicResource MainMenuItemControlTemplate}" Header="File">
                     <MenuItem Header="_New"/>
-                    <MenuItem Header="_Open..."/>
+                    <MenuItem Header="_Open..." Command="{Binding OpenFileCommand}"/>
                     <MenuItem Header="_Save" Command="{Binding SaveFileCommand}"/>
                     <MenuItem Header="_Save as..." Command="{Binding SaveFileAsCommand}" />
                     <Separator/>
