@@ -30,24 +30,35 @@ namespace Application.Client.Windows.Main.ViewModels
                 {
                     case MessageDialogResultType.Yes:
                         {
-                            SaveFileDialogResult saveFileDialogResult = await _saveFileDialogService.ShowDialogAsync(new SaveFileDialogOptions { FileFilters = GetSaveFileDialogFilters() });
-
-                            if (saveFileDialogResult.SaveFileDialogResultType == SaveFileDialogResultType.Ok)
+                            if (_notepadStorageService.HasUsedFile)
                             {
-                                await _textFileWriterService.WriteAsync(new WriteTextFileModel { FilePath = saveFileDialogResult.SavedFilePath, Content = _content });
-                                _notepadStorageService.SetUsedFilePath(saveFileDialogResult.SavedFilePath);
-
-                                OpenFileDialogResult openFileDialogResult = await _openFileDialogService.ShowDialogAsync(new OpenFileDialogOptions { FileFilters = GetOpenFileDialogFilters() });
-
-                                if (openFileDialogResult.OpenFileDialogResultType == OpenFileDialogResultType.Ok)
-                                {
-                                    Content = await _textFileReaderService.ReadAsync<string>(new ReadTextFileModel { FilePath = openFileDialogResult.FilePath });
-                                    _notepadStorageService.SetUsedFilePath(openFileDialogResult.OpenedFileName);
-                                }
-
-                                _notepadStorageService.SetDocumentState(DocumentState.Unmodified);
-                                WindowTitle = _notepadStorageService.UsedFileNameWithoutExtension;
+                                await _textFileWriterService.WriteAsync(new WriteTextFileModel { FilePath = _notepadStorageService.UsedFilePath, Content = _content });
                             }
+                            else
+                            {
+                                SaveFileDialogResult saveFileDialogResult = await _saveFileDialogService.ShowDialogAsync(new SaveFileDialogOptions { FileFilters = GetSaveFileDialogFilters() });
+
+                                if (saveFileDialogResult.SaveFileDialogResultType == SaveFileDialogResultType.Ok)
+                                {
+                                    await _textFileWriterService.WriteAsync(new WriteTextFileModel { FilePath = saveFileDialogResult.SavedFilePath, Content = _content });
+                                    _notepadStorageService.SetUsedFilePath(saveFileDialogResult.SavedFilePath);
+                                }
+                                else if (saveFileDialogResult.SaveFileDialogResultType == SaveFileDialogResultType.Cancel)
+                                {
+                                    return;
+                                }
+                            }
+
+                            OpenFileDialogResult openFileDialogResult = await _openFileDialogService.ShowDialogAsync(new OpenFileDialogOptions { FileFilters = GetOpenFileDialogFilters() });
+
+                            if (openFileDialogResult.OpenFileDialogResultType == OpenFileDialogResultType.Ok)
+                            {
+                                Content = await _textFileReaderService.ReadAsync<string>(new ReadTextFileModel { FilePath = openFileDialogResult.FilePath });
+                                _notepadStorageService.SetUsedFilePath(openFileDialogResult.OpenedFileName);
+                            }
+
+                            _notepadStorageService.SetDocumentState(DocumentState.Unmodified);
+                            WindowTitle = _notepadStorageService.UsedFileNameWithoutExtension;
 
                             break;
                         }
