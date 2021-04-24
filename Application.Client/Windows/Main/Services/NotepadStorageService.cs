@@ -29,6 +29,11 @@ namespace Application.Client.Windows.Main.Services
             UsedFilePath = filePath;
         }
 
+        public void SetDefaultFilePath()
+        {
+            UsedFilePath = default;
+        }
+
         public void SetDocumentState(DocumentState documentState)
         {
             _documentState = documentState;

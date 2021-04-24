@@ -16,6 +16,8 @@ namespace Application.Client.Windows.Main.Services.Interfaces
 
         void SetUsedFilePath(string filePath);
 
+        void SetDefaultFilePath();
+
         void SetDocumentState(DocumentState documentState);
     }
 }
