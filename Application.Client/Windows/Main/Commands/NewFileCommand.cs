@@ -45,37 +45,21 @@ namespace Application.Client.Windows.Main.ViewModels
                                 }
                             }
 
-                            Content = string.Empty;
-
-                            _notepadStorageService.SetDefaultFilePath();
-                            _notepadStorageService.SetDocumentState(DocumentState.Unmodified);
-
-                            WindowTitle = _notepadStorageService.UsedFileNameWithoutExtension;
-
                             break;
                         }
-                    case MessageDialogResultType.No:
+                    case MessageDialogResultType.Cancel:
                         {
-                            Content = string.Empty;
-
-                            _notepadStorageService.SetDefaultFilePath();
-                            _notepadStorageService.SetDocumentState(DocumentState.Unmodified);
-
-                            WindowTitle = _notepadStorageService.UsedFileNameWithoutExtension;
-
-                            break;
+                            return;
                         }
                 }
             }
-            else
-            {
-                Content = string.Empty;
 
-                _notepadStorageService.SetDefaultFilePath();
-                _notepadStorageService.SetDocumentState(DocumentState.Unmodified);
+            Content = string.Empty;
 
-                WindowTitle = _notepadStorageService.UsedFileNameWithoutExtension;
-            }
+            _notepadStorageService.SetDefaultFilePath();
+            _notepadStorageService.SetDocumentState(DocumentState.Unmodified);
+
+            WindowTitle = _notepadStorageService.UsedFileNameWithoutExtension;
         }
     }
 }
