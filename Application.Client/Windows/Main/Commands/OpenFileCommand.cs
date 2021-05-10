@@ -49,50 +49,28 @@ namespace Application.Client.Windows.Main.ViewModels
                                 }
                             }
 
-                            OpenFileDialogResult openFileDialogResult = await _openFileDialogService.ShowDialogAsync(new OpenFileDialogOptions { FileFilters = GetOpenFileDialogFilters() });
-
-                            if (openFileDialogResult.OpenFileDialogResultType == OpenFileDialogResultType.Ok)
-                            {
-                                Content = await _textFileReaderService.ReadAsync<string>(new ReadTextFileModel { FilePath = openFileDialogResult.FilePath });
-                                _notepadStorageService.SetUsedFilePath(openFileDialogResult.OpenedFileName);
-                            }
-
                             _notepadStorageService.SetDocumentState(DocumentState.Unmodified);
                             WindowTitle = _notepadStorageService.UsedFileNameWithoutExtension;
 
                             break;
                         }
-                    case MessageDialogResultType.No:
+                    case MessageDialogResultType.Cancel:
                         {
-                            OpenFileDialogResult openFileDialogResult = await _openFileDialogService.ShowDialogAsync(new OpenFileDialogOptions { FileFilters = GetOpenFileDialogFilters() });
-
-                            if (openFileDialogResult.OpenFileDialogResultType == OpenFileDialogResultType.Ok)
-                            {
-                                Content = await _textFileReaderService.ReadAsync<string>(new ReadTextFileModel { FilePath = openFileDialogResult.FilePath });
-
-                                _notepadStorageService.SetUsedFilePath(openFileDialogResult.FilePath);
-                                _notepadStorageService.SetDocumentState(DocumentState.Unmodified);
-
-                                WindowTitle = _notepadStorageService.UsedFileNameWithoutExtension;
-                            }
-
-                            break;
+                            return;
                         }
                 }
             }
-            else
+
+            OpenFileDialogResult openFileDialogResult = await _openFileDialogService.ShowDialogAsync(new OpenFileDialogOptions { FileFilters = GetOpenFileDialogFilters() });
+
+            if (openFileDialogResult.OpenFileDialogResultType == OpenFileDialogResultType.Ok)
             {
-                OpenFileDialogResult openFileDialogResult = await _openFileDialogService.ShowDialogAsync(new OpenFileDialogOptions { FileFilters = GetOpenFileDialogFilters() });
+                Content = await _textFileReaderService.ReadAsync<string>(new ReadTextFileModel { FilePath = openFileDialogResult.FilePath });
 
-                if (openFileDialogResult.OpenFileDialogResultType == OpenFileDialogResultType.Ok)
-                {
-                    Content = await _textFileReaderService.ReadAsync<string>(new ReadTextFileModel { FilePath = openFileDialogResult.FilePath });
+                _notepadStorageService.SetUsedFilePath(openFileDialogResult.FilePath);
+                _notepadStorageService.SetDocumentState(DocumentState.Unmodified);
 
-                    _notepadStorageService.SetUsedFilePath(openFileDialogResult.FilePath);
-                    _notepadStorageService.SetDocumentState(DocumentState.Unmodified);
-
-                    WindowTitle = _notepadStorageService.UsedFileNameWithoutExtension;
-                }
+                WindowTitle = _notepadStorageService.UsedFileNameWithoutExtension;
             }
         }
     }
