@@ -66,7 +66,7 @@
                     <MenuItem Header="_Save" Command="{Binding SaveFileCommand}"/>
                     <MenuItem Header="_Save as..." Command="{Binding SaveFileAsCommand}" />
                     <Separator/>
-                    <MenuItem Header="Exit..."/>
+                    <MenuItem Header="Exit..." Command="{Binding ExitCommand}"/>
                 </MenuItem>
                 <MenuItem Template="{DynamicResource MainMenuItemControlTemplate}" Header="Edit">
                     <MenuItem Header="_Redo"/>
