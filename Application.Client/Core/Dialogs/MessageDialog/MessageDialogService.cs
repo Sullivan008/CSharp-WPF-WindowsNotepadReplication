@@ -30,9 +30,9 @@ namespace Application.Client.Core.Dialogs.MessageDialog
 
         private static Task<MessageBoxResult> ShowMessageDialogAsync(MessageDialogOptions options)
         {
-            return Task.Run(() => options.Icon.HasValue
-                ? MessageBox.Show(options.Content, options.Title, options.Button, options.Icon.Value)
-                : MessageBox.Show(options.Content, options.Title, options.Button));
+            return options.Icon.HasValue
+                ? Task.FromResult(MessageBox.Show(options.Content, options.Title, options.Button, options.Icon.Value))
+                : Task.FromResult(MessageBox.Show(options.Content, options.Title, options.Button));
         }
     }
 }
