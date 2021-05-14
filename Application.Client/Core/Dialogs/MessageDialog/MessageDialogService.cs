@@ -9,9 +9,9 @@ namespace Application.Client.Core.Dialogs.MessageDialog
 {
     public class MessageDialogService : IMessageDialogService
     {
-        public async Task<MessageDialogResult> ShowDialogAsync(MessageDialogOptions options)
+        public async Task<MessageDialogResult> ShowMessageDialogAsync(MessageDialogOptions options)
         {
-            switch (await ShowMessageDialogAsync(options))
+            switch (await ShowDialogAsync(options))
             {
                 case MessageBoxResult.OK:
                     return new MessageDialogResult { MessageDialogResultType = MessageDialogResultType.Ok };
@@ -28,7 +28,7 @@ namespace Application.Client.Core.Dialogs.MessageDialog
             }
         }
 
-        private static Task<MessageBoxResult> ShowMessageDialogAsync(MessageDialogOptions options)
+        private static Task<MessageBoxResult> ShowDialogAsync(MessageDialogOptions options)
         {
             return options.Icon.HasValue
                 ? Task.FromResult(MessageBox.Show(options.Content, options.Title, options.Button, options.Icon.Value))

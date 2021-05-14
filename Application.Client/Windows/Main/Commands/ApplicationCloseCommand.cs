@@ -19,7 +19,7 @@ namespace Application.Client.Windows.Main.ViewModels
         {
             if (_notepadStorageService.HasDocumentModified)
             {
-                MessageDialogResult messageDialogResult = await _messageDialogService.ShowDialogAsync(
+                MessageDialogResult messageDialogResult = await _messageDialogService.ShowMessageDialogAsync(
                     new MessageDialogOptions { Title = "Notepad", Content = $"Do you want to save the {_notepadStorageService.UsedFileNameWithExtension} changes?", Button = MessageBoxButton.YesNoCancel });
 
                 switch (messageDialogResult.MessageDialogResultType)

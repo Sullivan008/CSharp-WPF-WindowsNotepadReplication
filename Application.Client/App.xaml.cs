@@ -106,7 +106,7 @@ namespace Application.Client
         {
             IMessageDialogService messageDialogService = _host.Services.GetRequiredService<IMessageDialogService>();
 
-            await messageDialogService.ShowDialogAsync(new MessageDialogOptions
+            await messageDialogService.ShowMessageDialogAsync(new MessageDialogOptions
             {
                 Content = $"An application error occurred.\n\n{errorModel.Message}.\n\n{errorModel.Exception}",
                 Title = "Application Error",
