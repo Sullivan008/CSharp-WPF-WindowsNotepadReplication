@@ -1,4 +1,4 @@
-﻿using System.Threading.Tasks;
+﻿using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
 using Application.Client.Core.Commands;
@@ -12,11 +12,10 @@ namespace Application.Client.Windows.Main.ViewModels
 {
     public partial class MainWindowViewModel
     {
-        private ICommand _exitCommand;
+        private ICommand _applicationCloseCommand;
+        public ICommand ApplicationCloseCommand => _applicationCloseCommand ??= new RelayCommandAsync<CancelEventArgs>(ApplicationCloseCommandExecute);
 
-        public ICommand ExitCommand => _exitCommand ??= new RelayCommandAsync(ExitCommandExecute);
-
-        private async Task ExitCommandExecute()
+        private async void ApplicationCloseCommandExecute(CancelEventArgs eventArgs)
         {
             if (_notepadStorageService.HasDocumentModified)
             {
@@ -41,6 +40,7 @@ namespace Application.Client.Windows.Main.ViewModels
                                 }
                                 else if (saveFileDialogResult.SaveFileDialogResultType == SaveFileDialogResultType.Cancel)
                                 {
+                                    eventArgs.Cancel = true;
                                     return;
                                 }
                             }
@@ -48,9 +48,10 @@ namespace Application.Client.Windows.Main.ViewModels
                             break;
                         }
                     case MessageDialogResultType.Cancel:
-                    {
-                        return;
-                    }
+                        {
+                            eventArgs.Cancel = true;
+                            return;
+                        }
                 }
             }
 
