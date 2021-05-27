@@ -16,7 +16,7 @@ namespace Application.Client.Windows.Main.ViewModels
         private async Task SaveFileAsCommandExecute()
         {
             SaveFileDialogResult saveFileDialogResult =
-                await _saveFileDialogService.ShowDialogAsync(new SaveFileDialogOptions { FileFilters = GetSaveFileDialogFilters() });
+                await _saveFileDialog.ShowDialogAsync(new SaveFileDialogOptions { FileFilters = GetSaveFileDialogFilters() });
 
             if (saveFileDialogResult.SaveFileDialogResultType == SaveFileDialogResultType.Ok)
             {

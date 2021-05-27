@@ -26,7 +26,7 @@ namespace Application.Client.Windows.Main.ViewModels
             else
             {
                 SaveFileDialogResult saveFileDialogResult =
-                    await _saveFileDialogService.ShowDialogAsync(new SaveFileDialogOptions { FileFilters = GetSaveFileDialogFilters() });
+                    await _saveFileDialog.ShowDialogAsync(new SaveFileDialogOptions { FileFilters = GetSaveFileDialogFilters() });
 
                 if (saveFileDialogResult.SaveFileDialogResultType == SaveFileDialogResultType.Ok)
                 {

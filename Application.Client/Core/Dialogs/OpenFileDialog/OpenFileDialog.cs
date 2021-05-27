@@ -1,44 +1,44 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Application.Client.Core.Dialogs.SaveFileDialog.Enums;
-using Application.Client.Core.Dialogs.SaveFileDialog.Exceptions;
-using Application.Client.Core.Dialogs.SaveFileDialog.Interfaces;
-using Application.Client.Core.Dialogs.SaveFileDialog.Models;
+using Application.Client.Core.Dialogs.OpenFileDialog.Enums;
+using Application.Client.Core.Dialogs.OpenFileDialog.Exceptions;
+using Application.Client.Core.Dialogs.OpenFileDialog.Interfaces;
+using Application.Client.Core.Dialogs.OpenFileDialog.Models;
 
-namespace Application.Client.Core.Dialogs.SaveFileDialog
+namespace Application.Client.Core.Dialogs.OpenFileDialog
 {
-    public class SaveFileDialogService : ISaveFileDialogService
+    public class OpenFileDialog : IOpenFileDialog
     {
-        public async Task<SaveFileDialogResult> ShowDialogAsync(SaveFileDialogOptions options)
+        public async Task<OpenFileDialogResult> ShowDialogAsync(OpenFileDialogOptions options)
         {
-            Microsoft.Win32.SaveFileDialog saveFileDialog = new()
+            Microsoft.Win32.OpenFileDialog openFileDialog = new()
             {
                 Filter = await ConvertFileFiltersToFileFilterFormat(options.FileFilters)
             };
 
-            switch (saveFileDialog.ShowDialog())
+            switch (openFileDialog.ShowDialog())
             {
                 case true:
-                    return new SaveFileDialogResult
+                    return new OpenFileDialogResult
                     {
-                        SaveFileDialogResultType = SaveFileDialogResultType.Ok,
-                        SavedFilePath = saveFileDialog.FileName
+                        OpenFileDialogResultType = OpenFileDialogResultType.Ok,
+                        FilePath = openFileDialog.FileName
                     };
                 case false:
-                    return new SaveFileDialogResult
+                    return new OpenFileDialogResult
                     {
-                        SaveFileDialogResultType = SaveFileDialogResultType.Cancel
+                        OpenFileDialogResultType = OpenFileDialogResultType.Cancel
                     };
                 default:
-                    throw new SaveFileDialogUnknownResultTypeException("An unknown error occurred while reading the result of the dialog box!");
+                    throw new OpenFileDialogUnknownResultTypeException("An unknown error occurred while reading the result of the dialog box!");
             }
         }
 
         private static Task<string> ConvertFileFiltersToFileFilterFormat(IReadOnlyDictionary<string, IReadOnlyList<string>> fileFilters)
         {
             const string FILE_FILTER_SEPARATOR = "|";
-            
+
             string result = string.Join(FILE_FILTER_SEPARATOR, fileFilters.Select(x => ConvertFileFilterRowToFileFilterFormat(x.Key, x.Value)));
 
             return Task.FromResult(result);

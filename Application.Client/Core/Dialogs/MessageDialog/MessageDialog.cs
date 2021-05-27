@@ -7,7 +7,7 @@ using Application.Client.Core.Dialogs.MessageDialog.Models;
 
 namespace Application.Client.Core.Dialogs.MessageDialog
 {
-    public class MessageDialogService : IMessageDialogService
+    public class MessageDialog : IMessageDialog
     {
         public async Task<MessageDialogResult> ShowMessageDialogAsync(MessageDialogOptions options)
         {

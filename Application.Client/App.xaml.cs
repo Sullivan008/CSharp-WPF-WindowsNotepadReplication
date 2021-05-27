@@ -104,7 +104,7 @@ namespace Application.Client
 
         private async void ShowUnhandledException(ClientErrorModel errorModel)
         {
-            IMessageDialogService messageDialogService = _host.Services.GetRequiredService<IMessageDialogService>();
+            IMessageDialog messageDialogService = _host.Services.GetRequiredService<IMessageDialog>();
 
             await messageDialogService.ShowMessageDialogAsync(new MessageDialogOptions
             {

@@ -21,14 +21,13 @@ namespace Application.Client.Core.Application.Providers
     {
         public static IServiceCollection AddTransientServices(this IServiceCollection services)
         {
-            services.AddTransient<ISaveFileDialogService, SaveFileDialogService>();
-            services.AddTransient<IOpenFileDialogService, OpenFileDialogService>();
+            services.AddTransient<ISaveFileDialog, SaveFileDialog>();
+            services.AddTransient<IOpenFileDialog, OpenFileDialog>();
+            services.AddTransient<IMessageDialog, MessageDialog>();
 
             services.AddTransient<ITextFileWriterService, TextFileWriterService>();
             services.AddTransient<ITextFileReaderService, TextFileReaderService>();
-
-            services.AddTransient<IMessageDialogService, MessageDialogService>();
-
+            
             return services;
         }
 

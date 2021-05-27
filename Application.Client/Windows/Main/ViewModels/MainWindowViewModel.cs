@@ -17,11 +17,11 @@ namespace Application.Client.Windows.Main.ViewModels
 {
     public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
     {
-        private readonly IMessageDialogService _messageDialogService;
+        private readonly IMessageDialog _messageDialog;
 
-        private readonly IOpenFileDialogService _openFileDialogService;
+        private readonly IOpenFileDialog _openFileDialog;
 
-        private readonly ISaveFileDialogService _saveFileDialogService;
+        private readonly ISaveFileDialog _saveFileDialog;
 
         private readonly ITextFileWriterService _textFileWriterService;
 
@@ -29,12 +29,12 @@ namespace Application.Client.Windows.Main.ViewModels
 
         private readonly INotepadStorageService _notepadStorageService;
 
-        public MainWindowViewModel(IMessageDialogService messageDialogService, IOpenFileDialogService openFileDialogService, ISaveFileDialogService saveFileDialogService,
+        public MainWindowViewModel(IMessageDialog messageDialog, IOpenFileDialog openFileDialog, ISaveFileDialog saveFileDialog,
             ITextFileWriterService textFileWriterService, ITextFileReaderService textFileReaderService, INotepadStorageService notepadStorageService)
         {
-            _messageDialogService = messageDialogService;
-            _openFileDialogService = openFileDialogService;
-            _saveFileDialogService = saveFileDialogService;
+            _messageDialog = messageDialog;
+            _openFileDialog = openFileDialog;
+            _saveFileDialog = saveFileDialog;
             _textFileWriterService = textFileWriterService;
             _textFileReaderService = textFileReaderService;
 
