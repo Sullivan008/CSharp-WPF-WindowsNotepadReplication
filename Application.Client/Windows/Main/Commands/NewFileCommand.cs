@@ -20,7 +20,7 @@ namespace Application.Client.Windows.Main.ViewModels
         {
             if (_notepadStorageService.HasDocumentModified)
             {
-                MessageDialogResult messageDialogResult = await _messageDialogService.ShowMessageDialogAsync(
+                MessageDialogResult messageDialogResult = await _messageDialog.ShowMessageDialogAsync(
                     new MessageDialogOptions { Title = "Notepad", Content = $"Do you want to save the {_notepadStorageService.UsedFileNameWithExtension} changes?", Button = MessageBoxButton.YesNoCancel });
 
                 switch (messageDialogResult.MessageDialogResultType)
@@ -33,7 +33,7 @@ namespace Application.Client.Windows.Main.ViewModels
                             }
                             else
                             {
-                                SaveFileDialogResult saveFileDialogResult = await _saveFileDialogService.ShowDialogAsync(new SaveFileDialogOptions { FileFilters = GetSaveFileDialogFilters() });
+                                SaveFileDialogResult saveFileDialogResult = await _saveFileDialog.ShowDialogAsync(new SaveFileDialogOptions { FileFilters = GetSaveFileDialogFilters() });
 
                                 if (saveFileDialogResult.SaveFileDialogResultType == SaveFileDialogResultType.Ok)
                                 {
