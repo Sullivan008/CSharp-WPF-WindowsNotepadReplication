@@ -19,17 +19,15 @@ namespace Application.Client.Core.Dialogs.StaticValues
             });
         }
 
-        public static IReadOnlyList<FileFilterModel> GetFileFiltersByFilterTypes(IEnumerable<FileFilterType> keys)
+        public static IReadOnlyList<FileFilterModel> GetFileFiltersByFilterTypes(IEnumerable<FileFilterType> types)
         {
             List<FileFilterModel> result = new();
 
-            foreach (FileFilterType key in keys)
+            foreach (FileFilterType type in types)
             {
-                FileFilterTypes.TryGetValue(key, out FileFilterModel fileFilter);
-
-                if (result == null)
+                if (!FileFilterTypes.TryGetValue(type, out FileFilterModel fileFilter))
                 {
-                    throw new ArgumentNullException(nameof(result), $@"The following File Filter Type does not exist with this key. {nameof(key).ToUpper()}: {key}");
+                    throw new ArgumentNullException(nameof(result), $@"The following File Filter Type does not exist with this type. {nameof(type).ToUpper()}: {type}");
                 }
 
                 result.Add(fileFilter);
