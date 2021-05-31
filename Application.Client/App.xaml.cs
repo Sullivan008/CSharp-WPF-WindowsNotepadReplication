@@ -37,7 +37,7 @@ namespace Application.Client
                 .ConfigureAppConfiguration(builder =>
                 {
                     builder.SetBasePath(Directory.GetCurrentDirectory())
-                        .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+                           .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
                 })
                 .ConfigureServices(ConfigureServices)
                 .ConfigureLogging((context, logging) =>
@@ -104,9 +104,9 @@ namespace Application.Client
 
         private async void ShowUnhandledException(ClientErrorModel errorModel)
         {
-            IMessageDialog messageDialogService = _host.Services.GetRequiredService<IMessageDialog>();
+            IMessageDialog messageDialog = _host.Services.GetRequiredService<IMessageDialog>();
 
-            await messageDialogService.ShowMessageDialogAsync(new MessageDialogOptions
+            await messageDialog.ShowMessageDialogAsync(new MessageDialogOptions
             {
                 Content = $"An application error occurred.\n\n{errorModel.Message}.\n\n{errorModel.Exception}",
                 Title = "Application Error",
