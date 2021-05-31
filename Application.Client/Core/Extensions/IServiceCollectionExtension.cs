@@ -15,9 +15,9 @@ using Application.Client.Windows.Main.ViewModels;
 using Application.Client.Windows.Main.ViewModels.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Application.Client.Core.Application.Providers
+namespace Application.Client.Core.Extensions
 {
-    public static class ServiceProviders
+    public static class IServiceCollectionExtension
     {
         public static IServiceCollection AddTransientServices(this IServiceCollection services)
         {
@@ -27,7 +27,7 @@ namespace Application.Client.Core.Application.Providers
 
             services.AddTransient<ITextFileWriterService, TextFileWriterService>();
             services.AddTransient<ITextFileReaderService, TextFileReaderService>();
-            
+
             return services;
         }
 
