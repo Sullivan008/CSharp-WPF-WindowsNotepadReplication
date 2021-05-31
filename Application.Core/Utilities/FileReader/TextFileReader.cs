@@ -1,12 +1,12 @@
 ﻿using System.IO;
 using System.Threading.Tasks;
-using Application.Core.Services.FileReader.Abstractions;
-using Application.Core.Services.FileReader.Interfaces;
-using Application.Core.Services.FileReader.Models.Interfaces;
+using Application.Core.Utilities.FileReader.Abstractions;
+using Application.Core.Utilities.FileReader.Interfaces;
+using Application.Core.Utilities.FileReader.Models.Interfaces;
 
-namespace Application.Core.Services.FileReader
+namespace Application.Core.Utilities.FileReader
 {
-    public class TextFileReaderService : BaseFileReader, ITextFileReaderService
+    public class TextFileReader : BaseFileReader, ITextFileReader
     {
         public override async Task<TContentType> ReadAsync<TContentType>(IFileReaderModel model)
         {
@@ -18,7 +18,7 @@ namespace Application.Core.Services.FileReader
             return await GetFileContent<TContentType>(model.FilePath);
         }
 
-        public static async Task<TContentType> GetFileContent<TContentType>(string filePath)
+        private static async Task<TContentType> GetFileContent<TContentType>(string filePath)
         {
             using StreamReader streamReader = new(filePath);
 

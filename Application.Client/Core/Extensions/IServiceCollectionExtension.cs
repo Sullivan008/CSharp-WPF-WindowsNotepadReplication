@@ -9,10 +9,10 @@ using Application.Client.Windows.Main.Services;
 using Application.Client.Windows.Main.Services.Interfaces;
 using Application.Client.Windows.Main.ViewModels;
 using Application.Client.Windows.Main.ViewModels.Interfaces;
-using Application.Core.Services.FileReader;
-using Application.Core.Services.FileReader.Interfaces;
 using Application.Core.Services.FileWriter;
 using Application.Core.Services.FileWriter.Interfaces;
+using Application.Core.Utilities.FileReader;
+using Application.Core.Utilities.FileReader.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Application.Client.Core.Extensions
@@ -25,8 +25,8 @@ namespace Application.Client.Core.Extensions
             services.AddTransient<IOpenFileDialog, OpenFileDialog>();
             services.AddTransient<IMessageDialog, MessageDialog>();
 
+            services.AddTransient<ITextFileReader, TextFileReader>();
             services.AddTransient<ITextFileWriterService, TextFileWriterService>();
-            services.AddTransient<ITextFileReaderService, TextFileReaderService>();
 
             return services;
         }

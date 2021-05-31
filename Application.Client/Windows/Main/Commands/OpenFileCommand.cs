@@ -9,8 +9,8 @@ using Application.Client.Core.Dialogs.OpenFileDialog.Models;
 using Application.Client.Core.Dialogs.SaveFileDialog.Enums;
 using Application.Client.Core.Dialogs.SaveFileDialog.Models;
 using Application.Client.Windows.Main.Services.Enums;
-using Application.Core.Services.FileReader.Models;
 using Application.Core.Services.FileWriter.Models;
+using Application.Core.Utilities.FileReader.Models;
 
 namespace Application.Client.Windows.Main.ViewModels
 {
@@ -65,7 +65,7 @@ namespace Application.Client.Windows.Main.ViewModels
 
             if (openFileDialogResult.OpenFileDialogResultType == OpenFileDialogResultType.Ok)
             {
-                Content = await _textFileReaderService.ReadAsync<string>(new ReadTextFileModel { FilePath = openFileDialogResult.FilePath });
+                Content = await _textFileReader.ReadAsync<string>(new ReadTextFileModel { FilePath = openFileDialogResult.FilePath });
 
                 _notepadStorageService.SetUsedFilePath(openFileDialogResult.FilePath);
                 _notepadStorageService.SetDocumentState(DocumentState.Unmodified);
