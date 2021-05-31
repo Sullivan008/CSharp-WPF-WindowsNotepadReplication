@@ -3,8 +3,8 @@ using System.Windows.Input;
 using Application.Client.Core.Commands;
 using Application.Client.Core.Dialogs.SaveFileDialog.Enums;
 using Application.Client.Core.Dialogs.SaveFileDialog.Models;
-using Application.Client.Core.Services.FileWriter.Models;
 using Application.Client.Windows.Main.Services.Enums;
+using Application.Core.Services.FileWriter.Models;
 
 namespace Application.Client.Windows.Main.ViewModels
 {

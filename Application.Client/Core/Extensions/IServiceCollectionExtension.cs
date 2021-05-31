@@ -4,15 +4,15 @@ using Application.Client.Core.Dialogs.OpenFileDialog;
 using Application.Client.Core.Dialogs.OpenFileDialog.Interfaces;
 using Application.Client.Core.Dialogs.SaveFileDialog;
 using Application.Client.Core.Dialogs.SaveFileDialog.Interfaces;
-using Application.Client.Core.Services.FileReader;
-using Application.Client.Core.Services.FileReader.Interfaces;
-using Application.Client.Core.Services.FileWriter;
-using Application.Client.Core.Services.FileWriter.Interfaces;
 using Application.Client.Windows.Main;
 using Application.Client.Windows.Main.Services;
 using Application.Client.Windows.Main.Services.Interfaces;
 using Application.Client.Windows.Main.ViewModels;
 using Application.Client.Windows.Main.ViewModels.Interfaces;
+using Application.Core.Services.FileReader;
+using Application.Core.Services.FileReader.Interfaces;
+using Application.Core.Services.FileWriter;
+using Application.Core.Services.FileWriter.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Application.Client.Core.Extensions

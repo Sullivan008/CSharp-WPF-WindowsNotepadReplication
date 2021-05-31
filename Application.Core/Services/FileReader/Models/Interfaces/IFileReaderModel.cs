@@ -1,4 +1,4 @@
-﻿namespace Application.Client.Core.Services.FileReader.Models.Interfaces
+﻿namespace Application.Core.Services.FileReader.Models.Interfaces
 {
     public interface IFileReaderModel
     {

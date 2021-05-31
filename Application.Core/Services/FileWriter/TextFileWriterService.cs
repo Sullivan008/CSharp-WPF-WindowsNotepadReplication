@@ -1,10 +1,10 @@
 ﻿using System.IO;
 using System.Threading.Tasks;
-using Application.Client.Core.Services.FileWriter.Abstractions;
-using Application.Client.Core.Services.FileWriter.Interfaces;
-using Application.Client.Core.Services.FileWriter.Models.Interfaces;
+using Application.Core.Services.FileWriter.Abstractions;
+using Application.Core.Services.FileWriter.Interfaces;
+using Application.Core.Services.FileWriter.Models.Interfaces;
 
-namespace Application.Client.Core.Services.FileWriter
+namespace Application.Core.Services.FileWriter
 {
     public class TextFileWriterService : BaseFileWriter, ITextFileWriterService
     {

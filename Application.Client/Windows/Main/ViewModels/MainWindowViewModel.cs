@@ -6,12 +6,12 @@ using Application.Client.Core.Dialogs.SaveFileDialog.Interfaces;
 using Application.Client.Core.Dialogs.StaticValues;
 using Application.Client.Core.Dialogs.StaticValues.Enums;
 using Application.Client.Core.Dialogs.StaticValues.Models;
-using Application.Client.Core.Services.FileReader.Interfaces;
-using Application.Client.Core.Services.FileWriter.Interfaces;
 using Application.Client.Core.ViewModels;
 using Application.Client.Windows.Main.Services.Enums;
 using Application.Client.Windows.Main.Services.Interfaces;
 using Application.Client.Windows.Main.ViewModels.Interfaces;
+using Application.Core.Services.FileReader.Interfaces;
+using Application.Core.Services.FileWriter.Interfaces;
 
 namespace Application.Client.Windows.Main.ViewModels
 {
