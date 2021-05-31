@@ -1,8 +1,8 @@
 ﻿using System.IO;
 using System.Threading.Tasks;
-using Application.Core.Services.FileWriter.Models.Interfaces;
+using Application.Core.Utilities.FileWriter.Models.Interfaces;
 
-namespace Application.Core.Services.FileWriter.Abstractions
+namespace Application.Core.Utilities.FileWriter.Abstractions
 {
     public abstract class BaseFileWriter
     {

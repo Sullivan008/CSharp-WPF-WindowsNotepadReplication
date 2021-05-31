@@ -7,7 +7,7 @@ using Application.Client.Core.Dialogs.MessageDialog.Models;
 using Application.Client.Core.Dialogs.SaveFileDialog.Enums;
 using Application.Client.Core.Dialogs.SaveFileDialog.Models;
 using Application.Client.Windows.Main.Services.Enums;
-using Application.Core.Services.FileWriter.Models;
+using Application.Core.Utilities.FileWriter.Models;
 
 namespace Application.Client.Windows.Main.ViewModels
 {
@@ -29,7 +29,7 @@ namespace Application.Client.Windows.Main.ViewModels
                         {
                             if (_notepadStorageService.HasUsedFile)
                             {
-                                await _textFileWriterService.WriteAsync(new WriteTextFileModel { FilePath = _notepadStorageService.UsedFilePath, Content = _content });
+                                await _textFileWriter.WriteAsync(new WriteTextFileModel { FilePath = _notepadStorageService.UsedFilePath, Content = _content });
                             }
                             else
                             {
@@ -37,7 +37,7 @@ namespace Application.Client.Windows.Main.ViewModels
 
                                 if (saveFileDialogResult.SaveFileDialogResultType == SaveFileDialogResultType.Ok)
                                 {
-                                    await _textFileWriterService.WriteAsync(new WriteTextFileModel { FilePath = saveFileDialogResult.SavedFilePath, Content = _content });
+                                    await _textFileWriter.WriteAsync(new WriteTextFileModel { FilePath = saveFileDialogResult.SavedFilePath, Content = _content });
                                 }
                                 else if (saveFileDialogResult.SaveFileDialogResultType == SaveFileDialogResultType.Cancel)
                                 {

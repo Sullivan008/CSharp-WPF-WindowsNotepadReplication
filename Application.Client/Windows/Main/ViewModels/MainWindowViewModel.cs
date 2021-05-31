@@ -10,8 +10,8 @@ using Application.Client.Core.ViewModels;
 using Application.Client.Windows.Main.Services.Enums;
 using Application.Client.Windows.Main.Services.Interfaces;
 using Application.Client.Windows.Main.ViewModels.Interfaces;
-using Application.Core.Services.FileWriter.Interfaces;
 using Application.Core.Utilities.FileReader.Interfaces;
+using Application.Core.Utilities.FileWriter.Interfaces;
 
 namespace Application.Client.Windows.Main.ViewModels
 {
@@ -23,19 +23,19 @@ namespace Application.Client.Windows.Main.ViewModels
 
         private readonly ISaveFileDialog _saveFileDialog;
 
-        private readonly ITextFileWriterService _textFileWriterService;
+        private readonly ITextFileWriter _textFileWriter;
 
         private readonly ITextFileReader _textFileReader;
 
         private readonly INotepadStorageService _notepadStorageService;
 
         public MainWindowViewModel(IMessageDialog messageDialog, IOpenFileDialog openFileDialog, ISaveFileDialog saveFileDialog,
-            ITextFileWriterService textFileWriterService, ITextFileReader textFileReader, INotepadStorageService notepadStorageService)
+            ITextFileWriter textFileWriter, ITextFileReader textFileReader, INotepadStorageService notepadStorageService)
         {
             _messageDialog = messageDialog;
             _openFileDialog = openFileDialog;
             _saveFileDialog = saveFileDialog;
-            _textFileWriterService = textFileWriterService;
+            _textFileWriter = textFileWriter;
             _textFileReader = textFileReader;
 
             _notepadStorageService = notepadStorageService;

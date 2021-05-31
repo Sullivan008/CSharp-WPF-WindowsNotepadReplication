@@ -1,4 +1,4 @@
-﻿namespace Application.Core.Services.FileWriter.Models.Interfaces
+﻿namespace Application.Core.Utilities.FileWriter.Models.Interfaces
 {
     public interface IFileWriterModel<TContentType>
     {

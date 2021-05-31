@@ -1,12 +1,12 @@
 ﻿using System.IO;
 using System.Threading.Tasks;
-using Application.Core.Services.FileWriter.Abstractions;
-using Application.Core.Services.FileWriter.Interfaces;
-using Application.Core.Services.FileWriter.Models.Interfaces;
+using Application.Core.Utilities.FileWriter.Abstractions;
+using Application.Core.Utilities.FileWriter.Interfaces;
+using Application.Core.Utilities.FileWriter.Models.Interfaces;
 
-namespace Application.Core.Services.FileWriter
+namespace Application.Core.Utilities.FileWriter
 {
-    public class TextFileWriterService : BaseFileWriter, ITextFileWriterService
+    public class TextFileWriter : BaseFileWriter, ITextFileWriter
     {
         public override async Task WriteAsync<TContentType>(IFileWriterModel<TContentType> model)
         {
