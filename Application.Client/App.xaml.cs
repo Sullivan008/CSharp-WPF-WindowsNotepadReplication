@@ -7,10 +7,10 @@ using Application.Client.Core.Dialogs.MessageDialog.Interfaces;
 using Application.Client.Core.Dialogs.MessageDialog.Models;
 using Application.Client.Core.Extensions;
 using Application.Client.Windows.Main;
-using Application.Core.Environment.StaticValues;
-using Application.Core.Environment.StaticValues.Enums;
+using Application.Core.Environment.Enums;
 using Application.Core.ErrorHandling.Constants;
 using Application.Core.ErrorHandling.Models;
+using Application.Core.Extensions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -29,10 +29,10 @@ namespace Application.Client
                 .ConfigureHostConfiguration(builder =>
                 {
                     KeyValuePair<string, string> environment = new(HostDefaults.EnvironmentKey,
-                        Environment.GetEnvironmentVariable(EnvironmentVariables.GetEnvironmentVariableKey(EnvironmentVariableKey.AspNetCoreEnvironment)));
+                        Environment.GetEnvironmentVariable(EnvironmentVariableKey.AspNetCoreEnvironment.ToEnumMemberAttrValue()));
 
                     builder.AddInMemoryCollection(new[] { environment })
-                        .AddEnvironmentVariables();
+                           .AddEnvironmentVariables();
                 })
                 .ConfigureAppConfiguration(builder =>
                 {
