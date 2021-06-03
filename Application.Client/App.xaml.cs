@@ -79,6 +79,8 @@ namespace Application.Client
 
         private static void ConfigureServices(IServiceCollection services)
         {
+            services.AddMemoryCache();
+
             services.AddSingletonServices();
             services.AddScopedServices();
             services.AddTransientServices();

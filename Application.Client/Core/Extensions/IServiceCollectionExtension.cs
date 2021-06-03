@@ -1,4 +1,6 @@
-﻿using Application.Client.Core.Dialogs.MessageDialog;
+﻿using Application.Client.Core.ApplicationCache.Services;
+using Application.Client.Core.ApplicationCache.Services.Interfaces;
+using Application.Client.Core.Dialogs.MessageDialog;
 using Application.Client.Core.Dialogs.MessageDialog.Interfaces;
 using Application.Client.Core.Dialogs.OpenFileDialog;
 using Application.Client.Core.Dialogs.OpenFileDialog.Interfaces;
@@ -40,6 +42,8 @@ namespace Application.Client.Core.Extensions
         {
             services.AddSingleton<MainWindow>();
             services.AddSingleton<IMainWindowViewModel, MainWindowViewModel>();
+
+            services.AddSingleton<IApplicationCacheService, ApplicationCacheService>();
 
             services.AddSingleton<INotepadStorageService, NotepadStorageService>();
 
