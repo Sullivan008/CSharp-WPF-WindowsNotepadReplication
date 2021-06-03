@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Application.Client.Dialogs\Application.Client.Dialogs.csproj" />
     <ProjectReference Include="..\Application.Core\Application.Core.csproj" />
   </ItemGroup>
 

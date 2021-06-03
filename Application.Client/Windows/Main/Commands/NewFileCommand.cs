@@ -2,10 +2,10 @@
 using System.Windows;
 using System.Windows.Input;
 using Application.Client.Core.Commands;
-using Application.Client.Core.Dialogs.MessageDialog.Enums;
-using Application.Client.Core.Dialogs.MessageDialog.Models;
-using Application.Client.Core.Dialogs.SaveFileDialog.Enums;
-using Application.Client.Core.Dialogs.SaveFileDialog.Models;
+using Application.Client.Dialogs.MessageDialog.Enums;
+using Application.Client.Dialogs.MessageDialog.Models;
+using Application.Client.Dialogs.SaveFileDialog.Enums;
+using Application.Client.Dialogs.SaveFileDialog.Models;
 using Application.Client.Windows.Main.Services.Enums;
 using Application.Core.Utilities.FileWriter.Models;
 
