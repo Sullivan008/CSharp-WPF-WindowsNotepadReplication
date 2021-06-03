@@ -92,10 +92,10 @@ namespace Application.Client
 
             logger.LogError(e.Exception, e.Exception.Message);
 
-            ClientErrorModel errorModel = new()
+            ErrorModel errorModel = new()
             {
                 Message = e.Exception.Message,
-                Exception = hostEnvironment.IsDevelopment() ? e.Exception.ToString() : ClientErrorConstants.NON_DEVELOPMENT_EXCEPTION_MESSAGE
+                Exception = hostEnvironment.IsDevelopment() ? e.Exception.ToString() : ErrorConstants.NON_DEVELOPMENT_EXCEPTION_MESSAGE
             };
 
             ShowUnhandledException(errorModel);
@@ -103,7 +103,7 @@ namespace Application.Client
             e.Handled = true;
         }
 
-        private async void ShowUnhandledException(ClientErrorModel errorModel)
+        private async void ShowUnhandledException(ErrorModel errorModel)
         {
             IMessageDialog messageDialog = _host.Services.GetRequiredService<IMessageDialog>();
 

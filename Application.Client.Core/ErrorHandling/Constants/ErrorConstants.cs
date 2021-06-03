@@ -1,6 +1,6 @@
 ﻿namespace Application.Client.Core.ErrorHandling.Constants
 {
-    public static class ClientErrorConstants
+    public static class ErrorConstants
     {
         public const string NON_DEVELOPMENT_EXCEPTION_MESSAGE = "Exception available only in development envrionment.";
     }

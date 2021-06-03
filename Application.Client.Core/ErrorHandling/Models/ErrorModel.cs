@@ -1,6 +1,6 @@
 ﻿namespace Application.Client.Core.ErrorHandling.Models
 {
-    public class ClientErrorModel
+    public class ErrorModel
     {
         public string Message { get; init; }
 
