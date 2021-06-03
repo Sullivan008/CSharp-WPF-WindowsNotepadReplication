@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization;
-using Application.Client.Core.Exceptions;
+using Application.Utilities.Extensions.Exceptions;
 
 namespace Application.Utilities.Extensions
 {
