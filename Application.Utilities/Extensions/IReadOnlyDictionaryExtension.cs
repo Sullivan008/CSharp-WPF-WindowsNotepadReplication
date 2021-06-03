@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace Application.Client.Core.Extensions
+namespace Application.Utilities.Extensions
 {
     public static class IReadOnlyDictionaryExtension
     {

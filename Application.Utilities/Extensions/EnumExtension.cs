@@ -4,7 +4,7 @@ using System.Reflection;
 using System.Runtime.Serialization;
 using Application.Client.Core.Exceptions;
 
-namespace Application.Client.Core.Extensions
+namespace Application.Utilities.Extensions
 {
     public static class EnumExtension
     {
