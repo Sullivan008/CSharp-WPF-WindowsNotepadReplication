@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Application.Core.Extensions;
+using Application.Client.Core.Extensions;
 
 namespace Application.Client.Dialogs.OpenFileDialog.Models
 {

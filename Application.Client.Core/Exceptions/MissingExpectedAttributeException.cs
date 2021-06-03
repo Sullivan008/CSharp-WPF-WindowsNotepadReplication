@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Application.Core.Exceptions
+namespace Application.Client.Core.Exceptions
 {
     public class MissingExpectedAttributeException : Exception
     {

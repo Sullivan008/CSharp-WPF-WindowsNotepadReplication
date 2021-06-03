@@ -2,9 +2,9 @@
 using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization;
-using Application.Core.Exceptions;
+using Application.Client.Core.Exceptions;
 
-namespace Application.Core.Extensions
+namespace Application.Client.Core.Extensions
 {
     public static class EnumExtension
     {

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace Application.Core.Extensions
+namespace Application.Client.Core.Extensions
 {
     public static class IReadOnlyListExtension
     {
