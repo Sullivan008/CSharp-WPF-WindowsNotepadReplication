@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace Application.Client.Core.Commands
+namespace Application.Client.Infrastructure.Commands
 {
     public class RelayCommandAsync : ICommand
     {

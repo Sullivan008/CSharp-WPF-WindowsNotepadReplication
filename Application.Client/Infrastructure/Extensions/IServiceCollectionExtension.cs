@@ -17,7 +17,7 @@ using Application.Utilities.FileWriter;
 using Application.Utilities.FileWriter.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Application.Client.Core.Extensions
+namespace Application.Client.Infrastructure.Extensions
 {
     public static class IServiceCollectionExtension
     {

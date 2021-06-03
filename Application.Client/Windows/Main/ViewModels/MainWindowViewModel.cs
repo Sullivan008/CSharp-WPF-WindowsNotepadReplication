@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Application.Client.Core.ViewModels;
 using Application.Client.Dialogs.MessageDialog.Interfaces;
 using Application.Client.Dialogs.OpenFileDialog.Interfaces;
 using Application.Client.Dialogs.SaveFileDialog.Interfaces;
 using Application.Client.Dialogs.StaticValues;
 using Application.Client.Dialogs.StaticValues.Enums;
 using Application.Client.Dialogs.StaticValues.Models;
+using Application.Client.Infrastructure.ViewModels;
 using Application.Client.Windows.Main.Services.Enums;
 using Application.Client.Windows.Main.Services.Interfaces;
 using Application.Client.Windows.Main.ViewModels.Interfaces;

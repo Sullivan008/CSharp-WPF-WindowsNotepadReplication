@@ -1,13 +1,13 @@
 ﻿using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using Application.Client.Core.Commands;
 using Application.Client.Dialogs.MessageDialog.Enums;
 using Application.Client.Dialogs.MessageDialog.Models;
 using Application.Client.Dialogs.OpenFileDialog.Enums;
 using Application.Client.Dialogs.OpenFileDialog.Models;
 using Application.Client.Dialogs.SaveFileDialog.Enums;
 using Application.Client.Dialogs.SaveFileDialog.Models;
+using Application.Client.Infrastructure.Commands;
 using Application.Client.Windows.Main.Services.Enums;
 using Application.Utilities.FileReader.Models;
 using Application.Utilities.FileWriter.Models;
