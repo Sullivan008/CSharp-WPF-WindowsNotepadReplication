@@ -11,10 +11,10 @@ using Application.Client.Windows.Main.Services;
 using Application.Client.Windows.Main.Services.Interfaces;
 using Application.Client.Windows.Main.ViewModels;
 using Application.Client.Windows.Main.ViewModels.Interfaces;
-using Application.Core.Utilities.FileReader;
-using Application.Core.Utilities.FileReader.Interfaces;
-using Application.Core.Utilities.FileWriter;
-using Application.Core.Utilities.FileWriter.Interfaces;
+using Application.Utilities.FileReader;
+using Application.Utilities.FileReader.Interfaces;
+using Application.Utilities.FileWriter;
+using Application.Utilities.FileWriter.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Application.Client.Core.Extensions

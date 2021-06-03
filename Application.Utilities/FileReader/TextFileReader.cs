@@ -1,10 +1,10 @@
 ﻿using System.IO;
 using System.Threading.Tasks;
-using Application.Core.Utilities.FileReader.Abstractions;
-using Application.Core.Utilities.FileReader.Interfaces;
-using Application.Core.Utilities.FileReader.Models.Interfaces;
+using Application.Utilities.FileReader.Abstractions;
+using Application.Utilities.FileReader.Interfaces;
+using Application.Utilities.FileReader.Models.Interfaces;
 
-namespace Application.Core.Utilities.FileReader
+namespace Application.Utilities.FileReader
 {
     public class TextFileReader : BaseFileReader, ITextFileReader
     {

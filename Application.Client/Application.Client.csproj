@@ -18,6 +18,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Application.Client.Dialogs\Application.Client.Dialogs.csproj" />
     <ProjectReference Include="..\Application.Core\Application.Core.csproj" />
+    <ProjectReference Include="..\Application.Utilities\Application.Utilities.csproj" />
   </ItemGroup>
 
   <ItemGroup>

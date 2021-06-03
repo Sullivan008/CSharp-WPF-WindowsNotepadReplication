@@ -9,8 +9,8 @@ using Application.Client.Dialogs.OpenFileDialog.Models;
 using Application.Client.Dialogs.SaveFileDialog.Enums;
 using Application.Client.Dialogs.SaveFileDialog.Models;
 using Application.Client.Windows.Main.Services.Enums;
-using Application.Core.Utilities.FileReader.Models;
-using Application.Core.Utilities.FileWriter.Models;
+using Application.Utilities.FileReader.Models;
+using Application.Utilities.FileWriter.Models;
 
 namespace Application.Client.Windows.Main.ViewModels
 {

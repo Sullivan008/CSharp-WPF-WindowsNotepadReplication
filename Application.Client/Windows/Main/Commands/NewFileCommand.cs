@@ -7,7 +7,7 @@ using Application.Client.Dialogs.MessageDialog.Models;
 using Application.Client.Dialogs.SaveFileDialog.Enums;
 using Application.Client.Dialogs.SaveFileDialog.Models;
 using Application.Client.Windows.Main.Services.Enums;
-using Application.Core.Utilities.FileWriter.Models;
+using Application.Utilities.FileWriter.Models;
 
 namespace Application.Client.Windows.Main.ViewModels
 {

@@ -1,10 +1,10 @@
 ﻿using System.IO;
 using System.Threading.Tasks;
-using Application.Core.Utilities.FileWriter.Abstractions;
-using Application.Core.Utilities.FileWriter.Interfaces;
-using Application.Core.Utilities.FileWriter.Models.Interfaces;
+using Application.Utilities.FileWriter.Abstractions;
+using Application.Utilities.FileWriter.Interfaces;
+using Application.Utilities.FileWriter.Models.Interfaces;
 
-namespace Application.Core.Utilities.FileWriter
+namespace Application.Utilities.FileWriter
 {
     public class TextFileWriter : BaseFileWriter, ITextFileWriter
     {

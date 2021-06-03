@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
-using Application.Core.Utilities.FileReader.Models.Interfaces;
+using Application.Utilities.FileReader.Models.Interfaces;
 
-namespace Application.Core.Utilities.FileReader.Interfaces
+namespace Application.Utilities.FileReader.Interfaces
 {
     public interface ITextFileReader
     {

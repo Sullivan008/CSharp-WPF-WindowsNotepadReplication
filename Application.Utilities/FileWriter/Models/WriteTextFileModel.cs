@@ -1,7 +1,7 @@
 ﻿using System;
-using Application.Core.Utilities.FileWriter.Models.Interfaces;
+using Application.Utilities.FileWriter.Models.Interfaces;
 
-namespace Application.Core.Utilities.FileWriter.Models
+namespace Application.Utilities.FileWriter.Models
 {
     public class WriteTextFileModel : IFileWriterModel<string>
     {

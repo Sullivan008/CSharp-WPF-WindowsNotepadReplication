@@ -1,7 +1,7 @@
 ﻿using System;
-using Application.Core.Utilities.FileReader.Models.Interfaces;
+using Application.Utilities.FileReader.Models.Interfaces;
 
-namespace Application.Core.Utilities.FileReader.Models
+namespace Application.Utilities.FileReader.Models
 {
     public class ReadTextFileModel : IFileReaderModel
     {

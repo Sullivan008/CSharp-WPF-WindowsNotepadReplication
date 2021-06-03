@@ -10,8 +10,8 @@ using Application.Client.Dialogs.StaticValues.Models;
 using Application.Client.Windows.Main.Services.Enums;
 using Application.Client.Windows.Main.Services.Interfaces;
 using Application.Client.Windows.Main.ViewModels.Interfaces;
-using Application.Core.Utilities.FileReader.Interfaces;
-using Application.Core.Utilities.FileWriter.Interfaces;
+using Application.Utilities.FileReader.Interfaces;
+using Application.Utilities.FileWriter.Interfaces;
 
 namespace Application.Client.Windows.Main.ViewModels
 {

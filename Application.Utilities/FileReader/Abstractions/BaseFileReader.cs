@@ -1,8 +1,8 @@
 ﻿using System.IO;
 using System.Threading.Tasks;
-using Application.Core.Utilities.FileReader.Models.Interfaces;
+using Application.Utilities.FileReader.Models.Interfaces;
 
-namespace Application.Core.Utilities.FileReader.Abstractions
+namespace Application.Utilities.FileReader.Abstractions
 {
     public abstract class BaseFileReader
     {
