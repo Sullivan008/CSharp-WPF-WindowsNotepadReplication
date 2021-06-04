@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Application.Client.Core\Application.Client.Core.csproj" />
+    <ProjectReference Include="..\Application.Utilities\Application.Utilities.csproj" />
   </ItemGroup>
 
 </Project>

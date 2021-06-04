@@ -4,7 +4,7 @@ using Application.Client.Core.ApplicationCache.Exceptions;
 using Application.Client.Core.ApplicationCache.Models.Interfaces;
 using Application.Client.Core.ApplicationCache.Models.Options;
 using Application.Client.Core.ApplicationCache.Services.Interfaces;
-using Application.Client.Core.Extensions;
+using Application.Utilities.Extensions;
 using Microsoft.Extensions.Caching.Memory;
 
 namespace Application.Client.Core.ApplicationCache.Services

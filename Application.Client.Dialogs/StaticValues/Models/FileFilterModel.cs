@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Application.Client.Core.Extensions;
+using Application.Utilities.Extensions;
 
 namespace Application.Client.Dialogs.StaticValues.Models
 {
