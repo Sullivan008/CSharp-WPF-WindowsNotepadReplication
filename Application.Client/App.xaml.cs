@@ -84,6 +84,8 @@ namespace Application.Client
             services.AddSingletonServices();
             services.AddScopedServices();
             services.AddTransientServices();
+
+            services.AddCacheRepositories();
         }
 
         private void AppDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)

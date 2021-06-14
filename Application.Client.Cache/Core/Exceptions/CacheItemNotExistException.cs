@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Application.Client.Core.ApplicationCache.Exceptions
+namespace Application.Client.Cache.Core.Exceptions
 {
     public class CacheItemNotExistException : Exception
     {

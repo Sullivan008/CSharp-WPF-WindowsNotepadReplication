@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace Application.Client.Core.ApplicationCache.Enums
+namespace Application.Client.Cache.Core.Enums
 {
     public enum CacheKey
     {

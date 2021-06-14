@@ -1,11 +1,11 @@
 ﻿using System;
-using Application.Client.Core.ApplicationCache.Enums;
-using Application.Client.Core.ApplicationCache.Models.Interfaces;
+using Application.Client.Cache.Core.Enums;
+using Application.Client.Cache.Core.Models.Interfaces;
 using Microsoft.Extensions.Caching.Memory;
 
-namespace Application.Client.Core.ApplicationCache.Models.Options
+namespace Application.Client.Cache.Core.Models.Options
 {
-    public class CacheSaveOptions<TCacheDataModel> where TCacheDataModel : ICacheDataModel
+    public class CacheSaveOptions<TCacheDataItem> where TCacheDataItem : ICacheDataModel
     {
         private readonly CacheKey? _key;
         public CacheKey Key
@@ -22,8 +22,8 @@ namespace Application.Client.Core.ApplicationCache.Models.Options
             init => _key = value;
         }
 
-        private readonly TCacheDataModel _data;
-        public TCacheDataModel Data
+        private readonly TCacheDataItem _data;
+        public TCacheDataItem Data
         {
             get
             {

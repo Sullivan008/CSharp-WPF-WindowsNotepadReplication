@@ -9,9 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application.Client", "Appli
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application.Client.Core", "Application.Client.Core\Application.Client.Core.csproj", "{155E0262-E51E-4285-8514-6CB982A3D2D8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.Client.Dialogs", "Application.Client.Dialogs\Application.Client.Dialogs.csproj", "{2F2A6A99-B0EA-4A6F-B8B9-0DD110D303D3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application.Client.Dialogs", "Application.Client.Dialogs\Application.Client.Dialogs.csproj", "{2F2A6A99-B0EA-4A6F-B8B9-0DD110D303D3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.Utilities", "Application.Utilities\Application.Utilities.csproj", "{A5191321-C28C-46E2-BB07-E5305488D4E3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application.Utilities", "Application.Utilities\Application.Utilities.csproj", "{A5191321-C28C-46E2-BB07-E5305488D4E3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.Client.Cache", "Application.Client.Cache\Application.Client.Cache.csproj", "{66BCEB05-3229-4A1E-8D98-C9C0B6E326D3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{A5191321-C28C-46E2-BB07-E5305488D4E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A5191321-C28C-46E2-BB07-E5305488D4E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A5191321-C28C-46E2-BB07-E5305488D4E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66BCEB05-3229-4A1E-8D98-C9C0B6E326D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66BCEB05-3229-4A1E-8D98-C9C0B6E326D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66BCEB05-3229-4A1E-8D98-C9C0B6E326D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66BCEB05-3229-4A1E-8D98-C9C0B6E326D3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,5 +1,10 @@
-﻿using Application.Client.Core.ApplicationCache.Services;
-using Application.Client.Core.ApplicationCache.Services.Interfaces;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using Application.Client.Cache.Core.Services;
+using Application.Client.Cache.Core.Services.Interfaces;
+using Application.Client.Cache.Repository.Interfaces;
 using Application.Client.Dialogs.MessageDialog;
 using Application.Client.Dialogs.MessageDialog.Interfaces;
 using Application.Client.Dialogs.OpenFileDialog;
@@ -44,8 +49,29 @@ namespace Application.Client.Infrastructure.Extensions
             services.AddSingleton<IMainWindowViewModel, MainWindowViewModel>();
 
             services.AddSingleton<IApplicationCacheService, ApplicationCacheService>();
-
             services.AddSingleton<INotepadStorageService, NotepadStorageService>();
+
+            return services;
+        }
+
+        public static IServiceCollection AddCacheRepositories(this IServiceCollection services)
+        {
+            Type repositoryType = typeof(ICacheRepository<>);
+
+            List<TypeInfo> definedTypes = repositoryType.Assembly.DefinedTypes
+                .Where(x => x.IsClass)
+                .Where(x => !x.IsAbstract)
+                .Where(x => x != repositoryType)
+                .Where(x => x.GetInterfaces().Any(y => y.IsGenericType && y.GetGenericTypeDefinition() == repositoryType))
+                .ToList();
+
+            foreach (TypeInfo definedType in definedTypes)
+            {
+                foreach (Type implementedInterface in definedType.ImplementedInterfaces)
+                {
+                    services.AddScoped(implementedInterface, definedType);
+                }
+            }
 
             return services;
         }

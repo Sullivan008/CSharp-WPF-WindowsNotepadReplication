@@ -1,8 +1,8 @@
-﻿using Application.Client.Core.ApplicationCache.Enums;
-using Application.Client.Core.ApplicationCache.Models.Interfaces;
-using Application.Client.Core.ApplicationCache.Models.Options;
+﻿using Application.Client.Cache.Core.Enums;
+using Application.Client.Cache.Core.Models.Interfaces;
+using Application.Client.Cache.Core.Models.Options;
 
-namespace Application.Client.Core.ApplicationCache.Services.Interfaces
+namespace Application.Client.Cache.Core.Services.Interfaces
 {
     public interface IApplicationCacheService
     {
