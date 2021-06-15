@@ -45,7 +45,14 @@ namespace Application.Client.Windows.Main.ViewModels
         private string _windowTitle;
         public string WindowTitle
         {
-            get => $"{_windowTitle ?? _docInfoService.UsedFileNameWithoutExtension} - Notepad";
+
+
+            get
+            {
+                const string WINDOW_TITLE_POSTFIX = " - Notepad";
+
+                return $"{_windowTitle ?? _docInfoService.UsedFileNameWithoutExtension}{WINDOW_TITLE_POSTFIX}";
+            }
             set
             {
                 _windowTitle = value;
