@@ -57,6 +57,13 @@
         </ControlTemplate>
     </Window.Resources>
 
+    <Window.InputBindings>
+        <KeyBinding Key="N" Modifiers="Control" Command="{Binding NewFileCommand}"/>
+        <KeyBinding Key="O" Modifiers="Control" Command="{Binding OpenFileCommand}"/>
+        <KeyBinding Key="S" Modifiers="Control" Command="{Binding SaveFileCommand}"/>
+        <KeyBinding Key="S" Modifiers="Control+Shift" Command="{Binding SaveFileAsCommand}"/>
+    </Window.InputBindings>
+
     <behaviors:Interaction.Triggers>
         <behaviors:EventTrigger EventName="Closing">
             <behaviors:InvokeCommandAction Command="{Binding ApplicationCloseCommand}" PassEventArgsToCommand="True"/>
@@ -67,10 +74,10 @@
         <DockPanel>
             <Menu Background="#FFFFFF" DockPanel.Dock="Top">
                 <MenuItem Template="{DynamicResource MainMenuItemControlTemplate}" Header="File">
-                    <MenuItem Header="_New" Command="{Binding NewFileCommand}"/>
-                    <MenuItem Header="_Open..." Command="{Binding OpenFileCommand}"/>
-                    <MenuItem Header="_Save" Command="{Binding SaveFileCommand}"/>
-                    <MenuItem Header="_Save as..." Command="{Binding SaveFileAsCommand}" />
+                    <MenuItem Header="_New" InputGestureText="Ctrl+N" Command="{Binding NewFileCommand}"/>
+                    <MenuItem Header="_Open..." InputGestureText="Ctrl+O" Command="{Binding OpenFileCommand}"/>
+                    <MenuItem Header="_Save" InputGestureText="Ctrl+S" Command="{Binding SaveFileCommand}"/>
+                    <MenuItem Header="_Save as..." InputGestureText="Ctrl+Shift+S" Command="{Binding SaveFileAsCommand}" />
                     <Separator/>
                     <MenuItem Header="Exit...">
                         <behaviors:Interaction.Triggers>
