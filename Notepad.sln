@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application.Client.Dialogs"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application.Utilities", "Application.Utilities\Application.Utilities.csproj", "{A5191321-C28C-46E2-BB07-E5305488D4E3}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application.Client.Services", "Application.Client.Services\Application.Client.Services.csproj", "{58B5CCED-ED2D-4542-8F14-A5AAA169F0BE}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.Client.Cache", "Application.Client.Cache\Application.Client.Cache.csproj", "{66BCEB05-3229-4A1E-8D98-C9C0B6E326D3}"
 EndProject
 Global
@@ -41,6 +43,10 @@ Global
 		{A5191321-C28C-46E2-BB07-E5305488D4E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A5191321-C28C-46E2-BB07-E5305488D4E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A5191321-C28C-46E2-BB07-E5305488D4E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58B5CCED-ED2D-4542-8F14-A5AAA169F0BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58B5CCED-ED2D-4542-8F14-A5AAA169F0BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58B5CCED-ED2D-4542-8F14-A5AAA169F0BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58B5CCED-ED2D-4542-8F14-A5AAA169F0BE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{66BCEB05-3229-4A1E-8D98-C9C0B6E326D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{66BCEB05-3229-4A1E-8D98-C9C0B6E326D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{66BCEB05-3229-4A1E-8D98-C9C0B6E326D3}.Release|Any CPU.ActiveCfg = Release|Any CPU

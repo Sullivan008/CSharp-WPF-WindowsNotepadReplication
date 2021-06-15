@@ -11,9 +11,9 @@ using Application.Client.Dialogs.OpenFileDialog;
 using Application.Client.Dialogs.OpenFileDialog.Interfaces;
 using Application.Client.Dialogs.SaveFileDialog;
 using Application.Client.Dialogs.SaveFileDialog.Interfaces;
+using Application.Client.Services;
+using Application.Client.Services.Interfaces;
 using Application.Client.Windows.Main;
-using Application.Client.Windows.Main.Services;
-using Application.Client.Windows.Main.Services.Interfaces;
 using Application.Client.Windows.Main.ViewModels;
 using Application.Client.Windows.Main.ViewModels.Interfaces;
 using Application.Utilities.FileReader;
@@ -49,7 +49,7 @@ namespace Application.Client.Infrastructure.Extensions
             services.AddSingleton<IMainWindowViewModel, MainWindowViewModel>();
 
             services.AddSingleton<IApplicationCacheService, ApplicationCacheService>();
-            services.AddSingleton<INotepadStorageService, NotepadStorageService>();
+            services.AddSingleton<IDocInfoService, DocInfoService>();
 
             return services;
         }
@@ -69,7 +69,7 @@ namespace Application.Client.Infrastructure.Extensions
             {
                 foreach (Type implementedInterface in definedType.ImplementedInterfaces)
                 {
-                    services.AddScoped(implementedInterface, definedType);
+                    services.AddSingleton(implementedInterface, definedType);
                 }
             }
 

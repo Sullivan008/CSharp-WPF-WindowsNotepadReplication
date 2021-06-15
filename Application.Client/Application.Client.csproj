@@ -17,6 +17,7 @@
     <ProjectReference Include="..\Application.Client.Cache\Application.Client.Cache.csproj" />
     <ProjectReference Include="..\Application.Client.Dialogs\Application.Client.Dialogs.csproj" />
     <ProjectReference Include="..\Application.Client.Core\Application.Client.Core.csproj" />
+    <ProjectReference Include="..\Application.Client.Services\Application.Client.Services.csproj" />
     <ProjectReference Include="..\Application.Utilities\Application.Utilities.csproj" />
   </ItemGroup>
 

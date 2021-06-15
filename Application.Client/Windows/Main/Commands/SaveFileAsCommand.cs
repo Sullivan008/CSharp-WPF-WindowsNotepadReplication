@@ -3,7 +3,6 @@ using System.Windows.Input;
 using Application.Client.Dialogs.SaveFileDialog.Enums;
 using Application.Client.Dialogs.SaveFileDialog.Models;
 using Application.Client.Infrastructure.Commands;
-using Application.Client.Windows.Main.Services.Enums;
 using Application.Utilities.FileWriter.Models;
 
 namespace Application.Client.Windows.Main.ViewModels
@@ -22,10 +21,10 @@ namespace Application.Client.Windows.Main.ViewModels
             {
                 await _textFileWriter.WriteAsync(new WriteTextFileModel { FilePath = saveFileDialogResult.SavedFilePath, Content = _content });
 
-                _notepadStorageService.SetUsedFilePath(saveFileDialogResult.SavedFilePath);
-                _notepadStorageService.SetDocumentState(DocumentState.Unmodified);
+                _docInfoService.SetFilePath(saveFileDialogResult.SavedFilePath);
+                _docInfoService.SetUnmodifiedDocumentState();
 
-                WindowTitle = _notepadStorageService.UsedFileNameWithoutExtension;
+                WindowTitle = _docInfoService.UsedFileNameWithoutExtension;
             }
         }
     }

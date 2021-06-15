@@ -7,8 +7,7 @@ using Application.Client.Dialogs.StaticValues;
 using Application.Client.Dialogs.StaticValues.Enums;
 using Application.Client.Dialogs.StaticValues.Models;
 using Application.Client.Infrastructure.ViewModels;
-using Application.Client.Windows.Main.Services.Enums;
-using Application.Client.Windows.Main.Services.Interfaces;
+using Application.Client.Services.Interfaces;
 using Application.Client.Windows.Main.ViewModels.Interfaces;
 using Application.Utilities.FileReader.Interfaces;
 using Application.Utilities.FileWriter.Interfaces;
@@ -27,10 +26,10 @@ namespace Application.Client.Windows.Main.ViewModels
 
         private readonly ITextFileReader _textFileReader;
 
-        private readonly INotepadStorageService _notepadStorageService;
+        private readonly IDocInfoService _docInfoService;
 
         public MainWindowViewModel(IMessageDialog messageDialog, IOpenFileDialog openFileDialog, ISaveFileDialog saveFileDialog,
-            ITextFileWriter textFileWriter, ITextFileReader textFileReader, INotepadStorageService notepadStorageService)
+            ITextFileWriter textFileWriter, ITextFileReader textFileReader, IDocInfoService docInfoService)
         {
             _messageDialog = messageDialog;
             _openFileDialog = openFileDialog;
@@ -38,7 +37,7 @@ namespace Application.Client.Windows.Main.ViewModels
             _textFileWriter = textFileWriter;
             _textFileReader = textFileReader;
 
-            _notepadStorageService = notepadStorageService;
+            _docInfoService = docInfoService;
         }
 
         #region PROPERTIES GETTERS/ SETTERS
@@ -46,7 +45,7 @@ namespace Application.Client.Windows.Main.ViewModels
         private string _windowTitle;
         public string WindowTitle
         {
-            get => $"{_windowTitle ?? _notepadStorageService.UsedFileNameWithoutExtension} - Notepad";
+            get => $"{_windowTitle ?? _docInfoService.UsedFileNameWithoutExtension} - Notepad";
             set
             {
                 _windowTitle = value;
@@ -63,9 +62,9 @@ namespace Application.Client.Windows.Main.ViewModels
             {
                 _content = value;
 
-                if (!_notepadStorageService.HasDocumentModified)
+                if (!_docInfoService.IsModifiedDocument)
                 {
-                    _notepadStorageService.SetDocumentState(DocumentState.Modified);
+                    _docInfoService.SetModifiedDocumentState();
                 }
 
                 OnPropertyChanged();

@@ -17,18 +17,18 @@ namespace Application.Client.Windows.Main.ViewModels
 
         private async void ApplicationCloseCommandExecute(CancelEventArgs eventArgs)
         {
-            if (_notepadStorageService.HasDocumentModified)
+            if (_docInfoService.IsModifiedDocument)
             {
                 MessageDialogResult messageDialogResult = await _messageDialog.ShowMessageDialogAsync(
-                    new MessageDialogOptions { Title = "Notepad", Content = $"Do you want to save the {_notepadStorageService.UsedFileNameWithExtension} changes?", Button = MessageBoxButton.YesNoCancel });
+                    new MessageDialogOptions { Title = "Notepad", Content = $"Do you want to save the {_docInfoService.UsedFileNameWithExtension} changes?", Button = MessageBoxButton.YesNoCancel });
 
                 switch (messageDialogResult.MessageDialogResultType)
                 {
                     case MessageDialogResultType.Yes:
                         {
-                            if (_notepadStorageService.HasUsedFile)
+                            if (_docInfoService.IsOpenedDocument)
                             {
-                                await _textFileWriter.WriteAsync(new WriteTextFileModel { FilePath = _notepadStorageService.UsedFilePath, Content = _content });
+                                await _textFileWriter.WriteAsync(new WriteTextFileModel { FilePath = _docInfoService.UsedFilePath, Content = _content });
                             }
                             else
                             {

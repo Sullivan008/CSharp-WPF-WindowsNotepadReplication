@@ -8,7 +8,6 @@ using Application.Client.Dialogs.OpenFileDialog.Models;
 using Application.Client.Dialogs.SaveFileDialog.Enums;
 using Application.Client.Dialogs.SaveFileDialog.Models;
 using Application.Client.Infrastructure.Commands;
-using Application.Client.Windows.Main.Services.Enums;
 using Application.Utilities.FileReader.Models;
 using Application.Utilities.FileWriter.Models;
 
@@ -21,18 +20,18 @@ namespace Application.Client.Windows.Main.ViewModels
 
         private async Task OpenFileCommandExecute()
         {
-            if (_notepadStorageService.HasDocumentModified)
+            if (_docInfoService.IsModifiedDocument)
             {
                 MessageDialogResult messageDialogResult = await _messageDialog.ShowMessageDialogAsync(
-                    new MessageDialogOptions { Title = "Notepad", Content = $"Do you want to save the {_notepadStorageService.UsedFileNameWithExtension} changes?", Button = MessageBoxButton.YesNoCancel });
+                    new MessageDialogOptions { Title = "Notepad", Content = $"Do you want to save the {_docInfoService.UsedFileNameWithExtension} changes?", Button = MessageBoxButton.YesNoCancel });
 
                 switch (messageDialogResult.MessageDialogResultType)
                 {
                     case MessageDialogResultType.Yes:
                         {
-                            if (_notepadStorageService.HasUsedFile)
+                            if (_docInfoService.IsOpenedDocument)
                             {
-                                await _textFileWriter.WriteAsync(new WriteTextFileModel { FilePath = _notepadStorageService.UsedFilePath, Content = _content });
+                                await _textFileWriter.WriteAsync(new WriteTextFileModel { FilePath = _docInfoService.UsedFilePath, Content = _content });
                             }
                             else
                             {
@@ -41,7 +40,7 @@ namespace Application.Client.Windows.Main.ViewModels
                                 if (saveFileDialogResult.SaveFileDialogResultType == SaveFileDialogResultType.Ok)
                                 {
                                     await _textFileWriter.WriteAsync(new WriteTextFileModel { FilePath = saveFileDialogResult.SavedFilePath, Content = _content });
-                                    _notepadStorageService.SetUsedFilePath(saveFileDialogResult.SavedFilePath);
+                                    _docInfoService.SetFilePath(saveFileDialogResult.SavedFilePath);
                                 }
                                 else if (saveFileDialogResult.SaveFileDialogResultType == SaveFileDialogResultType.Cancel)
                                 {
@@ -49,8 +48,8 @@ namespace Application.Client.Windows.Main.ViewModels
                                 }
                             }
 
-                            _notepadStorageService.SetDocumentState(DocumentState.Unmodified);
-                            WindowTitle = _notepadStorageService.UsedFileNameWithoutExtension;
+                            _docInfoService.SetUnmodifiedDocumentState();
+                            WindowTitle = _docInfoService.UsedFileNameWithoutExtension;
 
                             break;
                         }
@@ -67,10 +66,10 @@ namespace Application.Client.Windows.Main.ViewModels
             {
                 Content = await _textFileReader.ReadAsync<string>(new ReadTextFileModel { FilePath = openFileDialogResult.FilePath });
 
-                _notepadStorageService.SetUsedFilePath(openFileDialogResult.FilePath);
-                _notepadStorageService.SetDocumentState(DocumentState.Unmodified);
+                _docInfoService.SetFilePath(openFileDialogResult.FilePath);
+                _docInfoService.SetUnmodifiedDocumentState();
 
-                WindowTitle = _notepadStorageService.UsedFileNameWithoutExtension;
+                WindowTitle = _docInfoService.UsedFileNameWithoutExtension;
             }
         }
     }

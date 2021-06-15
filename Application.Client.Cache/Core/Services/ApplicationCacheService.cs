@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Application.Client.Cache.Core.Enums;
-using Application.Client.Cache.Core.Exceptions;
 using Application.Client.Cache.Core.Models.Interfaces;
 using Application.Client.Cache.Core.Models.Options;
 using Application.Client.Cache.Core.Services.Interfaces;
@@ -23,12 +22,7 @@ namespace Application.Client.Cache.Core.Services
 
         public TCacheDataModel GetItem<TCacheDataModel>(CacheKey key) where TCacheDataModel : ICacheDataModel
         {
-            if (!_memoryCache.TryGetValue(key.ToEnumMemberAttrValue(), out TCacheDataModel cacheItem))
-            {
-                throw new CacheItemNotExistException($"Application Cache Item does not exist with this key: {nameof(key).ToUpper()}: {key}");
-            }
-
-            return cacheItem;
+            return _memoryCache.Get<TCacheDataModel>(key.ToEnumMemberAttrValue());
         }
 
         public void SetItem<TCacheDataModel>(CacheSaveOptions<TCacheDataModel> saveOptions) where TCacheDataModel : ICacheDataModel

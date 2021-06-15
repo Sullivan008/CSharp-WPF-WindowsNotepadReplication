@@ -1,4 +1,4 @@
-﻿namespace Application.Client.Windows.Main.Services.Enums
+﻿namespace Application.Client.Cache.DataModels.Enums
 {
     public enum DocumentState
     {

@@ -6,7 +6,6 @@ using Application.Client.Dialogs.MessageDialog.Models;
 using Application.Client.Dialogs.SaveFileDialog.Enums;
 using Application.Client.Dialogs.SaveFileDialog.Models;
 using Application.Client.Infrastructure.Commands;
-using Application.Client.Windows.Main.Services.Enums;
 using Application.Utilities.FileWriter.Models;
 
 namespace Application.Client.Windows.Main.ViewModels
@@ -18,18 +17,18 @@ namespace Application.Client.Windows.Main.ViewModels
 
         private async Task NewFileCommandExecute()
         {
-            if (_notepadStorageService.HasDocumentModified)
+            if (_docInfoService.IsModifiedDocument)
             {
                 MessageDialogResult messageDialogResult = await _messageDialog.ShowMessageDialogAsync(
-                    new MessageDialogOptions { Title = "Notepad", Content = $"Do you want to save the {_notepadStorageService.UsedFileNameWithExtension} changes?", Button = MessageBoxButton.YesNoCancel });
+                    new MessageDialogOptions { Title = "Notepad", Content = $"Do you want to save the {_docInfoService.UsedFileNameWithExtension} changes?", Button = MessageBoxButton.YesNoCancel });
 
                 switch (messageDialogResult.MessageDialogResultType)
                 {
                     case MessageDialogResultType.Yes:
                         {
-                            if (_notepadStorageService.HasUsedFile)
+                            if (_docInfoService.IsOpenedDocument)
                             {
-                                await _textFileWriter.WriteAsync(new WriteTextFileModel { FilePath = _notepadStorageService.UsedFilePath, Content = _content });
+                                await _textFileWriter.WriteAsync(new WriteTextFileModel { FilePath = _docInfoService.UsedFilePath, Content = _content });
                             }
                             else
                             {
@@ -54,12 +53,10 @@ namespace Application.Client.Windows.Main.ViewModels
                 }
             }
 
+            _docInfoService.SetDefaultDocInfo();
+
             Content = string.Empty;
-
-            _notepadStorageService.SetDefaultFilePath();
-            _notepadStorageService.SetDocumentState(DocumentState.Unmodified);
-
-            WindowTitle = _notepadStorageService.UsedFileNameWithoutExtension;
+            WindowTitle = _docInfoService.UsedFileNameWithoutExtension;
         }
     }
 }
