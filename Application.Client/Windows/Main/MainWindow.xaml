@@ -89,12 +89,12 @@
                     </MenuItem>
                 </MenuItem>
                 <MenuItem Template="{DynamicResource MainMenuItemControlTemplate}" Header="Edit">
-                    <MenuItem Header="_Redo"/>
-                    <MenuItem Header="_Undo"/>
+                    <MenuItem Header="_Redo" Command="ApplicationCommands.Redo"/>
+                    <MenuItem Header="_Undo" Command="ApplicationCommands.Undo"/>
                     <Separator/>
-                    <MenuItem Header="_Cut"/>
-                    <MenuItem Header="_Copy"/>
-                    <MenuItem Header="_Paste"/>
+                    <MenuItem Header="_Cut" Command="ApplicationCommands.Cut"/>
+                    <MenuItem Header="_Copy" Command="ApplicationCommands.Copy"/>
+                    <MenuItem Header="_Paste" Command="ApplicationCommands.Paste"/>
                     <MenuItem Header="_Delete"/>
                     <Separator/>
                     <MenuItem Header="_Search"/>

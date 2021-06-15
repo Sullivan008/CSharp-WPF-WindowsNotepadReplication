@@ -45,8 +45,6 @@ namespace Application.Client.Windows.Main.ViewModels
         private string _windowTitle;
         public string WindowTitle
         {
-
-
             get
             {
                 const string WINDOW_TITLE_POSTFIX = " - Notepad";
