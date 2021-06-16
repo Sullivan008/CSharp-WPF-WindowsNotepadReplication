@@ -102,6 +102,8 @@
                     <MenuItem Header="_FindNext"/>
                     <MenuItem Header="_Replace"/>
                     <MenuItem Header="_Jump"/>
+                    <Separator/>
+                    <MenuItem Header="_Select All" Command="ApplicationCommands.SelectAll"/>
                 </MenuItem>
                 <MenuItem Template="{DynamicResource MainMenuItemControlTemplate}" Header="Format">
                     <MenuItem Header="_Break words"/>
