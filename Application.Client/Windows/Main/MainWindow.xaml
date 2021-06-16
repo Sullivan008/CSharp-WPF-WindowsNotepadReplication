@@ -4,6 +4,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:behaviors="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:textBoxBehaviors="clr-namespace:Application.Client.Behaviors.TextBox;assembly=Application.Client.Behaviors"
         mc:Ignorable="d"
         Height="450" Width="800"
         Title="{Binding WindowTitle}" Icon="/Resources/application-icon.ico">
@@ -95,7 +96,7 @@
                     <MenuItem Header="_Cut" Command="ApplicationCommands.Cut"/>
                     <MenuItem Header="_Copy" Command="ApplicationCommands.Copy"/>
                     <MenuItem Header="_Paste" Command="ApplicationCommands.Paste"/>
-                    <MenuItem Header="_Delete"/>
+                    <MenuItem Header="_Delete" InputGestureText="Del" Command="{Binding DeleteTextCommand}"/>
                     <Separator/>
                     <MenuItem Header="_Search"/>
                     <MenuItem Header="_FindNext"/>
@@ -116,7 +117,7 @@
                      TextWrapping="NoWrap"
                      VerticalScrollBarVisibility="Visible"
                      HorizontalScrollBarVisibility="Visible"
-                     Text="{Binding Content, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                     Text="{Binding Content, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" textBoxBehaviors:SelectedTextBehavior.SelectedText="{Binding SelectedText}"/>
         </DockPanel>
     </Grid>
 </Window>

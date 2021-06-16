@@ -76,6 +76,18 @@ namespace Application.Client.Windows.Main.ViewModels
             }
         }
 
+        private string _selectedText = string.Empty;
+        public string SelectedText
+        {
+            get => _selectedText;
+            set
+            {
+                _selectedText = value;
+
+                OnPropertyChanged();
+            }
+        }
+
         #endregion
 
         private static IReadOnlyDictionary<string, IReadOnlyList<string>> GetOpenFileDialogFilters()
