@@ -88,6 +88,18 @@ namespace Application.Client.Windows.Main.ViewModels
             }
         }
 
+        private int _caretIndex;
+        public int CaretIndex
+        {
+            get => _caretIndex;
+            set
+            {
+                _caretIndex = value;
+
+                OnPropertyChanged();
+            }
+        }
+
         #endregion
 
         private static IReadOnlyDictionary<string, IReadOnlyList<string>> GetOpenFileDialogFilters()

@@ -63,6 +63,7 @@
         <KeyBinding Key="O" Modifiers="Control" Command="{Binding OpenFileCommand}"/>
         <KeyBinding Key="S" Modifiers="Control" Command="{Binding SaveFileCommand}"/>
         <KeyBinding Key="S" Modifiers="Control+Shift" Command="{Binding SaveFileAsCommand}"/>
+        <KeyBinding Key="F5" Command="{Binding PutDateTimeTextCommand}"/>
     </Window.InputBindings>
 
     <behaviors:Interaction.Triggers>
@@ -104,6 +105,7 @@
                     <MenuItem Header="_Jump"/>
                     <Separator/>
                     <MenuItem Header="_Select All" Command="ApplicationCommands.SelectAll"/>
+                    <MenuItem Header="_Time/ Date" InputGestureText="F5" Command="{Binding PutDateTimeTextCommand}"/>
                 </MenuItem>
                 <MenuItem Template="{DynamicResource MainMenuItemControlTemplate}" Header="Format">
                     <MenuItem Header="_Break words"/>
@@ -119,7 +121,10 @@
                      TextWrapping="NoWrap"
                      VerticalScrollBarVisibility="Visible"
                      HorizontalScrollBarVisibility="Visible"
-                     Text="{Binding Content, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" textBoxBehaviors:SelectedTextBehavior.SelectedText="{Binding SelectedText}"/>
+                     Text="{Binding Content, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     textBoxBehaviors:SelectedTextBehavior.SelectedText="{Binding SelectedText}"
+                     textBoxBehaviors:CaretIndexBehavior.CaretIndex="{Binding CaretIndex}">
+            </TextBox>
         </DockPanel>
     </Grid>
 </Window>
