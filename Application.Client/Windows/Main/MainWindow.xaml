@@ -7,7 +7,8 @@
         xmlns:textBoxBehaviors="clr-namespace:Application.Client.Behaviors.TextBox;assembly=Application.Client.Behaviors"
         mc:Ignorable="d"
         Height="450" Width="800"
-        Title="{Binding WindowTitle}" Icon="/Resources/application-icon.ico">
+        Title="{Binding WindowTitle}" Icon="/Resources/application-icon.ico"
+        ResizeMode="CanResizeWithGrip">
     <Window.Resources>
 
         <ControlTemplate x:Key="MainInputTextBoxTemplate" TargetType="{x:Type TextBox}">
@@ -112,9 +113,33 @@
                     <MenuItem Header="_Font"/>
                 </MenuItem>
                 <MenuItem Template="{DynamicResource MainMenuItemControlTemplate}" Header="View">
-                    <MenuItem Header="_Status bar"/>
+                    <MenuItem Header="_Status bar" IsCheckable="True" IsChecked="True" Command="{Binding ChangeStatusBarVisibilityCommand}"/>
                 </MenuItem>
             </Menu>
+            <StatusBar DockPanel.Dock="Bottom" Visibility="{Binding StatusBar.Visibility}">
+                <StatusBar.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <Grid HorizontalAlignment="Right">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="185" />
+                            </Grid.ColumnDefinitions>
+                        </Grid>
+                    </ItemsPanelTemplate>
+                </StatusBar.ItemsPanel>
+                <Separator Grid.Column="0" Background="#FFD7D7D7" />
+                <StatusBarItem Grid.Column="1">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Length:" Margin="8 0 4 0"></TextBlock>
+                        <TextBlock Text="{Binding StatusBar.Length}"></TextBlock>
+                        <TextBlock Margin="2 0 10 0">,</TextBlock>
+                        <TextBlock Text="Lines:" Margin="0 0 4 0"></TextBlock>
+                        <TextBlock Text="{Binding StatusBar.Lines}"></TextBlock>
+                    </StackPanel>
+                    <!--<TextBlock Text="c:\path\of\current\file.txt" />
+                    <TextBlock Text="c:\path\of\current\file.txt" />-->
+                </StatusBarItem>
+            </StatusBar>
             <TextBox Template="{DynamicResource MainInputTextBoxTemplate}"
                      DockPanel.Dock="Bottom" 
                      AcceptsReturn="True"
@@ -126,5 +151,6 @@
                      textBoxBehaviors:CaretIndexBehavior.CaretIndex="{Binding CaretIndex}">
             </TextBox>
         </DockPanel>
+
     </Grid>
 </Window>

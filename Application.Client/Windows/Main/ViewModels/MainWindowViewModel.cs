@@ -54,7 +54,6 @@ namespace Application.Client.Windows.Main.ViewModels
             set
             {
                 _windowTitle = value;
-
                 OnPropertyChanged();
             }
         }
@@ -66,13 +65,12 @@ namespace Application.Client.Windows.Main.ViewModels
             set
             {
                 _content = value;
+                OnPropertyChanged();
 
                 if (!_docInfoService.IsModifiedDocument)
                 {
                     _docInfoService.SetModifiedDocumentState();
                 }
-
-                OnPropertyChanged();
             }
         }
 
@@ -83,8 +81,9 @@ namespace Application.Client.Windows.Main.ViewModels
             set
             {
                 _selectedText = value;
-
                 OnPropertyChanged();
+
+                RefreshStatusBar();
             }
         }
 
@@ -95,7 +94,17 @@ namespace Application.Client.Windows.Main.ViewModels
             set
             {
                 _caretIndex = value;
+                OnPropertyChanged();
+            }
+        }
 
+        private StatusBarViewModel _statusBar = new();
+        public StatusBarViewModel StatusBar
+        {
+            get => _statusBar;
+            set
+            {
+                _statusBar = value;
                 OnPropertyChanged();
             }
         }
@@ -114,6 +123,18 @@ namespace Application.Client.Windows.Main.ViewModels
             IReadOnlyList<FileFilterModel> fileFilters = FileFilters.GetFileFiltersByFilterTypes(new[] { FileFilterType.Text });
 
             return fileFilters.ToDictionary(x => x.FilterName, y => y.Filters);
+        }
+
+        private void RefreshStatusBar()
+        {
+            const string ROW_SEPARATOR = "\n";
+
+            StatusBar = new StatusBarViewModel
+            {
+                Length = Content.Length,
+                Visibility = StatusBar.Visibility,
+                Lines = Content.Split(ROW_SEPARATOR).Length
+            };
         }
     }
 }
