@@ -136,8 +136,6 @@
                         <TextBlock Text="Lines:" Margin="0 0 4 0"></TextBlock>
                         <TextBlock Text="{Binding StatusBar.Lines}"></TextBlock>
                     </StackPanel>
-                    <!--<TextBlock Text="c:\path\of\current\file.txt" />
-                    <TextBlock Text="c:\path\of\current\file.txt" />-->
                 </StatusBarItem>
             </StatusBar>
             <TextBox Template="{DynamicResource MainInputTextBoxTemplate}"
