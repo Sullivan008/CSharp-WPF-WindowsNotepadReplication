@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Windows;
 using Application.Client.Dialogs.MessageDialog.Interfaces;
 using Application.Client.Dialogs.OpenFileDialog.Interfaces;
 using Application.Client.Dialogs.SaveFileDialog.Interfaces;
@@ -94,6 +95,17 @@ namespace Application.Client.Windows.Main.ViewModels
             set
             {
                 _caretIndex = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private TextWrapping _textWrapping = TextWrapping.NoWrap;
+        public TextWrapping TextWrapping
+        {
+            get => _textWrapping;
+            set
+            {
+                _textWrapping = value;
                 OnPropertyChanged();
             }
         }

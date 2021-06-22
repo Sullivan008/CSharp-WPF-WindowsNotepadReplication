@@ -109,7 +109,7 @@
                     <MenuItem Header="_Time/ Date" InputGestureText="F5" Command="{Binding PutDateTimeTextCommand}"/>
                 </MenuItem>
                 <MenuItem Template="{DynamicResource MainMenuItemControlTemplate}" Header="Format">
-                    <MenuItem Header="_Break words"/>
+                    <MenuItem Header="_Break words" IsCheckable="True" IsChecked="False" Command="{Binding ChangeTextWrappingCommand}"/>
                     <MenuItem Header="_Font"/>
                 </MenuItem>
                 <MenuItem Template="{DynamicResource MainMenuItemControlTemplate}" Header="View">
@@ -141,7 +141,7 @@
             <TextBox Template="{DynamicResource MainInputTextBoxTemplate}"
                      DockPanel.Dock="Bottom" 
                      AcceptsReturn="True"
-                     TextWrapping="NoWrap"
+                     TextWrapping="{Binding TextWrapping}"
                      VerticalScrollBarVisibility="Visible"
                      HorizontalScrollBarVisibility="Visible"
                      Text="{Binding Content, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
