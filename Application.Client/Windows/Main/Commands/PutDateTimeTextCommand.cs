@@ -13,11 +13,11 @@ namespace Application.Client.Windows.Main.ViewModels
 
         private async Task PutDateTimeTextCommandExecute()
         {
-            int oldCaretIndexValue = CaretIndex;
+            int oldCaretIndexValue = InputTextBoxViewModel.CaretIndex;
             string dateTimeValue = DateTime.Now.ToString("MM-dd-yyyy hh:mm tt", new CultureInfo("en-EN"));
 
-            Content = Content.Insert(CaretIndex, dateTimeValue);
-            CaretIndex = oldCaretIndexValue + dateTimeValue.Length;
+            InputTextBoxViewModel.Content = InputTextBoxViewModel.Content.Insert(InputTextBoxViewModel.CaretIndex, dateTimeValue);
+            InputTextBoxViewModel.CaretIndex = oldCaretIndexValue + dateTimeValue.Length;
 
             await Task.CompletedTask;
         }

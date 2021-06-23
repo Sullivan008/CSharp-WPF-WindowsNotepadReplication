@@ -19,7 +19,7 @@ namespace Application.Client.Windows.Main.ViewModels
 
             if (saveFileDialogResult.SaveFileDialogResultType == SaveFileDialogResultType.Ok)
             {
-                await _textFileWriter.WriteAsync(new WriteTextFileModel { FilePath = saveFileDialogResult.SavedFilePath, Content = _content });
+                await _textFileWriter.WriteAsync(new WriteTextFileModel { FilePath = saveFileDialogResult.SavedFilePath, Content = InputTextBoxViewModel.Content });
 
                 _docInfoService.SetFilePath(saveFileDialogResult.SavedFilePath);
                 _docInfoService.SetUnmodifiedDocumentState();

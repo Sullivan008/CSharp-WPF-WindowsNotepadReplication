@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Windows;
+using System.Windows.Threading;
 using Application.Client.Dialogs.MessageDialog.Interfaces;
 using Application.Client.Dialogs.OpenFileDialog.Interfaces;
 using Application.Client.Dialogs.SaveFileDialog.Interfaces;
@@ -39,6 +39,10 @@ namespace Application.Client.Windows.Main.ViewModels
             _textFileReader = textFileReader;
 
             _docInfoService = docInfoService;
+
+            _inputTextBoxViewModel = new InputTextBoxViewModel();
+            _inputTextBoxViewModel.OnRefreshStatusBarEvent += (sender, eventArgs) => { Dispatcher.CurrentDispatcher.Invoke(() => StatusBar.RefreshOutputData(((InputTextBoxViewModel)sender).Content)); };
+            _inputTextBoxViewModel.OnContentChangedEvent += (sender, eventArgs) => { Dispatcher.CurrentDispatcher.Invoke(ChangeDocumentStateToModifiedState); };
         }
 
         #region PROPERTIES GETTERS/ SETTERS
@@ -59,53 +63,13 @@ namespace Application.Client.Windows.Main.ViewModels
             }
         }
 
-        private string _content = string.Empty;
-        public string Content
+        private static InputTextBoxViewModel _inputTextBoxViewModel;
+        public InputTextBoxViewModel InputTextBoxViewModel
         {
-            get => _content;
+            get => _inputTextBoxViewModel;
             set
             {
-                _content = value;
-                OnPropertyChanged();
-
-                if (!_docInfoService.IsModifiedDocument)
-                {
-                    _docInfoService.SetModifiedDocumentState();
-                }
-            }
-        }
-
-        private string _selectedText = string.Empty;
-        public string SelectedText
-        {
-            get => _selectedText;
-            set
-            {
-                _selectedText = value;
-                OnPropertyChanged();
-
-                RefreshStatusBar();
-            }
-        }
-
-        private int _caretIndex;
-        public int CaretIndex
-        {
-            get => _caretIndex;
-            set
-            {
-                _caretIndex = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private TextWrapping _textWrapping = TextWrapping.NoWrap;
-        public TextWrapping TextWrapping
-        {
-            get => _textWrapping;
-            set
-            {
-                _textWrapping = value;
+                _inputTextBoxViewModel = value;
                 OnPropertyChanged();
             }
         }
@@ -137,16 +101,12 @@ namespace Application.Client.Windows.Main.ViewModels
             return fileFilters.ToDictionary(x => x.FilterName, y => y.Filters);
         }
 
-        private void RefreshStatusBar()
+        private void ChangeDocumentStateToModifiedState()
         {
-            const string ROW_SEPARATOR = "\n";
-
-            StatusBar = new StatusBarViewModel
+            if (!_docInfoService.IsModifiedDocument)
             {
-                Length = Content.Length,
-                Visibility = StatusBar.Visibility,
-                Lines = Content.Split(ROW_SEPARATOR).Length
-            };
+                _docInfoService.SetModifiedDocumentState();
+            }
         }
     }
 }

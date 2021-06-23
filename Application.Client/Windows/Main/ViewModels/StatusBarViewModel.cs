@@ -17,7 +17,7 @@ namespace Application.Client.Windows.Main.ViewModels
             }
         }
 
-        private readonly int? _length = default(int);
+        private int? _length = default(int);
         public int Length
         {
             get
@@ -30,10 +30,14 @@ namespace Application.Client.Windows.Main.ViewModels
                 return _length.Value;
             }
 
-            init => _length = value;
+            private set
+            {
+                _length = value;
+                OnPropertyChanged();
+            }
         }
 
-        private readonly int? _lines = default(int) + 1;
+        private int? _lines = default(int) + 1;
         public int Lines
         {
             get
@@ -46,7 +50,26 @@ namespace Application.Client.Windows.Main.ViewModels
                 return _lines.Value;
             }
 
-            init => _lines = value;
+            private set
+            {
+                _lines = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public void RefreshOutputData(string content)
+        {
+            Length = GetContentLength(content);
+            Lines = GetContentLines(content);
+        }
+
+        private static int GetContentLength(string content) => content.Length;
+
+        private static int GetContentLines(string content)
+        {
+            const string ROW_SEPARATOR = "\n";
+
+            return content.Split(ROW_SEPARATOR).Length;
         }
     }
 }

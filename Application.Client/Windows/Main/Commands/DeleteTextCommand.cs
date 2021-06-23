@@ -11,14 +11,14 @@ namespace Application.Client.Windows.Main.ViewModels
 
         private async Task DeleteTextCommandExecute()
         {
-            SelectedText = string.Empty;
+            InputTextBoxViewModel.SelectedText = string.Empty;
 
             await Task.CompletedTask;
         }
 
         private bool CanExecuteDeleteTextCommand()
         {
-            return !string.IsNullOrWhiteSpace(SelectedText);
+            return !string.IsNullOrWhiteSpace(InputTextBoxViewModel.SelectedText);
         }
     }
 }

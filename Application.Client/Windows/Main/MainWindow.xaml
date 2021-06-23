@@ -141,12 +141,12 @@
             <TextBox Template="{DynamicResource MainInputTextBoxTemplate}"
                      DockPanel.Dock="Bottom" 
                      AcceptsReturn="True"
-                     TextWrapping="{Binding TextWrapping}"
+                     TextWrapping="{Binding InputTextBoxViewModel.TextWrapping}"
                      VerticalScrollBarVisibility="Visible"
                      HorizontalScrollBarVisibility="Visible"
-                     Text="{Binding Content, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                     textBoxBehaviors:SelectedTextBehavior.SelectedText="{Binding SelectedText}"
-                     textBoxBehaviors:CaretIndexBehavior.CaretIndex="{Binding CaretIndex}">
+                     Text="{Binding InputTextBoxViewModel.Content, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     textBoxBehaviors:SelectedTextBehavior.SelectedText="{Binding InputTextBoxViewModel.SelectedText}"
+                     textBoxBehaviors:CaretIndexBehavior.CaretIndex="{Binding InputTextBoxViewModel.CaretIndex}">
             </TextBox>
         </DockPanel>
 
