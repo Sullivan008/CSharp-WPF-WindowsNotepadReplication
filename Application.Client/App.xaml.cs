@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Windows;
 using System.Windows.Threading;
 using Application.Client.Core.Environment.Enums;
 using Application.Client.Core.ErrorHandling.Constants;
+using Application.Client.Core.ErrorHandling.DataBinding.TraceListeners;
 using Application.Client.Core.ErrorHandling.Models;
 using Application.Client.Dialogs.MessageDialog.Interfaces;
 using Application.Client.Dialogs.MessageDialog.Models;
@@ -53,6 +55,8 @@ namespace Application.Client
         {
             await _host.StartAsync();
 
+            ConfigureDataBindingErrorListener();
+
             Current.DispatcherUnhandledException += AppDispatcherUnhandledException;
 
             MainWindow mainWindow = _host.Services.GetRequiredService<MainWindow>();
@@ -86,6 +90,13 @@ namespace Application.Client
             services.AddTransientServices();
 
             services.AddCacheRepositories();
+        }
+
+        private static void ConfigureDataBindingErrorListener()
+        {
+            PresentationTraceSources.Refresh();
+            PresentationTraceSources.DataBindingSource.Switch.Level = SourceLevels.Error;
+            PresentationTraceSources.DataBindingSource.Listeners.Add(new BindingErrorTraceListener());
         }
 
         private void AppDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
