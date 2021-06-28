@@ -5,6 +5,8 @@ using System.Reflection;
 using Application.Client.Cache.Core.Services;
 using Application.Client.Cache.Core.Services.Interfaces;
 using Application.Client.Cache.Repository.Interfaces;
+using Application.Client.Dialogs.FontDialog;
+using Application.Client.Dialogs.FontDialog.Interfaces;
 using Application.Client.Dialogs.MessageDialog;
 using Application.Client.Dialogs.MessageDialog.Interfaces;
 using Application.Client.Dialogs.OpenFileDialog;
@@ -31,6 +33,7 @@ namespace Application.Client.Infrastructure.Extensions
             services.AddTransient<ISaveFileDialog, SaveFileDialog>();
             services.AddTransient<IOpenFileDialog, OpenFileDialog>();
             services.AddTransient<IMessageDialog, MessageDialog>();
+            services.AddTransient<IFontDialog, FontDialog>();
 
             services.AddTransient<ITextFileReader, TextFileReader>();
             services.AddTransient<ITextFileWriter, TextFileWriter>();
