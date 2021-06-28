@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Threading;
+using Application.Client.Dialogs.FontDialog.Interfaces;
 using Application.Client.Dialogs.MessageDialog.Interfaces;
 using Application.Client.Dialogs.OpenFileDialog.Interfaces;
 using Application.Client.Dialogs.SaveFileDialog.Interfaces;
@@ -17,6 +18,8 @@ namespace Application.Client.Windows.Main.ViewModels
 {
     public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
     {
+        private readonly IFontDialog _fontDialog;
+
         private readonly IMessageDialog _messageDialog;
 
         private readonly IOpenFileDialog _openFileDialog;
@@ -29,9 +32,10 @@ namespace Application.Client.Windows.Main.ViewModels
 
         private readonly IDocInfoService _docInfoService;
 
-        public MainWindowViewModel(IMessageDialog messageDialog, IOpenFileDialog openFileDialog, ISaveFileDialog saveFileDialog,
+        public MainWindowViewModel(IFontDialog fontDialog, IMessageDialog messageDialog, IOpenFileDialog openFileDialog, ISaveFileDialog saveFileDialog,
             ITextFileWriter textFileWriter, ITextFileReader textFileReader, IDocInfoService docInfoService)
         {
+            _fontDialog = fontDialog;
             _messageDialog = messageDialog;
             _openFileDialog = openFileDialog;
             _saveFileDialog = saveFileDialog;

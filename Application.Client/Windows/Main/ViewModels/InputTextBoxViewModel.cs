@@ -81,5 +81,16 @@ namespace Application.Client.Windows.Main.ViewModels
                 OnPropertyChanged();
             }
         }
+
+        private FontOptionsViewModel _fontOptions = new();
+        public FontOptionsViewModel FontOptions
+        {
+            get => _fontOptions;
+            set
+            {
+                _fontOptions = value;
+                OnPropertyChanged();
+            }
+        }
     }
 }

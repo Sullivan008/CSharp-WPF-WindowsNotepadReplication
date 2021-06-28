@@ -110,7 +110,7 @@
                 </MenuItem>
                 <MenuItem Template="{DynamicResource MainMenuItemControlTemplate}" Header="Format">
                     <MenuItem Header="_Break words" IsCheckable="True" IsChecked="False" Command="{Binding ChangeTextWrappingCommand}"/>
-                    <MenuItem Header="_Font"/>
+                    <MenuItem Header="_Fonts..." Command="{Binding FontsCommand}"/>
                 </MenuItem>
                 <MenuItem Template="{DynamicResource MainMenuItemControlTemplate}" Header="View">
                     <MenuItem Header="_Status bar" IsCheckable="True" IsChecked="True" Command="{Binding ChangeStatusBarVisibilityCommand}"/>
@@ -145,6 +145,10 @@
                      VerticalScrollBarVisibility="Visible"
                      HorizontalScrollBarVisibility="Visible"
                      Text="{Binding InputTextBoxViewModel.Content, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     FontFamily="{Binding InputTextBoxViewModel.FontOptions.FontFamily, Mode=OneWay}"
+                     FontSize="{Binding InputTextBoxViewModel.FontOptions.FontSize, Mode=OneWay}"
+                     FontStyle="{Binding InputTextBoxViewModel.FontOptions.FontStyle, Mode=OneWay}"
+                     FontWeight="{Binding InputTextBoxViewModel.FontOptions.FontWeight, Mode=OneWay}"
                      textBoxBehaviors:SelectedTextBehavior.SelectedText="{Binding InputTextBoxViewModel.SelectedText}"
                      textBoxBehaviors:CaretIndexBehavior.CaretIndex="{Binding InputTextBoxViewModel.CaretIndex}">
             </TextBox>
