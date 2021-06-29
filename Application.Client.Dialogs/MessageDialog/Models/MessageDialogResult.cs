@@ -12,11 +12,12 @@ namespace Application.Client.Dialogs.MessageDialog.Models
             {
                 if (!_messageDialogResultType.HasValue)
                 {
-                    throw new ArgumentNullException(nameof(_messageDialogResultType), @"The value cannot be null!");
+                    throw new ArgumentNullException(nameof(_messageDialogResultType), "The value cannot be null!");
                 }
 
                 return _messageDialogResultType.Value;
             }
+
             init => _messageDialogResultType = value;
         }
     }
