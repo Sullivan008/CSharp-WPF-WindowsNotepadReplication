@@ -13,13 +13,13 @@ namespace Application.Client.Windows.Main.ViewModels
 
         private async Task ChangeTextWrappingCommandExecute()
         {
-            switch (InputTextBoxViewModel.TextWrapping)
+            switch (InputTextBox.TextWrapping)
             {
                 case TextWrapping.NoWrap:
-                    InputTextBoxViewModel.TextWrapping = TextWrapping.Wrap;
+                    InputTextBox.TextWrapping = TextWrapping.Wrap;
                     break;
                 case TextWrapping.Wrap:
-                    InputTextBoxViewModel.TextWrapping = TextWrapping.NoWrap;
+                    InputTextBox.TextWrapping = TextWrapping.NoWrap;
                     break;
                 default:
                     throw new NotImplementedException($"The following Text Wrap change logic does not implemented! {StatusBar.Visibility}");

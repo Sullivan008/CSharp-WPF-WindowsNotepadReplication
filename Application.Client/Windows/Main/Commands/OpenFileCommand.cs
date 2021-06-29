@@ -31,7 +31,7 @@ namespace Application.Client.Windows.Main.ViewModels
                         {
                             if (_docInfoService.IsOpenedDocument)
                             {
-                                await _textFileWriter.WriteAsync(new WriteTextFileModel { FilePath = _docInfoService.UsedFilePath, Content = InputTextBoxViewModel.Content });
+                                await _textFileWriter.WriteAsync(new WriteTextFileModel { FilePath = _docInfoService.UsedFilePath, Content = InputTextBox.Content });
                             }
                             else
                             {
@@ -39,7 +39,7 @@ namespace Application.Client.Windows.Main.ViewModels
 
                                 if (saveFileDialogResult.SaveFileDialogResultType == SaveFileDialogResultType.Ok)
                                 {
-                                    await _textFileWriter.WriteAsync(new WriteTextFileModel { FilePath = saveFileDialogResult.SavedFilePath, Content = InputTextBoxViewModel.Content });
+                                    await _textFileWriter.WriteAsync(new WriteTextFileModel { FilePath = saveFileDialogResult.SavedFilePath, Content = InputTextBox.Content });
                                     _docInfoService.SetFilePath(saveFileDialogResult.SavedFilePath);
                                 }
                                 else if (saveFileDialogResult.SaveFileDialogResultType == SaveFileDialogResultType.Cancel)
@@ -64,7 +64,7 @@ namespace Application.Client.Windows.Main.ViewModels
 
             if (openFileDialogResult.OpenFileDialogResultType == OpenFileDialogResultType.Ok)
             {
-                InputTextBoxViewModel.Content = await _textFileReader.ReadAsync<string>(new ReadTextFileModel { FilePath = openFileDialogResult.FilePath });
+                InputTextBox.Content = await _textFileReader.ReadAsync<string>(new ReadTextFileModel { FilePath = openFileDialogResult.FilePath });
 
                 _docInfoService.SetFilePath(openFileDialogResult.FilePath);
                 _docInfoService.SetUnmodifiedDocumentState();

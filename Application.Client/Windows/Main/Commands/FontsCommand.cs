@@ -19,10 +19,10 @@ namespace Application.Client.Windows.Main.ViewModels
             {
                 FontOptions = new FontOptions
                 {
-                    MediaFontSize = InputTextBoxViewModel.FontOptions.FontSize,
-                    MediaFontStyle = InputTextBoxViewModel.FontOptions.FontStyle,
-                    MediaFontWeight = InputTextBoxViewModel.FontOptions.FontWeight,
-                    FontFamilyName = InputTextBoxViewModel.FontOptions.FontFamily.FamilyNames.Values.First()
+                    MediaFontSize = InputTextBox.FontOptions.FontSize,
+                    MediaFontStyle = InputTextBox.FontOptions.FontStyle,
+                    MediaFontWeight = InputTextBox.FontOptions.FontWeight,
+                    FontFamilyName = InputTextBox.FontOptions.FontFamily.FamilyNames.Values.First()
                 }
             };
 
@@ -30,10 +30,10 @@ namespace Application.Client.Windows.Main.ViewModels
 
             if (dialogResult.FontDialogResultType == FontDialogResultType.Ok)
             {
-                InputTextBoxViewModel.FontOptions.FontFamily = dialogResult.FontResult.FontFamily;
-                InputTextBoxViewModel.FontOptions.FontSize = dialogResult.FontResult.FontSize;
-                InputTextBoxViewModel.FontOptions.FontStyle = dialogResult.FontResult.FontStyle;
-                InputTextBoxViewModel.FontOptions.FontWeight = dialogResult.FontResult.FontWeight;
+                InputTextBox.FontOptions.FontFamily = dialogResult.FontResult.FontFamily;
+                InputTextBox.FontOptions.FontSize = dialogResult.FontResult.FontSize;
+                InputTextBox.FontOptions.FontStyle = dialogResult.FontResult.FontStyle;
+                InputTextBox.FontOptions.FontWeight = dialogResult.FontResult.FontWeight;
             }
         }
     }

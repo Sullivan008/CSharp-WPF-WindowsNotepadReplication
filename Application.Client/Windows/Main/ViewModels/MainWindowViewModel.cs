@@ -44,9 +44,9 @@ namespace Application.Client.Windows.Main.ViewModels
 
             _docInfoService = docInfoService;
 
-            _inputTextBoxViewModel = new InputTextBoxViewModel();
-            _inputTextBoxViewModel.OnRefreshStatusBarEvent += (sender, eventArgs) => { Dispatcher.CurrentDispatcher.Invoke(() => StatusBar.RefreshOutputData(((InputTextBoxViewModel)sender).Content)); };
-            _inputTextBoxViewModel.OnContentChangedEvent += (sender, eventArgs) => { Dispatcher.CurrentDispatcher.Invoke(ChangeDocumentStateToModifiedState); };
+            _inputTextBox = new InputTextBoxViewModel();
+            _inputTextBox.OnRefreshStatusBarEvent += (sender, eventArgs) => { Dispatcher.CurrentDispatcher.Invoke(() => StatusBar.RefreshOutputData(((InputTextBoxViewModel)sender).Content)); };
+            _inputTextBox.OnContentChangedEvent += (sender, eventArgs) => { Dispatcher.CurrentDispatcher.Invoke(ChangeDocumentStateToModifiedState); };
         }
 
         #region PROPERTIES GETTERS/ SETTERS
@@ -67,13 +67,13 @@ namespace Application.Client.Windows.Main.ViewModels
             }
         }
 
-        private static InputTextBoxViewModel _inputTextBoxViewModel;
-        public InputTextBoxViewModel InputTextBoxViewModel
+        private static InputTextBoxViewModel _inputTextBox;
+        public InputTextBoxViewModel InputTextBox
         {
-            get => _inputTextBoxViewModel;
+            get => _inputTextBox;
             set
             {
-                _inputTextBoxViewModel = value;
+                _inputTextBox = value;
                 OnPropertyChanged();
             }
         }

@@ -141,16 +141,16 @@
             <TextBox Template="{DynamicResource MainInputTextBoxTemplate}"
                      DockPanel.Dock="Bottom" 
                      AcceptsReturn="True"
-                     TextWrapping="{Binding InputTextBoxViewModel.TextWrapping}"
+                     TextWrapping="{Binding InputTextBox.TextWrapping}"
                      VerticalScrollBarVisibility="Visible"
                      HorizontalScrollBarVisibility="Visible"
-                     Text="{Binding InputTextBoxViewModel.Content, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                     FontFamily="{Binding InputTextBoxViewModel.FontOptions.FontFamily, Mode=OneWay}"
-                     FontSize="{Binding InputTextBoxViewModel.FontOptions.FontSize, Mode=OneWay}"
-                     FontStyle="{Binding InputTextBoxViewModel.FontOptions.FontStyle, Mode=OneWay}"
-                     FontWeight="{Binding InputTextBoxViewModel.FontOptions.FontWeight, Mode=OneWay}"
-                     textBoxBehaviors:SelectedTextBehavior.SelectedText="{Binding InputTextBoxViewModel.SelectedText}"
-                     textBoxBehaviors:CaretIndexBehavior.CaretIndex="{Binding InputTextBoxViewModel.CaretIndex}">
+                     Text="{Binding InputTextBox.Content, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     FontFamily="{Binding InputTextBox.FontOptions.FontFamily, Mode=OneWay}"
+                     FontSize="{Binding InputTextBox.FontOptions.FontSize, Mode=OneWay}"
+                     FontStyle="{Binding InputTextBox.FontOptions.FontStyle, Mode=OneWay}"
+                     FontWeight="{Binding InputTextBox.FontOptions.FontWeight, Mode=OneWay}"
+                     textBoxBehaviors:SelectedTextBehavior.SelectedText="{Binding InputTextBox.SelectedText}"
+                     textBoxBehaviors:CaretIndexBehavior.CaretIndex="{Binding InputTextBox.CaretIndex}">
             </TextBox>
         </DockPanel>
 

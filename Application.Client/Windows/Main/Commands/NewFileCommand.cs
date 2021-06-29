@@ -28,7 +28,7 @@ namespace Application.Client.Windows.Main.ViewModels
                         {
                             if (_docInfoService.IsOpenedDocument)
                             {
-                                await _textFileWriter.WriteAsync(new WriteTextFileModel { FilePath = _docInfoService.UsedFilePath, Content = InputTextBoxViewModel.Content });
+                                await _textFileWriter.WriteAsync(new WriteTextFileModel { FilePath = _docInfoService.UsedFilePath, Content = InputTextBox.Content });
                             }
                             else
                             {
@@ -36,7 +36,7 @@ namespace Application.Client.Windows.Main.ViewModels
 
                                 if (saveFileDialogResult.SaveFileDialogResultType == SaveFileDialogResultType.Ok)
                                 {
-                                    await _textFileWriter.WriteAsync(new WriteTextFileModel { FilePath = saveFileDialogResult.SavedFilePath, Content = InputTextBoxViewModel.Content });
+                                    await _textFileWriter.WriteAsync(new WriteTextFileModel { FilePath = saveFileDialogResult.SavedFilePath, Content = InputTextBox.Content });
                                 }
                                 else if (saveFileDialogResult.SaveFileDialogResultType == SaveFileDialogResultType.Cancel)
                                 {
@@ -55,7 +55,7 @@ namespace Application.Client.Windows.Main.ViewModels
 
             _docInfoService.SetDefaultDocInfo();
 
-            InputTextBoxViewModel.Content = string.Empty;
+            InputTextBox.Content = string.Empty;
             WindowTitle = _docInfoService.UsedFileNameWithoutExtension;
         }
     }
