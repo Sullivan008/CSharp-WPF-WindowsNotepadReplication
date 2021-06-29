@@ -9,31 +9,33 @@ namespace Application.Client.Dialogs.StaticValues.Models
         private readonly string _filterName;
         public string FilterName
         {
-            get => _filterName;
-            init
+            get
             {
-                if (string.IsNullOrWhiteSpace(value))
+                if (string.IsNullOrWhiteSpace(_filterName))
                 {
                     throw new ArgumentNullException(nameof(FilterName), "The value cannot be null!");
                 }
 
-                _filterName = value;
+                return _filterName;
             }
+
+            init => _filterName = value;
         }
 
         private readonly IReadOnlyList<string> _filters;
         public IReadOnlyList<string> Filters
         {
-            get => _filters;
-            init
+            get
             {
-                if (value.IsNullOrEmpty())
+                if (_filters.IsNullOrEmpty())
                 {
                     throw new ArgumentNullException(nameof(Filters), "The value cannot be null!");
                 }
 
-                _filters = value;
+                return _filters;
             }
+
+            init => _filters = value;
         }
     }
 }
