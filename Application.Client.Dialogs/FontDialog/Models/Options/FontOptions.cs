@@ -21,32 +21,11 @@ namespace Application.Client.Dialogs.FontDialog.Models.Options
             init => _fontFamilyName = value;
         }
 
-        private readonly float? _mediaFontSize;
-        public float MediaFontSize
-        {
-            private get
-            {
-                const float DEFAULT_FONT_SIZE = 16;
+        public float MediaFontSize { get; init; } = 16;
 
-                return _mediaFontSize ?? DEFAULT_FONT_SIZE;
-            }
+        public System.Windows.FontStyle MediaFontStyle { private get; init; } = FontStyles.Normal;
 
-            init => _mediaFontSize = value;
-        }
-
-        private readonly System.Windows.FontStyle? _mediaFontStyle;
-        public System.Windows.FontStyle MediaFontStyle
-        {
-            private get => _mediaFontStyle ?? FontStyles.Normal;
-            init => _mediaFontStyle = value;
-        }
-
-        private readonly FontWeight? _mediaFontWeight;
-        public FontWeight MediaFontWeight
-        {
-            private get => _mediaFontWeight ?? FontWeights.Regular;
-            init => _mediaFontWeight = value;
-        }
+        public FontWeight MediaFontWeight { private get; init; } = FontWeights.Regular;
 
         public TextDecorationCollection TextDecorations { private get; init; } = new();
 
