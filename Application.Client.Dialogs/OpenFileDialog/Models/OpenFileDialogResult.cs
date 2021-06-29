@@ -13,18 +13,28 @@ namespace Application.Client.Dialogs.OpenFileDialog.Models
             {
                 if (!_openFileDialogResultType.HasValue)
                 {
-                    throw new ArgumentNullException(nameof(_openFileDialogResultType), @"The value cannot be null!");
+                    throw new ArgumentNullException(nameof(_openFileDialogResultType), "The value cannot be null!");
                 }
 
                 return _openFileDialogResultType.Value;
             }
+
             init => _openFileDialogResultType = value;
         }
 
         private readonly string _filePath;
         public string FilePath
         {
-            get => _filePath;
+            get
+            {
+                if (string.IsNullOrWhiteSpace(_filePath))
+                {
+                    throw new ArgumentNullException(nameof(FilePath), "The value cannot be null!");
+                }
+
+                return _filePath;
+            }
+
             init
             {
                 if (!_openFileDialogResultType.HasValue)
