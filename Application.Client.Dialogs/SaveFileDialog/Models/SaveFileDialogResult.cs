@@ -13,18 +13,28 @@ namespace Application.Client.Dialogs.SaveFileDialog.Models
             {
                 if (!_saveFileDialogResultType.HasValue)
                 {
-                    throw new ArgumentNullException(nameof(_saveFileDialogResultType), @"The value cannot be null!");
+                    throw new ArgumentNullException(nameof(_saveFileDialogResultType), "The value cannot be null!");
                 }
 
                 return _saveFileDialogResultType.Value;
             }
+
             init => _saveFileDialogResultType = value;
         }
 
         private readonly string _savedFilePath;
         public string SavedFilePath
         {
-            get => _savedFilePath;
+            get
+            {
+                if (string.IsNullOrWhiteSpace(_savedFilePath))
+                {
+                    throw new ArgumentNullException(nameof(SavedFilePath), "The value cannot be null!");
+                }
+
+                return _savedFilePath;
+            }
+
             init
             {
                 if (!_saveFileDialogResultType.HasValue)
