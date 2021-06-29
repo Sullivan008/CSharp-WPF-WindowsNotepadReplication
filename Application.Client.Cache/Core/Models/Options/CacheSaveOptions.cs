@@ -33,23 +33,10 @@ namespace Application.Client.Cache.Core.Models.Options
                 }
 
                 return _data;
-            } 
+            }
             init => _data = value;
         }
 
-        private readonly MemoryCacheEntryOptions _memoryCacheEntryOptions;
-        public MemoryCacheEntryOptions MemoryCacheEntryOptions
-        {
-            get
-            {
-                if (_memoryCacheEntryOptions == null)
-                {
-                    return new MemoryCacheEntryOptions {Priority = CacheItemPriority.NeverRemove};
-                }
-
-                return _memoryCacheEntryOptions;
-            }
-            init => _memoryCacheEntryOptions = value;
-        }
+        public MemoryCacheEntryOptions MemoryCacheEntryOptions { get; init; } = new() { Priority = CacheItemPriority.NeverRemove };
     }
 }
