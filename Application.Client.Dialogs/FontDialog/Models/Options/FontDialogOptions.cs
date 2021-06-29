@@ -2,6 +2,8 @@
 {
     public class FontDialogOptions
     {
+        public bool ShowEffects { get; init; } = true;
+
         private readonly bool? _fontMustExist;
         public bool FontMustExist
         {

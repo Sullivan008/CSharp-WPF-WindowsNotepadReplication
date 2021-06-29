@@ -49,5 +49,16 @@ namespace Application.Client.Windows.Main.ViewModels
                 OnPropertyChanged();
             }
         }
+
+        private TextDecorationCollection _textDecorations = new();
+        public TextDecorationCollection TextDecorations
+        {
+            get => _textDecorations;
+            set
+            {
+                _textDecorations = value;
+                OnPropertyChanged();
+            }
+        }
     }
 }

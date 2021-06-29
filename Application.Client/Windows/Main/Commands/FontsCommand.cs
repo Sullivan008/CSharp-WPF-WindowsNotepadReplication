@@ -22,6 +22,7 @@ namespace Application.Client.Windows.Main.ViewModels
                     MediaFontSize = InputTextBox.FontOptions.FontSize,
                     MediaFontStyle = InputTextBox.FontOptions.FontStyle,
                     MediaFontWeight = InputTextBox.FontOptions.FontWeight,
+                    TextDecorations = InputTextBox.FontOptions.TextDecorations,
                     FontFamilyName = InputTextBox.FontOptions.FontFamily.FamilyNames.Values.First()
                 }
             };
@@ -34,6 +35,7 @@ namespace Application.Client.Windows.Main.ViewModels
                 InputTextBox.FontOptions.FontSize = dialogResult.FontResult.FontSize;
                 InputTextBox.FontOptions.FontStyle = dialogResult.FontResult.FontStyle;
                 InputTextBox.FontOptions.FontWeight = dialogResult.FontResult.FontWeight;
+                InputTextBox.FontOptions.TextDecorations = dialogResult.FontResult.TextDecorations;
             }
         }
     }

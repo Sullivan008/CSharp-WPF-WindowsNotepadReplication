@@ -16,7 +16,7 @@ namespace Application.Client.Dialogs.FontDialog
         {
             System.Windows.Forms.FontDialog fontDialog = new()
             {
-                ShowEffects = false,
+                ShowEffects = fontDialogOptions.ShowEffects,
                 FontMustExist = fontDialogOptions.FontMustExist,
                 AllowVectorFonts = fontDialogOptions.AllowVectorFonts,
                 AllowVerticalFonts = fontDialogOptions.AllowVerticalFonts,

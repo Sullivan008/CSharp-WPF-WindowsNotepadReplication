@@ -49,5 +49,24 @@ namespace Application.Client.Dialogs.FontDialog.Models.Result
 
         public FontWeight FontWeight => (DrawingFontStyle & System.Drawing.FontStyle.Bold) != 0 ? FontWeights.Bold : FontWeights.Regular;
 
+        public TextDecorationCollection TextDecorations
+        {
+            get
+            {
+                TextDecorationCollection result = new();
+
+                if ((DrawingFontStyle & System.Drawing.FontStyle.Strikeout) != 0)
+                {
+                    result.Add(System.Windows.TextDecorations.Strikethrough);
+                }
+
+                if ((DrawingFontStyle & System.Drawing.FontStyle.Underline) != 0)
+                {
+                    result.Add(System.Windows.TextDecorations.Underline);
+                }
+
+                return result;
+            }
+        }
     }
 }
