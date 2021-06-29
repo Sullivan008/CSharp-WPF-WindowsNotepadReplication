@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using Application.Client.Infrastructure.ViewModels;
 
 namespace Application.Client.Windows.Main.ViewModels
@@ -17,19 +16,10 @@ namespace Application.Client.Windows.Main.ViewModels
             }
         }
 
-        private int? _length = default(int);
+        private int _length;
         public int Length
         {
-            get
-            {
-                if (!_length.HasValue)
-                {
-                    throw new ArgumentNullException(nameof(Length), "The value cannot be null!");
-                }
-
-                return _length.Value;
-            }
-
+            get => _length;
             private set
             {
                 _length = value;
@@ -37,19 +27,10 @@ namespace Application.Client.Windows.Main.ViewModels
             }
         }
 
-        private int? _lines = default(int) + 1;
+        private int _lines = default(int) + 1;
         public int Lines
         {
-            get
-            {
-                if (!_lines.HasValue)
-                {
-                    throw new ArgumentNullException(nameof(Lines), "The value cannot be null!");
-                }
-
-                return _lines.Value;
-            }
-
+            get => _lines;
             private set
             {
                 _lines = value;
