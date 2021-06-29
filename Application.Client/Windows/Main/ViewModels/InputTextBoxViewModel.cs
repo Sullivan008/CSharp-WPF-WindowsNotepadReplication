@@ -6,34 +6,6 @@ namespace Application.Client.Windows.Main.ViewModels
 {
     public class InputTextBoxViewModel : ViewModelBase
     {
-        public delegate void OnContentChangedEventHandler(object sender, EventArgs e);
-
-        public event OnContentChangedEventHandler OnContentChangedEvent;
-
-        private void OnContentChanged(EventArgs eventArgs = null)
-        {
-            if (OnContentChangedEvent == null)
-            {
-                throw new ArgumentNullException(nameof(OnContentChangedEvent), "The value cannot be null!");
-            }
-
-            OnContentChangedEvent(this, eventArgs ?? EventArgs.Empty);
-        }
-
-        public delegate void OnRefreshStatusBarEventHandler(object sender, EventArgs e);
-
-        public event OnRefreshStatusBarEventHandler OnRefreshStatusBarEvent;
-
-        private void OnRefreshStatusBar(EventArgs eventArgs = null)
-        {
-            if (OnRefreshStatusBarEvent == null)
-            {
-                throw new ArgumentNullException(nameof(OnRefreshStatusBarEvent), "The value cannot be null!");
-            }
-
-            OnRefreshStatusBarEvent(this, eventArgs ?? EventArgs.Empty);
-        }
-
         private string _content = string.Empty;
         public string Content
         {
@@ -91,6 +63,34 @@ namespace Application.Client.Windows.Main.ViewModels
                 _fontOptions = value;
                 OnPropertyChanged();
             }
+        }
+
+        public delegate void OnContentChangedEventHandler(object sender, EventArgs e);
+
+        public event OnContentChangedEventHandler OnContentChangedEvent;
+
+        private void OnContentChanged(EventArgs eventArgs = null)
+        {
+            if (OnContentChangedEvent == null)
+            {
+                throw new ArgumentNullException(nameof(OnContentChangedEvent), "The value cannot be null!");
+            }
+
+            OnContentChangedEvent(this, eventArgs ?? EventArgs.Empty);
+        }
+
+        public delegate void OnRefreshStatusBarEventHandler(object sender, EventArgs e);
+
+        public event OnRefreshStatusBarEventHandler OnRefreshStatusBarEvent;
+
+        private void OnRefreshStatusBar(EventArgs eventArgs = null)
+        {
+            if (OnRefreshStatusBarEvent == null)
+            {
+                throw new ArgumentNullException(nameof(OnRefreshStatusBarEvent), "The value cannot be null!");
+            }
+
+            OnRefreshStatusBarEvent(this, eventArgs ?? EventArgs.Empty);
         }
     }
 }
