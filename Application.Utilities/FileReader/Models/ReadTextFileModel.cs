@@ -8,16 +8,17 @@ namespace Application.Utilities.FileReader.Models
         private readonly string _filePath;
         public string FilePath
         {
-            get => _filePath;
-            init
+            get
             {
-                if (string.IsNullOrWhiteSpace(value))
+                if (string.IsNullOrWhiteSpace(_filePath))
                 {
                     throw new ArgumentNullException(nameof(FilePath), "The value cannot be null!");
                 }
 
-                _filePath = value;
+                return _filePath;
             }
+
+            init => _filePath = value;
         }
     }
 }
