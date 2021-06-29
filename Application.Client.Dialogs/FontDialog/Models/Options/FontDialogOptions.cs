@@ -4,39 +4,14 @@
     {
         public bool ShowEffects { get; init; } = true;
 
-        private readonly bool? _fontMustExist;
-        public bool FontMustExist
-        {
-            get => _fontMustExist ?? true;
-            init => _fontMustExist = value;
-        }
+        public bool FontMustExist { get; init; } = true;
 
-        private readonly bool? _allowVectorFonts;
-        public bool AllowVectorFonts
-        {
-            get => _allowVectorFonts ?? true;
-            init => _allowVectorFonts = value;
-        }
+        public bool AllowVectorFonts { get; init; } = true;
 
-        private readonly bool? _allowVerticalFonts;
-        public bool AllowVerticalFonts
-        {
-            get => _allowVerticalFonts ?? true;
-            init => _allowVerticalFonts = value;
-        }
-        
-        private readonly bool? _fixedPitchOnly;
-        public bool FixedPitchOnly
-        {
-            get => _fixedPitchOnly ?? false;
-            init => _fixedPitchOnly = value;
-        }
+        public bool AllowVerticalFonts { get; init; } = true;
 
-        private readonly FontOptions _fontOptions;
-        public FontOptions FontOptions
-        {
-            get => _fontOptions ?? new FontOptions();
-            init => _fontOptions = value;
-        }
+        public bool FixedPitchOnly { get; init; } = false;
+
+        public FontOptions FontOptions { get; init; } = new();
     }
 }
