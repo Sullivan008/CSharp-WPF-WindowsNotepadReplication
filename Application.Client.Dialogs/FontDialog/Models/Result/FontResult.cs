@@ -11,9 +11,12 @@ namespace Application.Client.Dialogs.FontDialog.Models.Result
         {
             private get
             {
-                return !string.IsNullOrWhiteSpace(_fontFamilyName)
-                    ? _fontFamilyName
-                    : throw new ArgumentNullException(nameof(FontFamilyName), "The value cannot be null!");
+                if (string.IsNullOrWhiteSpace(_fontFamilyName))
+                {
+                    throw new ArgumentNullException(nameof(FontFamilyName), "The value cannot be null!");
+                }
+
+                return _fontFamilyName;
             }
 
             init => _fontFamilyName = value;
@@ -22,22 +25,14 @@ namespace Application.Client.Dialogs.FontDialog.Models.Result
         private readonly float? _drawingFontSize;
         public float DrawingFontSize
         {
-            private get
-            {
-                return _drawingFontSize ?? throw new ArgumentNullException(nameof(DrawingFontSize), "The value cannot be null!");
-            }
-
+            private get => _drawingFontSize ?? throw new ArgumentNullException(nameof(DrawingFontSize), "The value cannot be null!");
             init => _drawingFontSize = value;
         }
 
         private readonly System.Drawing.FontStyle? _drawingFontStyle;
         public System.Drawing.FontStyle DrawingFontStyle
         {
-            private get
-            {
-                return _drawingFontStyle ?? throw new ArgumentNullException(nameof(DrawingFontStyle), "The value cannot be null!");
-            }
-
+            private get => _drawingFontStyle ?? throw new ArgumentNullException(nameof(DrawingFontStyle), "The value cannot be null!");
             init => _drawingFontStyle = value;
         }
 
