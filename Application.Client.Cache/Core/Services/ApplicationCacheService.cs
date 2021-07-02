@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Application.Client.Cache.Core.Enums;
 using Application.Client.Cache.Core.Models.Interfaces;
 using Application.Client.Cache.Core.Models.Options;
@@ -22,7 +23,12 @@ namespace Application.Client.Cache.Core.Services
 
         public TCacheDataModel GetItem<TCacheDataModel>(CacheKey key) where TCacheDataModel : ICacheDataModel
         {
-            return _memoryCache.Get<TCacheDataModel>(key.ToEnumMemberAttrValue());
+            return _memoryCache.GetOrCreate(key.ToEnumMemberAttrValue(), entry =>
+            {
+                entry.Priority = CacheItemPriority.NeverRemove;
+
+                return Activator.CreateInstance<TCacheDataModel>();
+            });
         }
 
         public void SetItem<TCacheDataModel>(CacheSaveOptions<TCacheDataModel> saveOptions) where TCacheDataModel : ICacheDataModel
