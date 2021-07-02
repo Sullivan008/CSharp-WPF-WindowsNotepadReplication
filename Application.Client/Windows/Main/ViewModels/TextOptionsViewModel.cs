@@ -60,5 +60,16 @@ namespace Application.Client.Windows.Main.ViewModels
                 OnPropertyChanged();
             }
         }
+
+        private SolidColorBrush _foreground = new(Color.FromRgb(0, 0, 0));
+        public SolidColorBrush Foreground
+        {
+            get => _foreground;
+            set
+            {
+                _foreground = value;
+                OnPropertyChanged();
+            }
+        }
     }
 }

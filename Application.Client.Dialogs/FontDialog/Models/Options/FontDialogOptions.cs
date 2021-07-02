@@ -4,6 +4,8 @@
     {
         public bool ShowEffects { get; init; } = true;
 
+        public bool ShowColor { get; init; } = true;
+
         public bool FontMustExist { get; init; } = true;
 
         public bool AllowVectorFonts { get; init; } = true;

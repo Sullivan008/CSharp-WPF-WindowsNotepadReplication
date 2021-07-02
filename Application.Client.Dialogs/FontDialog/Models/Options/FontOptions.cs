@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Media;
 
 namespace Application.Client.Dialogs.FontDialog.Models.Options
 {
@@ -24,5 +25,7 @@ namespace Application.Client.Dialogs.FontDialog.Models.Options
         public FontWeight WindowsFontWeight { get; init; } = FontWeights.Regular;
 
         public TextDecorationCollection WindowsTextDecorations { get; init; } = new();
+
+        public Color MediaFontColor { get; init; } = Color.FromRgb(0, 0, 0);
     }
 }

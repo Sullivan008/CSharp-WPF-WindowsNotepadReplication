@@ -9,7 +9,6 @@ using Application.Client.Dialogs.FontDialog.Exceptions;
 using Application.Client.Dialogs.FontDialog.Interfaces;
 using Application.Client.Dialogs.FontDialog.Models.Options;
 using Application.Client.Dialogs.FontDialog.Models.Result;
-using FontStyle = System.Drawing.FontStyle;
 
 namespace Application.Client.Dialogs.FontDialog
 {
@@ -20,12 +19,16 @@ namespace Application.Client.Dialogs.FontDialog
             System.Windows.Forms.FontDialog fontDialog = new()
             {
                 ShowEffects = fontDialogOptions.ShowEffects,
+                ShowColor = fontDialogOptions.ShowColor,
                 FontMustExist = fontDialogOptions.FontMustExist,
                 AllowVectorFonts = fontDialogOptions.AllowVectorFonts,
                 AllowVerticalFonts = fontDialogOptions.AllowVerticalFonts,
                 FixedPitchOnly = fontDialogOptions.FixedPitchOnly,
-                Font = CreateDrawingFont(fontDialogOptions.FontOptions)
+                Font = CreateDrawingFont(fontDialogOptions.FontOptions),
+                Color = CreateDrawingColor(fontDialogOptions.FontOptions.MediaFontColor)
             };
+
+            var test = fontDialog.Color;
 
             switch (fontDialog.ShowDialog())
             {
@@ -38,7 +41,8 @@ namespace Application.Client.Dialogs.FontDialog
                             {
                                 FontFamilyName = fontDialog.Font.Name,
                                 DrawingFontSize = fontDialog.Font.Size,
-                                DrawingFontStyle = fontDialog.Font.Style
+                                DrawingFontStyle = fontDialog.Font.Style,
+                                DrawingFontColor = fontDialog.Color
                             }
                         });
                 case DialogResult.Cancel:
@@ -70,7 +74,7 @@ namespace Application.Client.Dialogs.FontDialog
             {
                 FontFamily fontFamily = new(fontOptions.FontFamilyName);
                 float fontSize = ConvertToDrawingFontSize(fontOptions.FontSize);
-                FontStyle fontStyle = ConvertToDrawingFontStyle(fontOptions.WindowsFontStyle, fontOptions.WindowsFontWeight, fontOptions.WindowsTextDecorations);
+                System.Drawing.FontStyle fontStyle = ConvertToDrawingFontStyle(fontOptions.WindowsFontStyle, fontOptions.WindowsFontWeight, fontOptions.WindowsTextDecorations);
 
                 return new Font(fontFamily, fontSize, fontStyle);
             }
@@ -85,24 +89,29 @@ namespace Application.Client.Dialogs.FontDialog
             return (float)(fontSize * 72.0 / 96.0);
         }
 
-        private static FontStyle ConvertToDrawingFontStyle(System.Windows.FontStyle windowsFontStyle, FontWeight windowsFontWeights, TextDecorationCollection windowsTextDecorationCollection)
+        private static System.Drawing.FontStyle ConvertToDrawingFontStyle(System.Windows.FontStyle windowsFontStyle, FontWeight windowsFontWeights, TextDecorationCollection windowsTextDecorationCollection)
         {
-            FontStyle result;
+            System.Drawing.FontStyle result;
 
             result = windowsFontStyle == FontStyles.Italic ? System.Drawing.FontStyle.Italic : System.Drawing.FontStyle.Regular;
             result ^= windowsFontWeights == FontWeights.Bold ? System.Drawing.FontStyle.Bold : System.Drawing.FontStyle.Regular;
 
             if (windowsTextDecorationCollection.Any(x => x.Location == TextDecorationLocation.Strikethrough))
             {
-                result ^= FontStyle.Strikeout;
+                result ^= System.Drawing.FontStyle.Strikeout;
             }
 
             if (windowsTextDecorationCollection.Any(x => x.Location == TextDecorationLocation.Underline))
             {
-                result ^= FontStyle.Underline;
+                result ^= System.Drawing.FontStyle.Underline;
             }
 
             return result;
+        }
+
+        private Color CreateDrawingColor(System.Windows.Media.Color mediaColor)
+        {
+            return Color.FromArgb(mediaColor.R, mediaColor.G, mediaColor.B);
         }
     }
 }

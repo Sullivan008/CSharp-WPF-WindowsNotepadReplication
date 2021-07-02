@@ -33,5 +33,12 @@ namespace Application.Client.Dialogs.FontDialog.Models.Result
             get => _drawingFontStyle ?? throw new ArgumentNullException(nameof(DrawingFontStyle), "The value cannot be null!");
             init => _drawingFontStyle = value;
         }
+
+        private readonly System.Drawing.Color? _drawingFontColor;
+        public System.Drawing.Color DrawingFontColor
+        {
+            get => _drawingFontColor ?? throw new ArgumentNullException(nameof(DrawingFontColor), "The value cannot be null!");
+            init => _drawingFontColor = value;
+        }
     }
 }

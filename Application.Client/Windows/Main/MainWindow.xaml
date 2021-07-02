@@ -150,6 +150,7 @@
                      FontStyle="{Binding InputTextBox.TextOptions.FontStyle, Mode=OneWay}"
                      FontWeight="{Binding InputTextBox.TextOptions.FontWeight, Mode=OneWay}"
                      TextDecorations="{Binding InputTextBox.TextOptions.TextDecorations, Mode=Oneway}"
+                     Foreground="{Binding InputTextBox.TextOptions.Foreground, Mode=OneWay}"
                      textBoxBehaviors:SelectedTextBehavior.SelectedText="{Binding InputTextBox.SelectedText}"
                      textBoxBehaviors:CaretIndexBehavior.CaretIndex="{Binding InputTextBox.CaretIndex}">
             </TextBox>

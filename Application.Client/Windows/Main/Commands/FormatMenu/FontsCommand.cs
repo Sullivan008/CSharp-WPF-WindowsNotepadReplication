@@ -30,6 +30,7 @@ namespace Application.Client.Windows.Main.Commands.FormatMenu
                     WindowsFontStyle = CallerViewModel.InputTextBox.TextOptions.FontStyle,
                     WindowsFontWeight = CallerViewModel.InputTextBox.TextOptions.FontWeight,
                     WindowsTextDecorations = CallerViewModel.InputTextBox.TextOptions.TextDecorations,
+                    MediaFontColor = CallerViewModel.InputTextBox.TextOptions.Foreground.Color,
                     FontFamilyName = CallerViewModel.InputTextBox.TextOptions.FontFamily.FamilyNames.Values.First()
                 }
             };
@@ -38,17 +39,18 @@ namespace Application.Client.Windows.Main.Commands.FormatMenu
 
             if (dialogResult.FontDialogResultType == FontDialogResultType.Ok)
             {
-                RefreshTextOptionsByDrawingFont(dialogResult.FontResult.FontFamilyName, dialogResult.FontResult.DrawingFontSize, dialogResult.FontResult.DrawingFontStyle);
+                RefreshTextOptionsByDrawingFont(dialogResult.FontResult.FontFamilyName, dialogResult.FontResult.DrawingFontSize, dialogResult.FontResult.DrawingFontStyle, dialogResult.FontResult.DrawingFontColor);
             }
         }
 
-        private void RefreshTextOptionsByDrawingFont(string fontFamilyName, float drawingFontSize, System.Drawing.FontStyle drawingFontStyle)
+        private void RefreshTextOptionsByDrawingFont(string fontFamilyName, float drawingFontSize, System.Drawing.FontStyle drawingFontStyle, System.Drawing.Color drawingFontColor)
         {
             CallerViewModel.InputTextBox.TextOptions.FontFamily = new FontFamily(fontFamilyName);
             CallerViewModel.InputTextBox.TextOptions.FontSize = ConvertToMediaFontSize(drawingFontSize);
             CallerViewModel.InputTextBox.TextOptions.FontStyle = ConvertToWindowsFontStyle(drawingFontStyle);
             CallerViewModel.InputTextBox.TextOptions.FontWeight = ConvertToWindowsFontWeight(drawingFontStyle);
             CallerViewModel.InputTextBox.TextOptions.TextDecorations = ConvertToTextDecorationCollection(drawingFontStyle);
+            CallerViewModel.InputTextBox.TextOptions.Foreground = ConvertToSolidColorBrush(drawingFontColor);
         }
 
         private static float ConvertToMediaFontSize(float fontSize)
@@ -81,6 +83,11 @@ namespace Application.Client.Windows.Main.Commands.FormatMenu
             }
 
             return result;
+        }
+
+        private static SolidColorBrush ConvertToSolidColorBrush(System.Drawing.Color color)
+        {
+            return new (Color.FromRgb(color.R, color.G, color.B));
         }
     }
 }
