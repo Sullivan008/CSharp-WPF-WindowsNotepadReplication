@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Drawing;
 
-namespace Application.Client.Dialogs.FontDialog.Models.Result
+namespace Application.Client.Windows.Main.EventArguments
 {
-    public class FontResult
+    public class RefreshTextOptionsByDrawingFontEventArgs : EventArgs
     {
         private readonly string _fontFamilyName;
         public string FontFamilyName
@@ -27,8 +28,8 @@ namespace Application.Client.Dialogs.FontDialog.Models.Result
             init => _drawingFontSize = value;
         }
 
-        private readonly System.Drawing.FontStyle? _drawingFontStyle;
-        public System.Drawing.FontStyle DrawingFontStyle
+        private readonly FontStyle? _drawingFontStyle;
+        public FontStyle DrawingFontStyle
         {
             get => _drawingFontStyle ?? throw new ArgumentNullException(nameof(DrawingFontStyle), "The value cannot be null!");
             init => _drawingFontStyle = value;

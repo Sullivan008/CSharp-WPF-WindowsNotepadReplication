@@ -145,11 +145,11 @@
                      VerticalScrollBarVisibility="Visible"
                      HorizontalScrollBarVisibility="Visible"
                      Text="{Binding InputTextBox.Content, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                     FontFamily="{Binding InputTextBox.FontOptions.FontFamily, Mode=OneWay}"
-                     FontSize="{Binding InputTextBox.FontOptions.FontSize, Mode=OneWay}"
-                     FontStyle="{Binding InputTextBox.FontOptions.FontStyle, Mode=OneWay}"
-                     FontWeight="{Binding InputTextBox.FontOptions.FontWeight, Mode=OneWay}"
-                     TextDecorations="{Binding InputTextBox.FontOptions.TextDecorations, Mode=Oneway}"
+                     FontFamily="{Binding InputTextBox.TextOptions.FontFamily, Mode=OneWay}"
+                     FontSize="{Binding InputTextBox.TextOptions.FontSize, Mode=OneWay}"
+                     FontStyle="{Binding InputTextBox.TextOptions.FontStyle, Mode=OneWay}"
+                     FontWeight="{Binding InputTextBox.TextOptions.FontWeight, Mode=OneWay}"
+                     TextDecorations="{Binding InputTextBox.TextOptions.TextDecorations, Mode=Oneway}"
                      textBoxBehaviors:SelectedTextBehavior.SelectedText="{Binding InputTextBox.SelectedText}"
                      textBoxBehaviors:CaretIndexBehavior.CaretIndex="{Binding InputTextBox.CaretIndex}">
             </TextBox>

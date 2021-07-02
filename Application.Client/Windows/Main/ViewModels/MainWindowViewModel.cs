@@ -1,22 +1,22 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Windows.Input;
 using System.Windows.Threading;
 using Application.Client.Dialogs.FontDialog.Interfaces;
 using Application.Client.Dialogs.MessageDialog.Interfaces;
 using Application.Client.Dialogs.OpenFileDialog.Interfaces;
 using Application.Client.Dialogs.SaveFileDialog.Interfaces;
-using Application.Client.Dialogs.StaticValues;
-using Application.Client.Dialogs.StaticValues.Enums;
-using Application.Client.Dialogs.StaticValues.Models;
 using Application.Client.Infrastructure.ViewModels;
 using Application.Client.Services.Interfaces;
-using Application.Client.Windows.Main.ViewModels.Interfaces;
+using Application.Client.Windows.Main.Commands.EditMenu;
+using Application.Client.Windows.Main.Commands.FileMenu;
+using Application.Client.Windows.Main.Commands.FormatMenu;
+using Application.Client.Windows.Main.Commands.Shared;
+using Application.Client.Windows.Main.Commands.ViewMenu;
 using Application.Utilities.FileReader.Interfaces;
 using Application.Utilities.FileWriter.Interfaces;
 
 namespace Application.Client.Windows.Main.ViewModels
 {
-    public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
+    public class MainWindowViewModel : ViewModelBase
     {
         private readonly IFontDialog _fontDialog;
 
@@ -32,8 +32,8 @@ namespace Application.Client.Windows.Main.ViewModels
 
         private readonly IDocInfoService _docInfoService;
 
-        public MainWindowViewModel(IFontDialog fontDialog, IMessageDialog messageDialog, IOpenFileDialog openFileDialog, ISaveFileDialog saveFileDialog,
-            ITextFileWriter textFileWriter, ITextFileReader textFileReader, IDocInfoService docInfoService)
+        public MainWindowViewModel(InputTextBoxViewModel inputTextBox, StatusBarViewModel statusBar, IFontDialog fontDialog, IMessageDialog messageDialog, IOpenFileDialog openFileDialog,
+            ISaveFileDialog saveFileDialog, ITextFileWriter textFileWriter, ITextFileReader textFileReader, IDocInfoService docInfoService)
         {
             _fontDialog = fontDialog;
             _messageDialog = messageDialog;
@@ -41,15 +41,12 @@ namespace Application.Client.Windows.Main.ViewModels
             _saveFileDialog = saveFileDialog;
             _textFileWriter = textFileWriter;
             _textFileReader = textFileReader;
-
             _docInfoService = docInfoService;
 
-            _inputTextBox = new InputTextBoxViewModel();
-            _inputTextBox.OnRefreshStatusBarEvent += (sender, eventArgs) => { Dispatcher.CurrentDispatcher.Invoke(() => StatusBar.RefreshOutputData(((InputTextBoxViewModel)sender).Content)); };
-            _inputTextBox.OnContentChangedEvent += (sender, eventArgs) => { Dispatcher.CurrentDispatcher.Invoke(ChangeDocumentStateToModifiedState); };
+            StatusBar = statusBar;
+            InputTextBox = inputTextBox;
+            InputTextBox.OnRefreshStatusBarEvent += (sender, _) => { Dispatcher.CurrentDispatcher.Invoke(() => StatusBar.RefreshOutputData(((InputTextBoxViewModel)sender).Content)); };
         }
-
-        #region PROPERTIES GETTERS/ SETTERS
 
         private string _windowTitle;
         public string WindowTitle
@@ -78,7 +75,7 @@ namespace Application.Client.Windows.Main.ViewModels
             }
         }
 
-        private StatusBarViewModel _statusBar = new();
+        private StatusBarViewModel _statusBar;
         public StatusBarViewModel StatusBar
         {
             get => _statusBar;
@@ -89,28 +86,37 @@ namespace Application.Client.Windows.Main.ViewModels
             }
         }
 
-        #endregion
+        private ICommand _newFileCommand;
+        public ICommand NewFileCommand => _newFileCommand ??= new NewFileCommand(this, _messageDialog, _saveFileDialog, _docInfoService, _textFileWriter);
 
-        private static IReadOnlyDictionary<string, IReadOnlyList<string>> GetOpenFileDialogFilters()
-        {
-            IReadOnlyList<FileFilterModel> fileFilters = FileFilters.GetFileFiltersByFilterTypes(new[] { FileFilterType.Text });
+        private ICommand _openFileCommand;
+        public ICommand OpenFileCommand => _openFileCommand ??= new OpenFileCommand(this, _messageDialog, _saveFileDialog, _openFileDialog, _docInfoService, _textFileWriter, _textFileReader);
 
-            return fileFilters.ToDictionary(x => x.FilterName, y => y.Filters);
-        }
+        private ICommand _saveFileCommand;
+        public ICommand SaveFileCommand => _saveFileCommand ??= new SaveFileCommand(this, _saveFileDialog, _docInfoService, _textFileWriter);
 
-        private static IReadOnlyDictionary<string, IReadOnlyList<string>> GetSaveFileDialogFilters()
-        {
-            IReadOnlyList<FileFilterModel> fileFilters = FileFilters.GetFileFiltersByFilterTypes(new[] { FileFilterType.Text });
+        private ICommand _saveFileAsCommand;
+        public ICommand SaveFileAsCommand => _saveFileAsCommand ??= new SaveFileAsCommand(this, _saveFileDialog, _docInfoService, _textFileWriter);
 
-            return fileFilters.ToDictionary(x => x.FilterName, y => y.Filters);
-        }
+        private ICommand _applicationCloseCommand;
+        public ICommand ApplicationCloseCommand => _applicationCloseCommand ??= new ApplicationCloseCommand(this, _messageDialog, _saveFileDialog, _docInfoService, _textFileWriter);
 
-        private void ChangeDocumentStateToModifiedState()
-        {
-            if (!_docInfoService.IsModifiedDocument)
-            {
-                _docInfoService.SetModifiedDocumentState();
-            }
-        }
+
+        private ICommand _deleteTextCommand;
+        public ICommand DeleteTextCommand => _deleteTextCommand ??= new DeleteTextCommand(this);
+
+        private ICommand _putDateTimeTextCommand;
+        public ICommand PutDateTimeTextCommand => _putDateTimeTextCommand ??= new PutDateTimeTextCommand(this);
+
+
+        private ICommand _fontsCommand;
+        public ICommand FontsCommand => _fontsCommand ??= new FontsCommand(this, _fontDialog);
+
+        private ICommand _changeTextWrappingCommand;
+        public ICommand ChangeTextWrappingCommand => _changeTextWrappingCommand ??= new ChangeTextWrappingCommand(this);
+
+
+        private ICommand _changeStatusBarVisibilityCommand;
+        public ICommand ChangeStatusBarVisibilityCommand => _changeStatusBarVisibilityCommand ??= new ChangeStatusBarVisibilityCommand(this);
     }
 }

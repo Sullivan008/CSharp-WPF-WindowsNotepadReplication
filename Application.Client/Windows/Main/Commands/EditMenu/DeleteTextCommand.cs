@@ -1,0 +1,22 @@
+﻿using System;
+using System.Threading.Tasks;
+using Application.Client.Infrastructure.Commands;
+using Application.Client.Windows.Main.ViewModels;
+
+namespace Application.Client.Windows.Main.Commands.EditMenu
+{
+    public class DeleteTextCommand : AsyncCommandBase<MainWindowViewModel>
+    {
+        public DeleteTextCommand(MainWindowViewModel callerViewModel) : base(callerViewModel)
+        { }
+
+        public override async Task ExecuteAsync()
+        {
+            CallerViewModel.InputTextBox.SelectedText = string.Empty;
+
+            await Task.CompletedTask;
+        }
+
+        public override Predicate<object> CanExecute => _ => !string.IsNullOrWhiteSpace(CallerViewModel.InputTextBox.SelectedText);
+    }
+}

@@ -4,7 +4,7 @@ using Application.Client.Infrastructure.ViewModels;
 
 namespace Application.Client.Windows.Main.ViewModels
 {
-    public class FontOptionsViewModel : ViewModelBase
+    public class TextOptionsViewModel : ViewModelBase
     {
         private FontFamily _fontFamily = new("Consolas");
         public FontFamily FontFamily

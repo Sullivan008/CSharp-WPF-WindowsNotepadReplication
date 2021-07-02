@@ -1,11 +1,21 @@
 ﻿using System;
 using System.Windows;
 using Application.Client.Infrastructure.ViewModels;
+using Application.Client.Services.Interfaces;
 
 namespace Application.Client.Windows.Main.ViewModels
 {
     public class InputTextBoxViewModel : ViewModelBase
     {
+        private readonly IDocInfoService _docInfoService;
+
+        public InputTextBoxViewModel(TextOptionsViewModel textOptions, IDocInfoService docInfoService)
+        {
+            _docInfoService = docInfoService;
+
+            TextOptions = textOptions;
+        }
+
         private string _content = string.Empty;
         public string Content
         {
@@ -15,7 +25,10 @@ namespace Application.Client.Windows.Main.ViewModels
                 _content = value;
                 OnPropertyChanged();
 
-                OnContentChanged();
+                if (!_docInfoService.IsModifiedDocument)
+                {
+                    _docInfoService.SetModifiedDocumentState();
+                }
             }
         }
 
@@ -54,34 +67,19 @@ namespace Application.Client.Windows.Main.ViewModels
             }
         }
 
-        private FontOptionsViewModel _fontOptions = new();
-        public FontOptionsViewModel FontOptions
+        private TextOptionsViewModel _textOptions;
+        public TextOptionsViewModel TextOptions
         {
-            get => _fontOptions;
+            get => _textOptions;
             set
             {
-                _fontOptions = value;
+                _textOptions = value;
                 OnPropertyChanged();
             }
         }
 
-        public delegate void OnContentChangedEventHandler(object sender, EventArgs e);
-
-        public event OnContentChangedEventHandler OnContentChangedEvent;
-
-        private void OnContentChanged(EventArgs eventArgs = null)
-        {
-            if (OnContentChangedEvent == null)
-            {
-                throw new ArgumentNullException(nameof(OnContentChangedEvent), "The value cannot be null!");
-            }
-
-            OnContentChangedEvent(this, eventArgs ?? EventArgs.Empty);
-        }
-
-        public delegate void OnRefreshStatusBarEventHandler(object sender, EventArgs e);
-
         public event OnRefreshStatusBarEventHandler OnRefreshStatusBarEvent;
+        public delegate void OnRefreshStatusBarEventHandler(object sender, EventArgs e);
 
         private void OnRefreshStatusBar(EventArgs eventArgs = null)
         {

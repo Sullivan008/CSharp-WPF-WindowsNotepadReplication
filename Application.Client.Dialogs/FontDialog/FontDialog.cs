@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Drawing;
+using System.Linq;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Forms;
 using Application.Client.Dialogs.FontDialog.Enums;
 using Application.Client.Dialogs.FontDialog.Exceptions;
 using Application.Client.Dialogs.FontDialog.Interfaces;
 using Application.Client.Dialogs.FontDialog.Models.Options;
 using Application.Client.Dialogs.FontDialog.Models.Result;
+using FontStyle = System.Drawing.FontStyle;
 
 namespace Application.Client.Dialogs.FontDialog
 {
@@ -21,7 +24,7 @@ namespace Application.Client.Dialogs.FontDialog
                 AllowVectorFonts = fontDialogOptions.AllowVectorFonts,
                 AllowVerticalFonts = fontDialogOptions.AllowVerticalFonts,
                 FixedPitchOnly = fontDialogOptions.FixedPitchOnly,
-                Font = GetDrawingFont(fontDialogOptions.FontOptions)
+                Font = CreateDrawingFont(fontDialogOptions.FontOptions)
             };
 
             switch (fontDialog.ShowDialog())
@@ -61,9 +64,45 @@ namespace Application.Client.Dialogs.FontDialog
             }
         }
 
-        private static Font GetDrawingFont(FontOptions fontOptions)
+        private static Font CreateDrawingFont(FontOptions fontOptions)
         {
-            return new(fontOptions.FontFamily, fontOptions.FontSize, fontOptions.FontStyle);
+            try
+            {
+                FontFamily fontFamily = new(fontOptions.FontFamilyName);
+                float fontSize = ConvertToDrawingFontSize(fontOptions.FontSize);
+                FontStyle fontStyle = ConvertToDrawingFontStyle(fontOptions.WindowsFontStyle, fontOptions.WindowsFontWeight, fontOptions.WindowsTextDecorations);
+
+                return new Font(fontFamily, fontSize, fontStyle);
+            }
+            catch (ArgumentException)
+            {
+                throw new UnknownFontException($"The following font does not exist or not available on the source machine! Please reinstall the following font type: {fontOptions.FontFamilyName}");
+            }
+        }
+
+        private static float ConvertToDrawingFontSize(float fontSize)
+        {
+            return (float)(fontSize * 72.0 / 96.0);
+        }
+
+        private static FontStyle ConvertToDrawingFontStyle(System.Windows.FontStyle windowsFontStyle, FontWeight windowsFontWeights, TextDecorationCollection windowsTextDecorationCollection)
+        {
+            FontStyle result;
+
+            result = windowsFontStyle == FontStyles.Italic ? System.Drawing.FontStyle.Italic : System.Drawing.FontStyle.Regular;
+            result ^= windowsFontWeights == FontWeights.Bold ? System.Drawing.FontStyle.Bold : System.Drawing.FontStyle.Regular;
+
+            if (windowsTextDecorationCollection.Any(x => x.Location == TextDecorationLocation.Strikethrough))
+            {
+                result ^= FontStyle.Strikeout;
+            }
+
+            if (windowsTextDecorationCollection.Any(x => x.Location == TextDecorationLocation.Underline))
+            {
+                result ^= FontStyle.Underline;
+            }
+
+            return result;
         }
     }
 }

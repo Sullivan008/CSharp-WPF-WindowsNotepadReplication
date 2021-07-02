@@ -17,7 +17,6 @@ using Application.Client.Services;
 using Application.Client.Services.Interfaces;
 using Application.Client.Windows.Main;
 using Application.Client.Windows.Main.ViewModels;
-using Application.Client.Windows.Main.ViewModels.Interfaces;
 using Application.Utilities.FileReader;
 using Application.Utilities.FileReader.Interfaces;
 using Application.Utilities.FileWriter;
@@ -28,29 +27,38 @@ namespace Application.Client.Infrastructure.Extensions
 {
     public static class IServiceCollectionExtension
     {
-        public static IServiceCollection AddTransientServices(this IServiceCollection services)
+        public static IServiceCollection AddWindows(this IServiceCollection services)
         {
+            services.AddSingleton(x => new MainWindow
+            {
+                DataContext = x.GetRequiredService<MainWindowViewModel>()
+            });
+
+            return services;
+        }
+
+        public static IServiceCollection AddViewModels(this IServiceCollection services)
+        {
+            services.AddTransient<StatusBarViewModel>();
+            services.AddTransient<MainWindowViewModel>();
+            services.AddTransient<TextOptionsViewModel>();
+            services.AddTransient<InputTextBoxViewModel>();
+
+            return services;
+        }
+
+        public static IServiceCollection AddDialogs(this IServiceCollection services)
+        {
+            services.AddTransient<IFontDialog, FontDialog>();
+            services.AddTransient<IMessageDialog, MessageDialog>();
             services.AddTransient<ISaveFileDialog, SaveFileDialog>();
             services.AddTransient<IOpenFileDialog, OpenFileDialog>();
-            services.AddTransient<IMessageDialog, MessageDialog>();
-            services.AddTransient<IFontDialog, FontDialog>();
-
-            services.AddTransient<ITextFileReader, TextFileReader>();
-            services.AddTransient<ITextFileWriter, TextFileWriter>();
 
             return services;
         }
 
-        public static IServiceCollection AddScopedServices(this IServiceCollection services)
+        public static IServiceCollection AddCacheServices(this IServiceCollection services)
         {
-            return services;
-        }
-
-        public static IServiceCollection AddSingletonServices(this IServiceCollection services)
-        {
-            services.AddSingleton<MainWindow>();
-            services.AddSingleton<IMainWindowViewModel, MainWindowViewModel>();
-
             services.AddSingleton<IApplicationCacheService, ApplicationCacheService>();
             services.AddSingleton<IDocInfoService, DocInfoService>();
 
@@ -75,6 +83,20 @@ namespace Application.Client.Infrastructure.Extensions
                     services.AddSingleton(implementedInterface, definedType);
                 }
             }
+
+            return services;
+        }
+
+        public static IServiceCollection AddFileReaders(this IServiceCollection services)
+        {
+            services.AddTransient<ITextFileReader, TextFileReader>();
+
+            return services;
+        }
+
+        public static IServiceCollection AddFileWriters(this IServiceCollection services)
+        {
+            services.AddTransient<ITextFileWriter, TextFileWriter>();
 
             return services;
         }

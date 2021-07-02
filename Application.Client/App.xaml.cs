@@ -83,13 +83,17 @@ namespace Application.Client
 
         private static void ConfigureServices(IServiceCollection services)
         {
+            services.AddWindows();
+            services.AddViewModels();
+
+            services.AddDialogs();
+
             services.AddMemoryCache();
-
-            services.AddSingletonServices();
-            services.AddScopedServices();
-            services.AddTransientServices();
-
+            services.AddCacheServices();
             services.AddCacheRepositories();
+
+            services.AddFileReaders();
+            services.AddFileWriters();
         }
 
         private static void ConfigureDataBindingErrorListener()
