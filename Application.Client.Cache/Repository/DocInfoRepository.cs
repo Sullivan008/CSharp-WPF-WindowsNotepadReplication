@@ -8,9 +8,12 @@ namespace Application.Client.Cache.Repository
 {
     public class DocInfoRepository : BaseCacheRepository<DocInfoDataModel>, ICacheRepository<DocInfoDataModel>
     {
-        private const CacheKey CACHE_KEY = CacheKey.DocInfo;
-
-        public DocInfoRepository(IApplicationCacheService applicationCacheService) : base(applicationCacheService, CACHE_KEY)
+        public DocInfoRepository(IApplicationCacheService applicationCacheService) : base(applicationCacheService)
         { }
+
+        protected override CacheKey GetCacheKey()
+        {
+            return CacheKey.DocInfo;
+        }
     }
 }

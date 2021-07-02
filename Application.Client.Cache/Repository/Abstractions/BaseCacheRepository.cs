@@ -7,30 +7,29 @@ namespace Application.Client.Cache.Repository.Abstractions
 {
     public abstract class BaseCacheRepository<TCacheDataModel> where TCacheDataModel : ICacheDataModel
     {
-        private readonly CacheKey _cacheKey;
-
         private readonly IApplicationCacheService _applicationCacheService;
 
-        protected BaseCacheRepository(IApplicationCacheService applicationCacheService, CacheKey cacheKey)
+        protected BaseCacheRepository(IApplicationCacheService applicationCacheService)
         {
-            _cacheKey = cacheKey;
             _applicationCacheService = applicationCacheService;
         }
 
         public TCacheDataModel GetItem()
         {
-            return _applicationCacheService.GetItem<TCacheDataModel>(_cacheKey);
+            return _applicationCacheService.GetItem<TCacheDataModel>(GetCacheKey());
         }
 
         public void SetItem(TCacheDataModel dataItem)
         {
             CacheSaveOptions<TCacheDataModel> saveOptions = new()
             {
-                Key = _cacheKey,
+                Key = GetCacheKey(),
                 Data = dataItem
             };
 
             _applicationCacheService.SetItem(saveOptions);
         }
+
+        protected abstract CacheKey GetCacheKey();
     }
 }
