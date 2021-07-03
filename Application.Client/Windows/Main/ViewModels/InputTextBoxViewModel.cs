@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Media;
 using Application.Client.Infrastructure.ViewModels;
 using Application.Client.Services.Interfaces;
 
@@ -63,6 +64,17 @@ namespace Application.Client.Windows.Main.ViewModels
             set
             {
                 _textWrapping = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private SolidColorBrush _background = new(Color.FromRgb(255, 255, 255));
+        public SolidColorBrush Background
+        {
+            get => _background;
+            set
+            {
+                _background = value;
                 OnPropertyChanged();
             }
         }

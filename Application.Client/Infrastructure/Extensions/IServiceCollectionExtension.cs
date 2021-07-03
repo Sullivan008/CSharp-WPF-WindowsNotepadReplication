@@ -5,6 +5,8 @@ using System.Reflection;
 using Application.Client.Cache.Core.Services;
 using Application.Client.Cache.Core.Services.Interfaces;
 using Application.Client.Cache.Repository.Interfaces;
+using Application.Client.Dialogs.ColorDialog;
+using Application.Client.Dialogs.ColorDialog.Interfaces;
 using Application.Client.Dialogs.FontDialog;
 using Application.Client.Dialogs.FontDialog.Interfaces;
 using Application.Client.Dialogs.MessageDialog;
@@ -50,6 +52,7 @@ namespace Application.Client.Infrastructure.Extensions
         public static IServiceCollection AddDialogs(this IServiceCollection services)
         {
             services.AddTransient<IFontDialog, FontDialog>();
+            services.AddTransient<IColorDialog, ColorDialog>();
             services.AddTransient<IMessageDialog, MessageDialog>();
             services.AddTransient<ISaveFileDialog, SaveFileDialog>();
             services.AddTransient<IOpenFileDialog, OpenFileDialog>();
@@ -61,6 +64,7 @@ namespace Application.Client.Infrastructure.Extensions
         {
             services.AddSingleton<IApplicationCacheService, ApplicationCacheService>();
             services.AddSingleton<IDocInfoService, DocInfoService>();
+            services.AddSingleton<IColorDialogSettingsService, ColorDialogSettingsService>();
 
             return services;
         }

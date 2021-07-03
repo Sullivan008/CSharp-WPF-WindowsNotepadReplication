@@ -12,7 +12,7 @@
     <Window.Resources>
 
         <ControlTemplate x:Key="MainInputTextBoxTemplate" TargetType="{x:Type TextBox}">
-            <Border x:Name="border" BorderBrush="#F0F0F0" BorderThickness="0,2.5,0,0">
+            <Border x:Name="border" BorderBrush="#F0F0F0" BorderThickness="0,2.5,0,0" Background="{TemplateBinding Background}">
                 <ScrollViewer x:Name="PART_ContentHost" />
             </Border>
             <ControlTemplate.Triggers>
@@ -109,8 +109,10 @@
                     <MenuItem Header="_Time/ Date" InputGestureText="F5" Command="{Binding PutDateTimeTextCommand}"/>
                 </MenuItem>
                 <MenuItem Template="{DynamicResource MainMenuItemControlTemplate}" Header="Format">
-                    <MenuItem Header="_Break words" IsCheckable="True" IsChecked="False" Command="{Binding ChangeTextWrappingCommand}"/>
                     <MenuItem Header="_Fonts..." Command="{Binding FontsCommand}"/>
+                    <MenuItem Header="_Background color" Command="{Binding BackgroundColorCommand}"/>
+                    <Separator/>
+                    <MenuItem Header="_Break words" IsCheckable="True" IsChecked="False" Command="{Binding ChangeTextWrappingCommand}"/>
                 </MenuItem>
                 <MenuItem Template="{DynamicResource MainMenuItemControlTemplate}" Header="View">
                     <MenuItem Header="_Status bar" IsCheckable="True" IsChecked="True" Command="{Binding ChangeStatusBarVisibilityCommand}"/>
@@ -149,8 +151,9 @@
                      FontSize="{Binding InputTextBox.TextOptions.FontSize, Mode=OneWay}"
                      FontStyle="{Binding InputTextBox.TextOptions.FontStyle, Mode=OneWay}"
                      FontWeight="{Binding InputTextBox.TextOptions.FontWeight, Mode=OneWay}"
-                     TextDecorations="{Binding InputTextBox.TextOptions.TextDecorations, Mode=Oneway}"
+                     TextDecorations="{Binding InputTextBox.TextOptions.TextDecorations, Mode=OneWay}"
                      Foreground="{Binding InputTextBox.TextOptions.Foreground, Mode=OneWay}"
+                     Background="{Binding InputTextBox.Background, Mode=OneWay}"
                      textBoxBehaviors:SelectedTextBehavior.SelectedText="{Binding InputTextBox.SelectedText}"
                      textBoxBehaviors:CaretIndexBehavior.CaretIndex="{Binding InputTextBox.CaretIndex}">
             </TextBox>

@@ -1,5 +1,6 @@
 ﻿using System.Windows.Input;
 using System.Windows.Threading;
+using Application.Client.Dialogs.ColorDialog.Interfaces;
 using Application.Client.Dialogs.FontDialog.Interfaces;
 using Application.Client.Dialogs.MessageDialog.Interfaces;
 using Application.Client.Dialogs.OpenFileDialog.Interfaces;
@@ -20,6 +21,8 @@ namespace Application.Client.Windows.Main.ViewModels
     {
         private readonly IFontDialog _fontDialog;
 
+        private readonly IColorDialog _colorDialog;
+
         private readonly IMessageDialog _messageDialog;
 
         private readonly IOpenFileDialog _openFileDialog;
@@ -32,10 +35,11 @@ namespace Application.Client.Windows.Main.ViewModels
 
         private readonly IDocInfoService _docInfoService;
 
-        public MainWindowViewModel(InputTextBoxViewModel inputTextBox, StatusBarViewModel statusBar, IFontDialog fontDialog, IMessageDialog messageDialog, IOpenFileDialog openFileDialog,
-            ISaveFileDialog saveFileDialog, ITextFileWriter textFileWriter, ITextFileReader textFileReader, IDocInfoService docInfoService)
+        public MainWindowViewModel(InputTextBoxViewModel inputTextBox, StatusBarViewModel statusBar, IFontDialog fontDialog, IColorDialog colorDialog, IMessageDialog messageDialog,
+            IOpenFileDialog openFileDialog, ISaveFileDialog saveFileDialog, ITextFileWriter textFileWriter, ITextFileReader textFileReader, IDocInfoService docInfoService)
         {
             _fontDialog = fontDialog;
+            _colorDialog = colorDialog;
             _messageDialog = messageDialog;
             _openFileDialog = openFileDialog;
             _saveFileDialog = saveFileDialog;
@@ -111,6 +115,9 @@ namespace Application.Client.Windows.Main.ViewModels
 
         private ICommand _fontsCommand;
         public ICommand FontsCommand => _fontsCommand ??= new FontsCommand(this, _fontDialog);
+
+        private ICommand _backgroundColorCommand;
+        public ICommand BackgroundColorCommand => _backgroundColorCommand ??= new BackgroundColorCommand(this, _colorDialog);
 
         private ICommand _changeTextWrappingCommand;
         public ICommand ChangeTextWrappingCommand => _changeTextWrappingCommand ??= new ChangeTextWrappingCommand(this);
