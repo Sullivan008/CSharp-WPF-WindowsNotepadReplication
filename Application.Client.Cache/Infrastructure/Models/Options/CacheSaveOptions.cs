@@ -1,9 +1,9 @@
 ﻿using System;
-using Application.Client.Cache.Core.Enums;
-using Application.Client.Cache.Core.Models.Interfaces;
+using Application.Client.Cache.Infrastructure.Enums;
+using Application.Client.Cache.Infrastructure.Models.Interfaces;
 using Microsoft.Extensions.Caching.Memory;
 
-namespace Application.Client.Cache.Core.Models.Options
+namespace Application.Client.Cache.Infrastructure.Models.Options
 {
     public class CacheSaveOptions<TCacheDataItem> where TCacheDataItem : ICacheDataModel
     {

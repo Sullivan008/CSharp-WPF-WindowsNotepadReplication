@@ -1,5 +1,5 @@
-﻿using Application.Client.Cache.Core.Models.Interfaces;
-using Application.Client.Cache.DataModels.Enums;
+﻿using Application.Client.Cache.DataModels.Enums;
+using Application.Client.Cache.Infrastructure.Models.Interfaces;
 
 namespace Application.Client.Cache.DataModels
 {

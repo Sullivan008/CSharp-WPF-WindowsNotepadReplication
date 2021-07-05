@@ -1,10 +1,10 @@
 ﻿using System.Drawing;
 using System.Linq;
 using Application.Client.Cache.DataModels;
-using Application.Client.Cache.Repository.Interfaces;
-using Application.Client.Services.Interfaces;
+using Application.Client.Cache.Infrastructure.Repository.Interfaces;
+using Application.Client.Dialogs.ColorDialog.Services.Interfaces;
 
-namespace Application.Client.Services
+namespace Application.Client.Dialogs.ColorDialog.Services
 {
     public class ColorDialogSettingsService : IColorDialogSettingsService
     {

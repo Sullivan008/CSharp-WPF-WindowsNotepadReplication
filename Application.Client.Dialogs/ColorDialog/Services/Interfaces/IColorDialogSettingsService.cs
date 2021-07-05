@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace Application.Client.Services.Interfaces
+namespace Application.Client.Dialogs.ColorDialog.Services.Interfaces
 {
     public interface IColorDialogSettingsService
     {

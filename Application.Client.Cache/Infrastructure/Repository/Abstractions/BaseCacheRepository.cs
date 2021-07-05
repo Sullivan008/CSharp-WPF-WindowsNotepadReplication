@@ -1,9 +1,9 @@
-﻿using Application.Client.Cache.Core.Enums;
-using Application.Client.Cache.Core.Models.Interfaces;
-using Application.Client.Cache.Core.Models.Options;
-using Application.Client.Cache.Core.Services.Interfaces;
+﻿using Application.Client.Cache.Infrastructure.Enums;
+using Application.Client.Cache.Infrastructure.Models.Interfaces;
+using Application.Client.Cache.Infrastructure.Models.Options;
+using Application.Client.Cache.Infrastructure.Services.Interfaces;
 
-namespace Application.Client.Cache.Repository.Abstractions
+namespace Application.Client.Cache.Infrastructure.Repository.Abstractions
 {
     public abstract class BaseCacheRepository<TCacheDataModel> where TCacheDataModel : ICacheDataModel
     {

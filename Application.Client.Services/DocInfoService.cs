@@ -2,7 +2,7 @@
 using System.IO;
 using Application.Client.Cache.DataModels;
 using Application.Client.Cache.DataModels.Enums;
-using Application.Client.Cache.Repository.Interfaces;
+using Application.Client.Cache.Infrastructure.Repository.Interfaces;
 using Application.Client.Services.Interfaces;
 
 namespace Application.Client.Services

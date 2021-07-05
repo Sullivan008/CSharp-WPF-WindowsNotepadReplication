@@ -5,7 +5,7 @@ using Application.Client.Dialogs.ColorDialog.Enums;
 using Application.Client.Dialogs.ColorDialog.Exceptions;
 using Application.Client.Dialogs.ColorDialog.Interfaces;
 using Application.Client.Dialogs.ColorDialog.Models;
-using Application.Client.Services.Interfaces;
+using Application.Client.Dialogs.ColorDialog.Services.Interfaces;
 
 namespace Application.Client.Dialogs.ColorDialog
 {

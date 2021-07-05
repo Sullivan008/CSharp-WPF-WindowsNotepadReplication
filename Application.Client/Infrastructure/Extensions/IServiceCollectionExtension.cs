@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Application.Client.Cache.Core.Services;
-using Application.Client.Cache.Core.Services.Interfaces;
-using Application.Client.Cache.Repository.Interfaces;
+using Application.Client.Cache.Infrastructure.Repository.Interfaces;
+using Application.Client.Cache.Infrastructure.Services;
+using Application.Client.Cache.Infrastructure.Services.Interfaces;
 using Application.Client.Dialogs.ColorDialog;
 using Application.Client.Dialogs.ColorDialog.Interfaces;
+using Application.Client.Dialogs.ColorDialog.Services;
+using Application.Client.Dialogs.ColorDialog.Services.Interfaces;
 using Application.Client.Dialogs.FontDialog;
 using Application.Client.Dialogs.FontDialog.Interfaces;
 using Application.Client.Dialogs.MessageDialog;
