@@ -11,6 +11,8 @@ using Application.Client.Dialogs.ColorDialog.Services;
 using Application.Client.Dialogs.ColorDialog.Services.Interfaces;
 using Application.Client.Dialogs.FontDialog;
 using Application.Client.Dialogs.FontDialog.Interfaces;
+using Application.Client.Dialogs.FontDialog.Services;
+using Application.Client.Dialogs.FontDialog.Services.Interfaces;
 using Application.Client.Dialogs.MessageDialog;
 using Application.Client.Dialogs.MessageDialog.Interfaces;
 using Application.Client.Dialogs.OpenFileDialog;
@@ -66,6 +68,7 @@ namespace Application.Client.Infrastructure.Extensions
         {
             services.AddSingleton<IApplicationCacheService, ApplicationCacheService>();
             services.AddSingleton<IDocInfoService, DocInfoService>();
+            services.AddSingleton<IFontDialogSettingsService, FontDialogSettingsService>();
             services.AddSingleton<IColorDialogSettingsService, ColorDialogSettingsService>();
 
             return services;

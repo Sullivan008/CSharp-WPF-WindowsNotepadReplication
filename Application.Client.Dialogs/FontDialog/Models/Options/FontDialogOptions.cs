@@ -13,7 +13,5 @@
         public bool AllowVerticalFonts { get; init; } = true;
 
         public bool FixedPitchOnly { get; init; } = false;
-
-        public FontOptions FontOptions { get; init; } = new();
     }
 }

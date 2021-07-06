@@ -8,6 +8,9 @@ namespace Application.Client.Cache.Infrastructure.Enums
         DocInfo = 1,
 
         [EnumMember(Value = "COLOR_DIALOG_SETTINGS")]
-        ColorDialogSettings = 2
+        ColorDialogSettings = 2,
+
+        [EnumMember(Value = "FONT_DIALOG_SETTINGS")]
+        FontDialogSettings = 3
     }
 }
