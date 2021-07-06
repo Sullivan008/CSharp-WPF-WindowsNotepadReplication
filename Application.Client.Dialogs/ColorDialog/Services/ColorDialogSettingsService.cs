@@ -20,12 +20,7 @@ namespace Application.Client.Dialogs.ColorDialog.Services
             get
             {
                 ColorDialogSettingsDataModel colorDialogSettings = _colorDialogSettingsCacheRepository.GetItem();
-
-                if (colorDialogSettings == null)
-                {
-                    return Color.FromArgb(0, 0, 0);
-                }
-
+                
                 return colorDialogSettings.Color;
             }
         }
@@ -39,7 +34,7 @@ namespace Application.Client.Dialogs.ColorDialog.Services
 
                 ColorDialogSettingsDataModel colorDialogSettings = _colorDialogSettingsCacheRepository.GetItem();
 
-                if (colorDialogSettings == null)
+                if (colorDialogSettings.CustomColors == null)
                 {
                     return Enumerable.Repeat(DEFAULT_CUSTOM_COLOR_VALUE, MAX_CUSTOM_COLOR_SIZE).ToArray();
                 }
