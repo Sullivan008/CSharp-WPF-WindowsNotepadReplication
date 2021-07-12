@@ -57,6 +57,17 @@ namespace Application.Client.Windows.Main.ViewModels
             }
         }
 
+        private int _selectionLength;
+        public int SelectionLength
+        {
+            get => _selectionLength;
+            set
+            {
+                _selectionLength = value;
+                OnPropertyChanged();
+            }
+        }
+
         private TextWrapping _textWrapping = TextWrapping.NoWrap;
         public TextWrapping TextWrapping
         {

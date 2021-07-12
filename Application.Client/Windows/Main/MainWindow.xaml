@@ -155,7 +155,8 @@
                      Foreground="{Binding InputTextBox.TextOptions.Foreground, Mode=OneWay}"
                      Background="{Binding InputTextBox.Background, Mode=OneWay}"
                      textBoxBehaviors:SelectedTextBehavior.SelectedText="{Binding InputTextBox.SelectedText}"
-                     textBoxBehaviors:CaretIndexBehavior.CaretIndex="{Binding InputTextBox.CaretIndex}">
+                     textBoxBehaviors:CaretIndexBehavior.CaretIndex="{Binding InputTextBox.CaretIndex}"
+                     textBoxBehaviors:SelectionLengthBehavior.SelectionLength="{Binding InputTextBox.SelectionLength}">
             </TextBox>
         </DockPanel>
 
