@@ -1,4 +1,4 @@
-﻿namespace Application.Client.Cache.DataModels.Enums
+﻿namespace Application.Client.Cache.DataModels.DocInfo.Enums
 {
     public enum DocumentState
     {

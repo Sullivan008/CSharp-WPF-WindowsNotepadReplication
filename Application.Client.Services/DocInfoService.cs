@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
-using Application.Client.Cache.DataModels;
-using Application.Client.Cache.DataModels.Enums;
+using Application.Client.Cache.DataModels.DocInfo;
+using Application.Client.Cache.DataModels.DocInfo.Enums;
 using Application.Client.Cache.Infrastructure.Repository.Interfaces;
 using Application.Client.Services.Interfaces;
 
@@ -24,9 +24,9 @@ namespace Application.Client.Services
         {
             get
             {
-                DocInfoDataModel docInfoData = GetDocInfoData();
+                DocInfoDataModel docInfoData = _docInfoCacheRepository.GetItem();
 
-                return docInfoData.FilePath;
+                return docInfoData.FileInfo.FilePath;
             }
         }
 
@@ -34,11 +34,11 @@ namespace Application.Client.Services
         {
             get
             {
-                DocInfoDataModel docInfoData = GetDocInfoData();
+                DocInfoDataModel docInfoData = _docInfoCacheRepository.GetItem();
 
-                if (!string.IsNullOrWhiteSpace(docInfoData.FilePath))
+                if (!string.IsNullOrWhiteSpace(docInfoData.FileInfo.FilePath))
                 {
-                    return Path.GetFileName(docInfoData.FilePath);
+                    return Path.GetFileName(docInfoData.FileInfo.FilePath);
                 }
 
                 return $"{DEFAULT_FILE_NAME}.{DEFAULT_FILE_EXTENSION}";
@@ -49,11 +49,11 @@ namespace Application.Client.Services
         {
             get
             {
-                DocInfoDataModel docInfoData = GetDocInfoData();
+                DocInfoDataModel docInfoData = _docInfoCacheRepository.GetItem();
 
-                if (!string.IsNullOrWhiteSpace(docInfoData.FilePath))
+                if (!string.IsNullOrWhiteSpace(docInfoData.FileInfo.FilePath))
                 {
-                    return Path.GetFileNameWithoutExtension(docInfoData.FilePath);
+                    return Path.GetFileNameWithoutExtension(docInfoData.FileInfo.FilePath);
                 }
 
                 return $"{DEFAULT_FILE_NAME}";
@@ -64,7 +64,7 @@ namespace Application.Client.Services
         {
             get
             {
-                DocInfoDataModel docInfoData = GetDocInfoData();
+                DocInfoDataModel docInfoData = _docInfoCacheRepository.GetItem();
 
                 return docInfoData.DocumentState == DocumentState.Modified;
             }
@@ -74,9 +74,29 @@ namespace Application.Client.Services
         {
             get
             {
-                DocInfoDataModel docInfoData = GetDocInfoData();
+                DocInfoDataModel docInfoData = _docInfoCacheRepository.GetItem();
 
-                return !string.IsNullOrWhiteSpace(docInfoData.FilePath);
+                return !string.IsNullOrWhiteSpace(docInfoData.FileInfo.FilePath);
+            }
+        }
+
+        public int ContentLength
+        {
+            get
+            {
+                DocInfoDataModel docInfoData = _docInfoCacheRepository.GetItem();
+
+                return docInfoData.ContentInfo.Length;
+            }
+        }
+
+        public int ContentLines
+        {
+            get
+            {
+                DocInfoDataModel docInfoData = _docInfoCacheRepository.GetItem();
+
+                return docInfoData.ContentInfo.Lines;
             }
         }
 
@@ -84,7 +104,8 @@ namespace Application.Client.Services
         {
             _docInfoCacheRepository.SetItem(new DocInfoDataModel
             {
-                FilePath = string.Empty,
+                FileInfo = new FileInfoDataModel(),
+                ContentInfo = new ContentInfoDataModel(),
                 DocumentState = DocumentState.Unmodified
             });
         }
@@ -96,46 +117,41 @@ namespace Application.Client.Services
                 throw new ArgumentNullException(nameof(filePath), "The value cannot be null!");
             }
 
-            DocInfoDataModel docInfoData = GetDocInfoData();
-            docInfoData.FilePath = filePath;
+            DocInfoDataModel docInfoData = _docInfoCacheRepository.GetItem();
+            docInfoData.FileInfo.FilePath = filePath;
 
-            SetDocInfoData(docInfoData);
+            _docInfoCacheRepository.SetItem(docInfoData);
         }
 
         public void SetModifiedDocumentState()
         {
-            DocInfoDataModel docInfoData = GetDocInfoData();
+            DocInfoDataModel docInfoData = _docInfoCacheRepository.GetItem();
             docInfoData.DocumentState = DocumentState.Modified;
 
-            SetDocInfoData(docInfoData);
+            _docInfoCacheRepository.SetItem(docInfoData);
         }
 
         public void SetUnmodifiedDocumentState()
         {
-            DocInfoDataModel docInfoData = GetDocInfoData();
+            DocInfoDataModel docInfoData = _docInfoCacheRepository.GetItem();
             docInfoData.DocumentState = DocumentState.Unmodified;
 
-            SetDocInfoData(docInfoData);
+            _docInfoCacheRepository.SetItem(docInfoData);
         }
 
-        private DocInfoDataModel GetDocInfoData()
+        public void SetContentLength(int contentLength)
         {
             DocInfoDataModel docInfoData = _docInfoCacheRepository.GetItem();
+            docInfoData.ContentInfo.Length = contentLength;
 
-            if (docInfoData == null)
-            {
-                return new DocInfoDataModel
-                {
-                    FilePath = string.Empty,
-                    DocumentState = DocumentState.Unmodified
-                };
-            }
-
-            return docInfoData;
+            _docInfoCacheRepository.SetItem(docInfoData);
         }
 
-        private void SetDocInfoData(DocInfoDataModel docInfoData)
+        public void SetContentLines(int contentLines)
         {
+            DocInfoDataModel docInfoData = _docInfoCacheRepository.GetItem();
+            docInfoData.ContentInfo.Lines = contentLines;
+
             _docInfoCacheRepository.SetItem(docInfoData);
         }
     }

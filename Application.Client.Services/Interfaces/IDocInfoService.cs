@@ -12,6 +12,10 @@
 
         public bool IsOpenedDocument { get; }
 
+        public int ContentLength { get; }
+
+        public int ContentLines { get; }
+
         public void SetDefaultDocInfo();
 
         public void SetFilePath(string filePath);
@@ -19,5 +23,9 @@
         public void SetModifiedDocumentState();
 
         public void SetUnmodifiedDocumentState();
+
+        public void SetContentLength(int contentLength);
+
+        public void SetContentLines(int contentLines);
     }
 }

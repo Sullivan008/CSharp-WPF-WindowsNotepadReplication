@@ -1,10 +1,19 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using Application.Client.Infrastructure.ViewModels;
+using Application.Client.Services.Interfaces;
 
 namespace Application.Client.Windows.Main.ViewModels
 {
     public class StatusBarViewModel : ViewModelBase
     {
+        private readonly IDocInfoService _docInfoService;
+
+        public StatusBarViewModel(IDocInfoService docInfoService)
+        {
+            _docInfoService = docInfoService;
+        }
+
         private Visibility _visibility = Visibility.Visible;
         public Visibility Visibility
         {
@@ -40,8 +49,11 @@ namespace Application.Client.Windows.Main.ViewModels
 
         public void RefreshOutputData(string content)
         {
-            Length = GetContentLength(content);
             Lines = GetContentLines(content);
+            Length = GetContentLength(content);
+
+            _docInfoService.SetContentLines(Lines);
+            _docInfoService.SetContentLength(Length);
         }
 
         private static int GetContentLength(string content) => content.Length;

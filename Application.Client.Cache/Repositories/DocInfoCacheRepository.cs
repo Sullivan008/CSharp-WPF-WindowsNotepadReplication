@@ -1,4 +1,4 @@
-﻿using Application.Client.Cache.DataModels;
+﻿using Application.Client.Cache.DataModels.DocInfo;
 using Application.Client.Cache.Infrastructure.Enums;
 using Application.Client.Cache.Infrastructure.Repository.Abstractions;
 using Application.Client.Cache.Infrastructure.Repository.Interfaces;
