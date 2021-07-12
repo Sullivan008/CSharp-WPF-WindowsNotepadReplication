@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
-using Application.Client.Core.ErrorHandling.DataBinding.Exceptions;
+using Application.Client.Infrastructure.ErrorHandling.DataBinding.Exceptions;
 
-namespace Application.Client.Core.ErrorHandling.DataBinding.TraceListeners
+namespace Application.Client.Infrastructure.ErrorHandling.DataBinding.TraceListeners
 {
     public class BindingErrorTraceListener : TraceListener
     {

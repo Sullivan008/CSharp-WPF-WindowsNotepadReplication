@@ -1,4 +1,4 @@
-﻿namespace Application.Client.Core.ErrorHandling.Constants
+﻿namespace Application.Client.Infrastructure.ErrorHandling.Constants
 {
     public static class ErrorConstants
     {

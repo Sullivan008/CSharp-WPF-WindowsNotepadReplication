@@ -1,4 +1,4 @@
-﻿namespace Application.Client.Core.ErrorHandling.Models
+﻿namespace Application.Client.Infrastructure.ErrorHandling.Models
 {
     public class ErrorModel
     {

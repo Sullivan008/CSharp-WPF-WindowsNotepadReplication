@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Notepad", "Notepad\Notepad.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application.Client", "Application.Client\Application.Client.csproj", "{2DC1951C-8733-4EA5-8214-00963333E21A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application.Client.Core", "Application.Client.Core\Application.Client.Core.csproj", "{155E0262-E51E-4285-8514-6CB982A3D2D8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application.Client.Infrastructure", "Application.Client.Infrastructure\Application.Client.Infrastructure.csproj", "{155E0262-E51E-4285-8514-6CB982A3D2D8}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application.Client.Dialogs", "Application.Client.Dialogs\Application.Client.Dialogs.csproj", "{2F2A6A99-B0EA-4A6F-B8B9-0DD110D303D3}"
 EndProject

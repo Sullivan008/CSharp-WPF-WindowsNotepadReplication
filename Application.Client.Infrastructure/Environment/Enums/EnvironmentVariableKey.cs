@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace Application.Client.Core.Environment.Enums
+namespace Application.Client.Infrastructure.Environment.Enums
 {
     public enum EnvironmentVariableKey
     {

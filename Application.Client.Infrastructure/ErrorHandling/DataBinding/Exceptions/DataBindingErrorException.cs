@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Application.Client.Core.ErrorHandling.DataBinding.Exceptions
+namespace Application.Client.Infrastructure.ErrorHandling.DataBinding.Exceptions
 {
     public class DataBindingErrorException : Exception
     {
