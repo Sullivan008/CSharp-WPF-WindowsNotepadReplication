@@ -103,7 +103,7 @@
                     <MenuItem Header="_Search"/>
                     <MenuItem Header="_FindNext"/>
                     <MenuItem Header="_Replace"/>
-                    <MenuItem Header="_Jump"/>
+                    <MenuItem Header="_Go to line" Command="{Binding GoToLineCommand}"/>
                     <Separator/>
                     <MenuItem Header="_Select All" Command="ApplicationCommands.SelectAll"/>
                     <MenuItem Header="_Time/ Date" InputGestureText="F5" Command="{Binding PutDateTimeTextCommand}"/>

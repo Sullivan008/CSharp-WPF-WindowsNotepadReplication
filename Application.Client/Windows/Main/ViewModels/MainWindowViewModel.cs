@@ -2,6 +2,7 @@
 using System.Windows.Threading;
 using Application.Client.Dialogs.ColorDialog.Interfaces;
 using Application.Client.Dialogs.FontDialog.Interfaces;
+using Application.Client.Dialogs.GoToLineDialog.Interfaces;
 using Application.Client.Dialogs.MessageDialog.Interfaces;
 using Application.Client.Dialogs.OpenFileDialog.Interfaces;
 using Application.Client.Dialogs.SaveFileDialog.Interfaces;
@@ -29,20 +30,24 @@ namespace Application.Client.Windows.Main.ViewModels
 
         private readonly ISaveFileDialog _saveFileDialog;
 
+        private readonly IGoToLineDialog _goToLineDialog;
+
         private readonly ITextFileWriter _textFileWriter;
 
         private readonly ITextFileReader _textFileReader;
 
         private readonly IDocInfoService _docInfoService;
 
+
         public MainWindowViewModel(InputTextBoxViewModel inputTextBox, StatusBarViewModel statusBar, IFontDialog fontDialog, IColorDialog colorDialog, IMessageDialog messageDialog,
-            IOpenFileDialog openFileDialog, ISaveFileDialog saveFileDialog, ITextFileWriter textFileWriter, ITextFileReader textFileReader, IDocInfoService docInfoService)
+            IOpenFileDialog openFileDialog, ISaveFileDialog saveFileDialog, IGoToLineDialog goToLineDialog, ITextFileWriter textFileWriter, ITextFileReader textFileReader, IDocInfoService docInfoService)
         {
             _fontDialog = fontDialog;
             _colorDialog = colorDialog;
             _messageDialog = messageDialog;
             _openFileDialog = openFileDialog;
             _saveFileDialog = saveFileDialog;
+            _goToLineDialog = goToLineDialog;
             _textFileWriter = textFileWriter;
             _textFileReader = textFileReader;
             _docInfoService = docInfoService;
@@ -111,6 +116,9 @@ namespace Application.Client.Windows.Main.ViewModels
 
         private ICommand _putDateTimeTextCommand;
         public ICommand PutDateTimeTextCommand => _putDateTimeTextCommand ??= new PutDateTimeTextCommand(this);
+
+        private ICommand _goToLineCommand;
+        public ICommand GoToLineCommand => _goToLineCommand ??= new GoToLineCommand(this, _goToLineDialog);
 
 
         private ICommand _fontsCommand;
