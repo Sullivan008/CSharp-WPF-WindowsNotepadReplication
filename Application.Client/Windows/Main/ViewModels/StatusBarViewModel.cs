@@ -60,9 +60,7 @@ namespace Application.Client.Windows.Main.ViewModels
 
         private static int GetContentLines(string content)
         {
-            const string ROW_SEPARATOR = "\n";
-
-            return content.Split(ROW_SEPARATOR).Length;
+            return content.Split(Environment.NewLine).Length;
         }
     }
 }
