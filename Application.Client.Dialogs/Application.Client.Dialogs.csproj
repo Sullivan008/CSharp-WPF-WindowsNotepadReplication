@@ -6,13 +6,38 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="GoToLineDialog\Windows\GoToLineWindow.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <FrameworkReference Include="Microsoft.WindowsDesktop.App.Wpf" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Application.Client.Core\Application.Client.Core.csproj" />
+    <PackageReference Include="FluentValidation" Version="10.2.3" />
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.31" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Application.Client.Behaviors\Application.Client.Behaviors.csproj" />
+    <ProjectReference Include="..\Application.Client.Converters\Application.Client.Converters.csproj" />
+    <ProjectReference Include="..\Application.Client.Infrastructure\Application.Client.Infrastructure.csproj" />
     <ProjectReference Include="..\Application.Client.Services\Application.Client.Services.csproj" />
     <ProjectReference Include="..\Application.Utilities\Application.Utilities.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Include="GoToLineDialog\Windows\GoToLineWindow.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="GoToLineDialog\Windows\GoToLineWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
 
 </Project>

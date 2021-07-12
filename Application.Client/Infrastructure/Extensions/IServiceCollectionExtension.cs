@@ -13,6 +13,11 @@ using Application.Client.Dialogs.FontDialog;
 using Application.Client.Dialogs.FontDialog.Interfaces;
 using Application.Client.Dialogs.FontDialog.Services;
 using Application.Client.Dialogs.FontDialog.Services.Interfaces;
+using Application.Client.Dialogs.GoToLineDialog;
+using Application.Client.Dialogs.GoToLineDialog.Interfaces;
+using Application.Client.Dialogs.GoToLineDialog.Windows;
+using Application.Client.Dialogs.GoToLineDialog.Windows.ViewModels;
+using Application.Client.Dialogs.GoToLineDialog.Windows.ViewModels.Validator;
 using Application.Client.Dialogs.MessageDialog;
 using Application.Client.Dialogs.MessageDialog.Interfaces;
 using Application.Client.Dialogs.OpenFileDialog;
@@ -27,6 +32,7 @@ using Application.Utilities.FileReader;
 using Application.Utilities.FileReader.Interfaces;
 using Application.Utilities.FileWriter;
 using Application.Utilities.FileWriter.Interfaces;
+using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Application.Client.Infrastructure.Extensions
@@ -60,6 +66,21 @@ namespace Application.Client.Infrastructure.Extensions
             services.AddTransient<IMessageDialog, MessageDialog>();
             services.AddTransient<ISaveFileDialog, SaveFileDialog>();
             services.AddTransient<IOpenFileDialog, OpenFileDialog>();
+
+            services.AddGoToLineDialog();
+
+            return services;
+        }
+
+        private static IServiceCollection AddGoToLineDialog(this IServiceCollection services)
+        {
+            services.AddTransient<GoToLineWindowViewModel>();
+            services.AddTransient<IGoToLineDialog, GoToLineDialog>();
+            services.AddTransient(x => new GoToLineWindow
+            {
+                DataContext = x.GetRequiredService<GoToLineWindowViewModel>()
+            });
+            services.AddScoped<IValidator<GoToLineWindowViewModel>, GoToLineWindowViewModelValidator>();
 
             return services;
         }
