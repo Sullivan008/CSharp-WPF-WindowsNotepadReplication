@@ -13,6 +13,7 @@ using Application.Client.Dialogs.FindDialog;
 using Application.Client.Dialogs.FindDialog.Interfaces;
 using Application.Client.Dialogs.FindDialog.Windows;
 using Application.Client.Dialogs.FindDialog.Windows.ViewModels;
+using Application.Client.Dialogs.FindDialog.Windows.ViewModels.Validator;
 using Application.Client.Dialogs.FontDialog;
 using Application.Client.Dialogs.FontDialog.Interfaces;
 using Application.Client.Dialogs.FontDialog.Services;
@@ -98,6 +99,7 @@ namespace Application.Client.Infrastructure.Extensions
             {
                 DataContext = x.GetRequiredService<FindWindowViewModel>()
             });
+            services.AddScoped<IValidator<FindWindowViewModel>, FindWindowViewModelValidator>();
 
             return services;
         }

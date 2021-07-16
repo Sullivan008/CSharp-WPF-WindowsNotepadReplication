@@ -115,6 +115,7 @@
                     </Label>
 
                     <TextBox Grid.Row="0" Grid.Column="1" Height="23" Padding="2" Margin="5,5,0,0" Width="190" HorizontalAlignment="Left"
+                             Text="{Binding FindWhat, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
                              Style="{DynamicResource ToolTipErrorMessageStyle}">
                     </TextBox>
                 </Grid>
