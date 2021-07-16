@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Windows.Input;
+using Application.Client.Dialogs.FindDialog.Windows.Commands;
 using Application.Client.Infrastructure.ViewModels;
 using FluentValidation;
 using FluentValidation.Results;
@@ -17,8 +19,11 @@ namespace Application.Client.Dialogs.FindDialog.Windows.ViewModels
             _validator = validator;
         }
 
-        private string _findWhat;
+        private ICommand _cancelCommand;
+        public ICommand CancelCommand => _cancelCommand ??= new CancelCommand(this);
 
+
+        private string _findWhat;
         public string FindWhat
         {
             get => _findWhat;
