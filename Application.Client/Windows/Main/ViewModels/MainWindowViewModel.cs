@@ -1,6 +1,7 @@
 ﻿using System.Windows.Input;
 using System.Windows.Threading;
 using Application.Client.Dialogs.ColorDialog.Interfaces;
+using Application.Client.Dialogs.FindDialog.Interfaces;
 using Application.Client.Dialogs.FontDialog.Interfaces;
 using Application.Client.Dialogs.GoToLineDialog.Interfaces;
 using Application.Client.Dialogs.MessageDialog.Interfaces;
@@ -22,6 +23,8 @@ namespace Application.Client.Windows.Main.ViewModels
     {
         private readonly IFontDialog _fontDialog;
 
+        private readonly IFindDialog _findDialog;
+
         private readonly IColorDialog _colorDialog;
 
         private readonly IMessageDialog _messageDialog;
@@ -37,12 +40,12 @@ namespace Application.Client.Windows.Main.ViewModels
         private readonly ITextFileReader _textFileReader;
 
         private readonly IDocInfoService _docInfoService;
-
-
-        public MainWindowViewModel(InputTextBoxViewModel inputTextBox, StatusBarViewModel statusBar, IFontDialog fontDialog, IColorDialog colorDialog, IMessageDialog messageDialog,
+        
+        public MainWindowViewModel(InputTextBoxViewModel inputTextBox, StatusBarViewModel statusBar, IFontDialog fontDialog, IFindDialog findDialog, IColorDialog colorDialog, IMessageDialog messageDialog,
             IOpenFileDialog openFileDialog, ISaveFileDialog saveFileDialog, IGoToLineDialog goToLineDialog, ITextFileWriter textFileWriter, ITextFileReader textFileReader, IDocInfoService docInfoService)
         {
             _fontDialog = fontDialog;
+            _findDialog = findDialog;
             _colorDialog = colorDialog;
             _messageDialog = messageDialog;
             _openFileDialog = openFileDialog;
@@ -111,15 +114,18 @@ namespace Application.Client.Windows.Main.ViewModels
         public ICommand ApplicationCloseCommand => _applicationCloseCommand ??= new ApplicationCloseCommand(this, _messageDialog, _saveFileDialog, _docInfoService, _textFileWriter);
 
 
+        private ICommand _findCommand;
+        public ICommand FindCommand => _findCommand ??= new FindCommand(this, _findDialog);
+
+        private ICommand _goToLineCommand;
+        public ICommand GoToLineCommand => _goToLineCommand ??= new GoToLineCommand(this, _goToLineDialog);
+
         private ICommand _deleteTextCommand;
         public ICommand DeleteTextCommand => _deleteTextCommand ??= new DeleteTextCommand(this);
 
         private ICommand _putDateTimeTextCommand;
         public ICommand PutDateTimeTextCommand => _putDateTimeTextCommand ??= new PutDateTimeTextCommand(this);
-
-        private ICommand _goToLineCommand;
-        public ICommand GoToLineCommand => _goToLineCommand ??= new GoToLineCommand(this, _goToLineDialog);
-
+        
 
         private ICommand _fontsCommand;
         public ICommand FontsCommand => _fontsCommand ??= new FontsCommand(this, _fontDialog);

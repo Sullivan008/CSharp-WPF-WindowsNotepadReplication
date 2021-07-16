@@ -100,7 +100,7 @@
                     <MenuItem Header="_Paste" Command="ApplicationCommands.Paste"/>
                     <MenuItem Header="_Delete" InputGestureText="Del" Command="{Binding DeleteTextCommand}"/>
                     <Separator/>
-                    <MenuItem Header="_Search"/>
+                    <MenuItem Header="_Find" Command="{Binding FindCommand}"/>
                     <MenuItem Header="_FindNext"/>
                     <MenuItem Header="_Replace"/>
                     <MenuItem Header="_Go to line" Command="{Binding GoToLineCommand}"/>

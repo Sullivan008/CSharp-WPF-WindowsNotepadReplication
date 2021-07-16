@@ -9,6 +9,10 @@ using Application.Client.Dialogs.ColorDialog;
 using Application.Client.Dialogs.ColorDialog.Interfaces;
 using Application.Client.Dialogs.ColorDialog.Services;
 using Application.Client.Dialogs.ColorDialog.Services.Interfaces;
+using Application.Client.Dialogs.FindDialog;
+using Application.Client.Dialogs.FindDialog.Interfaces;
+using Application.Client.Dialogs.FindDialog.Windows;
+using Application.Client.Dialogs.FindDialog.Windows.ViewModels;
 using Application.Client.Dialogs.FontDialog;
 using Application.Client.Dialogs.FontDialog.Interfaces;
 using Application.Client.Dialogs.FontDialog.Services;
@@ -68,6 +72,7 @@ namespace Application.Client.Infrastructure.Extensions
             services.AddTransient<IOpenFileDialog, OpenFileDialog>();
 
             services.AddGoToLineDialog();
+            services.AddFindDialog();
 
             return services;
         }
@@ -81,6 +86,18 @@ namespace Application.Client.Infrastructure.Extensions
                 DataContext = x.GetRequiredService<GoToLineWindowViewModel>()
             });
             services.AddScoped<IValidator<GoToLineWindowViewModel>, GoToLineWindowViewModelValidator>();
+
+            return services;
+        }
+
+        private static IServiceCollection AddFindDialog(this IServiceCollection services)
+        {
+            services.AddTransient<FindWindowViewModel>();
+            services.AddTransient<IFindDialog, FindDialog>();
+            services.AddTransient(x => new FindWindow
+            {
+                DataContext = x.GetRequiredService<FindWindowViewModel>()
+            });
 
             return services;
         }

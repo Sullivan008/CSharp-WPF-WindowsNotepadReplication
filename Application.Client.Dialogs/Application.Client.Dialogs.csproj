@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="FindDialog\Windows\FindWindow.xaml" />
     <None Remove="GoToLineDialog\Windows\GoToLineWindow.xaml" />
   </ItemGroup>
 
@@ -27,6 +28,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Page Include="FindDialog\Windows\FindWindow.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="GoToLineDialog\Windows\GoToLineWindow.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
@@ -35,6 +41,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="FindDialog\Windows\FindWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="GoToLineDialog\Windows\GoToLineWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
