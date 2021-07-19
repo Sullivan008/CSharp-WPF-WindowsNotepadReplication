@@ -23,6 +23,9 @@ namespace Application.Client.Dialogs.FindDialog.Windows.ViewModels
         private ICommand _cancelCommand;
         public ICommand CancelCommand => _cancelCommand ??= new CancelCommand(this);
 
+        private ICommand _findNextCommand;
+        public ICommand FindNextCommand => _findNextCommand ??= new FindNextCommand(this, _validator);
+
 
         private string _findWhat;
         public string FindWhat

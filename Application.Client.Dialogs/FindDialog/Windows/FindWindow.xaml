@@ -154,7 +154,7 @@
             </Grid>
 
             <StackPanel DockPanel.Dock="Right" Orientation="Vertical" HorizontalAlignment="Right" Width="80">
-                <Button Width="70" Height="23" Margin="5,5,5,5">
+                <Button Width="70" Height="23" Margin="5,5,5,5" Command="{Binding FindNextCommand}">
                     <Button.Content>
                         <TextBlock HorizontalAlignment="Center"><Underline>F</Underline>ind next</TextBlock>
                     </Button.Content>
