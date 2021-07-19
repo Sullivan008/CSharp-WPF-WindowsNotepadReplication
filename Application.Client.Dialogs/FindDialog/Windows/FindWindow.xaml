@@ -3,6 +3,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:enumConverters="clr-namespace:Application.Client.Converters.EnumConverters;assembly=Application.Client.Converters"
         mc:Ignorable="d" 
         Height="140" Width="370"
         ResizeMode="NoResize" Title="Find">
@@ -92,6 +93,8 @@
                 <ContentPresenter Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Margin="{TemplateBinding Padding}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
             </Grid>
         </ControlTemplate>
+
+        <enumConverters:EnumToBooleanConverter x:Key="EnumToBooleanConverter"/>
     </Window.Resources>
 
     <Grid>
@@ -135,12 +138,12 @@
                     <GroupBox Grid.Column="1" Header="Direction" Template="{DynamicResource SquareGroupBox}" 
                               HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="45" Width="105">
                         <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
-                            <RadioButton>
+                            <RadioButton IsChecked="{Binding Path=DirectionType, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Up}">
                                 <RadioButton.Content>
                                     <TextBlock Margin="-3,0,0,0"><Underline>U</Underline>p</TextBlock>
                                 </RadioButton.Content>
                             </RadioButton>
-                            <RadioButton Margin="10,0,0,0">
+                            <RadioButton Margin="10,0,0,0" IsChecked="{Binding Path=DirectionType, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Down}">
                                 <RadioButton.Content>
                                     <TextBlock Margin="-3,0,0,0"><Underline>D</Underline>own</TextBlock>
                                 </RadioButton.Content>

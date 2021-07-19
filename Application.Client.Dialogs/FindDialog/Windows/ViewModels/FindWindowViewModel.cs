@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows.Input;
 using Application.Client.Dialogs.FindDialog.Windows.Commands;
+using Application.Client.Dialogs.FindDialog.Windows.ViewModels.Enums;
 using Application.Client.Infrastructure.ViewModels;
 using FluentValidation;
 using FluentValidation.Results;
@@ -30,6 +31,17 @@ namespace Application.Client.Dialogs.FindDialog.Windows.ViewModels
             set
             {
                 _findWhat = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private DirectionType _directionType = DirectionType.Up;
+        public DirectionType DirectionType
+        {
+            get => _directionType;
+            set
+            {
+                _directionType = value;
                 OnPropertyChanged();
             }
         }
