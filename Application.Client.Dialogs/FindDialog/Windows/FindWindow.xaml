@@ -131,7 +131,7 @@
                         <ColumnDefinition Width="*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox Grid.Column="0" VerticalAlignment="Bottom">
+                    <CheckBox Grid.Column="0" VerticalAlignment="Bottom" IsChecked="{Binding Path=IsMatchCase}">
                         <TextBlock Margin="-3,0,0,0">Match <Underline>c</Underline>ase</TextBlock>
                     </CheckBox>
 

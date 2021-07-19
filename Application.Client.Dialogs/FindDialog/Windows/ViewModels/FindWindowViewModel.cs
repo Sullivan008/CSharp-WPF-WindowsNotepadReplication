@@ -46,6 +46,17 @@ namespace Application.Client.Dialogs.FindDialog.Windows.ViewModels
             }
         }
 
+        private bool _isMatchCase;
+        public bool IsMatchCase
+        {
+            get => _isMatchCase;
+            set
+            {
+                _isMatchCase = value;
+                OnPropertyChanged();
+            }
+        }
+
         public string this[string columnName]
         {
             get
