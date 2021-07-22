@@ -11,6 +11,9 @@ namespace Application.Client.Cache.Infrastructure.Enums
         ColorDialogSettings = 2,
 
         [EnumMember(Value = "FONT_DIALOG_SETTINGS")]
-        FontDialogSettings = 3
+        FontDialogSettings = 3,
+
+        [EnumMember(Value = "FIND_DIALOG_SEARCH_TERMS")]
+        FindDialogSearchTerms = 4
     }
 }

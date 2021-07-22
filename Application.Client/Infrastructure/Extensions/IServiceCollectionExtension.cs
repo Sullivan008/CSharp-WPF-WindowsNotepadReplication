@@ -31,6 +31,8 @@ using Application.Client.Dialogs.SaveFileDialog;
 using Application.Client.Dialogs.SaveFileDialog.Interfaces;
 using Application.Client.Services;
 using Application.Client.Services.Interfaces;
+using Application.Client.Services.SearchTerms;
+using Application.Client.Services.SearchTerms.Interfaces;
 using Application.Client.Windows.Main;
 using Application.Client.Windows.Main.ViewModels;
 using Application.Utilities.FileReader;
@@ -107,9 +109,11 @@ namespace Application.Client.Infrastructure.Extensions
         public static IServiceCollection AddCacheServices(this IServiceCollection services)
         {
             services.AddSingleton<IApplicationCacheService, ApplicationCacheService>();
+
             services.AddSingleton<IDocInfoService, DocInfoService>();
             services.AddSingleton<IFontDialogSettingsService, FontDialogSettingsService>();
             services.AddSingleton<IColorDialogSettingsService, ColorDialogSettingsService>();
+            services.AddSingleton<ISearchTermsService, SearchTermsService>();
 
             return services;
         }

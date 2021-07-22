@@ -6,6 +6,7 @@ using System.Windows.Input;
 using Application.Client.Dialogs.FindDialog.Windows.Commands;
 using Application.Client.Dialogs.FindDialog.Windows.ViewModels.Enums;
 using Application.Client.Infrastructure.ViewModels;
+using Application.Client.Services.SearchTerms.Interfaces;
 using FluentValidation;
 using FluentValidation.Results;
 
@@ -15,16 +16,19 @@ namespace Application.Client.Dialogs.FindDialog.Windows.ViewModels
     {
         private readonly IValidator<FindWindowViewModel> _validator;
 
-        public FindWindowViewModel(IValidator<FindWindowViewModel> validator)
+        private readonly ISearchTermsService _findDialogSearchTermsService;
+
+        public FindWindowViewModel(IValidator<FindWindowViewModel> validator, ISearchTermsService findDialogSearchTermsService)
         {
             _validator = validator;
+            _findDialogSearchTermsService = findDialogSearchTermsService;
         }
 
         private ICommand _cancelCommand;
         public ICommand CancelCommand => _cancelCommand ??= new CancelCommand(this);
 
         private ICommand _findNextCommand;
-        public ICommand FindNextCommand => _findNextCommand ??= new FindNextCommand(this, _validator);
+        public ICommand FindNextCommand => _findNextCommand ??= new FindNextCommand(this, _validator, _findDialogSearchTermsService);
 
 
         private string _findWhat;

@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Application.Client.Dialogs.FindDialog.Windows.ViewModels;
 using Application.Client.Infrastructure.Commands;
+using Application.Client.Services.SearchTerms.Interfaces;
 using FluentValidation;
 
 namespace Application.Client.Dialogs.FindDialog.Windows.Commands
@@ -10,16 +11,28 @@ namespace Application.Client.Dialogs.FindDialog.Windows.Commands
     {
         private readonly IValidator<FindWindowViewModel> _validator;
 
-        public FindNextCommand(FindWindowViewModel callerViewModel, IValidator<FindWindowViewModel> validator) : base(callerViewModel)
+        private readonly ISearchTermsService _searchTermsService;
+
+        public FindNextCommand(FindWindowViewModel callerViewModel, IValidator<FindWindowViewModel> validator, ISearchTermsService searchTermsService) : base(callerViewModel)
         {
             _validator = validator;
+            _searchTermsService = searchTermsService;
         }
 
         public override async Task ExecuteAsync()
         {
+            SetSearchTermsIntoCache();
+
             await Task.CompletedTask;
         }
 
         public override Predicate<object> CanExecute => _ => _validator.Validate(CallerViewModel).IsValid;
+
+        private void SetSearchTermsIntoCache()
+        {
+            _searchTermsService.SetText(CallerViewModel.FindWhat);
+            _searchTermsService.SetIsMatchCase(CallerViewModel.IsMatchCase);
+            _searchTermsService.SetDirectionType((Services.SearchTerms.Enums.DirectionType)CallerViewModel.DirectionType);
+        }
     }
 }
