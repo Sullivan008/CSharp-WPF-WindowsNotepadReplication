@@ -9,6 +9,7 @@ using Application.Client.Dialogs.OpenFileDialog.Interfaces;
 using Application.Client.Dialogs.SaveFileDialog.Interfaces;
 using Application.Client.Infrastructure.ViewModels;
 using Application.Client.Services.Interfaces;
+using Application.Client.Services.SearchTerms.Interfaces;
 using Application.Client.Windows.Main.Commands.EditMenu;
 using Application.Client.Windows.Main.Commands.FileMenu;
 using Application.Client.Windows.Main.Commands.FormatMenu;
@@ -40,9 +41,12 @@ namespace Application.Client.Windows.Main.ViewModels
         private readonly ITextFileReader _textFileReader;
 
         private readonly IDocInfoService _docInfoService;
-        
+
+        private readonly ISearchTermsService _searchTermsService;
+
         public MainWindowViewModel(InputTextBoxViewModel inputTextBox, StatusBarViewModel statusBar, IFontDialog fontDialog, IFindDialog findDialog, IColorDialog colorDialog, IMessageDialog messageDialog,
-            IOpenFileDialog openFileDialog, ISaveFileDialog saveFileDialog, IGoToLineDialog goToLineDialog, ITextFileWriter textFileWriter, ITextFileReader textFileReader, IDocInfoService docInfoService)
+            IOpenFileDialog openFileDialog, ISaveFileDialog saveFileDialog, IGoToLineDialog goToLineDialog, ITextFileWriter textFileWriter, ITextFileReader textFileReader, IDocInfoService docInfoService,
+            ISearchTermsService searchTermsService)
         {
             _fontDialog = fontDialog;
             _findDialog = findDialog;
@@ -54,10 +58,22 @@ namespace Application.Client.Windows.Main.ViewModels
             _textFileWriter = textFileWriter;
             _textFileReader = textFileReader;
             _docInfoService = docInfoService;
+            _searchTermsService = searchTermsService;
 
             StatusBar = statusBar;
             InputTextBox = inputTextBox;
             InputTextBox.OnRefreshStatusBarEvent += (sender, _) => { Dispatcher.CurrentDispatcher.Invoke(() => StatusBar.RefreshOutputData(((InputTextBoxViewModel)sender).Content)); };
+
+            _findDialog.OnFindNextEvent += (sender, _) =>
+            {
+                Dispatcher.CurrentDispatcher.Invoke(() =>
+                {
+                    if (FindNextCommand.CanExecute(default))
+                    {
+                        FindNextCommand.Execute(default);
+                    }
+                });
+            };
         }
 
         private string _windowTitle;
@@ -117,6 +133,9 @@ namespace Application.Client.Windows.Main.ViewModels
         private ICommand _findCommand;
         public ICommand FindCommand => _findCommand ??= new FindCommand(this, _findDialog);
 
+        private ICommand _findNextCommand;
+        public ICommand FindNextCommand => _findNextCommand ??= new Commands.EditMenu.FindNextCommand(this, _searchTermsService);
+
         private ICommand _goToLineCommand;
         public ICommand GoToLineCommand => _goToLineCommand ??= new GoToLineCommand(this, _goToLineDialog);
 
@@ -125,7 +144,7 @@ namespace Application.Client.Windows.Main.ViewModels
 
         private ICommand _putDateTimeTextCommand;
         public ICommand PutDateTimeTextCommand => _putDateTimeTextCommand ??= new PutDateTimeTextCommand(this);
-        
+
 
         private ICommand _fontsCommand;
         public ICommand FontsCommand => _fontsCommand ??= new FontsCommand(this, _fontDialog);

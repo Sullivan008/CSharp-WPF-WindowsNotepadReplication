@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Input;
+using Application.Client.Dialogs.FindDialog.Delegates;
 using Application.Client.Dialogs.FindDialog.Windows.Commands;
 using Application.Client.Dialogs.FindDialog.Windows.ViewModels.Enums;
 using Application.Client.Infrastructure.ViewModels;
@@ -16,19 +17,21 @@ namespace Application.Client.Dialogs.FindDialog.Windows.ViewModels
     {
         private readonly IValidator<FindWindowViewModel> _validator;
 
-        private readonly ISearchTermsService _findDialogSearchTermsService;
+        private readonly ISearchTermsService _searchTermsService;
 
-        public FindWindowViewModel(IValidator<FindWindowViewModel> validator, ISearchTermsService findDialogSearchTermsService)
+        public OnFindNextEventHandler OnFindNextEvent;
+
+        public FindWindowViewModel(IValidator<FindWindowViewModel> validator, ISearchTermsService searchTermsService)
         {
             _validator = validator;
-            _findDialogSearchTermsService = findDialogSearchTermsService;
+            _searchTermsService = searchTermsService;
         }
 
         private ICommand _cancelCommand;
         public ICommand CancelCommand => _cancelCommand ??= new CancelCommand(this);
 
         private ICommand _findNextCommand;
-        public ICommand FindNextCommand => _findNextCommand ??= new FindNextCommand(this, _validator, _findDialogSearchTermsService);
+        public ICommand FindNextCommand => _findNextCommand ??= new FindNextCommand(this, _validator, _searchTermsService);
 
 
         private string _findWhat;

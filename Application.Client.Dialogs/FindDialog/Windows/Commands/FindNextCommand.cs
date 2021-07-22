@@ -23,6 +23,8 @@ namespace Application.Client.Dialogs.FindDialog.Windows.Commands
         {
             SetSearchTermsIntoCache();
 
+            OnFindNext();
+
             await Task.CompletedTask;
         }
 
@@ -33,6 +35,16 @@ namespace Application.Client.Dialogs.FindDialog.Windows.Commands
             _searchTermsService.SetText(CallerViewModel.FindWhat);
             _searchTermsService.SetIsMatchCase(CallerViewModel.IsMatchCase);
             _searchTermsService.SetDirectionType((Services.SearchTerms.Enums.DirectionType)CallerViewModel.DirectionType);
+        }
+
+        private void OnFindNext(EventArgs eventArgs = null)
+        {
+            if (CallerViewModel.OnFindNextEvent == null)
+            {
+                throw new ArgumentNullException(nameof(CallerViewModel.OnFindNextEvent), "The value cannot be null!");
+            }
+
+            CallerViewModel.OnFindNextEvent(this, eventArgs ?? EventArgs.Empty);
         }
     }
 }
