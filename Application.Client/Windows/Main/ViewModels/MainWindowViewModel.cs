@@ -15,6 +15,7 @@ using Application.Client.Windows.Main.Commands.FileMenu;
 using Application.Client.Windows.Main.Commands.FormatMenu;
 using Application.Client.Windows.Main.Commands.Shared;
 using Application.Client.Windows.Main.Commands.ViewMenu;
+using Application.Client.Windows.Main.ViewModels.Settings;
 using Application.Utilities.FileReader.Interfaces;
 using Application.Utilities.FileWriter.Interfaces;
 
@@ -44,9 +45,9 @@ namespace Application.Client.Windows.Main.ViewModels
 
         private readonly ISearchTermsService _searchTermsService;
 
-        public MainWindowViewModel(InputTextBoxViewModel inputTextBox, StatusBarViewModel statusBar, IFontDialog fontDialog, IFindDialog findDialog, IColorDialog colorDialog, IMessageDialog messageDialog,
-            IOpenFileDialog openFileDialog, ISaveFileDialog saveFileDialog, IGoToLineDialog goToLineDialog, ITextFileWriter textFileWriter, ITextFileReader textFileReader, IDocInfoService docInfoService,
-            ISearchTermsService searchTermsService)
+        public MainWindowViewModel(WindowSettingsViewModel windowSettings, InputTextBoxViewModel inputTextBox, StatusBarViewModel statusBar, IFontDialog fontDialog, IFindDialog findDialog,
+            IColorDialog colorDialog, IMessageDialog messageDialog, IOpenFileDialog openFileDialog, ISaveFileDialog saveFileDialog, IGoToLineDialog goToLineDialog, ITextFileWriter textFileWriter,
+            ITextFileReader textFileReader, IDocInfoService docInfoService, ISearchTermsService searchTermsService)
         {
             _fontDialog = fontDialog;
             _findDialog = findDialog;
@@ -62,9 +63,11 @@ namespace Application.Client.Windows.Main.ViewModels
 
             StatusBar = statusBar;
             InputTextBox = inputTextBox;
+            WindowSettings = windowSettings;
+
             InputTextBox.OnRefreshStatusBarEvent += (sender, _) => { Dispatcher.CurrentDispatcher.Invoke(() => StatusBar.RefreshOutputData(((InputTextBoxViewModel)sender).Content)); };
 
-            _findDialog.OnFindNextEvent += (sender, _) =>
+            _findDialog.OnFindNextEvent += (_, _) =>
             {
                 Dispatcher.CurrentDispatcher.Invoke(() =>
                 {
@@ -76,18 +79,13 @@ namespace Application.Client.Windows.Main.ViewModels
             };
         }
 
-        private string _windowTitle;
-        public string WindowTitle
+        private static WindowSettingsViewModel _windowSettings;
+        public WindowSettingsViewModel WindowSettings
         {
-            get
-            {
-                const string WINDOW_TITLE_POSTFIX = " - Notepad";
-
-                return $"{_windowTitle ?? _docInfoService.UsedFileNameWithoutExtension}{WINDOW_TITLE_POSTFIX}";
-            }
+            get => _windowSettings;
             set
             {
-                _windowTitle = value;
+                _windowSettings = value;
                 OnPropertyChanged();
             }
         }

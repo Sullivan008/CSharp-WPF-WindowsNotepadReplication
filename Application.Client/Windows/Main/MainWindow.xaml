@@ -5,9 +5,10 @@
         xmlns:behaviors="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:textBoxBehaviors="clr-namespace:Application.Client.Behaviors.TextBox;assembly=Application.Client.Behaviors"
+        xmlns:windowBehaviors="clr-namespace:Application.Client.Behaviors.Window;assembly=Application.Client.Behaviors"
         mc:Ignorable="d"
         Height="450" Width="800"
-        Title="{Binding WindowTitle}" Icon="/Resources/application-icon.ico"
+        Title="{Binding WindowSettings.Title}" Icon="/Resources/application-icon.ico"
         ResizeMode="CanResizeWithGrip">
     <Window.Resources>
 
@@ -72,6 +73,9 @@
             <behaviors:InvokeCommandAction Command="{Binding ApplicationCloseCommand}" PassEventArgsToCommand="True"/>
         </behaviors:EventTrigger>
     </behaviors:Interaction.Triggers>
+    <behaviors:Interaction.Behaviors>
+        <windowBehaviors:ActivatedBehavior Activated="{Binding WindowSettings.Activated, Mode=TwoWay}"/>
+    </behaviors:Interaction.Behaviors>
 
     <Grid>
         <DockPanel>

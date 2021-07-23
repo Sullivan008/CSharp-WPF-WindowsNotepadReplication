@@ -17,6 +17,8 @@ namespace Application.Client.Windows.Main.Commands.EditMenu
 
         public override async Task ExecuteAsync()
         {
+            CallerViewModel.WindowSettings.Activated = true;
+
             await Task.CompletedTask;
         }
 

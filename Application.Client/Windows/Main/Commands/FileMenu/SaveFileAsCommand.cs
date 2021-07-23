@@ -43,7 +43,7 @@ namespace Application.Client.Windows.Main.Commands.FileMenu
                 _docInfoService.SetFilePath(saveFileDialogResult.SavedFilePath);
                 _docInfoService.SetUnmodifiedDocumentState();
 
-                CallerViewModel.WindowTitle = _docInfoService.UsedFileNameWithoutExtension;
+                CallerViewModel.WindowSettings.Title = _docInfoService.UsedFileNameWithoutExtension;
             }
         }
 

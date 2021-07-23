@@ -35,6 +35,7 @@ using Application.Client.Services.SearchTerms;
 using Application.Client.Services.SearchTerms.Interfaces;
 using Application.Client.Windows.Main;
 using Application.Client.Windows.Main.ViewModels;
+using Application.Client.Windows.Main.ViewModels.Settings;
 using Application.Utilities.FileReader;
 using Application.Utilities.FileReader.Interfaces;
 using Application.Utilities.FileWriter;
@@ -62,6 +63,7 @@ namespace Application.Client.Infrastructure.Extensions
             services.AddTransient<MainWindowViewModel>();
             services.AddTransient<TextOptionsViewModel>();
             services.AddTransient<InputTextBoxViewModel>();
+            services.AddTransient<WindowSettingsViewModel>();
 
             return services;
         }

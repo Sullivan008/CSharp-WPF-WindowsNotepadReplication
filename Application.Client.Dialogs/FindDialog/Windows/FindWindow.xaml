@@ -6,7 +6,8 @@
         xmlns:enumConverters="clr-namespace:Application.Client.Converters.EnumConverters;assembly=Application.Client.Converters"
         mc:Ignorable="d" 
         Height="140" Width="370"
-        ResizeMode="NoResize" Title="Find">
+        ResizeMode="NoResize" Title="Find"
+        Topmost="{Binding Source={x:Static Application.Current}, Path=MainWindow.IsActive, Mode=OneWay}">
     <Window.Resources>
         <Style x:Key="ToolTipErrorMessageStyle" TargetType="TextBox">
             <Style.Triggers>

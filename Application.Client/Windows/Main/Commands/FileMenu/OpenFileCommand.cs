@@ -80,7 +80,7 @@ namespace Application.Client.Windows.Main.Commands.FileMenu
                             }
 
                             _docInfoService.SetUnmodifiedDocumentState();
-                            CallerViewModel.WindowTitle = _docInfoService.UsedFileNameWithoutExtension;
+                            CallerViewModel.WindowSettings.Title = _docInfoService.UsedFileNameWithoutExtension;
 
                             break;
                         }
@@ -100,7 +100,7 @@ namespace Application.Client.Windows.Main.Commands.FileMenu
                 _docInfoService.SetFilePath(openFileDialogResult.FilePath);
                 _docInfoService.SetUnmodifiedDocumentState();
 
-                CallerViewModel.WindowTitle = _docInfoService.UsedFileNameWithoutExtension;
+                CallerViewModel.WindowSettings.Title = _docInfoService.UsedFileNameWithoutExtension;
             }
         }
 
