@@ -11,6 +11,8 @@ using Application.Client.Dialogs.ColorDialog.Services;
 using Application.Client.Dialogs.ColorDialog.Services.Interfaces;
 using Application.Client.Dialogs.FindDialog;
 using Application.Client.Dialogs.FindDialog.Interfaces;
+using Application.Client.Dialogs.FindDialog.Services;
+using Application.Client.Dialogs.FindDialog.Services.Interfaces;
 using Application.Client.Dialogs.FindDialog.Windows;
 using Application.Client.Dialogs.FindDialog.Windows.ViewModels;
 using Application.Client.Dialogs.FindDialog.Windows.ViewModels.Validator;
@@ -30,9 +32,9 @@ using Application.Client.Dialogs.OpenFileDialog.Interfaces;
 using Application.Client.Dialogs.SaveFileDialog;
 using Application.Client.Dialogs.SaveFileDialog.Interfaces;
 using Application.Client.Services;
+using Application.Client.Services.FindDialogSearchTerms;
+using Application.Client.Services.FindDialogSearchTerms.Interfaces;
 using Application.Client.Services.Interfaces;
-using Application.Client.Services.SearchTerms;
-using Application.Client.Services.SearchTerms.Interfaces;
 using Application.Client.Windows.Main;
 using Application.Client.Windows.Main.ViewModels;
 using Application.Client.Windows.Main.ViewModels.Settings;
@@ -113,9 +115,11 @@ namespace Application.Client.Infrastructure.Extensions
             services.AddSingleton<IApplicationCacheService, ApplicationCacheService>();
 
             services.AddSingleton<IDocInfoService, DocInfoService>();
+            services.AddSingleton<IFindDialogSearchTermsService, FindDialogSearchTermsService>();
+
+            services.AddSingleton<IFindDialogSettingsService, FindDialogSettingsService>();
             services.AddSingleton<IFontDialogSettingsService, FontDialogSettingsService>();
             services.AddSingleton<IColorDialogSettingsService, ColorDialogSettingsService>();
-            services.AddSingleton<ISearchTermsService, SearchTermsService>();
 
             return services;
         }

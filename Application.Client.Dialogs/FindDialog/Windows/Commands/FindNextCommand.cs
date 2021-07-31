@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Application.Client.Dialogs.FindDialog.Services.Interfaces;
 using Application.Client.Dialogs.FindDialog.Windows.ViewModels;
 using Application.Client.Infrastructure.Commands;
-using Application.Client.Services.SearchTerms.Interfaces;
 using FluentValidation;
 
 namespace Application.Client.Dialogs.FindDialog.Windows.Commands
@@ -11,12 +11,12 @@ namespace Application.Client.Dialogs.FindDialog.Windows.Commands
     {
         private readonly IValidator<FindWindowViewModel> _validator;
 
-        private readonly ISearchTermsService _searchTermsService;
+        private readonly IFindDialogSettingsService _findDialogSettingsService;
 
-        public FindNextCommand(FindWindowViewModel callerViewModel, IValidator<FindWindowViewModel> validator, ISearchTermsService searchTermsService) : base(callerViewModel)
+        public FindNextCommand(FindWindowViewModel callerViewModel, IValidator<FindWindowViewModel> validator, IFindDialogSettingsService findDialogSettingsService) : base(callerViewModel)
         {
             _validator = validator;
-            _searchTermsService = searchTermsService;
+            _findDialogSettingsService = findDialogSettingsService;
         }
 
         public override async Task ExecuteAsync()
@@ -32,9 +32,9 @@ namespace Application.Client.Dialogs.FindDialog.Windows.Commands
 
         private void SetSearchTermsIntoCache()
         {
-            _searchTermsService.SetText(CallerViewModel.FindWhat);
-            _searchTermsService.SetIsMatchCase(CallerViewModel.IsMatchCase);
-            _searchTermsService.SetDirectionType((Services.SearchTerms.Enums.DirectionType)CallerViewModel.DirectionType);
+            _findDialogSettingsService.SetFindWhat(CallerViewModel.FindWhat);
+            _findDialogSettingsService.SetIsMatchCase(CallerViewModel.IsMatchCase);
+            _findDialogSettingsService.SetDirectionType((Cache.DataModels.FindDialog.Enums.DirectionType)CallerViewModel.DirectionType);
         }
 
         private void OnFindNext(EventArgs eventArgs = null)

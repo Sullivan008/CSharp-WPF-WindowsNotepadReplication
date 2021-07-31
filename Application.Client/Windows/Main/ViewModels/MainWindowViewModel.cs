@@ -8,8 +8,8 @@ using Application.Client.Dialogs.MessageDialog.Interfaces;
 using Application.Client.Dialogs.OpenFileDialog.Interfaces;
 using Application.Client.Dialogs.SaveFileDialog.Interfaces;
 using Application.Client.Infrastructure.ViewModels;
+using Application.Client.Services.FindDialogSearchTerms.Interfaces;
 using Application.Client.Services.Interfaces;
-using Application.Client.Services.SearchTerms.Interfaces;
 using Application.Client.Windows.Main.Commands.EditMenu;
 using Application.Client.Windows.Main.Commands.FileMenu;
 using Application.Client.Windows.Main.Commands.FormatMenu;
@@ -43,11 +43,11 @@ namespace Application.Client.Windows.Main.ViewModels
 
         private readonly IDocInfoService _docInfoService;
 
-        private readonly ISearchTermsService _searchTermsService;
+        private readonly IFindDialogSearchTermsService _searchTermsService;
 
         public MainWindowViewModel(WindowSettingsViewModel windowSettings, InputTextBoxViewModel inputTextBox, StatusBarViewModel statusBar, IFontDialog fontDialog, IFindDialog findDialog,
             IColorDialog colorDialog, IMessageDialog messageDialog, IOpenFileDialog openFileDialog, ISaveFileDialog saveFileDialog, IGoToLineDialog goToLineDialog, ITextFileWriter textFileWriter,
-            ITextFileReader textFileReader, IDocInfoService docInfoService, ISearchTermsService searchTermsService)
+            ITextFileReader textFileReader, IDocInfoService docInfoService, IFindDialogSearchTermsService searchTermsService)
         {
             _fontDialog = fontDialog;
             _findDialog = findDialog;

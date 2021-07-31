@@ -6,14 +6,14 @@ using Application.Client.Cache.Infrastructure.Services.Interfaces;
 
 namespace Application.Client.Cache.Repositories
 {
-    public class FindDialogSearchTermsCacheRepository : BaseCacheRepository<FindDialogSearchTermsDataModel>, ICacheRepository<FindDialogSearchTermsDataModel>
+    public class FindDialogSettingsCacheRepository : BaseCacheRepository<FindDialogSettingsDataModel>, ICacheRepository<FindDialogSettingsDataModel>
     {
-        public FindDialogSearchTermsCacheRepository(IApplicationCacheService applicationCacheService) : base(applicationCacheService)
+        public FindDialogSettingsCacheRepository(IApplicationCacheService applicationCacheService) : base(applicationCacheService)
         { }
 
         protected override CacheKey GetCacheKey()
         {
-            return CacheKey.FindDialogSearchTerms;
+            return CacheKey.FindDialogSettings;
         }
     }
 }

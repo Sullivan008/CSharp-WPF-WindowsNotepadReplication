@@ -3,11 +3,11 @@ using Application.Client.Cache.Infrastructure.Models.Interfaces;
 
 namespace Application.Client.Cache.DataModels.FindDialog
 {
-    public class FindDialogSearchTermsDataModel : ICacheDataModel
+    public class FindDialogSettingsDataModel : ICacheDataModel
     {
-        public string Text { get; set; }
+        public string FindWhat { get; set; }
 
-        public DirectionType DirectionType { get; set; }
+        public DirectionType DirectionType { get; set; } = DirectionType.Up;
 
         public bool IsMatchCase { get; set; }
     }

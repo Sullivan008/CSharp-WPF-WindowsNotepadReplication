@@ -4,8 +4,8 @@ using System.Windows;
 using Application.Client.Dialogs.MessageDialog.Interfaces;
 using Application.Client.Dialogs.MessageDialog.Models;
 using Application.Client.Infrastructure.Commands;
-using Application.Client.Services.SearchTerms.Enums;
-using Application.Client.Services.SearchTerms.Interfaces;
+using Application.Client.Services.FindDialogSearchTerms.Enums;
+using Application.Client.Services.FindDialogSearchTerms.Interfaces;
 using Application.Client.Windows.Main.ViewModels;
 
 namespace Application.Client.Windows.Main.Commands.EditMenu
@@ -14,12 +14,12 @@ namespace Application.Client.Windows.Main.Commands.EditMenu
     {
         private readonly IMessageDialog _messageDialog;
 
-        private readonly ISearchTermsService _searchTermsService;
+        private readonly IFindDialogSearchTermsService _findDialogSearchTermsService;
 
-        public FindNextCommand(MainWindowViewModel callerViewModel, IMessageDialog messageDialog, ISearchTermsService searchTermsService) : base(callerViewModel)
+        public FindNextCommand(MainWindowViewModel callerViewModel, IMessageDialog messageDialog, IFindDialogSearchTermsService findDialogSearchTermsService) : base(callerViewModel)
         {
             _messageDialog = messageDialog;
-            _searchTermsService = searchTermsService;
+            _findDialogSearchTermsService = findDialogSearchTermsService;
         }
 
         public override async Task ExecuteAsync()
@@ -29,12 +29,12 @@ namespace Application.Client.Windows.Main.Commands.EditMenu
             if (searchedTextStartIndex == -1)
             {
                 await _messageDialog.ShowMessageDialogAsync(
-                    new MessageDialogOptions { Title = "Notepad", Content = $"'{_searchTermsService.Text}' was not found!", Button = MessageBoxButton.OK, Icon = MessageBoxImage.Information });
+                    new MessageDialogOptions { Title = "Notepad", Content = $"'{_findDialogSearchTermsService.Text}' was not found!", Button = MessageBoxButton.OK, Icon = MessageBoxImage.Information });
             }
             else
             {
                 CallerViewModel.InputTextBox.CaretIndex = searchedTextStartIndex;
-                CallerViewModel.InputTextBox.SelectionLength = _searchTermsService.Text.Length;
+                CallerViewModel.InputTextBox.SelectionLength = _findDialogSearchTermsService.Text.Length;
             }
 
             CallerViewModel.WindowSettings.Activated = true;
@@ -42,11 +42,11 @@ namespace Application.Client.Windows.Main.Commands.EditMenu
             await Task.CompletedTask;
         }
 
-        public override Predicate<object> CanExecute => _ => _searchTermsService.HasSearchTerms();
+        public override Predicate<object> CanExecute => _ => _findDialogSearchTermsService.HasSearchTerms;
 
         private int GetSearchedTextStartIndex()
         {
-            return _searchTermsService.DirectionType == DirectionType.Up
+            return _findDialogSearchTermsService.DirectionType == DirectionType.Up
                 ? GetNextTextStartIndex()
                 : GetPreviousTextStartIndex();
         }
@@ -63,12 +63,12 @@ namespace Application.Client.Windows.Main.Commands.EditMenu
                 StringComparison.CurrentCulture);
         }
 
-        private string Content => _searchTermsService.IsMatchCase
+        private string Content => _findDialogSearchTermsService.IsMatchCase
             ? CallerViewModel.InputTextBox.Content
             : CallerViewModel.InputTextBox.Content.ToLower();
 
-        private string SearchedText => _searchTermsService.IsMatchCase
-            ? _searchTermsService.Text
-            : _searchTermsService.Text.ToLower();
+        private string SearchedText => _findDialogSearchTermsService.IsMatchCase
+            ? _findDialogSearchTermsService.Text
+            : _findDialogSearchTermsService.Text.ToLower();
     }
 }

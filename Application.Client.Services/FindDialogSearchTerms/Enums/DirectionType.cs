@@ -1,4 +1,4 @@
-﻿namespace Application.Client.Services.SearchTerms.Enums
+﻿namespace Application.Client.Services.FindDialogSearchTerms.Enums
 {
     public enum DirectionType
     {

@@ -4,10 +4,10 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows.Input;
 using Application.Client.Dialogs.FindDialog.Delegates;
+using Application.Client.Dialogs.FindDialog.Services.Interfaces;
 using Application.Client.Dialogs.FindDialog.Windows.Commands;
 using Application.Client.Dialogs.FindDialog.Windows.ViewModels.Enums;
 using Application.Client.Infrastructure.ViewModels;
-using Application.Client.Services.SearchTerms.Interfaces;
 using FluentValidation;
 using FluentValidation.Results;
 
@@ -17,26 +17,23 @@ namespace Application.Client.Dialogs.FindDialog.Windows.ViewModels
     {
         private readonly IValidator<FindWindowViewModel> _validator;
 
-        private readonly ISearchTermsService _searchTermsService;
+        private readonly IFindDialogSettingsService _findDialogSettingsService;
 
         public OnFindNextEventHandler OnFindNextEvent;
 
-        public FindWindowViewModel(IValidator<FindWindowViewModel> validator, ISearchTermsService searchTermsService)
+        public FindWindowViewModel(IValidator<FindWindowViewModel> validator, IFindDialogSettingsService findDialogSettingsService)
         {
             _validator = validator;
-            _searchTermsService = searchTermsService;
+            _findDialogSettingsService = findDialogSettingsService;
 
-            if (_searchTermsService.HasSearchTerms())
-            {
-                RefreshInputFieldsFromCache();
-            }
+            RefreshInputFieldsFromCache();
         }
 
         private ICommand _cancelCommand;
         public ICommand CancelCommand => _cancelCommand ??= new CancelCommand(this);
 
         private ICommand _findNextCommand;
-        public ICommand FindNextCommand => _findNextCommand ??= new FindNextCommand(this, _validator, _searchTermsService);
+        public ICommand FindNextCommand => _findNextCommand ??= new FindNextCommand(this, _validator, _findDialogSettingsService);
 
 
         private string _findWhat;
@@ -108,9 +105,9 @@ namespace Application.Client.Dialogs.FindDialog.Windows.ViewModels
 
         private void RefreshInputFieldsFromCache()
         {
-            FindWhat = _searchTermsService.Text;
-            IsMatchCase = _searchTermsService.IsMatchCase;
-            DirectionType = (DirectionType)_searchTermsService.DirectionType;
+            FindWhat = _findDialogSettingsService.FindWhat;
+            IsMatchCase = _findDialogSettingsService.IsMatchCase;
+            DirectionType = (DirectionType)_findDialogSettingsService.DirectionType;
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Application.Client.Services.SearchTerms.Exceptions
+namespace Application.Client.Services.FindDialogSearchTerms.Exceptions
 {
     public class UnknownCacheDirectionTypeException : Exception
     {
