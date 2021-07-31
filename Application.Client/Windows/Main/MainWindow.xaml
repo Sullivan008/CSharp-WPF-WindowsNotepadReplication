@@ -105,7 +105,7 @@
                     <MenuItem Header="_Delete" InputGestureText="Del" Command="{Binding DeleteTextCommand}"/>
                     <Separator/>
                     <MenuItem Header="_Find" Command="{Binding FindCommand}"/>
-                    <MenuItem Header="_FindNext"/>
+                    <MenuItem Header="_Find Next" Command="{Binding FindNextCommand}"/>
                     <MenuItem Header="_Replace"/>
                     <MenuItem Header="_Go to line" Command="{Binding GoToLineCommand}"/>
                     <Separator/>

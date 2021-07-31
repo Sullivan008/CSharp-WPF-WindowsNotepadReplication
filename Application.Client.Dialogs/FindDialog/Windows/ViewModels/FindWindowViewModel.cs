@@ -25,6 +25,11 @@ namespace Application.Client.Dialogs.FindDialog.Windows.ViewModels
         {
             _validator = validator;
             _searchTermsService = searchTermsService;
+
+            if (_searchTermsService.HasSearchTerms())
+            {
+                RefreshInputFieldsFromCache();
+            }
         }
 
         private ICommand _cancelCommand;
@@ -99,6 +104,13 @@ namespace Application.Client.Dialogs.FindDialog.Windows.ViewModels
 
                 return string.Empty;
             }
+        }
+
+        private void RefreshInputFieldsFromCache()
+        {
+            FindWhat = _searchTermsService.Text;
+            IsMatchCase = _searchTermsService.IsMatchCase;
+            DirectionType = (DirectionType)_searchTermsService.DirectionType;
         }
     }
 }

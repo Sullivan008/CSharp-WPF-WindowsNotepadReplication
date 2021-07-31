@@ -132,7 +132,7 @@ namespace Application.Client.Windows.Main.ViewModels
         public ICommand FindCommand => _findCommand ??= new FindCommand(this, _findDialog);
 
         private ICommand _findNextCommand;
-        public ICommand FindNextCommand => _findNextCommand ??= new Commands.EditMenu.FindNextCommand(this, _searchTermsService);
+        public ICommand FindNextCommand => _findNextCommand ??= new Commands.EditMenu.FindNextCommand(this, _messageDialog, _searchTermsService);
 
         private ICommand _goToLineCommand;
         public ICommand GoToLineCommand => _goToLineCommand ??= new GoToLineCommand(this, _goToLineDialog);
