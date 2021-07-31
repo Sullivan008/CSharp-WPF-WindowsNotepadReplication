@@ -83,14 +83,15 @@ namespace Application.Client
 
         private static void ConfigureServices(IServiceCollection services)
         {
-            services.AddWindows();
-            services.AddViewModels();
-
-            services.AddDialogs();
+            services.AddMainWindow();
 
             services.AddMemoryCache();
             services.AddCacheServices();
             services.AddCacheRepositories();
+
+            services.AddDialogs();
+
+            services.AddServices();
 
             services.AddFileReaders();
             services.AddFileWriters();

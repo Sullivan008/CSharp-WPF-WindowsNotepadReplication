@@ -49,82 +49,35 @@ namespace Application.Client.Infrastructure.Extensions
 {
     public static class IServiceCollectionExtension
     {
-        public static IServiceCollection AddWindows(this IServiceCollection services)
+        public static IServiceCollection AddMainWindow(this IServiceCollection @this)
         {
-            services.AddSingleton(x => new MainWindow
+            @this.AddSingleton<MainWindowViewModel>();
+            @this.AddSingleton(x => new MainWindow
             {
                 DataContext = x.GetRequiredService<MainWindowViewModel>()
             });
 
-            return services;
+            @this.AddSubViewModelsToMainWindowViewModel();
+
+            return @this;
         }
 
-        public static IServiceCollection AddViewModels(this IServiceCollection services)
+        private static void AddSubViewModelsToMainWindowViewModel(this IServiceCollection @this)
         {
-            services.AddTransient<StatusBarViewModel>();
-            services.AddTransient<MainWindowViewModel>();
-            services.AddTransient<TextOptionsViewModel>();
-            services.AddTransient<InputTextBoxViewModel>();
-            services.AddTransient<WindowSettingsViewModel>();
-
-            return services;
+            @this.AddTransient<StatusBarViewModel>();
+            @this.AddTransient<TextOptionsViewModel>();
+            @this.AddTransient<InputTextBoxViewModel>();
+            @this.AddTransient<WindowSettingsViewModel>();
         }
 
-        public static IServiceCollection AddDialogs(this IServiceCollection services)
+        public static IServiceCollection AddCacheServices(this IServiceCollection @this)
         {
-            services.AddTransient<IFontDialog, FontDialog>();
-            services.AddTransient<IColorDialog, ColorDialog>();
-            services.AddTransient<IMessageDialog, MessageDialog>();
-            services.AddTransient<ISaveFileDialog, SaveFileDialog>();
-            services.AddTransient<IOpenFileDialog, OpenFileDialog>();
+            @this.AddSingleton<IApplicationCacheService, ApplicationCacheService>();
 
-            services.AddGoToLineDialog();
-            services.AddFindDialog();
-
-            return services;
+            return @this;
         }
 
-        private static IServiceCollection AddGoToLineDialog(this IServiceCollection services)
-        {
-            services.AddTransient<GoToLineWindowViewModel>();
-            services.AddTransient<IGoToLineDialog, GoToLineDialog>();
-            services.AddTransient(x => new GoToLineWindow
-            {
-                DataContext = x.GetRequiredService<GoToLineWindowViewModel>()
-            });
-            services.AddScoped<IValidator<GoToLineWindowViewModel>, GoToLineWindowViewModelValidator>();
-
-            return services;
-        }
-
-        private static IServiceCollection AddFindDialog(this IServiceCollection services)
-        {
-            services.AddTransient<FindWindowViewModel>();
-            services.AddTransient<IFindDialog, FindDialog>();
-            services.AddTransient(x => new FindWindow
-            {
-                DataContext = x.GetRequiredService<FindWindowViewModel>()
-            });
-            services.AddScoped<IValidator<FindWindowViewModel>, FindWindowViewModelValidator>();
-
-            return services;
-        }
-
-        public static IServiceCollection AddCacheServices(this IServiceCollection services)
-        {
-            services.AddSingleton<IApplicationCacheService, ApplicationCacheService>();
-
-            services.AddSingleton<IDocInfoService, DocInfoService>();
-            services.AddSingleton<IFindDialogSearchTermsService, FindDialogSearchTermsService>();
-
-            services.AddSingleton<IFindDialogSettingsService, FindDialogSettingsService>();
-            services.AddSingleton<IFontDialogSettingsService, FontDialogSettingsService>();
-            services.AddSingleton<IColorDialogSettingsService, ColorDialogSettingsService>();
-
-            return services;
-        }
-
-        public static IServiceCollection AddCacheRepositories(this IServiceCollection services)
+        public static IServiceCollection AddCacheRepositories(this IServiceCollection @this)
         {
             Type repositoryType = typeof(ICacheRepository<>);
 
@@ -139,25 +92,87 @@ namespace Application.Client.Infrastructure.Extensions
             {
                 foreach (Type implementedInterface in definedType.ImplementedInterfaces)
                 {
-                    services.AddSingleton(implementedInterface, definedType);
+                    @this.AddSingleton(implementedInterface, definedType);
                 }
             }
 
-            return services;
+            return @this;
         }
 
-        public static IServiceCollection AddFileReaders(this IServiceCollection services)
+        public static IServiceCollection AddDialogs(this IServiceCollection @this)
         {
-            services.AddTransient<ITextFileReader, TextFileReader>();
+            @this.AddTransient<IMessageDialog, MessageDialog>();
+            @this.AddTransient<ISaveFileDialog, SaveFileDialog>();
+            @this.AddTransient<IOpenFileDialog, OpenFileDialog>();
 
-            return services;
+            @this.AddFontDialog();
+            @this.AddFindDialog();
+            @this.AddColorDialog();
+            @this.AddGoToLineDialog();
+
+            return @this;
         }
 
-        public static IServiceCollection AddFileWriters(this IServiceCollection services)
+        private static void AddFontDialog(this IServiceCollection @this)
         {
-            services.AddTransient<ITextFileWriter, TextFileWriter>();
+            @this.AddTransient<IFontDialog, FontDialog>();
+            @this.AddSingleton<IFontDialogSettingsService, FontDialogSettingsService>();
+        }
 
-            return services;
+        private static void AddFindDialog(this IServiceCollection @this)
+        {
+            @this.AddTransient<IFindDialog, FindDialog>();
+
+            @this.AddTransient<FindWindowViewModel>();
+            @this.AddTransient(x => new FindWindow
+            {
+                DataContext = x.GetRequiredService<FindWindowViewModel>()
+            });
+            
+            @this.AddSingleton<IFindDialogSettingsService, FindDialogSettingsService>();
+
+            @this.AddScoped<IValidator<FindWindowViewModel>, FindWindowViewModelValidator>();
+        }
+
+        private static void AddColorDialog(this IServiceCollection @this)
+        {
+            @this.AddTransient<IColorDialog, ColorDialog>();
+            @this.AddSingleton<IColorDialogSettingsService, ColorDialogSettingsService>();
+        }
+
+        private static void AddGoToLineDialog(this IServiceCollection @this)
+        {
+            @this.AddTransient<IGoToLineDialog, GoToLineDialog>();
+
+            @this.AddTransient<GoToLineWindowViewModel>();
+            @this.AddTransient(x => new GoToLineWindow
+            {
+                DataContext = x.GetRequiredService<GoToLineWindowViewModel>()
+            });
+
+            @this.AddScoped<IValidator<GoToLineWindowViewModel>, GoToLineWindowViewModelValidator>();
+        }
+        
+        public static IServiceCollection AddServices(this IServiceCollection @this)
+        {
+            @this.AddSingleton<IDocInfoService, DocInfoService>();
+            @this.AddSingleton<IFindDialogSearchTermsService, FindDialogSearchTermsService>();
+
+            return @this;
+        }
+
+        public static IServiceCollection AddFileReaders(this IServiceCollection @this)
+        {
+            @this.AddTransient<ITextFileReader, TextFileReader>();
+
+            return @this;
+        }
+
+        public static IServiceCollection AddFileWriters(this IServiceCollection @this)
+        {
+            @this.AddTransient<ITextFileWriter, TextFileWriter>();
+
+            return @this;
         }
     }
 }
