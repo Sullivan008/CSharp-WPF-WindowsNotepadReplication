@@ -31,7 +31,7 @@ namespace Application.Client
                 .ConfigureHostConfiguration(builder =>
                 {
                     KeyValuePair<string, string> environment = new(HostDefaults.EnvironmentKey,
-                        Environment.GetEnvironmentVariable(EnvironmentVariableKey.AspNetCoreEnvironment.ToEnumMemberAttrValue()));
+                        Environment.GetEnvironmentVariable(EnvironmentVariableKey.AspNetCoreEnvironment.GetEnumMemberAttrValue()));
 
                     builder.AddInMemoryCollection(new[] { environment })
                            .AddEnvironmentVariables();

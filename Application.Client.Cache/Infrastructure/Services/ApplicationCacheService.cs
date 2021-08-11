@@ -23,7 +23,7 @@ namespace Application.Client.Cache.Infrastructure.Services
 
         public TCacheDataModel GetItem<TCacheDataModel>(CacheKey key) where TCacheDataModel : ICacheDataModel
         {
-            return _memoryCache.GetOrCreate(key.ToEnumMemberAttrValue(), entry =>
+            return _memoryCache.GetOrCreate(key.GetEnumMemberAttrValue(), entry =>
             {
                 entry.Priority = CacheItemPriority.NeverRemove;
 
@@ -33,14 +33,14 @@ namespace Application.Client.Cache.Infrastructure.Services
 
         public void SetItem<TCacheDataModel>(CacheSaveOptions<TCacheDataModel> saveOptions) where TCacheDataModel : ICacheDataModel
         {
-            _memoryCache.Set(saveOptions.Key.ToEnumMemberAttrValue(), saveOptions.Data, saveOptions.MemoryCacheEntryOptions);
+            _memoryCache.Set(saveOptions.Key.GetEnumMemberAttrValue(), saveOptions.Data, saveOptions.MemoryCacheEntryOptions);
 
             _memoryCacheKeys.Add(saveOptions.Key);
         }
 
         public void RemoveItem(CacheKey key)
         {
-            _memoryCache.Remove(key.ToEnumMemberAttrValue());
+            _memoryCache.Remove(key.GetEnumMemberAttrValue());
 
             _memoryCacheKeys.Remove(key);
         }

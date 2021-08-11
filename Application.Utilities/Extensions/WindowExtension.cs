@@ -33,14 +33,15 @@ namespace Application.Utilities.Extensions
             }
             else
             {
-                window.SourceInitialized += delegate
+                window.SourceInitialized += (_, _) =>
                 {
                     IntPtr hwnd = new WindowInteropHelper(window).Handle;
-                    
+
                     int extendedStyle = GetWindowLong(hwnd, GWL_EXSTYLE);
                     SetWindowLong(hwnd, GWL_EXSTYLE, extendedStyle | WS_EX_DLGMODALFRAME);
-                    
-                    SetWindowPos(hwnd, IntPtr.Zero, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOZORDER | SWP_FRAMECHANGED);
+
+                    SetWindowPos(hwnd, IntPtr.Zero, 0, 0, 0, 0,
+                        SWP_NOMOVE | SWP_NOSIZE | SWP_NOZORDER | SWP_FRAMECHANGED);
                 };
             }
         }

@@ -8,19 +8,19 @@ namespace Application.Utilities.Extensions
 {
     public static class EnumExtension
     {
-        public static string ToEnumMemberAttrValue<TEnum>(this TEnum value) where TEnum : Enum
+        public static string GetEnumMemberAttrValue<TEnum>(this TEnum @this) where TEnum : Enum
         {
-            EnumMemberAttribute enumMemberAttr = GetAttribute<EnumMemberAttribute>(value);
+            EnumMemberAttribute enumMemberAttr = @this.GetAttribute<EnumMemberAttribute>();
 
             string enumMemberAttrValue = enumMemberAttr.Value;
 
-            return !string.IsNullOrWhiteSpace(enumMemberAttrValue) ? enumMemberAttrValue : throw new ArgumentNullException(nameof(value), "The value cannot be null!");
+            return !string.IsNullOrWhiteSpace(enumMemberAttrValue) ? enumMemberAttrValue : throw new ArgumentNullException(nameof(@this), "The value cannot be null!");
         }
 
-        private static TAttributeType GetAttribute<TAttributeType>(this Enum value)
+        private static TAttributeType GetAttribute<TAttributeType>(this Enum @this)
         {
-            Type type = value.GetType();
-            MemberInfo[] memberInfo = type.GetMember(value.ToString());
+            Type type = @this.GetType();
+            MemberInfo[] memberInfo = type.GetMember(@this.ToString());
 
             object[] attributes = memberInfo[0].GetCustomAttributes(typeof(TAttributeType), false);
             object attribute = attributes.SingleOrDefault();
