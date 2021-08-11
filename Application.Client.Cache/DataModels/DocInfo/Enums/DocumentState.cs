@@ -2,7 +2,7 @@
 {
     public enum DocumentState
     {
-        Unmodified,
-        Modified
+        Unmodified = 1,
+        Modified = 2
     }
 }

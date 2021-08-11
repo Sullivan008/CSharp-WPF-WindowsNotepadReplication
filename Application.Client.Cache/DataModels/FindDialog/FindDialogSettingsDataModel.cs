@@ -5,7 +5,7 @@ namespace Application.Client.Cache.DataModels.FindDialog
 {
     public class FindDialogSettingsDataModel : ICacheDataModel
     {
-        public string FindWhat { get; set; }
+        public string FindWhat { get; set; } = string.Empty;
 
         public DirectionType DirectionType { get; set; } = DirectionType.Up;
 

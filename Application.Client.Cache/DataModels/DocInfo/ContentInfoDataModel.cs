@@ -4,7 +4,7 @@ namespace Application.Client.Cache.DataModels.DocInfo
 {
     public class ContentInfoDataModel : ICacheDataModel
     {
-        public int Length { get; set; } = default;
+        public int Length { get; set; }
 
         public int Lines { get; set; } = default(int) + 1;
     }
