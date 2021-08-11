@@ -29,7 +29,7 @@ namespace Application.Client.Windows.Main.Commands.FormatMenu
 
         private static SolidColorBrush ConvertToSolidColorBrush(System.Drawing.Color color)
         {
-            return new(Color.FromRgb(color.R, color.G, color.B));
+            return new SolidColorBrush(Color.FromRgb(color.R, color.G, color.B));
         }
     }
 }
