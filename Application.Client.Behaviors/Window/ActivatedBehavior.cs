@@ -18,7 +18,7 @@ namespace Application.Client.Behaviors.Window
             set => SetValue(ActivatedProperty, value);
         }
 
-        private static void OnActivatedChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
+        private static void OnActivatedChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs eventArgs)
         {
             ActivatedBehavior behavior = (ActivatedBehavior)dependencyObject;
 

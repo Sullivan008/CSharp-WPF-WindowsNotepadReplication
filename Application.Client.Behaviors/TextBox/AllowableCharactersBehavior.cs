@@ -38,26 +38,26 @@ namespace Application.Client.Behaviors.TextBox
             DataObject.RemovePastingHandler(AssociatedObject, OnPaste);
         }
 
-        private void OnPaste(object sender, DataObjectPastingEventArgs e)
+        private void OnPaste(object sender, DataObjectPastingEventArgs eventArgs)
         {
-            if (e.DataObject.GetDataPresent(DataFormats.Text))
+            if (eventArgs.DataObject.GetDataPresent(DataFormats.Text))
             {
-                string text = Convert.ToString(e.DataObject.GetData(DataFormats.Text), CultureInfo.CurrentCulture);
+                string text = Convert.ToString(eventArgs.DataObject.GetData(DataFormats.Text), CultureInfo.CurrentCulture);
 
                 if (!IsValid(text))
                 {
-                    e.CancelCommand();
+                    eventArgs.CancelCommand();
                 }
             }
             else
             {
-                e.CancelCommand();
+                eventArgs.CancelCommand();
             }
         }
 
-        private void OnPreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
+        private void OnPreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs eventArgs)
         {
-            e.Handled = !IsValid(e.Text);
+            eventArgs.Handled = !IsValid(eventArgs.Text);
         }
 
         private bool IsValid(string newText)
