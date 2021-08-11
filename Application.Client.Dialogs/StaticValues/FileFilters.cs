@@ -27,7 +27,7 @@ namespace Application.Client.Dialogs.StaticValues
             {
                 if (!FileFilterTypes.TryGetValue(type, out FileFilterModel fileFilter))
                 {
-                    throw new ArgumentNullException(nameof(result), $@"The following File Filter Type does not exist with this type. {nameof(type).ToUpper()}: {type}");
+                    throw new ArgumentNullException(nameof(result), $"The following File Filter Type does not exist with this type. {nameof(type).ToUpper()}: {type}");
                 }
 
                 result.Add(fileFilter);

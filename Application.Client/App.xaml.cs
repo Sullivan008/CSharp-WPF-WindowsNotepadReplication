@@ -63,7 +63,7 @@ namespace Application.Client
 
             if (mainWindow == null)
             {
-                throw new ArgumentNullException(nameof(mainWindow), @"The value cannot be null!");
+                throw new ArgumentNullException(nameof(mainWindow), "The value cannot be null!");
             }
 
             mainWindow.Show();
