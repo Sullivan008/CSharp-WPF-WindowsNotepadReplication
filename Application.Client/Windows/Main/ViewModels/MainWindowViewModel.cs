@@ -43,11 +43,11 @@ namespace Application.Client.Windows.Main.ViewModels
 
         private readonly IDocInfoService _docInfoService;
 
-        private readonly IFindDialogSearchTermsService _searchTermsService;
+        private readonly IFindDialogSearchTermsService _findDialogSearchTermsService;
 
         public MainWindowViewModel(WindowSettingsViewModel windowSettings, InputTextBoxViewModel inputTextBox, StatusBarViewModel statusBar, IFontDialog fontDialog, IFindDialog findDialog,
             IColorDialog colorDialog, IMessageDialog messageDialog, IOpenFileDialog openFileDialog, ISaveFileDialog saveFileDialog, IGoToLineDialog goToLineDialog, ITextFileWriter textFileWriter,
-            ITextFileReader textFileReader, IDocInfoService docInfoService, IFindDialogSearchTermsService searchTermsService)
+            ITextFileReader textFileReader, IDocInfoService docInfoService, IFindDialogSearchTermsService findDialogSearchTermsService)
         {
             _fontDialog = fontDialog;
             _findDialog = findDialog;
@@ -59,7 +59,7 @@ namespace Application.Client.Windows.Main.ViewModels
             _textFileWriter = textFileWriter;
             _textFileReader = textFileReader;
             _docInfoService = docInfoService;
-            _searchTermsService = searchTermsService;
+            _findDialogSearchTermsService = findDialogSearchTermsService;
 
             StatusBar = statusBar;
             InputTextBox = inputTextBox;
@@ -132,7 +132,7 @@ namespace Application.Client.Windows.Main.ViewModels
         public ICommand FindCommand => _findCommand ??= new FindCommand(this, _findDialog);
 
         private ICommand _findNextCommand;
-        public ICommand FindNextCommand => _findNextCommand ??= new Commands.EditMenu.FindNextCommand(this, _messageDialog, _searchTermsService);
+        public ICommand FindNextCommand => _findNextCommand ??= new Commands.EditMenu.FindNextCommand(this, _messageDialog, _findDialogSearchTermsService);
 
         private ICommand _goToLineCommand;
         public ICommand GoToLineCommand => _goToLineCommand ??= new GoToLineCommand(this, _goToLineDialog);
