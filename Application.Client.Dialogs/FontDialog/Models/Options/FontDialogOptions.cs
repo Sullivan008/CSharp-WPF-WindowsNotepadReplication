@@ -12,6 +12,6 @@
 
         public bool AllowVerticalFonts { get; init; } = true;
 
-        public bool FixedPitchOnly { get; init; } = false;
+        public bool FixedPitchOnly { get; init; }
     }
 }
