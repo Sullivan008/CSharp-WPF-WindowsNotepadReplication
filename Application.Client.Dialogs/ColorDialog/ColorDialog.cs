@@ -65,7 +65,7 @@ namespace Application.Client.Dialogs.ColorDialog
             });
         }
 
-        private Task<ColorDialogResult> OnCancelResult()
+        private static Task<ColorDialogResult> OnCancelResult()
         {
             return Task.FromResult(new ColorDialogResult
             {

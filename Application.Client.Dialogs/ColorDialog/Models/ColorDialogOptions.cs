@@ -4,10 +4,10 @@
     {
         public bool AllowFullOpen { get; init; } = true;
 
-        public bool FullOpen { get; init; } = false;
+        public bool FullOpen { get; init; }
 
         public bool AnyColor { get; init; } = true;
 
-        public bool SolidColorOnly { get; init; } = false;
+        public bool SolidColorOnly { get; init; }
     }
 }
