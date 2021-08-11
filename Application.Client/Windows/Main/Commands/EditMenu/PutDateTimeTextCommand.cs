@@ -16,8 +16,8 @@ namespace Application.Client.Windows.Main.Commands.EditMenu
             int originalCaretIndex = OriginalCaretIndex;
             string currentDateTimeValue = CurrentDateTimeAsString;
 
-            CallerViewModel.InputTextBox.Content = CallerViewModel.InputTextBox.Content.Insert(originalCaretIndex, currentDateTimeValue);
-            CallerViewModel.InputTextBox.CaretIndex = CalculateNewCaretIndex(originalCaretIndex, currentDateTimeValue);
+            CallerViewModel.InputTextBoxViewModel.Content = CallerViewModel.InputTextBoxViewModel.Content.Insert(originalCaretIndex, currentDateTimeValue);
+            CallerViewModel.InputTextBoxViewModel.CaretIndex = CalculateNewCaretIndex(originalCaretIndex, currentDateTimeValue);
 
             await Task.CompletedTask;
         }
@@ -27,7 +27,7 @@ namespace Application.Client.Windows.Main.Commands.EditMenu
             return originalCaretIndex + insertedString.Length;
         }
 
-        private int OriginalCaretIndex => CallerViewModel.InputTextBox.CaretIndex;
+        private int OriginalCaretIndex => CallerViewModel.InputTextBoxViewModel.CaretIndex;
 
         private static string CurrentDateTimeAsString =>
             DateTime.Now.ToString("MM-dd-yyyy hh:mm tt", new CultureInfo("en-EN"));

@@ -8,7 +8,7 @@
         xmlns:windowBehaviors="clr-namespace:Application.Client.Behaviors.Window;assembly=Application.Client.Behaviors"
         mc:Ignorable="d"
         Height="450" Width="800"
-        Title="{Binding WindowSettings.Title}" Icon="/Resources/application-icon.ico"
+        Title="{Binding WindowSettingsViewModel.Title}" Icon="/Resources/application-icon.ico"
         ResizeMode="CanResizeWithGrip">
     <Window.Resources>
 
@@ -74,7 +74,7 @@
         </behaviors:EventTrigger>
     </behaviors:Interaction.Triggers>
     <behaviors:Interaction.Behaviors>
-        <windowBehaviors:ActivatedBehavior Activated="{Binding WindowSettings.Activated, Mode=TwoWay}"/>
+        <windowBehaviors:ActivatedBehavior Activated="{Binding WindowSettingsViewModel.Activated, Mode=TwoWay}"/>
     </behaviors:Interaction.Behaviors>
 
     <Grid>
@@ -122,7 +122,7 @@
                     <MenuItem Header="_Status bar" IsCheckable="True" IsChecked="True" Command="{Binding ChangeStatusBarVisibilityCommand}"/>
                 </MenuItem>
             </Menu>
-            <StatusBar DockPanel.Dock="Bottom" Visibility="{Binding StatusBar.Visibility}">
+            <StatusBar DockPanel.Dock="Bottom" Visibility="{Binding StatusBarViewModel.Visibility}">
                 <StatusBar.ItemsPanel>
                     <ItemsPanelTemplate>
                         <Grid HorizontalAlignment="Right">
@@ -137,30 +137,30 @@
                 <StatusBarItem Grid.Column="1">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Length:" Margin="8 0 4 0"></TextBlock>
-                        <TextBlock Text="{Binding StatusBar.Length}"></TextBlock>
+                        <TextBlock Text="{Binding StatusBarViewModel.Length}"></TextBlock>
                         <TextBlock Margin="2 0 10 0">,</TextBlock>
                         <TextBlock Text="Lines:" Margin="0 0 4 0"></TextBlock>
-                        <TextBlock Text="{Binding StatusBar.Lines}"></TextBlock>
+                        <TextBlock Text="{Binding StatusBarViewModel.Lines}"></TextBlock>
                     </StackPanel>
                 </StatusBarItem>
             </StatusBar>
             <TextBox Template="{DynamicResource MainInputTextBoxTemplate}"
                      DockPanel.Dock="Bottom" 
                      AcceptsReturn="True"
-                     TextWrapping="{Binding InputTextBox.TextWrapping}"
+                     TextWrapping="{Binding InputTextBoxViewModel.TextWrapping}"
                      VerticalScrollBarVisibility="Visible"
                      HorizontalScrollBarVisibility="Visible"
-                     Text="{Binding InputTextBox.Content, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                     FontFamily="{Binding InputTextBox.TextOptions.FontFamily, Mode=OneWay}"
-                     FontSize="{Binding InputTextBox.TextOptions.FontSize, Mode=OneWay}"
-                     FontStyle="{Binding InputTextBox.TextOptions.FontStyle, Mode=OneWay}"
-                     FontWeight="{Binding InputTextBox.TextOptions.FontWeight, Mode=OneWay}"
-                     TextDecorations="{Binding InputTextBox.TextOptions.TextDecorations, Mode=OneWay}"
-                     Foreground="{Binding InputTextBox.TextOptions.Foreground, Mode=OneWay}"
-                     Background="{Binding InputTextBox.Background, Mode=OneWay}"
-                     textBoxBehaviors:SelectedTextBehavior.SelectedText="{Binding InputTextBox.SelectedText}"
-                     textBoxBehaviors:CaretIndexBehavior.CaretIndex="{Binding InputTextBox.CaretIndex}"
-                     textBoxBehaviors:SelectionLengthBehavior.SelectionLength="{Binding InputTextBox.SelectionLength}">
+                     Text="{Binding InputTextBoxViewModel.Content, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     FontFamily="{Binding InputTextBoxViewModel.TextOptionsViewModel.FontFamily, Mode=OneWay}"
+                     FontSize="{Binding InputTextBoxViewModel.TextOptionsViewModel.FontSize, Mode=OneWay}"
+                     FontStyle="{Binding InputTextBoxViewModel.TextOptionsViewModel.FontStyle, Mode=OneWay}"
+                     FontWeight="{Binding InputTextBoxViewModel.TextOptionsViewModel.FontWeight, Mode=OneWay}"
+                     TextDecorations="{Binding InputTextBoxViewModel.TextOptionsViewModel.TextDecorations, Mode=OneWay}"
+                     Foreground="{Binding InputTextBoxViewModel.TextOptionsViewModel.Foreground, Mode=OneWay}"
+                     Background="{Binding InputTextBoxViewModel.Background, Mode=OneWay}"
+                     textBoxBehaviors:SelectedTextBehavior.SelectedText="{Binding InputTextBoxViewModel.SelectedText}"
+                     textBoxBehaviors:CaretIndexBehavior.CaretIndex="{Binding InputTextBoxViewModel.CaretIndex}"
+                     textBoxBehaviors:SelectionLengthBehavior.SelectionLength="{Binding InputTextBoxViewModel.SelectionLength}">
             </TextBox>
         </DockPanel>
 

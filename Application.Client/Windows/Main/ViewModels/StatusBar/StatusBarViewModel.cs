@@ -3,7 +3,7 @@ using System.Windows;
 using Application.Client.Infrastructure.ViewModels;
 using Application.Client.Services.Interfaces;
 
-namespace Application.Client.Windows.Main.ViewModels
+namespace Application.Client.Windows.Main.ViewModels.StatusBar
 {
     public class StatusBarViewModel : ViewModelBase
     {

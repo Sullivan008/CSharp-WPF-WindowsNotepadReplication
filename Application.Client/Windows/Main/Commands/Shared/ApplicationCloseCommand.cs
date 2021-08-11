@@ -52,7 +52,7 @@ namespace Application.Client.Windows.Main.Commands.Shared
                         {
                             if (_docInfoService.IsOpenedDocument)
                             {
-                                await _textFileWriter.WriteAsync(new WriteTextFileModel { FilePath = _docInfoService.UsedFilePath, Content = CallerViewModel.InputTextBox.Content });
+                                await _textFileWriter.WriteAsync(new WriteTextFileModel { FilePath = _docInfoService.UsedFilePath, Content = CallerViewModel.InputTextBoxViewModel.Content });
                             }
                             else
                             {
@@ -60,7 +60,7 @@ namespace Application.Client.Windows.Main.Commands.Shared
 
                                 if (saveFileDialogResult.SaveFileDialogResultType == SaveFileDialogResultType.Ok)
                                 {
-                                    await _textFileWriter.WriteAsync(new WriteTextFileModel { FilePath = saveFileDialogResult.SavedFilePath, Content = CallerViewModel.InputTextBox.Content });
+                                    await _textFileWriter.WriteAsync(new WriteTextFileModel { FilePath = saveFileDialogResult.SavedFilePath, Content = CallerViewModel.InputTextBoxViewModel.Content });
                                 }
                                 else if (saveFileDialogResult.SaveFileDialogResultType == SaveFileDialogResultType.Cancel)
                                 {

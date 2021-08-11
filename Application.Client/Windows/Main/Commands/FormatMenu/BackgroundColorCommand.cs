@@ -23,7 +23,7 @@ namespace Application.Client.Windows.Main.Commands.FormatMenu
 
             if (dialogResult.ColorDialogResultType == ColorDialogResultType.Ok)
             {
-                CallerViewModel.InputTextBox.Background = ConvertToSolidColorBrush(dialogResult.Color);
+                CallerViewModel.InputTextBoxViewModel.Background = ConvertToSolidColorBrush(dialogResult.Color);
             }
         }
 

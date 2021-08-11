@@ -3,18 +3,19 @@ using System.Windows;
 using System.Windows.Media;
 using Application.Client.Infrastructure.ViewModels;
 using Application.Client.Services.Interfaces;
+using Application.Client.Windows.Main.ViewModels.InputTextBox.Delegates;
 
-namespace Application.Client.Windows.Main.ViewModels
+namespace Application.Client.Windows.Main.ViewModels.InputTextBox
 {
     public class InputTextBoxViewModel : ViewModelBase
     {
         private readonly IDocInfoService _docInfoService;
 
-        public InputTextBoxViewModel(TextOptionsViewModel textOptions, IDocInfoService docInfoService)
+        public InputTextBoxViewModel(TextOptionsViewModel textOptionsViewModel, IDocInfoService docInfoService)
         {
             _docInfoService = docInfoService;
 
-            TextOptions = textOptions;
+            TextOptionsViewModel = textOptionsViewModel;
         }
 
         private string _content = string.Empty;
@@ -90,20 +91,18 @@ namespace Application.Client.Windows.Main.ViewModels
             }
         }
 
-        private TextOptionsViewModel _textOptions;
-        public TextOptionsViewModel TextOptions
+        private TextOptionsViewModel _textOptionsViewModel;
+        public TextOptionsViewModel TextOptionsViewModel
         {
-            get => _textOptions;
+            get => _textOptionsViewModel;
             set
             {
-                _textOptions = value;
+                _textOptionsViewModel = value;
                 OnPropertyChanged();
             }
         }
 
         public event OnRefreshStatusBarEventHandler OnRefreshStatusBarEvent;
-        public delegate void OnRefreshStatusBarEventHandler(object sender, EventArgs e);
-
         private void OnRefreshStatusBar(EventArgs eventArgs = null)
         {
             if (OnRefreshStatusBarEvent == null)

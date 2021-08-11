@@ -13,16 +13,16 @@ namespace Application.Client.Windows.Main.Commands.FormatMenu
 
         public override async Task ExecuteAsync()
         {
-            switch (CallerViewModel.InputTextBox.TextWrapping)
+            switch (CallerViewModel.InputTextBoxViewModel.TextWrapping)
             {
                 case TextWrapping.NoWrap:
-                    CallerViewModel.InputTextBox.TextWrapping = TextWrapping.Wrap;
+                    CallerViewModel.InputTextBoxViewModel.TextWrapping = TextWrapping.Wrap;
                     break;
                 case TextWrapping.Wrap:
-                    CallerViewModel.InputTextBox.TextWrapping = TextWrapping.NoWrap;
+                    CallerViewModel.InputTextBoxViewModel.TextWrapping = TextWrapping.NoWrap;
                     break;
                 default:
-                    throw new NotImplementedException($"The following Text Wrap change logic does not implemented! {CallerViewModel.InputTextBox.TextWrapping}");
+                    throw new NotImplementedException($"The following Text Wrap change logic does not implemented! {CallerViewModel.InputTextBoxViewModel.TextWrapping}");
             }
 
             await Task.CompletedTask;

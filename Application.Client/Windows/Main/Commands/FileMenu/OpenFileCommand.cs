@@ -62,7 +62,7 @@ namespace Application.Client.Windows.Main.Commands.FileMenu
                         {
                             if (_docInfoService.IsOpenedDocument)
                             {
-                                await _textFileWriter.WriteAsync(new WriteTextFileModel { FilePath = _docInfoService.UsedFilePath, Content = CallerViewModel.InputTextBox.Content });
+                                await _textFileWriter.WriteAsync(new WriteTextFileModel { FilePath = _docInfoService.UsedFilePath, Content = CallerViewModel.InputTextBoxViewModel.Content });
                             }
                             else
                             {
@@ -70,7 +70,7 @@ namespace Application.Client.Windows.Main.Commands.FileMenu
 
                                 if (saveFileDialogResult.SaveFileDialogResultType == SaveFileDialogResultType.Ok)
                                 {
-                                    await _textFileWriter.WriteAsync(new WriteTextFileModel { FilePath = saveFileDialogResult.SavedFilePath, Content = CallerViewModel.InputTextBox.Content });
+                                    await _textFileWriter.WriteAsync(new WriteTextFileModel { FilePath = saveFileDialogResult.SavedFilePath, Content = CallerViewModel.InputTextBoxViewModel.Content });
                                     _docInfoService.SetFilePath(saveFileDialogResult.SavedFilePath);
                                 }
                                 else if (saveFileDialogResult.SaveFileDialogResultType == SaveFileDialogResultType.Cancel)
@@ -80,7 +80,7 @@ namespace Application.Client.Windows.Main.Commands.FileMenu
                             }
 
                             _docInfoService.SetUnmodifiedDocumentState();
-                            CallerViewModel.WindowSettings.Title = _docInfoService.UsedFileNameWithoutExtension;
+                            CallerViewModel.WindowSettingsViewModel.Title = _docInfoService.UsedFileNameWithoutExtension;
 
                             break;
                         }
@@ -95,12 +95,12 @@ namespace Application.Client.Windows.Main.Commands.FileMenu
 
             if (openFileDialogResult.OpenFileDialogResultType == OpenFileDialogResultType.Ok)
             {
-                CallerViewModel.InputTextBox.Content = await _textFileReader.ReadAsync<string>(new ReadTextFileModel { FilePath = openFileDialogResult.FilePath });
+                CallerViewModel.InputTextBoxViewModel.Content = await _textFileReader.ReadAsync<string>(new ReadTextFileModel { FilePath = openFileDialogResult.FilePath });
 
                 _docInfoService.SetFilePath(openFileDialogResult.FilePath);
                 _docInfoService.SetUnmodifiedDocumentState();
 
-                CallerViewModel.WindowSettings.Title = _docInfoService.UsedFileNameWithoutExtension;
+                CallerViewModel.WindowSettingsViewModel.Title = _docInfoService.UsedFileNameWithoutExtension;
             }
         }
 

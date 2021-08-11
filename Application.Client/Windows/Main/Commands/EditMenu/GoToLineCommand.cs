@@ -24,12 +24,12 @@ namespace Application.Client.Windows.Main.Commands.EditMenu
 
             if (dialogResult.GoToLineDialogResultType == GoToLineDialogResultType.GoToLine)
             {
-                if (HasSelectedText(CallerViewModel.InputTextBox.SelectedText))
+                if (HasSelectedText(CallerViewModel.InputTextBoxViewModel.SelectedText))
                 {
-                    CallerViewModel.InputTextBox.SelectionLength = default;
+                    CallerViewModel.InputTextBoxViewModel.SelectionLength = default;
                 }
 
-                CallerViewModel.InputTextBox.CaretIndex = GetSelectedLineStartIndex(CallerViewModel.InputTextBox.Content, dialogResult.LineNumber);
+                CallerViewModel.InputTextBoxViewModel.CaretIndex = GetSelectedLineStartIndex(CallerViewModel.InputTextBoxViewModel.Content, dialogResult.LineNumber);
             }
         }
 

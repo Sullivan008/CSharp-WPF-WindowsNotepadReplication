@@ -34,11 +34,11 @@ namespace Application.Client.Windows.Main.Commands.FileMenu
         {
             if (_docInfoService.IsOpenedDocument)
             {
-                await _textFileWriter.WriteAsync(new WriteTextFileModel { FilePath = _docInfoService.UsedFilePath, Content = CallerViewModel.InputTextBox.Content });
+                await _textFileWriter.WriteAsync(new WriteTextFileModel { FilePath = _docInfoService.UsedFilePath, Content = CallerViewModel.InputTextBoxViewModel.Content });
 
                 _docInfoService.SetUnmodifiedDocumentState();
 
-                CallerViewModel.WindowSettings.Title = _docInfoService.UsedFileNameWithoutExtension;
+                CallerViewModel.WindowSettingsViewModel.Title = _docInfoService.UsedFileNameWithoutExtension;
             }
             else
             {
@@ -47,12 +47,12 @@ namespace Application.Client.Windows.Main.Commands.FileMenu
 
                 if (saveFileDialogResult.SaveFileDialogResultType == SaveFileDialogResultType.Ok)
                 {
-                    await _textFileWriter.WriteAsync(new WriteTextFileModel { FilePath = saveFileDialogResult.SavedFilePath, Content = CallerViewModel.InputTextBox.Content });
+                    await _textFileWriter.WriteAsync(new WriteTextFileModel { FilePath = saveFileDialogResult.SavedFilePath, Content = CallerViewModel.InputTextBoxViewModel.Content });
 
                     _docInfoService.SetFilePath(saveFileDialogResult.SavedFilePath);
                     _docInfoService.SetUnmodifiedDocumentState();
 
-                    CallerViewModel.WindowSettings.Title = _docInfoService.UsedFileNameWithoutExtension;
+                    CallerViewModel.WindowSettingsViewModel.Title = _docInfoService.UsedFileNameWithoutExtension;
                 }
             }
         }

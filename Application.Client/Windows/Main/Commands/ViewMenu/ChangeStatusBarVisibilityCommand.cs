@@ -13,16 +13,16 @@ namespace Application.Client.Windows.Main.Commands.ViewMenu
 
         public override async Task ExecuteAsync()
         {
-            switch (CallerViewModel.StatusBar.Visibility)
+            switch (CallerViewModel.StatusBarViewModel.Visibility)
             {
                 case Visibility.Visible:
-                    CallerViewModel.StatusBar.Visibility = Visibility.Collapsed;
+                    CallerViewModel.StatusBarViewModel.Visibility = Visibility.Collapsed;
                     break;
                 case Visibility.Collapsed:
-                    CallerViewModel.StatusBar.Visibility = Visibility.Visible;
+                    CallerViewModel.StatusBarViewModel.Visibility = Visibility.Visible;
                     break;
                 default:
-                    throw new NotImplementedException($"The following Status Bar Visibility change logic does not implemented! {CallerViewModel.StatusBar.Visibility}");
+                    throw new NotImplementedException($"The following Status Bar Visibility change logic does not implemented! {CallerViewModel.StatusBarViewModel.Visibility}");
             }
 
             await Task.CompletedTask;

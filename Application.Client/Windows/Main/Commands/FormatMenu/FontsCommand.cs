@@ -25,12 +25,12 @@ namespace Application.Client.Windows.Main.Commands.FormatMenu
 
             if (dialogResult.FontDialogResultType == FontDialogResultType.Ok)
             {
-                CallerViewModel.InputTextBox.TextOptions.FontFamily = new FontFamily(dialogResult.FontResult.FontFamilyName);
-                CallerViewModel.InputTextBox.TextOptions.FontSize = ConvertToMediaFontSize(dialogResult.FontResult.DrawingFontSize);
-                CallerViewModel.InputTextBox.TextOptions.FontStyle = ConvertToWindowsFontStyle(dialogResult.FontResult.DrawingFontStyle);
-                CallerViewModel.InputTextBox.TextOptions.FontWeight = ConvertToWindowsFontWeight(dialogResult.FontResult.DrawingFontStyle);
-                CallerViewModel.InputTextBox.TextOptions.TextDecorations = ConvertToTextDecorationCollection(dialogResult.FontResult.DrawingFontStyle);
-                CallerViewModel.InputTextBox.TextOptions.Foreground = ConvertToSolidColorBrush(dialogResult.FontResult.DrawingFontColor);
+                CallerViewModel.InputTextBoxViewModel.TextOptionsViewModel.FontFamily = new FontFamily(dialogResult.FontResult.FontFamilyName);
+                CallerViewModel.InputTextBoxViewModel.TextOptionsViewModel.FontSize = ConvertToMediaFontSize(dialogResult.FontResult.DrawingFontSize);
+                CallerViewModel.InputTextBoxViewModel.TextOptionsViewModel.FontStyle = ConvertToWindowsFontStyle(dialogResult.FontResult.DrawingFontStyle);
+                CallerViewModel.InputTextBoxViewModel.TextOptionsViewModel.FontWeight = ConvertToWindowsFontWeight(dialogResult.FontResult.DrawingFontStyle);
+                CallerViewModel.InputTextBoxViewModel.TextOptionsViewModel.TextDecorations = ConvertToTextDecorationCollection(dialogResult.FontResult.DrawingFontStyle);
+                CallerViewModel.InputTextBoxViewModel.TextOptionsViewModel.Foreground = ConvertToSolidColorBrush(dialogResult.FontResult.DrawingFontColor);
             }
         }
 

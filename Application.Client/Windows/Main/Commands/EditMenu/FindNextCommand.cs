@@ -33,11 +33,11 @@ namespace Application.Client.Windows.Main.Commands.EditMenu
             }
             else
             {
-                CallerViewModel.InputTextBox.CaretIndex = searchedTextStartIndex;
-                CallerViewModel.InputTextBox.SelectionLength = _findDialogSearchTermsService.Text.Length;
+                CallerViewModel.InputTextBoxViewModel.CaretIndex = searchedTextStartIndex;
+                CallerViewModel.InputTextBoxViewModel.SelectionLength = _findDialogSearchTermsService.Text.Length;
             }
 
-            CallerViewModel.WindowSettings.Activated = true;
+            CallerViewModel.WindowSettingsViewModel.Activated = true;
 
             await Task.CompletedTask;
         }
@@ -53,19 +53,19 @@ namespace Application.Client.Windows.Main.Commands.EditMenu
 
         private int GetNextTextStartIndex()
         {
-            return Content.IndexOf(SearchedText, CallerViewModel.InputTextBox.CaretIndex + CallerViewModel.InputTextBox.SelectionLength,
+            return Content.IndexOf(SearchedText, CallerViewModel.InputTextBoxViewModel.CaretIndex + CallerViewModel.InputTextBoxViewModel.SelectionLength,
                 StringComparison.CurrentCulture);
         }
 
         private int GetPreviousTextStartIndex()
         {
-            return Content.LastIndexOf(SearchedText, CallerViewModel.InputTextBox.CaretIndex,
+            return Content.LastIndexOf(SearchedText, CallerViewModel.InputTextBoxViewModel.CaretIndex,
                 StringComparison.CurrentCulture);
         }
 
         private string Content => _findDialogSearchTermsService.IsMatchCase
-            ? CallerViewModel.InputTextBox.Content
-            : CallerViewModel.InputTextBox.Content.ToLower();
+            ? CallerViewModel.InputTextBoxViewModel.Content
+            : CallerViewModel.InputTextBoxViewModel.Content.ToLower();
 
         private string SearchedText => _findDialogSearchTermsService.IsMatchCase
             ? _findDialogSearchTermsService.Text

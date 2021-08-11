@@ -15,7 +15,9 @@ using Application.Client.Windows.Main.Commands.FileMenu;
 using Application.Client.Windows.Main.Commands.FormatMenu;
 using Application.Client.Windows.Main.Commands.Shared;
 using Application.Client.Windows.Main.Commands.ViewMenu;
+using Application.Client.Windows.Main.ViewModels.InputTextBox;
 using Application.Client.Windows.Main.ViewModels.Settings;
+using Application.Client.Windows.Main.ViewModels.StatusBar;
 using Application.Utilities.FileReader.Interfaces;
 using Application.Utilities.FileWriter.Interfaces;
 
@@ -45,9 +47,9 @@ namespace Application.Client.Windows.Main.ViewModels
 
         private readonly IFindDialogSearchTermsService _findDialogSearchTermsService;
 
-        public MainWindowViewModel(WindowSettingsViewModel windowSettings, InputTextBoxViewModel inputTextBox, StatusBarViewModel statusBar, IFontDialog fontDialog, IFindDialog findDialog,
-            IColorDialog colorDialog, IMessageDialog messageDialog, IOpenFileDialog openFileDialog, ISaveFileDialog saveFileDialog, IGoToLineDialog goToLineDialog, ITextFileWriter textFileWriter,
-            ITextFileReader textFileReader, IDocInfoService docInfoService, IFindDialogSearchTermsService findDialogSearchTermsService)
+        public MainWindowViewModel(WindowSettingsViewModel windowSettingsViewModel, InputTextBoxViewModel inputTextBoxViewModel, StatusBarViewModel statusBarViewModel, IFontDialog fontDialog,
+            IFindDialog findDialog, IColorDialog colorDialog, IMessageDialog messageDialog, IOpenFileDialog openFileDialog, ISaveFileDialog saveFileDialog, IGoToLineDialog goToLineDialog,
+            ITextFileWriter textFileWriter, ITextFileReader textFileReader, IDocInfoService docInfoService, IFindDialogSearchTermsService findDialogSearchTermsService)
         {
             _fontDialog = fontDialog;
             _findDialog = findDialog;
@@ -61,11 +63,14 @@ namespace Application.Client.Windows.Main.ViewModels
             _docInfoService = docInfoService;
             _findDialogSearchTermsService = findDialogSearchTermsService;
 
-            StatusBar = statusBar;
-            InputTextBox = inputTextBox;
-            WindowSettings = windowSettings;
+            StatusBarViewModel = statusBarViewModel;
+            InputTextBoxViewModel = inputTextBoxViewModel;
+            WindowSettingsViewModel = windowSettingsViewModel;
 
-            InputTextBox.OnRefreshStatusBarEvent += (sender, _) => { Dispatcher.CurrentDispatcher.Invoke(() => StatusBar.RefreshOutputData(((InputTextBoxViewModel)sender).Content)); };
+            InputTextBoxViewModel.OnRefreshStatusBarEvent += (sender, _) =>
+            {
+                Dispatcher.CurrentDispatcher.Invoke(() => StatusBarViewModel.RefreshOutputData(((InputTextBoxViewModel)sender).Content));
+            };
 
             _findDialog.OnFindNextEvent += (_, _) =>
             {
@@ -79,35 +84,35 @@ namespace Application.Client.Windows.Main.ViewModels
             };
         }
 
-        private static WindowSettingsViewModel _windowSettings;
-        public WindowSettingsViewModel WindowSettings
+        private static WindowSettingsViewModel _windowSettingsViewModel;
+        public WindowSettingsViewModel WindowSettingsViewModel
         {
-            get => _windowSettings;
+            get => _windowSettingsViewModel;
             set
             {
-                _windowSettings = value;
+                _windowSettingsViewModel = value;
                 OnPropertyChanged();
             }
         }
 
-        private static InputTextBoxViewModel _inputTextBox;
-        public InputTextBoxViewModel InputTextBox
+        private static InputTextBoxViewModel _inputTextBoxViewModel;
+        public InputTextBoxViewModel InputTextBoxViewModel
         {
-            get => _inputTextBox;
+            get => _inputTextBoxViewModel;
             set
             {
-                _inputTextBox = value;
+                _inputTextBoxViewModel = value;
                 OnPropertyChanged();
             }
         }
 
-        private StatusBarViewModel _statusBar;
-        public StatusBarViewModel StatusBar
+        private StatusBarViewModel _statusBarViewModel;
+        public StatusBarViewModel StatusBarViewModel
         {
-            get => _statusBar;
+            get => _statusBarViewModel;
             set
             {
-                _statusBar = value;
+                _statusBarViewModel = value;
                 OnPropertyChanged();
             }
         }
@@ -132,7 +137,7 @@ namespace Application.Client.Windows.Main.ViewModels
         public ICommand FindCommand => _findCommand ??= new FindCommand(this, _findDialog);
 
         private ICommand _findNextCommand;
-        public ICommand FindNextCommand => _findNextCommand ??= new Commands.EditMenu.FindNextCommand(this, _messageDialog, _findDialogSearchTermsService);
+        public ICommand FindNextCommand => _findNextCommand ??= new FindNextCommand(this, _messageDialog, _findDialogSearchTermsService);
 
         private ICommand _goToLineCommand;
         public ICommand GoToLineCommand => _goToLineCommand ??= new GoToLineCommand(this, _goToLineDialog);

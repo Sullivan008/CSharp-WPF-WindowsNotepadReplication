@@ -2,7 +2,7 @@
 using System.Windows.Media;
 using Application.Client.Infrastructure.ViewModels;
 
-namespace Application.Client.Windows.Main.ViewModels
+namespace Application.Client.Windows.Main.ViewModels.InputTextBox
 {
     public class TextOptionsViewModel : ViewModelBase
     {

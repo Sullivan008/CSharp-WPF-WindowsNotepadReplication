@@ -51,7 +51,7 @@ namespace Application.Client.Windows.Main.Commands.FileMenu
                         {
                             if (_docInfoService.IsOpenedDocument)
                             {
-                                await _textFileWriter.WriteAsync(new WriteTextFileModel { FilePath = _docInfoService.UsedFilePath, Content = CallerViewModel.InputTextBox.Content });
+                                await _textFileWriter.WriteAsync(new WriteTextFileModel { FilePath = _docInfoService.UsedFilePath, Content = CallerViewModel.InputTextBoxViewModel.Content });
                             }
                             else
                             {
@@ -59,7 +59,7 @@ namespace Application.Client.Windows.Main.Commands.FileMenu
 
                                 if (saveFileDialogResult.SaveFileDialogResultType == SaveFileDialogResultType.Ok)
                                 {
-                                    await _textFileWriter.WriteAsync(new WriteTextFileModel { FilePath = saveFileDialogResult.SavedFilePath, Content = CallerViewModel.InputTextBox.Content });
+                                    await _textFileWriter.WriteAsync(new WriteTextFileModel { FilePath = saveFileDialogResult.SavedFilePath, Content = CallerViewModel.InputTextBoxViewModel.Content });
                                 }
                                 else if (saveFileDialogResult.SaveFileDialogResultType == SaveFileDialogResultType.Cancel)
                                 {
@@ -76,11 +76,11 @@ namespace Application.Client.Windows.Main.Commands.FileMenu
                 }
             }
 
-            CallerViewModel.InputTextBox.Content = string.Empty;
+            CallerViewModel.InputTextBoxViewModel.Content = string.Empty;
             
             _docInfoService.SetDefaultDocInfo();
 
-            CallerViewModel.WindowSettings.Title = _docInfoService.UsedFileNameWithoutExtension;
+            CallerViewModel.WindowSettingsViewModel.Title = _docInfoService.UsedFileNameWithoutExtension;
         }
 
         private static IReadOnlyDictionary<string, IReadOnlyList<string>> GetSaveFileDialogFilters()
