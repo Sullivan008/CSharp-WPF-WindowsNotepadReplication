@@ -5,7 +5,7 @@ using Application.Client.Dialogs.GoToLineDialog.Windows.ViewModels;
 using Application.Client.Dialogs.MessageDialog.Interfaces;
 using Application.Client.Dialogs.MessageDialog.Models;
 using Application.Client.Infrastructure.Commands;
-using Application.Client.Services.Interfaces;
+using Application.Client.Services.DocInfo.Interfaces;
 using FluentValidation;
 
 namespace Application.Client.Dialogs.GoToLineDialog.Windows.Commands

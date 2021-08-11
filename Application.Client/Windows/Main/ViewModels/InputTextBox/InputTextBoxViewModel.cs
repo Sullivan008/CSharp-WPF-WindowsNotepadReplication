@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Media;
 using Application.Client.Infrastructure.ViewModels;
-using Application.Client.Services.Interfaces;
+using Application.Client.Services.DocInfo.Interfaces;
 using Application.Client.Windows.Main.ViewModels.InputTextBox.Delegates;
 
 namespace Application.Client.Windows.Main.ViewModels.InputTextBox

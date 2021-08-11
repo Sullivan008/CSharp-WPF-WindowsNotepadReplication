@@ -6,7 +6,7 @@ using System.Windows.Input;
 using Application.Client.Dialogs.GoToLineDialog.Windows.Commands;
 using Application.Client.Dialogs.MessageDialog.Interfaces;
 using Application.Client.Infrastructure.ViewModels;
-using Application.Client.Services.Interfaces;
+using Application.Client.Services.DocInfo.Interfaces;
 using FluentValidation;
 using FluentValidation.Results;
 

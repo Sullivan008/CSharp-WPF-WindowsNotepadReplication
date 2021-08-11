@@ -1,4 +1,4 @@
-﻿namespace Application.Client.Services.Interfaces
+﻿namespace Application.Client.Services.DocInfo.Interfaces
 {
     public interface IDocInfoService
     {

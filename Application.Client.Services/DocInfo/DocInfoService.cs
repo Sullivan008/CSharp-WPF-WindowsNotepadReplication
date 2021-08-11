@@ -3,9 +3,9 @@ using System.IO;
 using Application.Client.Cache.DataModels.DocInfo;
 using Application.Client.Cache.DataModels.DocInfo.Enums;
 using Application.Client.Cache.Infrastructure.Repository.Interfaces;
-using Application.Client.Services.Interfaces;
+using Application.Client.Services.DocInfo.Interfaces;
 
-namespace Application.Client.Services
+namespace Application.Client.Services.DocInfo
 {
     public class DocInfoService : IDocInfoService
     {

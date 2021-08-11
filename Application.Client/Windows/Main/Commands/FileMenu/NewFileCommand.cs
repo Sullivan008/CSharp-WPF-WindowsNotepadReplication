@@ -12,7 +12,7 @@ using Application.Client.Dialogs.StaticValues;
 using Application.Client.Dialogs.StaticValues.Enums;
 using Application.Client.Dialogs.StaticValues.Models;
 using Application.Client.Infrastructure.Commands;
-using Application.Client.Services.Interfaces;
+using Application.Client.Services.DocInfo.Interfaces;
 using Application.Client.Windows.Main.ViewModels;
 using Application.Utilities.FileWriter.Interfaces;
 using Application.Utilities.FileWriter.Models;

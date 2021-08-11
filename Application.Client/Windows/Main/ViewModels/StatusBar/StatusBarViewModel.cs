@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows;
 using Application.Client.Infrastructure.ViewModels;
-using Application.Client.Services.Interfaces;
+using Application.Client.Services.DocInfo.Interfaces;
 
 namespace Application.Client.Windows.Main.ViewModels.StatusBar
 {
