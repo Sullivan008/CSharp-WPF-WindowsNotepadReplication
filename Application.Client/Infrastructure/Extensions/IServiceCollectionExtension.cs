@@ -124,14 +124,14 @@ namespace Application.Client.Infrastructure.Extensions
             @this.AddTransient<IFindDialog, FindDialog>();
 
             @this.AddTransient<FindWindowViewModel>();
+            @this.AddTransient<IValidator<FindWindowViewModel>, FindWindowViewModelValidator>();
+
             @this.AddTransient(x => new FindWindow
             {
                 DataContext = x.GetRequiredService<FindWindowViewModel>()
             });
             
             @this.AddSingleton<IFindDialogSettingsService, FindDialogSettingsService>();
-
-            @this.AddScoped<IValidator<FindWindowViewModel>, FindWindowViewModelValidator>();
         }
 
         private static void AddColorDialog(this IServiceCollection @this)
@@ -145,12 +145,12 @@ namespace Application.Client.Infrastructure.Extensions
             @this.AddTransient<IGoToLineDialog, GoToLineDialog>();
 
             @this.AddTransient<GoToLineWindowViewModel>();
+            @this.AddTransient<IValidator<GoToLineWindowViewModel>, GoToLineWindowViewModelValidator>();
+
             @this.AddTransient(x => new GoToLineWindow
             {
                 DataContext = x.GetRequiredService<GoToLineWindowViewModel>()
             });
-
-            @this.AddScoped<IValidator<GoToLineWindowViewModel>, GoToLineWindowViewModelValidator>();
         }
         
         public static IServiceCollection AddServices(this IServiceCollection @this)
