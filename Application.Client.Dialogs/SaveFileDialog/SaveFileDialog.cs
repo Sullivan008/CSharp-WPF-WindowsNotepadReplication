@@ -20,16 +20,9 @@ namespace Application.Client.Dialogs.SaveFileDialog
             switch (saveFileDialog.ShowDialog())
             {
                 case true:
-                    return new SaveFileDialogResult
-                    {
-                        SaveFileDialogResultType = SaveFileDialogResultType.Ok,
-                        SavedFilePath = saveFileDialog.FileName
-                    };
+                    return OnTrueResult(saveFileDialog);
                 case false:
-                    return new SaveFileDialogResult
-                    {
-                        SaveFileDialogResultType = SaveFileDialogResultType.Cancel
-                    };
+                    return OnFalseResult();
                 default:
                     throw new SaveFileDialogUnknownResultTypeException("An unknown error occurred while reading the result of the dialog box!");
             }
@@ -50,6 +43,23 @@ namespace Application.Client.Dialogs.SaveFileDialog
             const string SEPARATOR_IN_FILTER_SETTINGS = ";";
 
             return $"{filterName} ({string.Join(SEPARATOR_IN_PARENTHESIS, filters)})|{string.Join(SEPARATOR_IN_FILTER_SETTINGS, filters)}";
+        }
+
+        private static SaveFileDialogResult OnTrueResult(Microsoft.Win32.SaveFileDialog saveFileDialog)
+        {
+            return new SaveFileDialogResult
+            {
+                SaveFileDialogResultType = SaveFileDialogResultType.Ok,
+                SavedFilePath = saveFileDialog.FileName
+            };
+        }
+
+        private static SaveFileDialogResult OnFalseResult()
+        {
+            return new SaveFileDialogResult
+            {
+                SaveFileDialogResultType = SaveFileDialogResultType.Cancel
+            };
         }
     }
 }
