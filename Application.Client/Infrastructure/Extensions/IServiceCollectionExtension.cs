@@ -29,6 +29,8 @@ using Application.Client.Dialogs.MessageDialog;
 using Application.Client.Dialogs.MessageDialog.Interfaces;
 using Application.Client.Dialogs.OpenFileDialog;
 using Application.Client.Dialogs.OpenFileDialog.Interfaces;
+using Application.Client.Dialogs.ReplaceDialog;
+using Application.Client.Dialogs.ReplaceDialog.Interfaces;
 using Application.Client.Dialogs.SaveFileDialog;
 using Application.Client.Dialogs.SaveFileDialog.Interfaces;
 using Application.Client.Services.DocInfo;
@@ -110,6 +112,7 @@ namespace Application.Client.Infrastructure.Extensions
             @this.AddFontDialog();
             @this.AddFindDialog();
             @this.AddColorDialog();
+            @this.AddReplaceDialog();
             @this.AddGoToLineDialog();
 
             return @this;
@@ -153,6 +156,11 @@ namespace Application.Client.Infrastructure.Extensions
             {
                 DataContext = x.GetRequiredService<GoToLineWindowViewModel>()
             });
+        }
+
+        private static void AddReplaceDialog(this IServiceCollection @this)
+        {
+            @this.AddTransient<IReplaceDialog, ReplaceDialog>();
         }
         
         public static IServiceCollection AddServices(this IServiceCollection @this)
