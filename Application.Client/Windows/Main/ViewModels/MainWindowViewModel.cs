@@ -6,6 +6,7 @@ using Application.Client.Dialogs.FontDialog.Interfaces;
 using Application.Client.Dialogs.GoToLineDialog.Interfaces;
 using Application.Client.Dialogs.MessageDialog.Interfaces;
 using Application.Client.Dialogs.OpenFileDialog.Interfaces;
+using Application.Client.Dialogs.ReplaceDialog.Interfaces;
 using Application.Client.Dialogs.SaveFileDialog.Interfaces;
 using Application.Client.Infrastructure.ViewModels;
 using Application.Client.Services.DocInfo.Interfaces;
@@ -33,6 +34,8 @@ namespace Application.Client.Windows.Main.ViewModels
 
         private readonly IMessageDialog _messageDialog;
 
+        private readonly IReplaceDialog _replaceDialog;
+
         private readonly IOpenFileDialog _openFileDialog;
 
         private readonly ISaveFileDialog _saveFileDialog;
@@ -44,17 +47,18 @@ namespace Application.Client.Windows.Main.ViewModels
         private readonly ITextFileReader _textFileReader;
 
         private readonly IDocInfoService _docInfoService;
-
+        
         private readonly IFindDialogSearchTermsService _findDialogSearchTermsService;
 
         public MainWindowViewModel(WindowSettingsViewModel windowSettingsViewModel, InputTextBoxViewModel inputTextBoxViewModel, StatusBarViewModel statusBarViewModel, IFontDialog fontDialog,
-            IFindDialog findDialog, IColorDialog colorDialog, IMessageDialog messageDialog, IOpenFileDialog openFileDialog, ISaveFileDialog saveFileDialog, IGoToLineDialog goToLineDialog,
-            ITextFileWriter textFileWriter, ITextFileReader textFileReader, IDocInfoService docInfoService, IFindDialogSearchTermsService findDialogSearchTermsService)
+            IFindDialog findDialog, IColorDialog colorDialog, IMessageDialog messageDialog, IReplaceDialog replaceDialog, IOpenFileDialog openFileDialog, ISaveFileDialog saveFileDialog,
+            IGoToLineDialog goToLineDialog, ITextFileWriter textFileWriter, ITextFileReader textFileReader, IDocInfoService docInfoService, IFindDialogSearchTermsService findDialogSearchTermsService)
         {
             _fontDialog = fontDialog;
             _findDialog = findDialog;
             _colorDialog = colorDialog;
             _messageDialog = messageDialog;
+            _replaceDialog = replaceDialog;
             _openFileDialog = openFileDialog;
             _saveFileDialog = saveFileDialog;
             _goToLineDialog = goToLineDialog;
