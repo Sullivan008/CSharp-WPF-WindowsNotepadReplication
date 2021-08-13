@@ -14,15 +14,15 @@ namespace Application.Client.Dialogs.MessageDialog
             switch (await ShowDialogAsync(options))
             {
                 case MessageBoxResult.OK:
-                    return new MessageDialogResult { MessageDialogResultType = MessageDialogResultType.Ok };
+                    return OnOkResult();
                 case MessageBoxResult.Yes:
-                    return new MessageDialogResult { MessageDialogResultType = MessageDialogResultType.Yes };
+                    return OnYesResult();
                 case MessageBoxResult.No:
-                    return new MessageDialogResult { MessageDialogResultType = MessageDialogResultType.No };
+                    return OnNoResult();
                 case MessageBoxResult.Cancel:
-                    return new MessageDialogResult { MessageDialogResultType = MessageDialogResultType.Cancel };
+                    return OnCancelResult();
                 case MessageBoxResult.None:
-                    return new MessageDialogResult { MessageDialogResultType = MessageDialogResultType.None };
+                    return OnNoneResult();
                 default:
                     throw new MessageDialogUnknownResultTypeException("An unknown error occurred while reading the result of the dialog box!");
             }
@@ -33,6 +33,31 @@ namespace Application.Client.Dialogs.MessageDialog
             return options.Icon.HasValue
                 ? Task.FromResult(MessageBox.Show(options.Content, options.Title, options.Button, options.Icon.Value))
                 : Task.FromResult(MessageBox.Show(options.Content, options.Title, options.Button));
+        }
+
+        private static MessageDialogResult OnOkResult()
+        {
+            return new MessageDialogResult { MessageDialogResultType = MessageDialogResultType.Ok };
+        }
+
+        private static MessageDialogResult OnYesResult()
+        {
+            return new MessageDialogResult { MessageDialogResultType = MessageDialogResultType.Yes };
+        }
+
+        private static MessageDialogResult OnNoResult()
+        {
+            return new MessageDialogResult { MessageDialogResultType = MessageDialogResultType.No };
+        }
+
+        private static MessageDialogResult OnCancelResult()
+        {
+            return new MessageDialogResult { MessageDialogResultType = MessageDialogResultType.Cancel };
+        }
+
+        private static MessageDialogResult OnNoneResult()
+        {
+            return new MessageDialogResult { MessageDialogResultType = MessageDialogResultType.None };
         }
     }
 }
