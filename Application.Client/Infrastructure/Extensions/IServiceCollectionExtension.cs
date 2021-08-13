@@ -31,6 +31,8 @@ using Application.Client.Dialogs.OpenFileDialog;
 using Application.Client.Dialogs.OpenFileDialog.Interfaces;
 using Application.Client.Dialogs.ReplaceDialog;
 using Application.Client.Dialogs.ReplaceDialog.Interfaces;
+using Application.Client.Dialogs.ReplaceDialog.Windows;
+using Application.Client.Dialogs.ReplaceDialog.Windows.ViewModels;
 using Application.Client.Dialogs.SaveFileDialog;
 using Application.Client.Dialogs.SaveFileDialog.Interfaces;
 using Application.Client.Services.DocInfo;
@@ -145,6 +147,18 @@ namespace Application.Client.Infrastructure.Extensions
             @this.AddSingleton<IColorDialogSettingsService, ColorDialogSettingsService>();
         }
 
+        private static void AddReplaceDialog(this IServiceCollection @this)
+        {
+            @this.AddTransient<IReplaceDialog, ReplaceDialog>();
+
+            @this.AddTransient<ReplaceWindowViewModel>();
+
+            @this.AddTransient(x => new ReplaceWindow
+            {
+                DataContext = x.GetRequiredService<ReplaceWindowViewModel>()
+            });
+        }
+
         private static void AddGoToLineDialog(this IServiceCollection @this)
         {
             @this.AddTransient<IGoToLineDialog, GoToLineDialog>();
@@ -156,11 +170,6 @@ namespace Application.Client.Infrastructure.Extensions
             {
                 DataContext = x.GetRequiredService<GoToLineWindowViewModel>()
             });
-        }
-
-        private static void AddReplaceDialog(this IServiceCollection @this)
-        {
-            @this.AddTransient<IReplaceDialog, ReplaceDialog>();
         }
         
         public static IServiceCollection AddServices(this IServiceCollection @this)

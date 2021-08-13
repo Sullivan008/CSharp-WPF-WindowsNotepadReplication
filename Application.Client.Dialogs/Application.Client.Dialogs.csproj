@@ -8,6 +8,7 @@
   <ItemGroup>
     <None Remove="FindDialog\Windows\FindWindow.xaml" />
     <None Remove="GoToLineDialog\Windows\GoToLineWindow.xaml" />
+    <None Remove="ReplaceDialog\Windows\ReplaceWindow.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -38,6 +39,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="ReplaceDialog\Windows\ReplaceWindow.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 
   <ItemGroup>
@@ -45,6 +51,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="GoToLineDialog\Windows\GoToLineWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ReplaceDialog\Windows\ReplaceWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
