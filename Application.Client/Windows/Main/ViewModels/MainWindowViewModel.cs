@@ -140,6 +140,9 @@ namespace Application.Client.Windows.Main.ViewModels
         private ICommand _findCommand;
         public ICommand FindCommand => _findCommand ??= new FindCommand(this, _findDialog);
 
+        private ICommand _replaceCommand;
+        public ICommand ReplaceCommand => _replaceCommand ??= new ReplaceCommand(this, _replaceDialog);
+
         private ICommand _findNextCommand;
         public ICommand FindNextCommand => _findNextCommand ??= new FindNextCommand(this, _messageDialog, _findDialogSearchTermsService);
 
