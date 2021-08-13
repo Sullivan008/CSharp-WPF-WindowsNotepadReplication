@@ -20,16 +20,9 @@ namespace Application.Client.Dialogs.OpenFileDialog
             switch (openFileDialog.ShowDialog())
             {
                 case true:
-                    return new OpenFileDialogResult
-                    {
-                        OpenFileDialogResultType = OpenFileDialogResultType.Ok,
-                        FilePath = openFileDialog.FileName
-                    };
+                    return OnTrueResult(openFileDialog);
                 case false:
-                    return new OpenFileDialogResult
-                    {
-                        OpenFileDialogResultType = OpenFileDialogResultType.Cancel
-                    };
+                    return OnFalseResult();
                 default:
                     throw new OpenFileDialogUnknownResultTypeException("An unknown error occurred while reading the result of the dialog box!");
             }
@@ -50,6 +43,23 @@ namespace Application.Client.Dialogs.OpenFileDialog
             const string SEPARATOR_IN_FILTER_SETTINGS = ";";
 
             return $"{filterName} ({string.Join(SEPARATOR_IN_PARENTHESIS, filters)})|{string.Join(SEPARATOR_IN_FILTER_SETTINGS, filters)}";
+        }
+
+        private static OpenFileDialogResult OnTrueResult(Microsoft.Win32.OpenFileDialog openFileDialog)
+        {
+            return new OpenFileDialogResult
+            {
+                OpenFileDialogResultType = OpenFileDialogResultType.Ok,
+                FilePath = openFileDialog.FileName
+            };
+        }
+
+        private static OpenFileDialogResult OnFalseResult()
+        {
+            return new OpenFileDialogResult
+            {
+                OpenFileDialogResultType = OpenFileDialogResultType.Cancel
+            };
         }
     }
 }
