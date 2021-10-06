@@ -22,8 +22,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Application.Client.Behaviors\Application.Client.Behaviors.csproj" />
+    <ProjectReference Include="..\Application.Client.Common\Application.Client.Common.csproj" />
     <ProjectReference Include="..\Application.Client.Converters\Application.Client.Converters.csproj" />
-    <ProjectReference Include="..\Application.Client.Infrastructure\Application.Client.Infrastructure.csproj" />
     <ProjectReference Include="..\Application.Client.Messenger\Application.Client.Messenger.csproj" />
     <ProjectReference Include="..\Application.Client.Services\Application.Client.Services.csproj" />
     <ProjectReference Include="..\Application.Utilities\Application.Utilities.csproj" />

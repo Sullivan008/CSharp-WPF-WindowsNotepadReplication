@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using Application.Client.Common.Commands;
 using Application.Client.Dialogs.MessageDialog.Enums;
 using Application.Client.Dialogs.MessageDialog.Interfaces;
 using Application.Client.Dialogs.MessageDialog.Models;
@@ -11,7 +12,6 @@ using Application.Client.Dialogs.SaveFileDialog.Models;
 using Application.Client.Dialogs.StaticValues;
 using Application.Client.Dialogs.StaticValues.Enums;
 using Application.Client.Dialogs.StaticValues.Models;
-using Application.Client.Infrastructure.Commands;
 using Application.Client.Services.DocInfo.Interfaces;
 using Application.Client.Windows.Main.ViewModels;
 using Application.Utilities.FileWriter.Interfaces;

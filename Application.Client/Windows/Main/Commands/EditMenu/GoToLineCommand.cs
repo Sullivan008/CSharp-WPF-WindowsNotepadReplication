@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Application.Client.Common.Commands;
 using Application.Client.Dialogs.GoToLineDialog.Enums;
 using Application.Client.Dialogs.GoToLineDialog.Interfaces;
 using Application.Client.Dialogs.GoToLineDialog.Models;
-using Application.Client.Infrastructure.Commands;
 using Application.Client.Windows.Main.ViewModels;
 using Application.Utilities.Extensions;
 

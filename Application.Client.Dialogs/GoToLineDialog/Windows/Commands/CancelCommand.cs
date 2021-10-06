@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
+using Application.Client.Common.Commands;
 using Application.Client.Dialogs.GoToLineDialog.Windows.ViewModels;
-using Application.Client.Infrastructure.Commands;
 
 namespace Application.Client.Dialogs.GoToLineDialog.Windows.Commands
 {

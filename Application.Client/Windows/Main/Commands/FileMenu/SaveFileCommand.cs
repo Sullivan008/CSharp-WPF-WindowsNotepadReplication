@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Application.Client.Common.Commands;
 using Application.Client.Dialogs.SaveFileDialog.Enums;
 using Application.Client.Dialogs.SaveFileDialog.Interfaces;
 using Application.Client.Dialogs.SaveFileDialog.Models;
 using Application.Client.Dialogs.StaticValues;
 using Application.Client.Dialogs.StaticValues.Enums;
 using Application.Client.Dialogs.StaticValues.Models;
-using Application.Client.Infrastructure.Commands;
 using Application.Client.Services.DocInfo.Interfaces;
 using Application.Client.Windows.Main.ViewModels;
 using Application.Utilities.FileWriter.Interfaces;

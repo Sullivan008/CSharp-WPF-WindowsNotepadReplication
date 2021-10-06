@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Input;
+using Application.Client.Common.ViewModels;
 using Application.Client.Dialogs.FindDialog.Services.Interfaces;
 using Application.Client.Dialogs.FindDialog.Windows.Commands;
 using Application.Client.Dialogs.FindDialog.Windows.ViewModels.Enums;
-using Application.Client.Infrastructure.ViewModels;
 using FluentValidation;
 using FluentValidation.Results;
 

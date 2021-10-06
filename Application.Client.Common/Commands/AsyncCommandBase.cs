@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Application.Client.Infrastructure.ViewModels;
+using Application.Client.Common.ViewModels;
 
-namespace Application.Client.Infrastructure.Commands
+namespace Application.Client.Common.Commands
 {
     public abstract class AsyncCommandBase<TCallerViewModel> : ICommand where TCallerViewModel : ViewModelBase
     {

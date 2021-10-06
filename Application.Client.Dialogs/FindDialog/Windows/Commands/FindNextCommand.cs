@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Application.Client.Common.Commands;
 using Application.Client.Dialogs.FindDialog.Services.Interfaces;
 using Application.Client.Dialogs.FindDialog.Windows.ViewModels;
-using Application.Client.Infrastructure.Commands;
 using Application.Client.Messenger.GenericMessages.DialogMessages;
 using FluentValidation;
 

@@ -1,4 +1,4 @@
-﻿using Application.Client.Infrastructure.ViewModels;
+﻿using Application.Client.Common.ViewModels;
 
 namespace Application.Client.Dialogs.ReplaceDialog.Windows.ViewModels
 {

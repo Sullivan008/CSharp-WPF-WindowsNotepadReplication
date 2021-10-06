@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Windows;
+using Application.Client.Common.Commands;
 using Application.Client.Dialogs.MessageDialog.Interfaces;
 using Application.Client.Dialogs.MessageDialog.Models;
-using Application.Client.Infrastructure.Commands;
 using Application.Client.Services.FindDialogSearchTerms.Enums;
 using Application.Client.Services.FindDialogSearchTerms.Interfaces;
 using Application.Client.Windows.Main.ViewModels;

@@ -1,5 +1,6 @@
 ﻿using System.Windows.Input;
 using System.Windows.Threading;
+using Application.Client.Common.ViewModels;
 using Application.Client.Dialogs.ColorDialog.Interfaces;
 using Application.Client.Dialogs.FindDialog.Interfaces;
 using Application.Client.Dialogs.FontDialog.Interfaces;
@@ -8,7 +9,6 @@ using Application.Client.Dialogs.MessageDialog.Interfaces;
 using Application.Client.Dialogs.OpenFileDialog.Interfaces;
 using Application.Client.Dialogs.ReplaceDialog.Interfaces;
 using Application.Client.Dialogs.SaveFileDialog.Interfaces;
-using Application.Client.Infrastructure.ViewModels;
 using Application.Client.Messenger.GenericMessages.DialogMessages;
 using Application.Client.Messenger.GenericMessages.InputTextBoxMessages;
 using Application.Client.Services.DocInfo.Interfaces;

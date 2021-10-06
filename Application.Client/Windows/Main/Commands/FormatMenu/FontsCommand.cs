@@ -1,11 +1,11 @@
 ﻿using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
+using Application.Client.Common.Commands;
 using Application.Client.Dialogs.FontDialog.Enums;
 using Application.Client.Dialogs.FontDialog.Interfaces;
 using Application.Client.Dialogs.FontDialog.Models.Options;
 using Application.Client.Dialogs.FontDialog.Models.Result;
-using Application.Client.Infrastructure.Commands;
 using Application.Client.Windows.Main.ViewModels;
 
 namespace Application.Client.Windows.Main.Commands.FormatMenu

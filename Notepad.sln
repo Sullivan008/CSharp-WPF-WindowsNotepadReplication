@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Notepad", "Notepad\Notepad.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application.Client", "Application.Client\Application.Client.csproj", "{2DC1951C-8733-4EA5-8214-00963333E21A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application.Client.Infrastructure", "Application.Client.Infrastructure\Application.Client.Infrastructure.csproj", "{155E0262-E51E-4285-8514-6CB982A3D2D8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application.Client.Common", "Application.Client.Common\Application.Client.Common.csproj", "{155E0262-E51E-4285-8514-6CB982A3D2D8}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application.Client.Dialogs", "Application.Client.Dialogs\Application.Client.Dialogs.csproj", "{2F2A6A99-B0EA-4A6F-B8B9-0DD110D303D3}"
 EndProject
@@ -21,7 +21,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application.Client.Behavior
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application.Client.Converters", "Application.Client.Converters\Application.Client.Converters.csproj", "{81CB67EA-CA49-4B54-BCAE-7B4C130C95B8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.Client.Messenger", "Application.Client.Messenger\Application.Client.Messenger.csproj", "{66B4C0DD-12CC-4E01-861A-04003A4FC102}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application.Client.Messenger", "Application.Client.Messenger\Application.Client.Messenger.csproj", "{66B4C0DD-12CC-4E01-861A-04003A4FC102}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

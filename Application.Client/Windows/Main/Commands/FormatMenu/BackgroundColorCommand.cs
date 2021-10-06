@@ -1,9 +1,9 @@
 ﻿using System.Threading.Tasks;
 using System.Windows.Media;
+using Application.Client.Common.Commands;
 using Application.Client.Dialogs.ColorDialog.Enums;
 using Application.Client.Dialogs.ColorDialog.Interfaces;
 using Application.Client.Dialogs.ColorDialog.Models;
-using Application.Client.Infrastructure.Commands;
 using Application.Client.Windows.Main.ViewModels;
 
 namespace Application.Client.Windows.Main.Commands.FormatMenu
