@@ -1,8 +1,7 @@
-<Project Sdk="Microsoft.NET.Sdk">
-
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net5.0-windows</TargetFramework>
-    <UseWindowsForms>true</UseWindowsForms>   
+	<UseWPF>true</UseWPF>
   </PropertyGroup>
 
   <ItemGroup>
@@ -27,35 +26,4 @@
     <ProjectReference Include="..\Application.Client.Services\Application.Client.Services.csproj" />
     <ProjectReference Include="..\Application.Utilities\Application.Utilities.csproj" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Page Include="FindDialog\Windows\FindWindow.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="GoToLineDialog\Windows\GoToLineWindow.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="ReplaceDialog\Windows\ReplaceWindow.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="FindDialog\Windows\FindWindow.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="GoToLineDialog\Windows\GoToLineWindow.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="ReplaceDialog\Windows\ReplaceWindow.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-  </ItemGroup>
-
 </Project>
