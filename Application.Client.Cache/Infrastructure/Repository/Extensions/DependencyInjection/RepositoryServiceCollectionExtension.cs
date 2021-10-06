@@ -3,21 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Application.Client.Cache.Infrastructure.Repository.Interfaces;
-using Application.Client.Cache.Infrastructure.Services;
-using Application.Client.Cache.Infrastructure.Services.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Application.Client.Cache.Infrastructure.Extensions.DependencyInjection
+namespace Application.Client.Cache.Infrastructure.Repository.Extensions.DependencyInjection
 {
-    public static class CacheServiceCollectionExtension
+    public static class RepositoryServiceCollectionExtension
     {
-        public static IServiceCollection AddCacheServices(this IServiceCollection @this)
-        {
-            @this.AddSingleton<IApplicationCacheService, ApplicationCacheService>();
-
-            return @this;
-        }
-
         public static IServiceCollection AddCacheRepositories(this IServiceCollection @this)
         {
             Type repositoryType = typeof(ICacheRepository<>);
