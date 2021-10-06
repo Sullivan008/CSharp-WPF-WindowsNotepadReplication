@@ -5,6 +5,6 @@ namespace Application.Utilities.FileWriter.Interfaces
 {
     public interface ITextFileWriter
     {
-        Task WriteAsync<TContentType>(IFileWriterModel<TContentType> model);
+        public Task WriteAsync<TContentType>(IFileWriterModel<TContentType> model);
     }
 }

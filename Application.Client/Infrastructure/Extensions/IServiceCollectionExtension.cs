@@ -14,10 +14,6 @@ using Application.Client.Windows.Main.ViewModels;
 using Application.Client.Windows.Main.ViewModels.InputTextBox;
 using Application.Client.Windows.Main.ViewModels.Settings;
 using Application.Client.Windows.Main.ViewModels.StatusBar;
-using Application.Utilities.FileReader;
-using Application.Utilities.FileReader.Interfaces;
-using Application.Utilities.FileWriter;
-using Application.Utilities.FileWriter.Interfaces;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -79,20 +75,6 @@ namespace Application.Client.Infrastructure.Extensions
         {
             @this.AddSingleton<IDocInfoService, DocInfoService>();
             @this.AddSingleton<IFindDialogSearchTermsService, FindDialogSearchTermsService>();
-
-            return @this;
-        }
-
-        public static IServiceCollection AddFileReaders(this IServiceCollection @this)
-        {
-            @this.AddTransient<ITextFileReader, TextFileReader>();
-
-            return @this;
-        }
-
-        public static IServiceCollection AddFileWriters(this IServiceCollection @this)
-        {
-            @this.AddTransient<ITextFileWriter, TextFileWriter>();
 
             return @this;
         }

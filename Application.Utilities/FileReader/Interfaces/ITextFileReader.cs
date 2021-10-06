@@ -5,6 +5,6 @@ namespace Application.Utilities.FileReader.Interfaces
 {
     public interface ITextFileReader
     {
-        Task<TContentType> ReadAsync<TContentType>(IFileReaderModel model);
+        public Task<TContentType> ReadAsync<TContentType>(IFileReaderModel model);
     }
 }

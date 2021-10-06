@@ -2,7 +2,7 @@
 
 namespace Application.Utilities.Extensions.Exceptions
 {
-    public class MissingExpectedAttributeException : Exception
+    internal class MissingExpectedAttributeException : Exception
     {
         public MissingExpectedAttributeException()
         { }
