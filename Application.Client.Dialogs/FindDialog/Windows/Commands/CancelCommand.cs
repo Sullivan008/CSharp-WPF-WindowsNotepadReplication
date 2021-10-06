@@ -4,7 +4,7 @@ using Application.Client.Infrastructure.Commands;
 
 namespace Application.Client.Dialogs.FindDialog.Windows.Commands
 {
-    public class CancelCommand : AsyncCommandBase<FindWindowViewModel, FindWindow>
+    internal class CancelCommand : AsyncCommandBase<FindWindowViewModel, FindWindow>
     {
         public CancelCommand(FindWindowViewModel callerViewModel) : base(callerViewModel)
         { }

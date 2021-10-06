@@ -7,7 +7,7 @@ using FluentValidation;
 
 namespace Application.Client.Dialogs.FindDialog.Windows.Commands
 {
-    public class FindNextCommand : AsyncCommandBase<FindWindowViewModel>
+    internal class FindNextCommand : AsyncCommandBase<FindWindowViewModel>
     {
         private readonly IValidator<FindWindowViewModel> _validator;
 

@@ -7,6 +7,6 @@ namespace Application.Client.Dialogs.FindDialog.Interfaces
     {
         public event OnFindNextEventHandler OnFindNextEvent;
 
-        Task ShowAsync();
+        public Task ShowAsync();
     }
 }

@@ -5,7 +5,7 @@ using Application.Client.Dialogs.FindDialog.Services.Interfaces;
 
 namespace Application.Client.Dialogs.FindDialog.Services
 {
-    public class FindDialogSettingsService : IFindDialogSettingsService
+    internal class FindDialogSettingsService : IFindDialogSettingsService
     {
         private readonly ICacheRepository<FindDialogSettingsDataModel> _findDialogSettingsRepository;
 

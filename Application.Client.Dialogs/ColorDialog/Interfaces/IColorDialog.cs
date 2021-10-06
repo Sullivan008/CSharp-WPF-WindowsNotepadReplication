@@ -5,6 +5,6 @@ namespace Application.Client.Dialogs.ColorDialog.Interfaces
 {
     public interface IColorDialog
     {
-        public Task<ColorDialogResult> ShowColorDialogAsync(ColorDialogOptions dialogOptions);
+        public Task<ColorDialogResult> ShowDialogAsync(ColorDialogOptions dialogOptions);
     }
 }

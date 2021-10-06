@@ -6,7 +6,7 @@ using Application.Client.Dialogs.ColorDialog.Services.Interfaces;
 
 namespace Application.Client.Dialogs.ColorDialog.Services
 {
-    public class ColorDialogSettingsService : IColorDialogSettingsService
+    internal class ColorDialogSettingsService : IColorDialogSettingsService
     {
         private readonly ICacheRepository<ColorDialogSettingsDataModel> _colorDialogSettingsCacheRepository;
 

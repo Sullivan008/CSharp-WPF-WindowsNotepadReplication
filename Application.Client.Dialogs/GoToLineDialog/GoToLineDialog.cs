@@ -10,7 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Application.Client.Dialogs.GoToLineDialog
 {
-    public class GoToLineDialog : IGoToLineDialog
+    internal class GoToLineDialog : IGoToLineDialog
     {
         private readonly IServiceProvider _serviceProvider;
 
@@ -23,15 +23,12 @@ namespace Application.Client.Dialogs.GoToLineDialog
         {
             GoToLineWindow dialogWindow = _serviceProvider.GetRequiredService<GoToLineWindow>();
 
-            switch (dialogWindow.ShowDialog())
+            return dialogWindow.ShowDialog() switch
             {
-                case true:
-                    return OnTrueResult(dialogWindow);
-                case false:
-                    return OnFalseResult();
-                default:
-                    throw new GoToLineDialogUnknownResultTypeException("An unknown error occurred while reading the result of the dialog box!");
-            }
+                true => OnTrueResult(dialogWindow),
+                false => OnFalseResult(),
+                _ => throw new GoToLineDialogUnknownResultTypeException("An unknown error occurred while reading the result of the dialog box!")
+            };
         }
 
         private static Task<GoToLineDialogResult> OnTrueResult(GoToLineWindow dialogWindow)

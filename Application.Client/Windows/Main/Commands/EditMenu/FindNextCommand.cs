@@ -28,7 +28,7 @@ namespace Application.Client.Windows.Main.Commands.EditMenu
 
             if (searchedTextStartIndex == -1)
             {
-                await _messageDialog.ShowMessageDialogAsync(
+                await _messageDialog.ShowDialogAsync(
                     new MessageDialogOptions { Title = "Notepad", Content = $"'{_findDialogSearchTermsService.Text}' was not found!", Button = MessageBoxButton.OK, Icon = MessageBoxImage.Information });
             }
             else

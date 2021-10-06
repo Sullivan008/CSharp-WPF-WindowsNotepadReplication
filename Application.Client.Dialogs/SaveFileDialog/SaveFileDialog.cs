@@ -17,15 +17,12 @@ namespace Application.Client.Dialogs.SaveFileDialog
                 Filter = await ConvertFileFiltersToFileFilterFormat(options.FileFilters)
             };
 
-            switch (saveFileDialog.ShowDialog())
+            return saveFileDialog.ShowDialog() switch
             {
-                case true:
-                    return OnTrueResult(saveFileDialog);
-                case false:
-                    return OnFalseResult();
-                default:
-                    throw new SaveFileDialogUnknownResultTypeException("An unknown error occurred while reading the result of the dialog box!");
-            }
+                true => OnTrueResult(saveFileDialog),
+                false => OnFalseResult(),
+                _ => throw new SaveFileDialogUnknownResultTypeException("An unknown error occurred while reading the result of the dialog box!")
+            };
         }
 
         private static Task<string> ConvertFileFiltersToFileFilterFormat(IReadOnlyDictionary<string, IReadOnlyList<string>> fileFilters)

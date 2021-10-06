@@ -2,7 +2,7 @@
 
 namespace Application.Client.Dialogs.OpenFileDialog.Exceptions
 {
-    public class OpenFileDialogUnknownResultTypeException : Exception
+    internal class OpenFileDialogUnknownResultTypeException : Exception
     {
         public OpenFileDialogUnknownResultTypeException()
         { }

@@ -19,7 +19,7 @@ namespace Application.Client.Windows.Main.Commands.FormatMenu
 
         public override async Task ExecuteAsync()
         {
-            ColorDialogResult dialogResult = await _colorDialog.ShowColorDialogAsync(new ColorDialogOptions());
+            ColorDialogResult dialogResult = await _colorDialog.ShowDialogAsync(new ColorDialogOptions());
 
             if (dialogResult.ColorDialogResultType == ColorDialogResultType.Ok)
             {

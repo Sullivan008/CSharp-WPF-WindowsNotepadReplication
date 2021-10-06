@@ -12,7 +12,7 @@ using FluentValidation.Results;
 
 namespace Application.Client.Dialogs.GoToLineDialog.Windows.ViewModels
 {
-    public class GoToLineWindowViewModel : ViewModelBase, IDataErrorInfo
+    internal class GoToLineWindowViewModel : ViewModelBase, IDataErrorInfo
     {
         private readonly IMessageDialog _messageDialog;
 

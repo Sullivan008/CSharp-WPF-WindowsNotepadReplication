@@ -13,7 +13,7 @@ using FluentValidation.Results;
 
 namespace Application.Client.Dialogs.FindDialog.Windows.ViewModels
 {
-    public class FindWindowViewModel : ViewModelBase, IDataErrorInfo
+    internal class FindWindowViewModel : ViewModelBase, IDataErrorInfo
     {
         private readonly IValidator<FindWindowViewModel> _validator;
 

@@ -2,7 +2,7 @@
 
 namespace Application.Client.Dialogs.SaveFileDialog.Exceptions
 {
-    public class SaveFileDialogUnknownResultTypeException : Exception
+    internal class SaveFileDialogUnknownResultTypeException : Exception
     {
         public SaveFileDialogUnknownResultTypeException()
         { }

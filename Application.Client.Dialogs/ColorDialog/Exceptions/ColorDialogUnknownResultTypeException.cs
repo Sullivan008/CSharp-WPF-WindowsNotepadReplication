@@ -2,7 +2,7 @@
 
 namespace Application.Client.Dialogs.ColorDialog.Exceptions
 {
-    public class ColorDialogUnknownResultTypeException : Exception
+    internal class ColorDialogUnknownResultTypeException : Exception
     {
         public ColorDialogUnknownResultTypeException()
         { }

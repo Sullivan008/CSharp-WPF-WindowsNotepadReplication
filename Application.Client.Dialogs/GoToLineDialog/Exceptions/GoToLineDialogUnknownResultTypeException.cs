@@ -2,7 +2,7 @@
 
 namespace Application.Client.Dialogs.GoToLineDialog.Exceptions
 {
-    public class GoToLineDialogUnknownResultTypeException : Exception
+    internal class GoToLineDialogUnknownResultTypeException : Exception
     {
         public GoToLineDialogUnknownResultTypeException()
         { }

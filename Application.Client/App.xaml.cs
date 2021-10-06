@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Windows;
 using System.Windows.Threading;
+using Application.Client.Dialogs.Infrastructure.Extensions.DependencyInjection;
 using Application.Client.Dialogs.MessageDialog.Interfaces;
 using Application.Client.Dialogs.MessageDialog.Models;
 using Application.Client.Infrastructure.Environment.Enums;
@@ -89,8 +90,15 @@ namespace Application.Client
             services.AddCacheServices();
             services.AddCacheRepositories();
 
-            services.AddDialogs();
-
+            services.AddMessageDialog();
+            services.AddSaveFileDialog();
+            services.AddOpenFileDialog();
+            services.AddFontDialog();
+            services.AddFindDialog();
+            services.AddColorDialog();
+            services.AddReplaceDialog();
+            services.AddGoToLineDialog();
+            
             services.AddServices();
 
             services.AddFileReaders();
@@ -126,7 +134,7 @@ namespace Application.Client
         {
             IMessageDialog messageDialog = _host.Services.GetRequiredService<IMessageDialog>();
 
-            await messageDialog.ShowMessageDialogAsync(new MessageDialogOptions
+            await messageDialog.ShowDialogAsync(new MessageDialogOptions
             {
                 Content = $"An application error occurred.\n\n{errorModel.Message}.\n\n{errorModel.Exception}",
                 Title = "Application Error",

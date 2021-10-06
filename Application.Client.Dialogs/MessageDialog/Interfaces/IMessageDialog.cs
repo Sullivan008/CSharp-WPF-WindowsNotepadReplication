@@ -5,6 +5,6 @@ namespace Application.Client.Dialogs.MessageDialog.Interfaces
 {
     public interface IMessageDialog
     {
-        public Task<MessageDialogResult> ShowMessageDialogAsync(MessageDialogOptions options);
+        public Task<MessageDialogResult> ShowDialogAsync(MessageDialogOptions options);
     }
 }

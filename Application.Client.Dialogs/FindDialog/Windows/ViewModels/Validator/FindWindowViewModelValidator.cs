@@ -2,7 +2,7 @@
 
 namespace Application.Client.Dialogs.FindDialog.Windows.ViewModels.Validator
 {
-    public class FindWindowViewModelValidator : AbstractValidator<FindWindowViewModel>
+    internal class FindWindowViewModelValidator : AbstractValidator<FindWindowViewModel>
     {
         public FindWindowViewModelValidator()
         {

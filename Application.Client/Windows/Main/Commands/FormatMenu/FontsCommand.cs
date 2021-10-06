@@ -21,7 +21,7 @@ namespace Application.Client.Windows.Main.Commands.FormatMenu
 
         public override async Task ExecuteAsync()
         {
-            FontDialogResult dialogResult = await _fontDialog.ShowFontDialogAsync(new FontDialogOptions());
+            FontDialogResult dialogResult = await _fontDialog.ShowDialogAsync(new FontDialogOptions());
 
             if (dialogResult.FontDialogResultType == FontDialogResultType.Ok)
             {

@@ -4,7 +4,7 @@ using Application.Client.Infrastructure.Commands;
 
 namespace Application.Client.Dialogs.GoToLineDialog.Windows.Commands
 {
-    public class CancelCommand : AsyncCommandBase<GoToLineWindowViewModel, GoToLineWindow>
+    internal class CancelCommand : AsyncCommandBase<GoToLineWindowViewModel, GoToLineWindow>
     {
         public CancelCommand(GoToLineWindowViewModel callerViewModel) : base(callerViewModel)
         { }

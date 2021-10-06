@@ -2,7 +2,7 @@
 
 namespace Application.Client.Dialogs.FontDialog.Exceptions
 {
-    public class FontDialogUnknownResultTypeException : Exception
+    internal class FontDialogUnknownResultTypeException : Exception
     {
         public FontDialogUnknownResultTypeException()
         { }

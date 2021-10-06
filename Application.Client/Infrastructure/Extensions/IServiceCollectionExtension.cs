@@ -5,36 +5,6 @@ using System.Reflection;
 using Application.Client.Cache.Infrastructure.Repository.Interfaces;
 using Application.Client.Cache.Infrastructure.Services;
 using Application.Client.Cache.Infrastructure.Services.Interfaces;
-using Application.Client.Dialogs.ColorDialog;
-using Application.Client.Dialogs.ColorDialog.Interfaces;
-using Application.Client.Dialogs.ColorDialog.Services;
-using Application.Client.Dialogs.ColorDialog.Services.Interfaces;
-using Application.Client.Dialogs.FindDialog;
-using Application.Client.Dialogs.FindDialog.Interfaces;
-using Application.Client.Dialogs.FindDialog.Services;
-using Application.Client.Dialogs.FindDialog.Services.Interfaces;
-using Application.Client.Dialogs.FindDialog.Windows;
-using Application.Client.Dialogs.FindDialog.Windows.ViewModels;
-using Application.Client.Dialogs.FindDialog.Windows.ViewModels.Validator;
-using Application.Client.Dialogs.FontDialog;
-using Application.Client.Dialogs.FontDialog.Interfaces;
-using Application.Client.Dialogs.FontDialog.Services;
-using Application.Client.Dialogs.FontDialog.Services.Interfaces;
-using Application.Client.Dialogs.GoToLineDialog;
-using Application.Client.Dialogs.GoToLineDialog.Interfaces;
-using Application.Client.Dialogs.GoToLineDialog.Windows;
-using Application.Client.Dialogs.GoToLineDialog.Windows.ViewModels;
-using Application.Client.Dialogs.GoToLineDialog.Windows.ViewModels.Validator;
-using Application.Client.Dialogs.MessageDialog;
-using Application.Client.Dialogs.MessageDialog.Interfaces;
-using Application.Client.Dialogs.OpenFileDialog;
-using Application.Client.Dialogs.OpenFileDialog.Interfaces;
-using Application.Client.Dialogs.ReplaceDialog;
-using Application.Client.Dialogs.ReplaceDialog.Interfaces;
-using Application.Client.Dialogs.ReplaceDialog.Windows;
-using Application.Client.Dialogs.ReplaceDialog.Windows.ViewModels;
-using Application.Client.Dialogs.SaveFileDialog;
-using Application.Client.Dialogs.SaveFileDialog.Interfaces;
 using Application.Client.Services.DocInfo;
 using Application.Client.Services.DocInfo.Interfaces;
 using Application.Client.Services.FindDialogSearchTerms;
@@ -105,73 +75,6 @@ namespace Application.Client.Infrastructure.Extensions
             return @this;
         }
 
-        public static IServiceCollection AddDialogs(this IServiceCollection @this)
-        {
-            @this.AddTransient<IMessageDialog, MessageDialog>();
-            @this.AddTransient<ISaveFileDialog, SaveFileDialog>();
-            @this.AddTransient<IOpenFileDialog, OpenFileDialog>();
-
-            @this.AddFontDialog();
-            @this.AddFindDialog();
-            @this.AddColorDialog();
-            @this.AddReplaceDialog();
-            @this.AddGoToLineDialog();
-
-            return @this;
-        }
-
-        private static void AddFontDialog(this IServiceCollection @this)
-        {
-            @this.AddTransient<IFontDialog, FontDialog>();
-            @this.AddSingleton<IFontDialogSettingsService, FontDialogSettingsService>();
-        }
-
-        private static void AddFindDialog(this IServiceCollection @this)
-        {
-            @this.AddTransient<IFindDialog, FindDialog>();
-
-            @this.AddTransient<FindWindowViewModel>();
-            @this.AddTransient<IValidator<FindWindowViewModel>, FindWindowViewModelValidator>();
-
-            @this.AddTransient(x => new FindWindow
-            {
-                DataContext = x.GetRequiredService<FindWindowViewModel>()
-            });
-            
-            @this.AddSingleton<IFindDialogSettingsService, FindDialogSettingsService>();
-        }
-
-        private static void AddColorDialog(this IServiceCollection @this)
-        {
-            @this.AddTransient<IColorDialog, ColorDialog>();
-            @this.AddSingleton<IColorDialogSettingsService, ColorDialogSettingsService>();
-        }
-
-        private static void AddReplaceDialog(this IServiceCollection @this)
-        {
-            @this.AddTransient<IReplaceDialog, ReplaceDialog>();
-
-            @this.AddTransient<ReplaceWindowViewModel>();
-
-            @this.AddTransient(x => new ReplaceWindow
-            {
-                DataContext = x.GetRequiredService<ReplaceWindowViewModel>()
-            });
-        }
-
-        private static void AddGoToLineDialog(this IServiceCollection @this)
-        {
-            @this.AddTransient<IGoToLineDialog, GoToLineDialog>();
-
-            @this.AddTransient<GoToLineWindowViewModel>();
-            @this.AddTransient<IValidator<GoToLineWindowViewModel>, GoToLineWindowViewModelValidator>();
-
-            @this.AddTransient(x => new GoToLineWindow
-            {
-                DataContext = x.GetRequiredService<GoToLineWindowViewModel>()
-            });
-        }
-        
         public static IServiceCollection AddServices(this IServiceCollection @this)
         {
             @this.AddSingleton<IDocInfoService, DocInfoService>();

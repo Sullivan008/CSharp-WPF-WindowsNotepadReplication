@@ -2,7 +2,7 @@
 
 namespace Application.Client.Dialogs.GoToLineDialog.Windows.ViewModels.Validator
 {
-    public class GoToLineWindowViewModelValidator : AbstractValidator<GoToLineWindowViewModel>
+    internal class GoToLineWindowViewModelValidator : AbstractValidator<GoToLineWindowViewModel>
     {
         public GoToLineWindowViewModelValidator()
         {

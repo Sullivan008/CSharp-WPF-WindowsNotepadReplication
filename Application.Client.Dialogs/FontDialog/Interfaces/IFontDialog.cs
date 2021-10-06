@@ -6,6 +6,6 @@ namespace Application.Client.Dialogs.FontDialog.Interfaces
 {
     public interface IFontDialog
     {
-        public Task<FontDialogResult> ShowFontDialogAsync(FontDialogOptions fontDialogOptions);
+        public Task<FontDialogResult> ShowDialogAsync(FontDialogOptions fontDialogOptions);
     }
 }

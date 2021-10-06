@@ -9,26 +9,20 @@ namespace Application.Client.Dialogs.MessageDialog
 {
     public class MessageDialog : IMessageDialog
     {
-        public async Task<MessageDialogResult> ShowMessageDialogAsync(MessageDialogOptions options)
+        public async Task<MessageDialogResult> ShowDialogAsync(MessageDialogOptions options)
         {
-            switch (await ShowDialogAsync(options))
+            return await ShowAsync(options) switch
             {
-                case MessageBoxResult.OK:
-                    return OnOkResult();
-                case MessageBoxResult.Yes:
-                    return OnYesResult();
-                case MessageBoxResult.No:
-                    return OnNoResult();
-                case MessageBoxResult.Cancel:
-                    return OnCancelResult();
-                case MessageBoxResult.None:
-                    return OnNoneResult();
-                default:
-                    throw new MessageDialogUnknownResultTypeException("An unknown error occurred while reading the result of the dialog box!");
-            }
+                MessageBoxResult.OK => OnOkResult(),
+                MessageBoxResult.Yes => OnYesResult(),
+                MessageBoxResult.No => OnNoResult(),
+                MessageBoxResult.Cancel => OnCancelResult(),
+                MessageBoxResult.None => OnNoneResult(),
+                _ => throw new MessageDialogUnknownResultTypeException("An unknown error occurred while reading the result of the dialog box!")
+            };
         }
 
-        private static Task<MessageBoxResult> ShowDialogAsync(MessageDialogOptions options)
+        private static Task<MessageBoxResult> ShowAsync(MessageDialogOptions options)
         {
             return options.Icon.HasValue
                 ? Task.FromResult(MessageBox.Show(options.Content, options.Title, options.Button, options.Icon.Value))

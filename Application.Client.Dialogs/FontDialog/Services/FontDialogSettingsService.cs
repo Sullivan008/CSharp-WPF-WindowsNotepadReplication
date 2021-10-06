@@ -6,7 +6,7 @@ using Application.Client.Dialogs.FontDialog.Services.Interfaces;
 
 namespace Application.Client.Dialogs.FontDialog.Services
 {
-    public class FontDialogSettingsService : IFontDialogSettingsService
+    internal class FontDialogSettingsService : IFontDialogSettingsService
     {
         private readonly ICacheRepository<FontDialogSettingsDataModel> _fontDialogSettingCacheRepository;
 

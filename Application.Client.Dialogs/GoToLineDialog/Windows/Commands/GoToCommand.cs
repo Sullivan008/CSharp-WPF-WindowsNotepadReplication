@@ -10,7 +10,7 @@ using FluentValidation;
 
 namespace Application.Client.Dialogs.GoToLineDialog.Windows.Commands
 {
-    public class GoToCommand : AsyncCommandBase<GoToLineWindowViewModel, GoToLineWindow>
+    internal class GoToCommand : AsyncCommandBase<GoToLineWindowViewModel, GoToLineWindow>
     {
         private readonly IMessageDialog _messageDialog;
 
@@ -30,7 +30,7 @@ namespace Application.Client.Dialogs.GoToLineDialog.Windows.Commands
             if (IsLineNumberGreaterThanLines(CallerViewModel.LineNumber.Value, _docInfoService.ContentLines))
             {
                 MessageDialogOptions dialogOptions = new() { Content = "The line number exceeds the total line number", Title = window.Title, Button = MessageBoxButton.OK, Icon = MessageBoxImage.Warning };
-                await _messageDialog.ShowMessageDialogAsync(dialogOptions);
+                await _messageDialog.ShowDialogAsync(dialogOptions);
 
                 return;
             } 

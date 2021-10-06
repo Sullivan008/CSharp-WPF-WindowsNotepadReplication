@@ -53,7 +53,7 @@ namespace Application.Client.Windows.Main.Commands.FileMenu
         {
             if (_docInfoService.IsModifiedDocument)
             {
-                MessageDialogResult messageDialogResult = await _messageDialog.ShowMessageDialogAsync(
+                MessageDialogResult messageDialogResult = await _messageDialog.ShowDialogAsync(
                     new MessageDialogOptions { Title = "Notepad", Content = $"Do you want to save the {_docInfoService.UsedFileNameWithExtension} changes?", Button = MessageBoxButton.YesNoCancel });
 
                 switch (messageDialogResult.MessageDialogResultType)

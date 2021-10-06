@@ -2,7 +2,7 @@
 
 namespace Application.Client.Dialogs.MessageDialog.Exceptions
 {
-    public class MessageDialogUnknownResultTypeException : Exception
+    internal class MessageDialogUnknownResultTypeException : Exception
     {
         public MessageDialogUnknownResultTypeException()
         { }

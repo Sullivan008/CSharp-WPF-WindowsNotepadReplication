@@ -19,7 +19,7 @@ namespace Application.Client.Dialogs.FontDialog
             _fontDialogSettingsService = fontDialogSettingsService;
         }
 
-        public async Task<FontDialogResult> ShowFontDialogAsync(FontDialogOptions fontDialogOptions)
+        public async Task<FontDialogResult> ShowDialogAsync(FontDialogOptions fontDialogOptions)
         {
             System.Windows.Forms.FontDialog fontDialog = new()
             {
@@ -33,27 +33,18 @@ namespace Application.Client.Dialogs.FontDialog
                 Color = _fontDialogSettingsService.Color
             };
 
-            switch (fontDialog.ShowDialog())
+            return fontDialog.ShowDialog() switch
             {
-                case DialogResult.OK:
-                    return await OnOkResult(fontDialog);
-                case DialogResult.Cancel:
-                    return await OnCancelResult();
-                case DialogResult.None:
-                    throw new NotImplementedException($"No logic is implemented for this type of return! Type: {nameof(DialogResult.None)}");
-                case DialogResult.No:
-                    throw new NotImplementedException($"No logic is implemented for this type of return! Type: {nameof(DialogResult.Cancel)}");
-                case DialogResult.Abort:
-                    throw new NotImplementedException($"No logic is implemented for this type of return! Type: {nameof(DialogResult.Abort)}");
-                case DialogResult.Retry:
-                    throw new NotImplementedException($"No logic is implemented for this type of return! Type: {nameof(DialogResult.Retry)}");
-                case DialogResult.Ignore:
-                    throw new NotImplementedException($"No logic is implemented for this type of return! Type: {nameof(DialogResult.Ignore)}");
-                case DialogResult.Yes:
-                    throw new NotImplementedException($"No logic is implemented for this type of return! Type: {nameof(DialogResult.Yes)}");
-                default:
-                    throw new FontDialogUnknownResultTypeException("An unknown error occurred while reading the result of the dialog box!");
-            }
+                DialogResult.OK => await OnOkResult(fontDialog),
+                DialogResult.Cancel => await OnCancelResult(),
+                DialogResult.None => throw new NotImplementedException($"No logic is implemented for this type of return! Type: {nameof(DialogResult.None)}"),
+                DialogResult.No => throw new NotImplementedException($"No logic is implemented for this type of return! Type: {nameof(DialogResult.Cancel)}"),
+                DialogResult.Abort => throw new NotImplementedException($"No logic is implemented for this type of return! Type: {nameof(DialogResult.Abort)}"),
+                DialogResult.Retry => throw new NotImplementedException($"No logic is implemented for this type of return! Type: {nameof(DialogResult.Retry)}"),
+                DialogResult.Ignore => throw new NotImplementedException($"No logic is implemented for this type of return! Type: {nameof(DialogResult.Ignore)}"),
+                DialogResult.Yes => throw new NotImplementedException($"No logic is implemented for this type of return! Type: {nameof(DialogResult.Yes)}"),
+                _ => throw new FontDialogUnknownResultTypeException("An unknown error occurred while reading the result of the dialog box!"),
+            };
         }
 
         private Task<FontDialogResult> OnOkResult(System.Windows.Forms.FontDialog fontDialog)
