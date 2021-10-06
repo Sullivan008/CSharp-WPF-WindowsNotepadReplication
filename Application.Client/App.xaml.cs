@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Windows;
 using System.Windows.Threading;
+using Application.Client.Cache.Infrastructure.Extensions.DependencyInjection;
 using Application.Client.Dialogs.Infrastructure.Extensions.DependencyInjection;
 using Application.Client.Dialogs.MessageDialog.Interfaces;
 using Application.Client.Dialogs.MessageDialog.Models;
