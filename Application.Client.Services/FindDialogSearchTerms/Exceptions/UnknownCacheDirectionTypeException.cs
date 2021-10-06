@@ -2,7 +2,7 @@
 
 namespace Application.Client.Services.FindDialogSearchTerms.Exceptions
 {
-    public class UnknownCacheDirectionTypeException : Exception
+    internal class UnknownCacheDirectionTypeException : Exception
     {
         public UnknownCacheDirectionTypeException()
         { }

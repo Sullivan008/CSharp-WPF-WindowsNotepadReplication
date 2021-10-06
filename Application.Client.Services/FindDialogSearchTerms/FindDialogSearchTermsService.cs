@@ -31,19 +31,15 @@ namespace Application.Client.Services.FindDialogSearchTerms
             {
                 FindDialogSettingsDataModel findDialogSearchTerms = _findDialogSettingsCacheRepository.GetItem();
 
-                switch (findDialogSearchTerms.DirectionType)
+                return findDialogSearchTerms.DirectionType switch
                 {
-                    case Cache.DataModels.FindDialog.Enums.DirectionType.Up:
-                        return DirectionType.Up;
-                    case Cache.DataModels.FindDialog.Enums.DirectionType.Down:
-                        return DirectionType.Down;
-                    default:
-                        throw new UnknownCacheDirectionTypeException("An unknown error occurred while reading the direction type from cache data!");
-                }
+                    Cache.DataModels.FindDialog.Enums.DirectionType.Up => DirectionType.Up,
+                    Cache.DataModels.FindDialog.Enums.DirectionType.Down => DirectionType.Down,
+                    _ => throw new UnknownCacheDirectionTypeException("An unknown error occurred while reading the direction type from cache data!")
+                };
             }
         }
-
-
+        
         public bool IsMatchCase
         {
             get

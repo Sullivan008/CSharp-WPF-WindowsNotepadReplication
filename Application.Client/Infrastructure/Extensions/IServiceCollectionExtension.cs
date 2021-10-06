@@ -5,10 +5,6 @@ using System.Reflection;
 using Application.Client.Cache.Infrastructure.Repository.Interfaces;
 using Application.Client.Cache.Infrastructure.Services;
 using Application.Client.Cache.Infrastructure.Services.Interfaces;
-using Application.Client.Services.DocInfo;
-using Application.Client.Services.DocInfo.Interfaces;
-using Application.Client.Services.FindDialogSearchTerms;
-using Application.Client.Services.FindDialogSearchTerms.Interfaces;
 using Application.Client.Windows.Main;
 using Application.Client.Windows.Main.ViewModels;
 using Application.Client.Windows.Main.ViewModels.InputTextBox;
@@ -67,14 +63,6 @@ namespace Application.Client.Infrastructure.Extensions
                     @this.AddSingleton(implementedInterface, definedType);
                 }
             }
-
-            return @this;
-        }
-
-        public static IServiceCollection AddServices(this IServiceCollection @this)
-        {
-            @this.AddSingleton<IDocInfoService, DocInfoService>();
-            @this.AddSingleton<IFindDialogSearchTermsService, FindDialogSearchTermsService>();
 
             return @this;
         }
