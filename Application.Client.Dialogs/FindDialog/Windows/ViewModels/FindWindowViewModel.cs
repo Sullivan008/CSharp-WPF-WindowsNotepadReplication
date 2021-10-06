@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Input;
-using Application.Client.Dialogs.FindDialog.Delegates;
 using Application.Client.Dialogs.FindDialog.Services.Interfaces;
 using Application.Client.Dialogs.FindDialog.Windows.Commands;
 using Application.Client.Dialogs.FindDialog.Windows.ViewModels.Enums;
@@ -18,8 +17,6 @@ namespace Application.Client.Dialogs.FindDialog.Windows.ViewModels
         private readonly IValidator<FindWindowViewModel> _validator;
 
         private readonly IFindDialogSettingsService _findDialogSettingsService;
-
-        public OnFindNextEventHandler OnFindNextEvent;
 
         public FindWindowViewModel(IValidator<FindWindowViewModel> validator, IFindDialogSettingsService findDialogSettingsService)
         {

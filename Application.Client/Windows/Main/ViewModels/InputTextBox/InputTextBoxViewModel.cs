@@ -1,9 +1,8 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Media;
 using Application.Client.Infrastructure.ViewModels;
+using Application.Client.Messenger.GenericMessages.InputTextBoxMessages;
 using Application.Client.Services.DocInfo.Interfaces;
-using Application.Client.Windows.Main.ViewModels.InputTextBox.Delegates;
 
 namespace Application.Client.Windows.Main.ViewModels.InputTextBox
 {
@@ -43,7 +42,7 @@ namespace Application.Client.Windows.Main.ViewModels.InputTextBox
                 _selectedText = value;
                 OnPropertyChanged();
 
-                OnRefreshStatusBar();
+                GalaSoft.MvvmLight.Messaging.Messenger.Default.Send(new RefreshStatusBarMessage(this));
             }
         }
 
@@ -100,17 +99,6 @@ namespace Application.Client.Windows.Main.ViewModels.InputTextBox
                 _textOptionsViewModel = value;
                 OnPropertyChanged();
             }
-        }
-
-        public event OnRefreshStatusBarEventHandler OnRefreshStatusBarEvent;
-        private void OnRefreshStatusBar(EventArgs eventArgs = null)
-        {
-            if (OnRefreshStatusBarEvent == null)
-            {
-                throw new ArgumentNullException(nameof(OnRefreshStatusBarEvent), "The value cannot be null!");
-            }
-
-            OnRefreshStatusBarEvent(this, eventArgs ?? EventArgs.Empty);
         }
     }
 }

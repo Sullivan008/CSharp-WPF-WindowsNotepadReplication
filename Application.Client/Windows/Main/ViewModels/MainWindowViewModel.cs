@@ -9,6 +9,8 @@ using Application.Client.Dialogs.OpenFileDialog.Interfaces;
 using Application.Client.Dialogs.ReplaceDialog.Interfaces;
 using Application.Client.Dialogs.SaveFileDialog.Interfaces;
 using Application.Client.Infrastructure.ViewModels;
+using Application.Client.Messenger.GenericMessages.DialogMessages;
+using Application.Client.Messenger.GenericMessages.InputTextBoxMessages;
 using Application.Client.Services.DocInfo.Interfaces;
 using Application.Client.Services.FindDialogSearchTerms.Interfaces;
 using Application.Client.Windows.Main.Commands.EditMenu;
@@ -71,12 +73,7 @@ namespace Application.Client.Windows.Main.ViewModels
             InputTextBoxViewModel = inputTextBoxViewModel;
             WindowSettingsViewModel = windowSettingsViewModel;
 
-            InputTextBoxViewModel.OnRefreshStatusBarEvent += (sender, _) =>
-            {
-                Dispatcher.CurrentDispatcher.Invoke(() => StatusBarViewModel.RefreshOutputData(((InputTextBoxViewModel)sender).Content));
-            };
-
-            _findDialog.OnFindNextEvent += (_, _) =>
+            GalaSoft.MvvmLight.Messaging.Messenger.Default.Register<FindNextMessage>(this, _ =>
             {
                 Dispatcher.CurrentDispatcher.Invoke(() =>
                 {
@@ -85,7 +82,12 @@ namespace Application.Client.Windows.Main.ViewModels
                         FindNextCommand.Execute(default);
                     }
                 });
-            };
+            });
+
+            GalaSoft.MvvmLight.Messaging.Messenger.Default.Register<RefreshStatusBarMessage>(this, message =>
+            {
+                Dispatcher.CurrentDispatcher.Invoke(() => StatusBarViewModel.RefreshOutputData(((InputTextBoxViewModel)message.Sender).Content));
+            });
         }
 
         private static WindowSettingsViewModel _windowSettingsViewModel;

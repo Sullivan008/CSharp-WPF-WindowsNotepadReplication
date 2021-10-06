@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Application.Client.Dialogs.FindDialog.Services.Interfaces;
 using Application.Client.Dialogs.FindDialog.Windows.ViewModels;
 using Application.Client.Infrastructure.Commands;
+using Application.Client.Messenger.GenericMessages.DialogMessages;
 using FluentValidation;
 
 namespace Application.Client.Dialogs.FindDialog.Windows.Commands
@@ -23,7 +24,7 @@ namespace Application.Client.Dialogs.FindDialog.Windows.Commands
         {
             SetSearchTermsIntoCache();
 
-            OnFindNext();
+            GalaSoft.MvvmLight.Messaging.Messenger.Default.Send(new FindNextMessage(this));
 
             await Task.CompletedTask;
         }
@@ -35,16 +36,6 @@ namespace Application.Client.Dialogs.FindDialog.Windows.Commands
             _findDialogSettingsService.SetFindWhat(CallerViewModel.FindWhat);
             _findDialogSettingsService.SetIsMatchCase(CallerViewModel.IsMatchCase);
             _findDialogSettingsService.SetDirectionType((Cache.DataModels.FindDialog.Enums.DirectionType)CallerViewModel.DirectionType);
-        }
-
-        private void OnFindNext(EventArgs eventArgs = null)
-        {
-            if (CallerViewModel.OnFindNextEvent == null)
-            {
-                throw new ArgumentNullException(nameof(CallerViewModel.OnFindNextEvent), "The value cannot be null!");
-            }
-
-            CallerViewModel.OnFindNextEvent(this, eventArgs ?? EventArgs.Empty);
         }
     }
 }
