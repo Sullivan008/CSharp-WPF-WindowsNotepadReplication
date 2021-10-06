@@ -20,7 +20,7 @@ using Application.Utilities.FileWriter.Models;
 
 namespace Application.Client.Windows.Main.Commands.Shared
 {
-    public class ApplicationCloseCommand : AsyncCommandBase<MainWindowViewModel, CancelEventArgs>
+    internal class ApplicationCloseCommand : AsyncCommandBase<MainWindowViewModel, CancelEventArgs>
     {
         private readonly IMessageDialog _messageDialog;
 

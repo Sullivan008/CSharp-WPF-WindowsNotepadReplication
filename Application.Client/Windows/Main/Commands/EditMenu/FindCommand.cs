@@ -5,7 +5,7 @@ using Application.Client.Windows.Main.ViewModels;
 
 namespace Application.Client.Windows.Main.Commands.EditMenu
 {
-    public class FindCommand : AsyncCommandBase<MainWindowViewModel>
+    internal class FindCommand : AsyncCommandBase<MainWindowViewModel>
     {
         private readonly IFindDialog _findDialog;
 

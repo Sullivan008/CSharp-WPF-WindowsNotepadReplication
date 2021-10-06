@@ -5,9 +5,9 @@ using Application.Client.Windows.Main.ViewModels.Settings;
 using Application.Client.Windows.Main.ViewModels.StatusBar;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Application.Client.Infrastructure.Extensions
+namespace Application.Client.Infrastructure.Extensions.DependencyInjection
 {
-    public static class IServiceCollectionExtension
+    internal static class ClientServiceCollectionExtension
     {
         public static IServiceCollection AddMainWindow(this IServiceCollection @this)
         {
@@ -17,17 +17,12 @@ namespace Application.Client.Infrastructure.Extensions
                 DataContext = x.GetRequiredService<MainWindowViewModel>()
             });
 
-            @this.AddSubViewModelsToMainWindowViewModel();
-
-            return @this;
-        }
-
-        private static void AddSubViewModelsToMainWindowViewModel(this IServiceCollection @this)
-        {
             @this.AddTransient<StatusBarViewModel>();
             @this.AddTransient<TextOptionsViewModel>();
             @this.AddTransient<InputTextBoxViewModel>();
             @this.AddTransient<WindowSettingsViewModel>();
+
+            return @this;
         }
     }
 }

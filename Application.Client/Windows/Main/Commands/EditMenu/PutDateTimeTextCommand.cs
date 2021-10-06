@@ -6,7 +6,7 @@ using Application.Client.Windows.Main.ViewModels;
 
 namespace Application.Client.Windows.Main.Commands.EditMenu
 {
-    public class PutDateTimeTextCommand : AsyncCommandBase<MainWindowViewModel>
+    internal class PutDateTimeTextCommand : AsyncCommandBase<MainWindowViewModel>
     {
         public PutDateTimeTextCommand(MainWindowViewModel callerViewModel) : base(callerViewModel)
         { }

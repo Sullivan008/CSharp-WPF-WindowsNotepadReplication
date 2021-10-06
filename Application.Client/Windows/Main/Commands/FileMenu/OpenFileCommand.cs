@@ -24,7 +24,7 @@ using Application.Utilities.FileWriter.Models;
 
 namespace Application.Client.Windows.Main.Commands.FileMenu
 {
-    public class OpenFileCommand : AsyncCommandBase<MainWindowViewModel>
+    internal class OpenFileCommand : AsyncCommandBase<MainWindowViewModel>
     {
         private readonly IMessageDialog _messageDialog;
 

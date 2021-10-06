@@ -9,7 +9,7 @@ using Application.Utilities.Extensions;
 
 namespace Application.Client.Windows.Main.Commands.EditMenu
 {
-    public class GoToLineCommand : AsyncCommandBase<MainWindowViewModel>
+    internal class GoToLineCommand : AsyncCommandBase<MainWindowViewModel>
     {
         private readonly IGoToLineDialog _goToTheLineDialog;
 

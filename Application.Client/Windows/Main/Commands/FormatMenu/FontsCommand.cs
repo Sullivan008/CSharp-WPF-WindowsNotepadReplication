@@ -10,7 +10,7 @@ using Application.Client.Windows.Main.ViewModels;
 
 namespace Application.Client.Windows.Main.Commands.FormatMenu
 {
-    public class FontsCommand : AsyncCommandBase<MainWindowViewModel>
+    internal class FontsCommand : AsyncCommandBase<MainWindowViewModel>
     {
         private readonly IFontDialog _fontDialog;
 

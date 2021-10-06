@@ -19,7 +19,7 @@ using Application.Utilities.FileWriter.Models;
 
 namespace Application.Client.Windows.Main.Commands.FileMenu
 {
-    public class NewFileCommand : AsyncCommandBase<MainWindowViewModel>
+    internal class NewFileCommand : AsyncCommandBase<MainWindowViewModel>
     {
         private readonly IMessageDialog _messageDialog;
 

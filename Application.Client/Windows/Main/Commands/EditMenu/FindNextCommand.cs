@@ -10,7 +10,7 @@ using Application.Client.Windows.Main.ViewModels;
 
 namespace Application.Client.Windows.Main.Commands.EditMenu
 {
-    public class FindNextCommand : AsyncCommandBase<MainWindowViewModel>
+    internal class FindNextCommand : AsyncCommandBase<MainWindowViewModel>
     {
         private readonly IMessageDialog _messageDialog;
 

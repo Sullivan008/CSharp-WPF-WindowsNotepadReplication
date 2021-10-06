@@ -15,7 +15,7 @@ using Application.Utilities.FileWriter.Models;
 
 namespace Application.Client.Windows.Main.Commands.FileMenu
 {
-    public class SaveFileAsCommand : AsyncCommandBase<MainWindowViewModel>
+    internal class SaveFileAsCommand : AsyncCommandBase<MainWindowViewModel>
     {
         private readonly ISaveFileDialog _saveFileDialog;
 

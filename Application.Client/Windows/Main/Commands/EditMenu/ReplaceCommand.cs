@@ -5,7 +5,7 @@ using Application.Client.Windows.Main.ViewModels;
 
 namespace Application.Client.Windows.Main.Commands.EditMenu
 {
-    public class ReplaceCommand : AsyncCommandBase<MainWindowViewModel>
+    internal class ReplaceCommand : AsyncCommandBase<MainWindowViewModel>
     {
         private readonly IReplaceDialog _replaceDialog;
 

@@ -8,7 +8,7 @@ using Application.Client.Windows.Main.ViewModels;
 
 namespace Application.Client.Windows.Main.Commands.FormatMenu
 {
-    public class BackgroundColorCommand : AsyncCommandBase<MainWindowViewModel>
+    internal class BackgroundColorCommand : AsyncCommandBase<MainWindowViewModel>
     {
         private readonly IColorDialog _colorDialog;
 

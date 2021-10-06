@@ -12,7 +12,7 @@ using Application.Client.Infrastructure.Environment.Enums;
 using Application.Client.Infrastructure.ErrorHandling.Constants;
 using Application.Client.Infrastructure.ErrorHandling.DataBinding.TraceListeners;
 using Application.Client.Infrastructure.ErrorHandling.Models;
-using Application.Client.Infrastructure.Extensions;
+using Application.Client.Infrastructure.Extensions.DependencyInjection;
 using Application.Client.Services.Infrastructure.Extensions.DependencyInjection;
 using Application.Client.Windows.Main;
 using Application.Utilities.Extensions;

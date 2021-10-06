@@ -5,7 +5,7 @@ using Application.Client.Windows.Main.ViewModels;
 
 namespace Application.Client.Windows.Main.Commands.EditMenu
 {
-    public class DeleteTextCommand : AsyncCommandBase<MainWindowViewModel>
+    internal class DeleteTextCommand : AsyncCommandBase<MainWindowViewModel>
     {
         public DeleteTextCommand(MainWindowViewModel callerViewModel) : base(callerViewModel)
         { }
