@@ -7,7 +7,7 @@ namespace Application.Client.Common.Commands
 {
     public abstract class AsyncCommandBase<TCallerViewModel> : ICommand where TCallerViewModel : ViewModelBase
     {
-        public virtual Predicate<object> CanExecute { get; }
+        public virtual Predicate<object?>? CanExecute { get; }
 
         protected readonly TCallerViewModel CallerViewModel;
 
@@ -15,27 +15,27 @@ namespace Application.Client.Common.Commands
 
         protected AsyncCommandBase(TCallerViewModel callerViewModel)
         {
-            CallerViewModel = callerViewModel ?? throw new ArgumentNullException(nameof(callerViewModel));
             CanExecute = default;
+            CallerViewModel = callerViewModel ?? throw new ArgumentNullException(nameof(callerViewModel));
         }
 
-        public event EventHandler CanExecuteChanged
+        public event EventHandler? CanExecuteChanged
         {
             add => CommandManager.RequerySuggested += value;
             remove => CommandManager.RequerySuggested -= value;
         }
 
-        bool ICommand.CanExecute(object parameter)
+        bool ICommand.CanExecute(object? parameter)
         {
             if (!_isExecuting && CanExecute == null)
             {
                 return true;
             }
 
-            return !_isExecuting && CanExecute(parameter);
+            return !_isExecuting && CanExecute != null && CanExecute(parameter);
         }
 
-        async void ICommand.Execute(object parameter)
+        async void ICommand.Execute(object? parameter)
         {
             _isExecuting = true;
 
@@ -54,40 +54,41 @@ namespace Application.Client.Common.Commands
 
     public abstract class AsyncCommandBase<TCallerViewModel, TCommandParameter> : ICommand where TCallerViewModel : ViewModelBase
     {
-        public virtual Predicate<object> CanExecute { get; }
+        public virtual Predicate<object?>? CanExecute { get; }
 
         protected readonly TCallerViewModel CallerViewModel;
 
         private bool _isExecuting;
 
-        protected AsyncCommandBase(TCallerViewModel callerViewModel)
+        protected AsyncCommandBase(TCallerViewModel? callerViewModel)
         {
+            CanExecute = default;
             CallerViewModel = callerViewModel ?? throw new ArgumentNullException(nameof(callerViewModel));
         }
 
-        public event EventHandler CanExecuteChanged
+        public event EventHandler? CanExecuteChanged
         {
             add => CommandManager.RequerySuggested += value;
             remove => CommandManager.RequerySuggested -= value;
         }
 
-        bool ICommand.CanExecute(object parameter)
+        bool ICommand.CanExecute(object? parameter)
         {
             if (!_isExecuting && CanExecute == null)
             {
                 return true;
             }
 
-            return !_isExecuting && CanExecute(parameter);
+            return !_isExecuting && CanExecute != null && CanExecute(parameter);
         }
 
-        async void ICommand.Execute(object parameter)
+        async void ICommand.Execute(object? parameter)
         {
             _isExecuting = true;
 
             try
             {
-                await ExecuteAsync((TCommandParameter) parameter);
+                await ExecuteAsync((TCommandParameter) parameter!);
             }
             finally
             {

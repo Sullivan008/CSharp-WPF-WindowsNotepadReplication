@@ -25,7 +25,7 @@ namespace Application.Client.Dialogs.StaticValues
 
             foreach (FileFilterType type in types)
             {
-                if (!FileFilterTypes.TryGetValue(type, out FileFilterModel fileFilter))
+                if (!FileFilterTypes.TryGetValue(type, out FileFilterModel? fileFilter))
                 {
                     throw new ArgumentNullException(nameof(result), $"The following File Filter Type does not exist with this type. {nameof(type).ToUpper()}: {type}");
                 }

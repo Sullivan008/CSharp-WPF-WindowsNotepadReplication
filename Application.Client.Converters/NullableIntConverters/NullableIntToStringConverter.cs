@@ -13,7 +13,7 @@ namespace Application.Client.Converters.NullableIntConverters
             return integer?.ToString() ?? (object)string.Empty;
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object? ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             return !int.TryParse((string)value, out int result) ? default(int?) : result;
         }

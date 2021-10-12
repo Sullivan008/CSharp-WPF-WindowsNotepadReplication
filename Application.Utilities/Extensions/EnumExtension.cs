@@ -12,9 +12,7 @@ namespace Application.Utilities.Extensions
         {
             EnumMemberAttribute enumMemberAttr = @this.GetAttribute<EnumMemberAttribute>();
 
-            string enumMemberAttrValue = enumMemberAttr.Value;
-
-            return !string.IsNullOrWhiteSpace(enumMemberAttrValue) ? enumMemberAttrValue : throw new ArgumentNullException(nameof(@this), "The value cannot be null!");
+            return !string.IsNullOrWhiteSpace(enumMemberAttr.Value) ? enumMemberAttr.Value : throw new ArgumentNullException(nameof(@this), "The value cannot be null!");
         }
 
         private static TAttributeType GetAttribute<TAttributeType>(this Enum @this)
@@ -23,7 +21,7 @@ namespace Application.Utilities.Extensions
             MemberInfo[] memberInfo = type.GetMember(@this.ToString());
 
             object[] attributes = memberInfo[0].GetCustomAttributes(typeof(TAttributeType), false);
-            object attribute = attributes.SingleOrDefault();
+            object? attribute = attributes.SingleOrDefault();
 
             if (attribute == null)
             {

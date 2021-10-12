@@ -29,7 +29,7 @@ namespace Application.Client.Dialogs.FindDialog.Windows.Commands
             await Task.CompletedTask;
         }
 
-        public override Predicate<object> CanExecute => _ => _validator.Validate(CallerViewModel).IsValid;
+        public override Predicate<object?> CanExecute => _ => _validator.Validate(CallerViewModel).IsValid;
 
         private void SetSearchTermsIntoCache()
         {

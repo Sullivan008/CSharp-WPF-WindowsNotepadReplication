@@ -5,7 +5,7 @@ namespace Application.Utilities.FileWriter.Models
 {
     public class WriteTextFileModel : IFileWriterModel<string>
     {
-        private readonly string _filePath;
+        private readonly string? _filePath;
         public string FilePath
         {
             get
@@ -21,6 +21,6 @@ namespace Application.Utilities.FileWriter.Models
             init => _filePath = value;
         }
 
-        public string Content { get; init; }
+        public string? Content { get; init; }
     }
 }

@@ -90,10 +90,10 @@ namespace Application.Client.Windows.Main.ViewModels
             });
         }
 
-        private static WindowSettingsViewModel _windowSettingsViewModel;
-        public WindowSettingsViewModel WindowSettingsViewModel
+        private static WindowSettingsViewModel? _windowSettingsViewModel;
+        public WindowSettingsViewModel? WindowSettingsViewModel
         {
-            get => _windowSettingsViewModel;
+            get => _windowSettingsViewModel!;
             set
             {
                 _windowSettingsViewModel = value;
@@ -101,10 +101,10 @@ namespace Application.Client.Windows.Main.ViewModels
             }
         }
 
-        private static InputTextBoxViewModel _inputTextBoxViewModel;
-        public InputTextBoxViewModel InputTextBoxViewModel
+        private static InputTextBoxViewModel? _inputTextBoxViewModel;
+        public InputTextBoxViewModel? InputTextBoxViewModel
         {
-            get => _inputTextBoxViewModel;
+            get => _inputTextBoxViewModel!;
             set
             {
                 _inputTextBoxViewModel = value;
@@ -112,10 +112,10 @@ namespace Application.Client.Windows.Main.ViewModels
             }
         }
 
-        private StatusBarViewModel _statusBarViewModel;
-        public StatusBarViewModel StatusBarViewModel
+        private StatusBarViewModel? _statusBarViewModel;
+        public StatusBarViewModel? StatusBarViewModel
         {
-            get => _statusBarViewModel;
+            get => _statusBarViewModel!;
             set
             {
                 _statusBarViewModel = value;
@@ -123,52 +123,52 @@ namespace Application.Client.Windows.Main.ViewModels
             }
         }
 
-        private ICommand _newFileCommand;
+        private ICommand? _newFileCommand;
         public ICommand NewFileCommand => _newFileCommand ??= new NewFileCommand(this, _messageDialog, _saveFileDialog, _docInfoService, _textFileWriter);
 
-        private ICommand _openFileCommand;
+        private ICommand? _openFileCommand;
         public ICommand OpenFileCommand => _openFileCommand ??= new OpenFileCommand(this, _messageDialog, _saveFileDialog, _openFileDialog, _docInfoService, _textFileWriter, _textFileReader);
 
-        private ICommand _saveFileCommand;
+        private ICommand? _saveFileCommand;
         public ICommand SaveFileCommand => _saveFileCommand ??= new SaveFileCommand(this, _saveFileDialog, _docInfoService, _textFileWriter);
 
-        private ICommand _saveFileAsCommand;
+        private ICommand? _saveFileAsCommand;
         public ICommand SaveFileAsCommand => _saveFileAsCommand ??= new SaveFileAsCommand(this, _saveFileDialog, _docInfoService, _textFileWriter);
 
-        private ICommand _applicationCloseCommand;
+        private ICommand? _applicationCloseCommand;
         public ICommand ApplicationCloseCommand => _applicationCloseCommand ??= new ApplicationCloseCommand(this, _messageDialog, _saveFileDialog, _docInfoService, _textFileWriter);
 
 
-        private ICommand _findCommand;
+        private ICommand? _findCommand;
         public ICommand FindCommand => _findCommand ??= new FindCommand(this, _findDialog);
 
-        private ICommand _replaceCommand;
+        private ICommand? _replaceCommand;
         public ICommand ReplaceCommand => _replaceCommand ??= new ReplaceCommand(this, _replaceDialog);
 
-        private ICommand _findNextCommand;
+        private ICommand? _findNextCommand;
         public ICommand FindNextCommand => _findNextCommand ??= new FindNextCommand(this, _messageDialog, _findDialogSearchTermsService);
 
-        private ICommand _goToLineCommand;
+        private ICommand? _goToLineCommand;
         public ICommand GoToLineCommand => _goToLineCommand ??= new GoToLineCommand(this, _goToLineDialog);
 
-        private ICommand _deleteTextCommand;
+        private ICommand? _deleteTextCommand;
         public ICommand DeleteTextCommand => _deleteTextCommand ??= new DeleteTextCommand(this);
 
-        private ICommand _putDateTimeTextCommand;
+        private ICommand? _putDateTimeTextCommand;
         public ICommand PutDateTimeTextCommand => _putDateTimeTextCommand ??= new PutDateTimeTextCommand(this);
 
 
-        private ICommand _fontsCommand;
+        private ICommand? _fontsCommand;
         public ICommand FontsCommand => _fontsCommand ??= new FontsCommand(this, _fontDialog);
 
-        private ICommand _backgroundColorCommand;
+        private ICommand? _backgroundColorCommand;
         public ICommand BackgroundColorCommand => _backgroundColorCommand ??= new BackgroundColorCommand(this, _colorDialog);
 
-        private ICommand _changeTextWrappingCommand;
+        private ICommand? _changeTextWrappingCommand;
         public ICommand ChangeTextWrappingCommand => _changeTextWrappingCommand ??= new ChangeTextWrappingCommand(this);
 
 
-        private ICommand _changeStatusBarVisibilityCommand;
+        private ICommand? _changeStatusBarVisibilityCommand;
         public ICommand ChangeStatusBarVisibilityCommand => _changeStatusBarVisibilityCommand ??= new ChangeStatusBarVisibilityCommand(this);
     }
 }

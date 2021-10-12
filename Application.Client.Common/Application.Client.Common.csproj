@@ -1,14 +1,12 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net5.0-windows</TargetFramework>
-    <UseWPF>true</UseWPF>
-    <AssemblyName>Application.Client.Common</AssemblyName>
-    <RootNamespace>Application.Client.Common</RootNamespace>
-  </PropertyGroup>
+	<PropertyGroup>
+		<AssemblyName>Application.Client.Common</AssemblyName>
+		<RootNamespace>Application.Client.Common</RootNamespace>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Application.Utilities\Application.Utilities.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Application.Utilities\Application.Utilities.csproj" />
+	</ItemGroup>
 
 </Project>

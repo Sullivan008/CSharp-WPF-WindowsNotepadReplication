@@ -43,7 +43,7 @@ namespace Application.Client
             _host = new HostBuilder()
                 .ConfigureHostConfiguration(builder =>
                 {
-                    KeyValuePair<string, string> environment = new(HostDefaults.EnvironmentKey,
+                    KeyValuePair<string, string?> environment = new(HostDefaults.EnvironmentKey,
                         Environment.GetEnvironmentVariable(EnvironmentVariableKey.AspNetCoreEnvironment.GetEnumMemberAttrValue()));
 
                     builder.AddInMemoryCollection(new[] { environment })

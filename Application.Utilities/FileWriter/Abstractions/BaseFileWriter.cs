@@ -16,7 +16,7 @@ namespace Application.Utilities.FileWriter.Abstractions
             Directory.CreateDirectory(directoryPath);
         }
 
-        protected static string GetDirectoryPath(string filePath)
+        protected static string? GetDirectoryPath(string filePath)
         {
             return Path.GetDirectoryName(filePath);
         }

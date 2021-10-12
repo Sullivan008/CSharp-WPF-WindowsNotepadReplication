@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Threading.Tasks;
 using Application.Utilities.FileWriter.Abstractions;
 using Application.Utilities.FileWriter.Interfaces;
@@ -10,7 +11,12 @@ namespace Application.Utilities.FileWriter
     {
         public override async Task WriteAsync<TContentType>(IFileWriterModel<TContentType> model)
         {
-            string directoryPath = GetDirectoryPath(model.FilePath);
+            string? directoryPath = GetDirectoryPath(model.FilePath);
+
+            if (string.IsNullOrWhiteSpace(directoryPath))
+            {
+                throw new ArgumentNullException(nameof(directoryPath), "The value cannot be null!");
+            }
 
             if (!IsExistDirectory(directoryPath))
             {

@@ -12,7 +12,7 @@ namespace Application.Client.Dialogs.FontDialog.Models.Result
             init => _fontDialogResultType = value;
         }
 
-        private readonly FontResult _fontResult;
+        private readonly FontResult? _fontResult;
         public FontResult FontResult
         {
             get => _fontResult ?? throw new ArgumentNullException(nameof(FontResult), "The value cannot be null!");

@@ -13,7 +13,7 @@ namespace Application.Utilities.Extensions
                 return -1;
             }
 
-            int[] indexes = @this.IndexesOf(searchedValue);
+            int[]? indexes = @this.IndexesOf(searchedValue);
 
             if (indexes != null && indexes.Length >= n)
             {
@@ -23,7 +23,7 @@ namespace Application.Utilities.Extensions
             return -1;
         }
 
-        private static int[] IndexesOf(this string @this, string searchedValue)
+        private static int[]? IndexesOf(this string @this, string searchedValue)
         {
             if (string.IsNullOrEmpty(searchedValue))
             {

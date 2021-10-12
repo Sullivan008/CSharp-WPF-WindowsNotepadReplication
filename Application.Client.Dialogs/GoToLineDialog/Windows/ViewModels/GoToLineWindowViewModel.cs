@@ -27,10 +27,10 @@ namespace Application.Client.Dialogs.GoToLineDialog.Windows.ViewModels
             _docInfoService = docInfoService;
         }
 
-        private ICommand _goToCommand;
+        private ICommand? _goToCommand;
         public ICommand GoToCommand => _goToCommand ??= new GoToCommand(this, _validator, _messageDialog, _docInfoService);
 
-        private ICommand _cancelCommand;
+        private ICommand? _cancelCommand;
         public ICommand CancelCommand => _cancelCommand ??= new CancelCommand(this);
 
         private int? _lineNumber = default(int) + 1;

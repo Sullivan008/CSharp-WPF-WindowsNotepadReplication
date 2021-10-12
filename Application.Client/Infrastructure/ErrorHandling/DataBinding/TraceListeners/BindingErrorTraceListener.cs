@@ -5,10 +5,10 @@ namespace Application.Client.Infrastructure.ErrorHandling.DataBinding.TraceListe
 {
     public class BindingErrorTraceListener : TraceListener
     {
-        public override void Write(string message)
+        public override void Write(string? message)
         { }
 
-        public override void WriteLine(string message)
+        public override void WriteLine(string? message)
         {
             throw new DataBindingErrorException(message);
         }

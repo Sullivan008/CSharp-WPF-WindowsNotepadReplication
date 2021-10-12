@@ -47,13 +47,13 @@ namespace Application.Client.Behaviors.Window
             AssociatedObject.Deactivated -= OnDeactivated;
         }
 
-        private void OnActivated(object sender, EventArgs eventArgs)
+        private void OnActivated(object? sender, EventArgs eventArgs)
         {
             _isActivated = true;
             Activated = true;
         }
 
-        private void OnDeactivated(object sender, EventArgs eventArgs)
+        private void OnDeactivated(object? sender, EventArgs eventArgs)
         {
             _isActivated = false;
             Activated = false;
