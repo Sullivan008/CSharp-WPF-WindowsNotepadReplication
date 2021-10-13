@@ -8,13 +8,11 @@
 
 	<PropertyGroup>
 		<GenerateAssemblyInfo>True</GenerateAssemblyInfo>
-		<Version>$(VersionMajor).$(VersionMinor).$(VersionPatch).$(VersionRevision)</Version>
+		<GenerateAssemblyInformationalVersionAttribute>False</GenerateAssemblyInformationalVersionAttribute>
 		<FileVersion>$(VersionMajor).$(VersionMinor).$(VersionPatch).$(VersionRevision)</FileVersion>
 		<AssemblyVersion>$(VersionMajor).$(VersionMinor).$(VersionPatch).$(VersionRevision)</AssemblyVersion>
-		<AssemblyProduct>Notepad</AssemblyProduct>
 		<Product>Windows Notepad Replication</Product>
 		<Copyright>Copyright © Péter Kozák $([System.DateTime]::UtcNow.ToString("yyyy")) - All Rights Reserved</Copyright>
-		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 	</PropertyGroup>
 
 	<PropertyGroup>
