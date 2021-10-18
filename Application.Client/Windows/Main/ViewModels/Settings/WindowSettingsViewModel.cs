@@ -12,7 +12,7 @@ namespace Application.Client.Windows.Main.ViewModels.Settings
             _docInfoService = docInfoService;
         }
 
-        private string _title;
+        private string? _title;
         public string Title
         {
             get

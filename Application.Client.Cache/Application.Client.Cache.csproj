@@ -2,6 +2,7 @@
 
 	<PropertyGroup>
 		<UseWindowsForms>true</UseWindowsForms>
+		<Nullable>enable</Nullable>
 	</PropertyGroup>
 
 	<ItemGroup>

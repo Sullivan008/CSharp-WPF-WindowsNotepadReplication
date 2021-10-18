@@ -91,7 +91,7 @@ namespace Application.Client.Windows.Main.ViewModels
         }
 
         private static WindowSettingsViewModel? _windowSettingsViewModel;
-        public WindowSettingsViewModel? WindowSettingsViewModel
+        public WindowSettingsViewModel WindowSettingsViewModel
         {
             get => _windowSettingsViewModel!;
             set
@@ -102,7 +102,7 @@ namespace Application.Client.Windows.Main.ViewModels
         }
 
         private static InputTextBoxViewModel? _inputTextBoxViewModel;
-        public InputTextBoxViewModel? InputTextBoxViewModel
+        public InputTextBoxViewModel InputTextBoxViewModel
         {
             get => _inputTextBoxViewModel!;
             set
@@ -113,7 +113,7 @@ namespace Application.Client.Windows.Main.ViewModels
         }
 
         private StatusBarViewModel? _statusBarViewModel;
-        public StatusBarViewModel? StatusBarViewModel
+        public StatusBarViewModel StatusBarViewModel
         {
             get => _statusBarViewModel!;
             set

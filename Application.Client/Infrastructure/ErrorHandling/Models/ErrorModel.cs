@@ -2,8 +2,8 @@
 {
     public class ErrorModel
     {
-        public string Message { get; init; }
+        public string Message { get; init; } = string.Empty;
 
-        public string Exception { get; init; }
+        public string Exception { get; init; } = string.Empty;
     }
 }

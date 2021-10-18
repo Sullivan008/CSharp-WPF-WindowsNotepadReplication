@@ -28,8 +28,8 @@ namespace Application.Client.Behaviors.TextBox
                 return;
             }
 
-            string? oldValue = eventArgs.OldValue as string;
-            string? newValue = eventArgs.NewValue as string;
+            string oldValue = (eventArgs.OldValue as string)!;
+            string newValue = (eventArgs.NewValue as string)!;
 
             if (oldValue == SELECTED_TEXT_DEFAULT_VALUE && newValue != SELECTED_TEXT_DEFAULT_VALUE)
             {

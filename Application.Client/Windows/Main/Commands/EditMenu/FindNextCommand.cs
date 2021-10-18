@@ -42,7 +42,7 @@ namespace Application.Client.Windows.Main.Commands.EditMenu
             await Task.CompletedTask;
         }
 
-        public override Predicate<object> CanExecute => _ => _findDialogSearchTermsService.HasSearchTerms;
+        public override Predicate<object?> CanExecute => _ => _findDialogSearchTermsService.HasSearchTerms;
 
         private int GetSearchedTextStartIndex()
         {

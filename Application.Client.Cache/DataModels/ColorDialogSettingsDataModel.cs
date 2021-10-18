@@ -7,6 +7,6 @@ namespace Application.Client.Cache.DataModels
     {
         public Color Color { get; set; }
 
-        public int[] CustomColors { get; set; }
+        public int[]? CustomColors { get; set; }
     }
 }

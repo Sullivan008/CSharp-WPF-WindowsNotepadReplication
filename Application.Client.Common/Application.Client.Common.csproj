@@ -3,6 +3,7 @@
 	<PropertyGroup>
 		<AssemblyName>Application.Client.Common</AssemblyName>
 		<RootNamespace>Application.Client.Common</RootNamespace>
+		<Nullable>enable</Nullable>
 	</PropertyGroup>
 
 	<ItemGroup>

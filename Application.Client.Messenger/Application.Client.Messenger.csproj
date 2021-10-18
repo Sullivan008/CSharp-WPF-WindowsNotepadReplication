@@ -1,5 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
 	
+	<PropertyGroup>
+	  <Nullable>enable</Nullable>
+	</PropertyGroup>
+	
 	<ItemGroup>
 		<PackageReference Include="MvvmLightLibsStd10" Version="5.4.1.1" />
 	</ItemGroup>

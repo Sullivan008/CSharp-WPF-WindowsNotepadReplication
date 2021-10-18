@@ -21,6 +21,6 @@ namespace Application.Utilities.FileWriter.Models
             init => _filePath = value;
         }
 
-        public string? Content { get; init; }
+        public string Content { get; init; } = string.Empty;
     }
 }

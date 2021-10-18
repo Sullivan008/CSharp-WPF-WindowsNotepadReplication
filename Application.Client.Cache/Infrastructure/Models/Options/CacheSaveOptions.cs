@@ -22,7 +22,7 @@ namespace Application.Client.Cache.Infrastructure.Models.Options
             init => _key = value;
         }
 
-        private readonly TCacheDataItem _data;
+        private readonly TCacheDataItem? _data;
         public TCacheDataItem Data
         {
             get

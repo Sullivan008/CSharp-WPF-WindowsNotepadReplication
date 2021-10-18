@@ -5,7 +5,7 @@ namespace Application.Utilities.FileReader.Models
 {
     public class ReadTextFileModel : IFileReaderModel
     {
-        private readonly string _filePath;
+        private readonly string? _filePath;
         public string FilePath
         {
             get

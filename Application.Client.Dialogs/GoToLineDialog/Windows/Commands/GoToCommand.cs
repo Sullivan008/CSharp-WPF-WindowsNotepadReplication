@@ -27,12 +27,7 @@ namespace Application.Client.Dialogs.GoToLineDialog.Windows.Commands
 
         public override async Task ExecuteAsync(GoToLineWindow window)
         {
-            if (!CallerViewModel.LineNumber.HasValue)
-            {
-                throw new ArgumentNullException(nameof(CallerViewModel.LineNumber), "The value cannot be null!");
-            }
-
-            if (IsLineNumberGreaterThanLines(CallerViewModel.LineNumber.Value, _docInfoService.ContentLines))
+            if (IsLineNumberGreaterThanLines(CallerViewModel.LineNumber!.Value, _docInfoService.ContentLines))
             {
                 MessageDialogOptions dialogOptions = new() { Content = "The line number exceeds the total line number", Title = window.Title, Button = MessageBoxButton.OK, Icon = MessageBoxImage.Warning };
                 await _messageDialog.ShowDialogAsync(dialogOptions);

@@ -22,7 +22,7 @@ namespace Application.Client.Dialogs.OpenFileDialog.Models
             init => _openFileDialogResultType = value;
         }
 
-        private readonly string _filePath;
+        private readonly string? _filePath;
         public string FilePath
         {
             get
@@ -51,8 +51,8 @@ namespace Application.Client.Dialogs.OpenFileDialog.Models
             }
         }
 
-        public string OpenedFileName => Path.GetFileName(_filePath);
+        public string OpenedFileName => Path.GetFileName(_filePath)!;
 
-        public string OpenedFileNameWithoutExtension => Path.GetFileNameWithoutExtension(_filePath);
+        public string OpenedFileNameWithoutExtension => Path.GetFileNameWithoutExtension(_filePath)!;
     }
 }

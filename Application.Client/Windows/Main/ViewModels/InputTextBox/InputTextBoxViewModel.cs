@@ -90,10 +90,10 @@ namespace Application.Client.Windows.Main.ViewModels.InputTextBox
             }
         }
 
-        private TextOptionsViewModel _textOptionsViewModel;
+        private TextOptionsViewModel? _textOptionsViewModel;
         public TextOptionsViewModel TextOptionsViewModel
         {
-            get => _textOptionsViewModel;
+            get => _textOptionsViewModel!;
             set
             {
                 _textOptionsViewModel = value;

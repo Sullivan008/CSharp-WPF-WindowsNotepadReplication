@@ -4,6 +4,6 @@
     {
         public string FilePath { get; init; }
 
-        public TContentType? Content { get; init; }
+        public TContentType Content { get; init; }
     }
 }

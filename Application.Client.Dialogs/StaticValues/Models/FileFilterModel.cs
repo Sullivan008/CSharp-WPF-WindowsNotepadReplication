@@ -6,7 +6,7 @@ namespace Application.Client.Dialogs.StaticValues.Models
 {
     public class FileFilterModel
     {
-        private readonly string _filterName;
+        private readonly string? _filterName;
         public string FilterName
         {
             get
@@ -22,7 +22,7 @@ namespace Application.Client.Dialogs.StaticValues.Models
             init => _filterName = value;
         }
 
-        private readonly IReadOnlyList<string> _filters;
+        private readonly IReadOnlyList<string>? _filters;
         public IReadOnlyList<string> Filters
         {
             get
@@ -32,7 +32,7 @@ namespace Application.Client.Dialogs.StaticValues.Models
                     throw new ArgumentNullException(nameof(Filters), "The value cannot be null!");
                 }
 
-                return _filters;
+                return _filters!;
             }
 
             init => _filters = value;

@@ -11,12 +11,7 @@ namespace Application.Utilities.FileWriter
     {
         public override async Task WriteAsync<TContentType>(IFileWriterModel<TContentType> model)
         {
-            string? directoryPath = GetDirectoryPath(model.FilePath);
-
-            if (string.IsNullOrWhiteSpace(directoryPath))
-            {
-                throw new ArgumentNullException(nameof(directoryPath), "The value cannot be null!");
-            }
+            string directoryPath = GetDirectoryPath(model.FilePath)!;
 
             if (!IsExistDirectory(directoryPath))
             {

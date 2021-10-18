@@ -42,12 +42,7 @@ namespace Application.Client.Behaviors.TextBox
         {
             if (eventArgs.DataObject.GetDataPresent(DataFormats.Text))
             {
-                string? text = Convert.ToString(eventArgs.DataObject.GetData(DataFormats.Text), CultureInfo.CurrentCulture);
-
-                if (string.IsNullOrEmpty(text))
-                {
-                    throw new ArgumentNullException(nameof(text), "The value cannot be null!");
-                }
+                string text = Convert.ToString(eventArgs.DataObject.GetData(DataFormats.Text), CultureInfo.CurrentCulture)!;
 
                 if (!IsValid(text))
                 {

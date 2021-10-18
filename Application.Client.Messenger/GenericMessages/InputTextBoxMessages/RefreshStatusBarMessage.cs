@@ -3,7 +3,7 @@ using GalaSoft.MvvmLight.Messaging;
 
 namespace Application.Client.Messenger.GenericMessages.InputTextBoxMessages
 {
-    public class RefreshStatusBarMessage : GenericMessage<RefreshStatusBarMessageContent>
+    public class RefreshStatusBarMessage : GenericMessage<RefreshStatusBarMessageContent?>
     {
         public RefreshStatusBarMessage(object sender) : base(sender, default)
         { }

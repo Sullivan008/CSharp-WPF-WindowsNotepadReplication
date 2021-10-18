@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using Application.Client.Dialogs.FontDialog.Enums;
 
 namespace Application.Client.Dialogs.FontDialog.Models.Result
@@ -28,7 +29,7 @@ namespace Application.Client.Dialogs.FontDialog.Models.Result
                     throw new InvalidOperationException("It is not possible to set the font when, the font dialog result type is cancelled!");
                 }
 
-                _fontResult = value;
+                _fontResult = value!;
             }
         }
     }

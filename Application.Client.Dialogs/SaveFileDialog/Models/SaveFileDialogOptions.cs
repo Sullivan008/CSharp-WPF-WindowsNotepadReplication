@@ -6,7 +6,7 @@ namespace Application.Client.Dialogs.SaveFileDialog.Models
 {
     public class SaveFileDialogOptions
     {
-        private readonly IReadOnlyDictionary<string, IReadOnlyList<string>> _fileFilters;
+        private readonly IReadOnlyDictionary<string, IReadOnlyList<string>>? _fileFilters;
         public IReadOnlyDictionary<string, IReadOnlyList<string>> FileFilters
         {
             get
@@ -16,7 +16,7 @@ namespace Application.Client.Dialogs.SaveFileDialog.Models
                     throw new ArgumentNullException(nameof(FileFilters), "The value cannot be null!");
                 }
 
-                return _fileFilters;
+                return _fileFilters!;
             }
 
             init => _fileFilters = value;

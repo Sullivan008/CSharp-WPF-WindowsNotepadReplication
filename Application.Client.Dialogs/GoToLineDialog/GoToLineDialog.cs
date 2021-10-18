@@ -36,7 +36,7 @@ namespace Application.Client.Dialogs.GoToLineDialog
             return Task.FromResult(new GoToLineDialogResult
             {
                 GoToLineDialogResultType = GoToLineDialogResultType.GoToLine,
-                LineNumber = ((GoToLineWindowViewModel)dialogWindow.DataContext).LineNumber ?? throw new ArgumentNullException(nameof(GoToLineWindowViewModel.LineNumber), "The value cannot be null!")
+                LineNumber = ((GoToLineWindowViewModel)dialogWindow.DataContext).LineNumber!.Value
             });
         }
 

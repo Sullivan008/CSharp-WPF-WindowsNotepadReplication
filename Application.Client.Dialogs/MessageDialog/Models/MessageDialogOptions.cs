@@ -23,7 +23,7 @@ namespace Application.Client.Dialogs.MessageDialog.Models
             init => _button = value;
         }
         
-        private readonly string _title;
+        private readonly string? _title;
         public string Title
         {
             get
@@ -39,7 +39,7 @@ namespace Application.Client.Dialogs.MessageDialog.Models
             init => _title = value;
         }
 
-        private readonly string _content;
+        private readonly string? _content;
         public string Content
         {
             get

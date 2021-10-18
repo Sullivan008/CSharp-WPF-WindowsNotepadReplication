@@ -22,7 +22,7 @@ namespace Application.Client.Dialogs.SaveFileDialog.Models
             init => _saveFileDialogResultType = value;
         }
 
-        private readonly string _savedFilePath;
+        private readonly string? _savedFilePath;
         public string SavedFilePath
         {
             get
@@ -51,8 +51,8 @@ namespace Application.Client.Dialogs.SaveFileDialog.Models
             }
         }
 
-        public string SavedFileName => Path.GetFileName(_savedFilePath);
+        public string SavedFileName => Path.GetFileName(_savedFilePath!);
 
-        public string SavedFileNameWithoutExtension => Path.GetFileNameWithoutExtension(_savedFilePath);
+        public string SavedFileNameWithoutExtension => Path.GetFileNameWithoutExtension(_savedFilePath!);
     }
 }

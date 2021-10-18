@@ -1,5 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
+	<PropertyGroup>
+	  <Nullable>enable</Nullable>
+	</PropertyGroup>
+
 	<ItemGroup>
 		<Compile Remove="Models\**" />
 		<EmbeddedResource Remove="Models\**" />

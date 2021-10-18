@@ -4,7 +4,7 @@ namespace Application.Client.Dialogs.FontDialog.Models.Result
 {
     public class FontResult
     {
-        private readonly string _fontFamilyName;
+        private readonly string? _fontFamilyName;
         public string FontFamilyName
         {
             get

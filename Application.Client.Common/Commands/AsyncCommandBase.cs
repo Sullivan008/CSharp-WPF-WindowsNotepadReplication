@@ -32,7 +32,7 @@ namespace Application.Client.Common.Commands
                 return true;
             }
 
-            return !_isExecuting && CanExecute != null && CanExecute(parameter);
+            return !_isExecuting && CanExecute!(parameter);
         }
 
         async void ICommand.Execute(object? parameter)
@@ -60,7 +60,7 @@ namespace Application.Client.Common.Commands
 
         private bool _isExecuting;
 
-        protected AsyncCommandBase(TCallerViewModel? callerViewModel)
+        protected AsyncCommandBase(TCallerViewModel callerViewModel)
         {
             CanExecute = default;
             CallerViewModel = callerViewModel ?? throw new ArgumentNullException(nameof(callerViewModel));
@@ -79,7 +79,7 @@ namespace Application.Client.Common.Commands
                 return true;
             }
 
-            return !_isExecuting && CanExecute != null && CanExecute(parameter);
+            return !_isExecuting && CanExecute!(parameter);
         }
 
         async void ICommand.Execute(object? parameter)

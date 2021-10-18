@@ -18,6 +18,6 @@
 	<PropertyGroup>
 		<TargetFramework>net5.0-windows</TargetFramework>
 		<Nullable>enable</Nullable>
-		<WarningsAsErrors>CS8600</WarningsAsErrors>
+		<LangVersion>9.0</LangVersion>
 	</PropertyGroup>
 </Project>

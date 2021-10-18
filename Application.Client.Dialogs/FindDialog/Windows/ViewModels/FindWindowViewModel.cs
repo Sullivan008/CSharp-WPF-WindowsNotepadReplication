@@ -26,14 +26,14 @@ namespace Application.Client.Dialogs.FindDialog.Windows.ViewModels
             RefreshInputFieldsFromCache();
         }
 
-        private ICommand _cancelCommand;
+        private ICommand? _cancelCommand;
         public ICommand CancelCommand => _cancelCommand ??= new CancelCommand(this);
 
-        private ICommand _findNextCommand;
+        private ICommand? _findNextCommand;
         public ICommand FindNextCommand => _findNextCommand ??= new FindNextCommand(this, _validator, _findDialogSettingsService);
 
 
-        private string _findWhat;
+        private string _findWhat = string.Empty;
         public string FindWhat
         {
             get => _findWhat;
