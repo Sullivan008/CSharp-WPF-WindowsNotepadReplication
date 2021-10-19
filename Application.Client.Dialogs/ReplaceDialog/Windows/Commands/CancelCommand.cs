@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Application.Client.Common.Commands;
 using Application.Client.Dialogs.ReplaceDialog.Windows.ViewModels;
 
@@ -10,9 +9,11 @@ namespace Application.Client.Dialogs.ReplaceDialog.Windows.Commands
         public CancelCommand(ReplaceWindowViewModel callerViewModel) : base(callerViewModel)
         { }
 
-        public override Task ExecuteAsync(ReplaceWindow parameter)
+        public override async Task ExecuteAsync(ReplaceWindow window)
         {
-            throw new NotImplementedException();
+            window.Close();
+
+            await Task.CompletedTask;
         }
     }
 }
