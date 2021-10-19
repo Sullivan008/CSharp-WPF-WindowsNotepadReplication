@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using Application.Client.Dialogs.SaveFileDialog.Enums;
+using Application.Utilities.Guard;
 
 namespace Application.Client.Dialogs.SaveFileDialog.Models
 {
@@ -11,12 +12,9 @@ namespace Application.Client.Dialogs.SaveFileDialog.Models
         {
             get
             {
-                if (!_saveFileDialogResultType.HasValue)
-                {
-                    throw new ArgumentNullException(nameof(_saveFileDialogResultType), "The value cannot be null!");
-                }
-
-                return _saveFileDialogResultType.Value;
+                Guard.ThrowIfNull(_saveFileDialogResultType, nameof(SaveFileDialogResultType));
+                
+                return _saveFileDialogResultType!.Value;
             }
 
             init => _saveFileDialogResultType = value;
@@ -27,12 +25,9 @@ namespace Application.Client.Dialogs.SaveFileDialog.Models
         {
             get
             {
-                if (string.IsNullOrWhiteSpace(_savedFilePath))
-                {
-                    throw new ArgumentNullException(nameof(SavedFilePath), "The value cannot be null!");
-                }
-
-                return _savedFilePath;
+                Guard.ThrowIfNullOrWhitespace(_savedFilePath, nameof(SavedFilePath));
+                
+                return _savedFilePath!;
             }
 
             init

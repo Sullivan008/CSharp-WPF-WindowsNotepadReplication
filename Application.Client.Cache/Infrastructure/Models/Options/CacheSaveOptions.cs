@@ -1,6 +1,6 @@
-﻿using System;
-using Application.Client.Cache.Infrastructure.Enums;
+﻿using Application.Client.Cache.Infrastructure.Enums;
 using Application.Client.Cache.Infrastructure.Models.Interfaces;
+using Application.Utilities.Guard;
 using Microsoft.Extensions.Caching.Memory;
 
 namespace Application.Client.Cache.Infrastructure.Models.Options
@@ -12,12 +12,9 @@ namespace Application.Client.Cache.Infrastructure.Models.Options
         {
             get
             {
-                if (!_key.HasValue)
-                {
-                    throw new ArgumentNullException(nameof(Key), "The value cannot be null!");
-                }
-
-                return _key.Value;
+                Guard.ThrowIfNull(_key, nameof(Key));
+                
+                return _key!.Value;
             }
             init => _key = value;
         }
@@ -27,12 +24,9 @@ namespace Application.Client.Cache.Infrastructure.Models.Options
         {
             get
             {
-                if (_data == null)
-                {
-                    throw new ArgumentNullException(nameof(Data), "The value cannot be null!");
-                }
+                Guard.ThrowIfNull(_data, nameof(Data));
 
-                return _data;
+                return _data!;
             }
             init => _data = value;
         }

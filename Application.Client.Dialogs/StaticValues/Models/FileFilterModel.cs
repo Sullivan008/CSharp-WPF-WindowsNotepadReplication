@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using Application.Utilities.Extensions;
+﻿using System.Collections.Generic;
+using Application.Utilities.Guard;
 
 namespace Application.Client.Dialogs.StaticValues.Models
 {
@@ -11,12 +10,9 @@ namespace Application.Client.Dialogs.StaticValues.Models
         {
             get
             {
-                if (string.IsNullOrWhiteSpace(_filterName))
-                {
-                    throw new ArgumentNullException(nameof(FilterName), "The value cannot be null!");
-                }
+                Guard.ThrowIfNullOrWhitespace(_filterName, nameof(FilterName));
 
-                return _filterName;
+                return _filterName!;
             }
 
             init => _filterName = value;
@@ -27,11 +23,8 @@ namespace Application.Client.Dialogs.StaticValues.Models
         {
             get
             {
-                if (_filters.IsNullOrEmpty())
-                {
-                    throw new ArgumentNullException(nameof(Filters), "The value cannot be null!");
-                }
-
+                Guard.ThrowIfNullOrEmpty(_filters, nameof(Filters));
+                
                 return _filters!;
             }
 

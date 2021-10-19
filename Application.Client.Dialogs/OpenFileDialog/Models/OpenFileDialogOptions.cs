@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using Application.Utilities.Extensions;
+﻿using System.Collections.Generic;
+using Application.Utilities.Guard;
 
 namespace Application.Client.Dialogs.OpenFileDialog.Models
 {
@@ -11,10 +10,7 @@ namespace Application.Client.Dialogs.OpenFileDialog.Models
         {
             get
             {
-                if (_fileFilters.IsNullOrEmpty())
-                {
-                    throw new ArgumentNullException(nameof(FileFilters), "The value cannot be null!");
-                }
+                Guard.ThrowIfNullOrEmpty(_fileFilters, nameof(FileFilters));
 
                 return _fileFilters!;
             }

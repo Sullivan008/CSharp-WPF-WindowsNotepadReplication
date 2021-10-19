@@ -1,5 +1,5 @@
-﻿using System;
-using Application.Client.Dialogs.MessageDialog.Enums;
+﻿using Application.Client.Dialogs.MessageDialog.Enums;
+using Application.Utilities.Guard;
 
 namespace Application.Client.Dialogs.MessageDialog.Models
 {
@@ -10,12 +10,9 @@ namespace Application.Client.Dialogs.MessageDialog.Models
         {
             get
             {
-                if (!_messageDialogResultType.HasValue)
-                {
-                    throw new ArgumentNullException(nameof(_messageDialogResultType), "The value cannot be null!");
-                }
+                Guard.ThrowIfNull(_messageDialogResultType, nameof(MessageDialogResultType));
 
-                return _messageDialogResultType.Value;
+                return _messageDialogResultType!.Value;
             }
 
             init => _messageDialogResultType = value;

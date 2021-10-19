@@ -1,5 +1,5 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
+using Application.Utilities.Guard;
 
 namespace Application.Client.Dialogs.MessageDialog.Models
 {
@@ -12,12 +12,9 @@ namespace Application.Client.Dialogs.MessageDialog.Models
         {
             get
             {
-                if (!_button.HasValue)
-                {
-                    throw new ArgumentNullException(nameof(Button), "The value cannot be null!");
-                }
+                Guard.ThrowIfNull(_button, nameof(Button));
 
-                return _button.Value;
+                return _button!.Value;
             }
 
             init => _button = value;
@@ -28,12 +25,9 @@ namespace Application.Client.Dialogs.MessageDialog.Models
         {
             get
             {
-                if (string.IsNullOrWhiteSpace(_title))
-                {
-                    throw new ArgumentNullException(nameof(Title), "The value cannot be null!");
-                }
+                Guard.ThrowIfNullOrWhitespace(_title, nameof(Title));
 
-                return _title;
+                return _title!;
             }
 
             init => _title = value;
@@ -44,12 +38,9 @@ namespace Application.Client.Dialogs.MessageDialog.Models
         {
             get
             {
-                if (string.IsNullOrWhiteSpace(_content))
-                {
-                    throw new ArgumentNullException(nameof(Content), "The value cannot be null!");
-                }
+                Guard.ThrowIfNullOrWhitespace(_content, nameof(Content));
 
-                return _content;
+                return _content!;
             }
             
             init => _content = value;

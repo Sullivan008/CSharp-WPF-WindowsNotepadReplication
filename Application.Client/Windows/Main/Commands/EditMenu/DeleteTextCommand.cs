@@ -12,11 +12,11 @@ namespace Application.Client.Windows.Main.Commands.EditMenu
 
         public override async Task ExecuteAsync()
         {
-            CallerViewModel.InputTextBoxViewModel!.SelectedText = string.Empty;
+            CallerViewModel.InputTextBoxViewModel.SelectedText = string.Empty;
 
             await Task.CompletedTask;
         }
 
-        public override Predicate<object?> CanExecute => _ => !string.IsNullOrWhiteSpace(CallerViewModel.InputTextBoxViewModel!.SelectedText);
+        public override Predicate<object?> CanExecute => _ => !string.IsNullOrWhiteSpace(CallerViewModel.InputTextBoxViewModel.SelectedText);
     }
 }

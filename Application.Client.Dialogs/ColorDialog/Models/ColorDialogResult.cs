@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using Application.Client.Dialogs.ColorDialog.Enums;
+using Application.Utilities.Guard;
 
 namespace Application.Client.Dialogs.ColorDialog.Models
 {
@@ -9,14 +10,26 @@ namespace Application.Client.Dialogs.ColorDialog.Models
         private readonly ColorDialogResultType? _colorDialogResultType;
         public ColorDialogResultType ColorDialogResultType
         {
-            get => _colorDialogResultType ?? throw new ArgumentNullException(nameof(ColorDialogResultType), "The value cannot be null!");
+            get
+            {
+                Guard.ThrowIfNull(_colorDialogResultType, nameof(ColorDialogResultType));
+
+                return _colorDialogResultType!.Value;
+            }
+
             init => _colorDialogResultType = value;
         }
 
         private readonly Color? _color;
         public Color Color
         {
-            get => _color ?? throw new ArgumentNullException(nameof(Color), "The value cannot be null!");
+            get
+            {
+                Guard.ThrowIfNull(_color, nameof(Color));
+
+                return _color!.Value;
+            }
+
             init
             {
                 if (!_colorDialogResultType.HasValue)

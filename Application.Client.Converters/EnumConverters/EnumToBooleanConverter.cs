@@ -2,12 +2,13 @@
 using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
+using Application.Utilities.Guard;
 
 namespace Application.Client.Converters.EnumConverters
 {
     public class EnumToBooleanConverter : IValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public object Convert(object value, Type targetType, object? parameter, CultureInfo culture)
         {
             if (parameter == null)
             {
@@ -24,7 +25,7 @@ namespace Application.Client.Converters.EnumConverters
             return enumValue.Equals(value);
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object ConvertBack(object value, Type targetType, object? parameter, CultureInfo culture)
         {
             if (parameter == null)
             {
@@ -36,10 +37,7 @@ namespace Application.Client.Converters.EnumConverters
 
         private static bool IsExistingEnumValue(object value)
         {
-            if (value == null)
-            {
-                throw new ArgumentNullException(nameof(value), "The value cannot be null!");
-            }
+            Guard.ThrowIfNull(value, nameof(value));
 
             return Enum.IsDefined(value.GetType(), value);
         }

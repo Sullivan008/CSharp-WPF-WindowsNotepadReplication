@@ -1,5 +1,4 @@
-﻿using System;
-using Application.Utilities.FileWriter.Models.Interfaces;
+﻿using Application.Utilities.FileWriter.Models.Interfaces;
 
 namespace Application.Utilities.FileWriter.Models
 {
@@ -10,12 +9,9 @@ namespace Application.Utilities.FileWriter.Models
         {
             get
             {
-                if (string.IsNullOrWhiteSpace(_filePath))
-                {
-                    throw new ArgumentNullException(nameof(FilePath), "The value cannot be null!");
-                }
+                Guard.Guard.ThrowIfNullOrWhitespace(_filePath, nameof(FilePath));
 
-                return _filePath;
+                return _filePath!;
             }
 
             init => _filePath = value;

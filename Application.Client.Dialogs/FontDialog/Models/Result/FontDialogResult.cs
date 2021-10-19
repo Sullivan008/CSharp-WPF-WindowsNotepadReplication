@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Diagnostics.CodeAnalysis;
 using Application.Client.Dialogs.FontDialog.Enums;
+using Application.Utilities.Guard;
 
 namespace Application.Client.Dialogs.FontDialog.Models.Result
 {
@@ -9,14 +9,26 @@ namespace Application.Client.Dialogs.FontDialog.Models.Result
         private readonly FontDialogResultType? _fontDialogResultType;
         public FontDialogResultType FontDialogResultType
         {
-            get => _fontDialogResultType ?? throw new ArgumentNullException(nameof(_fontDialogResultType), "The value cannot be null!");
+            get
+            {
+                Guard.ThrowIfNull(_fontDialogResultType, nameof(FontDialogResultType));
+
+                return _fontDialogResultType!.Value;
+            }
+
             init => _fontDialogResultType = value;
         }
 
         private readonly FontResult? _fontResult;
         public FontResult FontResult
         {
-            get => _fontResult ?? throw new ArgumentNullException(nameof(FontResult), "The value cannot be null!");
+            get
+            {
+                Guard.ThrowIfNull(_fontResult, nameof(FontResult));
+
+                return _fontResult!;
+            }
+
             init
             {
                 if (!_fontDialogResultType.HasValue)

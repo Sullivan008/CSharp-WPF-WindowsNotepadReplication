@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using Application.Client.Dialogs.OpenFileDialog.Enums;
+using Application.Utilities.Guard;
 
 namespace Application.Client.Dialogs.OpenFileDialog.Models
 {
@@ -11,12 +12,9 @@ namespace Application.Client.Dialogs.OpenFileDialog.Models
         {
             get
             {
-                if (!_openFileDialogResultType.HasValue)
-                {
-                    throw new ArgumentNullException(nameof(_openFileDialogResultType), "The value cannot be null!");
-                }
+                Guard.ThrowIfNull(_openFileDialogResultType, nameof(OpenFileDialogResultType));
 
-                return _openFileDialogResultType.Value;
+                return _openFileDialogResultType!.Value;
             }
 
             init => _openFileDialogResultType = value;
@@ -27,12 +25,9 @@ namespace Application.Client.Dialogs.OpenFileDialog.Models
         {
             get
             {
-                if (string.IsNullOrWhiteSpace(_filePath))
-                {
-                    throw new ArgumentNullException(nameof(FilePath), "The value cannot be null!");
-                }
+                Guard.ThrowIfNullOrWhitespace(_filePath, nameof(FilePath));
 
-                return _filePath;
+                return _filePath!;
             }
 
             init

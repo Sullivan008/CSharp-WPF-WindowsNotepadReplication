@@ -1,5 +1,6 @@
 ﻿using System;
 using Application.Client.Dialogs.GoToLineDialog.Enums;
+using Application.Utilities.Guard;
 
 namespace Application.Client.Dialogs.GoToLineDialog.Models
 {
@@ -8,14 +9,26 @@ namespace Application.Client.Dialogs.GoToLineDialog.Models
         private readonly GoToLineDialogResultType? _goToLineDialogResultType;
         public GoToLineDialogResultType GoToLineDialogResultType
         {
-            get => _goToLineDialogResultType ?? throw new ArgumentNullException(nameof(GoToLineDialogResultType), "The value cannot be null!");
+            get
+            {
+                Guard.ThrowIfNull(_goToLineDialogResultType, nameof(GoToLineDialogResultType));
+
+                return _goToLineDialogResultType!.Value;
+            }
+
             init => _goToLineDialogResultType = value;
         }
 
         private readonly int? _lineNumber;
         public int LineNumber
         {
-            get => _lineNumber ?? throw new ArgumentNullException(nameof(LineNumber), "The value cannot be null!");
+            get
+            {
+                Guard.ThrowIfNull(_lineNumber, nameof(LineNumber));
+
+                return _lineNumber!.Value;
+            }
+
             init
             {
                 if (!_goToLineDialogResultType.HasValue)

@@ -1,9 +1,9 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using Application.Client.Cache.DataModels.DocInfo;
 using Application.Client.Cache.DataModels.DocInfo.Enums;
 using Application.Client.Cache.Infrastructure.Repository.Interfaces;
 using Application.Client.Services.DocInfo.Interfaces;
+using Application.Utilities.Guard;
 
 namespace Application.Client.Services.DocInfo
 {
@@ -112,10 +112,7 @@ namespace Application.Client.Services.DocInfo
 
         public void SetFilePath(string filePath)
         {
-            if (string.IsNullOrWhiteSpace(filePath))
-            {
-                throw new ArgumentNullException(nameof(filePath), "The value cannot be null!");
-            }
+            Guard.ThrowIfNullOrWhitespace(filePath, nameof(filePath));
 
             DocInfoDataModel docInfoData = _docInfoCacheRepository.GetItem();
             docInfoData.FileInfo.FilePath = filePath;

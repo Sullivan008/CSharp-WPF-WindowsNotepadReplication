@@ -6,7 +6,7 @@ namespace Application.Client.Converters.NullableIntConverters
 {
     public class NullableIntToStringConverter : IValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public object Convert(object? value, Type targetType, object parameter, CultureInfo culture)
         {
             int? integer = (int?)value;
 

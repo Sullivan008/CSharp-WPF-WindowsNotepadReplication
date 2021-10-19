@@ -1,8 +1,8 @@
-﻿using System;
-using System.Drawing;
+﻿using System.Drawing;
 using Application.Client.Cache.DataModels;
 using Application.Client.Cache.Infrastructure.Repository.Interfaces;
 using Application.Client.Dialogs.FontDialog.Services.Interfaces;
+using Application.Utilities.Guard;
 
 namespace Application.Client.Dialogs.FontDialog.Services
 {
@@ -46,10 +46,7 @@ namespace Application.Client.Dialogs.FontDialog.Services
 
         public void SetFont(Font font)
         {
-            if (font == null)
-            {
-                throw new ArgumentNullException(nameof(font), "The value cannot be null!");
-            }
+            Guard.ThrowIfNull(font, nameof(font));
 
             FontDialogSettingsDataModel fontDialogSettings = _fontDialogSettingCacheRepository.GetItem();
             fontDialogSettings.Font = font;

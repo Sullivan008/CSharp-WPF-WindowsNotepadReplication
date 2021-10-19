@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization;
-using Application.Utilities.Extensions.Exceptions;
 
 namespace Application.Utilities.Extensions
 {
@@ -12,7 +11,9 @@ namespace Application.Utilities.Extensions
         {
             EnumMemberAttribute enumMemberAttr = @this.GetAttribute<EnumMemberAttribute>();
 
-            return !string.IsNullOrWhiteSpace(enumMemberAttr.Value) ? enumMemberAttr.Value : throw new ArgumentNullException(nameof(@this), "The value cannot be null!");
+            Guard.Guard.ThrowIfNullOrWhitespace(enumMemberAttr.Value, nameof(enumMemberAttr.Value));
+
+            return enumMemberAttr.Value!;
         }
 
         private static TAttributeType GetAttribute<TAttributeType>(this Enum @this)
@@ -23,12 +24,9 @@ namespace Application.Utilities.Extensions
             object[] attributes = memberInfo[0].GetCustomAttributes(typeof(TAttributeType), false);
             object? attribute = attributes.SingleOrDefault();
 
-            if (attribute == null)
-            {
-                throw new MissingExpectedAttributeException($"The following attribute is missing! {nameof(TAttributeType).ToUpper()}: {typeof(TAttributeType)}");
-            }
+            Guard.Guard.ThrowIfNull(attribute, nameof(attribute));
 
-            return (TAttributeType)attribute;
+            return (TAttributeType)attribute!;
         }
     }
 }
