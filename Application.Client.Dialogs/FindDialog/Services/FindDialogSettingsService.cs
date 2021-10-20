@@ -1,5 +1,5 @@
-﻿using Application.Client.Cache.DataModels.FindDialog;
-using Application.Client.Cache.DataModels.FindDialog.Enums;
+﻿using Application.Client.Cache.DataModels.FindNext.SearchConditions;
+using Application.Client.Cache.DataModels.FindNext.SearchConditions.Enums;
 using Application.Client.Cache.Infrastructure.Repository.Interfaces;
 using Application.Client.Dialogs.FindDialog.Services.Interfaces;
 
@@ -7,20 +7,20 @@ namespace Application.Client.Dialogs.FindDialog.Services
 {
     internal class FindDialogSettingsService : IFindDialogSettingsService
     {
-        private readonly ICacheRepository<FindDialogSettingsDataModel> _findDialogSettingsRepository;
+        private readonly ICacheRepository<FindNextSearchConditionsDataModel> _findNextSearchConditionsRepository;
 
-        public FindDialogSettingsService(ICacheRepository<FindDialogSettingsDataModel> findDialogSettingsRepository)
+        public FindDialogSettingsService(ICacheRepository<FindNextSearchConditionsDataModel> findNextSearchConditionsRepository)
         {
-            _findDialogSettingsRepository = findDialogSettingsRepository;
+            _findNextSearchConditionsRepository = findNextSearchConditionsRepository;
         }
 
         public string FindWhat
         {
             get
             {
-                FindDialogSettingsDataModel findDialogSettings = _findDialogSettingsRepository.GetItem();
+                FindNextSearchConditionsDataModel findNextSearchConditions = _findNextSearchConditionsRepository.GetItem();
 
-                return findDialogSettings.FindWhat;
+                return findNextSearchConditions.FindWhat;
             }
         }
 
@@ -28,9 +28,9 @@ namespace Application.Client.Dialogs.FindDialog.Services
         {
             get
             {
-                FindDialogSettingsDataModel findDialogSettings = _findDialogSettingsRepository.GetItem();
+                FindNextSearchConditionsDataModel findNextSearchConditions = _findNextSearchConditionsRepository.GetItem();
 
-                return findDialogSettings.DirectionType;
+                return findNextSearchConditions.DirectionType;
             }
         }
 
@@ -38,34 +38,34 @@ namespace Application.Client.Dialogs.FindDialog.Services
         {
             get
             {
-                FindDialogSettingsDataModel findDialogSettings = _findDialogSettingsRepository.GetItem();
+                FindNextSearchConditionsDataModel findNextSearchConditions = _findNextSearchConditionsRepository.GetItem();
 
-                return findDialogSettings.IsMatchCase;
+                return findNextSearchConditions.IsMatchCase;
             }
         }
 
         public void SetFindWhat(string findWhat)
         {
-            FindDialogSettingsDataModel findDialogSettings = _findDialogSettingsRepository.GetItem();
-            findDialogSettings.FindWhat = findWhat;
+            FindNextSearchConditionsDataModel findNextSearchConditions = _findNextSearchConditionsRepository.GetItem();
+            findNextSearchConditions.FindWhat = findWhat;
 
-            _findDialogSettingsRepository.SetItem(findDialogSettings);
+            _findNextSearchConditionsRepository.SetItem(findNextSearchConditions);
         }
 
         public void SetDirectionType(DirectionType directionType)
         {
-            FindDialogSettingsDataModel findDialogSettings = _findDialogSettingsRepository.GetItem();
-            findDialogSettings.DirectionType = directionType;
+            FindNextSearchConditionsDataModel findNextSearchConditions = _findNextSearchConditionsRepository.GetItem();
+            findNextSearchConditions.DirectionType = directionType;
 
-            _findDialogSettingsRepository.SetItem(findDialogSettings);
+            _findNextSearchConditionsRepository.SetItem(findNextSearchConditions);
         }
 
         public void SetIsMatchCase(bool isMatchCase)
         {
-            FindDialogSettingsDataModel findDialogSettings = _findDialogSettingsRepository.GetItem();
-            findDialogSettings.IsMatchCase = isMatchCase;
+            FindNextSearchConditionsDataModel findNextSearchConditions = _findNextSearchConditionsRepository.GetItem();
+            findNextSearchConditions.IsMatchCase = isMatchCase;
 
-            _findDialogSettingsRepository.SetItem(findDialogSettings);
+            _findNextSearchConditionsRepository.SetItem(findNextSearchConditions);
         }
     }
 }

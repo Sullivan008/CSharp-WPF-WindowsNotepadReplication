@@ -1,9 +1,9 @@
-﻿using Application.Client.Cache.DataModels.FindDialog.Enums;
+﻿using Application.Client.Cache.DataModels.FindNext.SearchConditions.Enums;
 using Application.Client.Cache.Infrastructure.Models.Interfaces;
 
-namespace Application.Client.Cache.DataModels.FindDialog
+namespace Application.Client.Cache.DataModels.FindNext.SearchConditions
 {
-    public class FindDialogSettingsDataModel : ICacheDataModel
+    public class FindNextSearchConditionsDataModel : ICacheDataModel
     {
         public string FindWhat { get; set; } = string.Empty;
 

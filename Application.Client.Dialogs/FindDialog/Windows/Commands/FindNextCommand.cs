@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Application.Client.Cache.DataModels.FindNext.SearchConditions.Enums;
 using Application.Client.Common.Commands;
 using Application.Client.Dialogs.FindDialog.Services.Interfaces;
 using Application.Client.Dialogs.FindDialog.Windows.ViewModels;
@@ -35,7 +36,7 @@ namespace Application.Client.Dialogs.FindDialog.Windows.Commands
         {
             _findDialogSettingsService.SetFindWhat(CallerViewModel.FindWhat);
             _findDialogSettingsService.SetIsMatchCase(CallerViewModel.IsMatchCase);
-            _findDialogSettingsService.SetDirectionType((Cache.DataModels.FindDialog.Enums.DirectionType)CallerViewModel.DirectionType);
+            _findDialogSettingsService.SetDirectionType((DirectionType)CallerViewModel.DirectionType);
         }
     }
 }

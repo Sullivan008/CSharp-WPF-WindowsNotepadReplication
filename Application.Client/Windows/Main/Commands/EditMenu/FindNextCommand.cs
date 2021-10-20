@@ -4,8 +4,8 @@ using System.Windows;
 using Application.Client.Common.Commands;
 using Application.Client.Dialogs.MessageDialog.Interfaces;
 using Application.Client.Dialogs.MessageDialog.Models;
-using Application.Client.Services.FindDialogSearchTerms.Enums;
-using Application.Client.Services.FindDialogSearchTerms.Interfaces;
+using Application.Client.Services.FindNext.SearchConditions.Enums;
+using Application.Client.Services.FindNext.SearchConditions.Interfaces;
 using Application.Client.Windows.Main.ViewModels;
 
 namespace Application.Client.Windows.Main.Commands.EditMenu
@@ -14,12 +14,12 @@ namespace Application.Client.Windows.Main.Commands.EditMenu
     {
         private readonly IMessageDialog _messageDialog;
 
-        private readonly IFindDialogSearchTermsService _findDialogSearchTermsService;
+        private readonly IFindNextSearchConditionsService _findNextSearchConditionsService;
 
-        public FindNextCommand(MainWindowViewModel callerViewModel, IMessageDialog messageDialog, IFindDialogSearchTermsService findDialogSearchTermsService) : base(callerViewModel)
+        public FindNextCommand(MainWindowViewModel callerViewModel, IMessageDialog messageDialog, IFindNextSearchConditionsService findNextSearchConditionsService) : base(callerViewModel)
         {
             _messageDialog = messageDialog;
-            _findDialogSearchTermsService = findDialogSearchTermsService;
+            _findNextSearchConditionsService = findNextSearchConditionsService;
         }
 
         public override async Task ExecuteAsync()
@@ -29,12 +29,12 @@ namespace Application.Client.Windows.Main.Commands.EditMenu
             if (searchedTextStartIndex == -1)
             {
                 await _messageDialog.ShowDialogAsync(
-                    new MessageDialogOptions { Title = "Notepad", Content = $"'{_findDialogSearchTermsService.Text}' was not found!", Button = MessageBoxButton.OK, Icon = MessageBoxImage.Information });
+                    new MessageDialogOptions { Title = "Notepad", Content = $"'{_findNextSearchConditionsService.Text}' was not found!", Button = MessageBoxButton.OK, Icon = MessageBoxImage.Information });
             }
             else
             {
                 CallerViewModel.InputTextBoxViewModel.CaretIndex = searchedTextStartIndex;
-                CallerViewModel.InputTextBoxViewModel.SelectionLength = _findDialogSearchTermsService.Text.Length;
+                CallerViewModel.InputTextBoxViewModel.SelectionLength = _findNextSearchConditionsService.Text.Length;
             }
 
             CallerViewModel.WindowSettingsViewModel.Activated = true;
@@ -42,11 +42,11 @@ namespace Application.Client.Windows.Main.Commands.EditMenu
             await Task.CompletedTask;
         }
 
-        public override Predicate<object?> CanExecute => _ => _findDialogSearchTermsService.HasSearchTerms;
+        public override Predicate<object?> CanExecute => _ => _findNextSearchConditionsService.HasSearchTerms;
 
         private int GetSearchedTextStartIndex()
         {
-            return _findDialogSearchTermsService.DirectionType == DirectionType.Up
+            return _findNextSearchConditionsService.DirectionType == DirectionType.Up
                 ? GetNextTextStartIndex()
                 : GetPreviousTextStartIndex();
         }
@@ -63,12 +63,12 @@ namespace Application.Client.Windows.Main.Commands.EditMenu
                 StringComparison.CurrentCulture);
         }
 
-        private string Content => _findDialogSearchTermsService.IsMatchCase
+        private string Content => _findNextSearchConditionsService.IsMatchCase
             ? CallerViewModel.InputTextBoxViewModel.Content
             : CallerViewModel.InputTextBoxViewModel.Content.ToLower();
 
-        private string SearchedText => _findDialogSearchTermsService.IsMatchCase
-            ? _findDialogSearchTermsService.Text
-            : _findDialogSearchTermsService.Text.ToLower();
+        private string SearchedText => _findNextSearchConditionsService.IsMatchCase
+            ? _findNextSearchConditionsService.Text
+            : _findNextSearchConditionsService.Text.ToLower();
     }
 }

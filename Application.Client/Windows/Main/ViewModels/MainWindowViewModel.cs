@@ -12,7 +12,7 @@ using Application.Client.Dialogs.SaveFileDialog.Interfaces;
 using Application.Client.Messenger.GenericMessages.DialogMessages;
 using Application.Client.Messenger.GenericMessages.InputTextBoxMessages;
 using Application.Client.Services.DocInfo.Interfaces;
-using Application.Client.Services.FindDialogSearchTerms.Interfaces;
+using Application.Client.Services.FindNext.SearchConditions.Interfaces;
 using Application.Client.Windows.Main.Commands.EditMenu;
 using Application.Client.Windows.Main.Commands.FileMenu;
 using Application.Client.Windows.Main.Commands.FormatMenu;
@@ -50,11 +50,11 @@ namespace Application.Client.Windows.Main.ViewModels
 
         private readonly IDocInfoService _docInfoService;
         
-        private readonly IFindDialogSearchTermsService _findDialogSearchTermsService;
+        private readonly IFindNextSearchConditionsService _findNextSearchConditionsService;
 
         public MainWindowViewModel(WindowSettingsViewModel windowSettingsViewModel, InputTextBoxViewModel inputTextBoxViewModel, StatusBarViewModel statusBarViewModel, IFontDialog fontDialog,
             IFindDialog findDialog, IColorDialog colorDialog, IMessageDialog messageDialog, IReplaceDialog replaceDialog, IOpenFileDialog openFileDialog, ISaveFileDialog saveFileDialog,
-            IGoToLineDialog goToLineDialog, ITextFileWriter textFileWriter, ITextFileReader textFileReader, IDocInfoService docInfoService, IFindDialogSearchTermsService findDialogSearchTermsService)
+            IGoToLineDialog goToLineDialog, ITextFileWriter textFileWriter, ITextFileReader textFileReader, IDocInfoService docInfoService, IFindNextSearchConditionsService findNextSearchConditionsService)
         {
             _fontDialog = fontDialog;
             _findDialog = findDialog;
@@ -67,7 +67,7 @@ namespace Application.Client.Windows.Main.ViewModels
             _textFileWriter = textFileWriter;
             _textFileReader = textFileReader;
             _docInfoService = docInfoService;
-            _findDialogSearchTermsService = findDialogSearchTermsService;
+            _findNextSearchConditionsService = findNextSearchConditionsService;
 
             StatusBarViewModel = statusBarViewModel;
             InputTextBoxViewModel = inputTextBoxViewModel;
@@ -146,7 +146,7 @@ namespace Application.Client.Windows.Main.ViewModels
         public ICommand ReplaceCommand => _replaceCommand ??= new ReplaceCommand(this, _replaceDialog);
 
         private ICommand? _findNextCommand;
-        public ICommand FindNextCommand => _findNextCommand ??= new FindNextCommand(this, _messageDialog, _findDialogSearchTermsService);
+        public ICommand FindNextCommand => _findNextCommand ??= new FindNextCommand(this, _messageDialog, _findNextSearchConditionsService);
 
         private ICommand? _goToLineCommand;
         public ICommand GoToLineCommand => _goToLineCommand ??= new GoToLineCommand(this, _goToLineDialog);
