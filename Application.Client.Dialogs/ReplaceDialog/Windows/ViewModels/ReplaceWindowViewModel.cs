@@ -29,7 +29,7 @@ namespace Application.Client.Dialogs.ReplaceDialog.Windows.ViewModels
         public ICommand CancelCommand => _cancelCommand ??= new CancelCommand(this);
 
         private ICommand? _findNextCommand;
-        public ICommand FindNextCommand => _findNextCommand ??= new FindNextCommand(this);
+        public ICommand FindNextCommand => _findNextCommand ??= new FindNextCommand(this, _validator, _replaceDialogSettingsService);
 
         private ICommand? _replaceCommand;
         public ICommand ReplaceCommand => _replaceCommand ??= new ReplaceCommand(this);
