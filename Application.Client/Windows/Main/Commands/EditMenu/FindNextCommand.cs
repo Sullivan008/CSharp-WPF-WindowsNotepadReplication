@@ -42,7 +42,8 @@ namespace Application.Client.Windows.Main.Commands.EditMenu
             await Task.CompletedTask;
         }
 
-        public override Predicate<object?> CanExecute => _ => _findNextSearchConditionsService.HasSearchTerms;
+        public override Predicate<object?> CanExecute => _ => CallerViewModel.InputTextBoxViewModel.Content.Length != 0 &&
+                                                              _findNextSearchConditionsService.HasSearchTerms;
 
         private int GetSearchedTextStartIndex()
         {

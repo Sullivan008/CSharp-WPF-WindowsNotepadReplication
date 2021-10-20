@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Application.Client.Common.Commands;
 using Application.Client.Dialogs.FindDialog.Interfaces;
 using Application.Client.Windows.Main.ViewModels;
@@ -18,5 +19,7 @@ namespace Application.Client.Windows.Main.Commands.EditMenu
         {
             await _findDialog.ShowAsync();
         }
+
+        public override Predicate<object?> CanExecute => _ => CallerViewModel.InputTextBoxViewModel.Content.Length != 0;
     }
 }
