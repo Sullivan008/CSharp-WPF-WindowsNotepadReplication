@@ -1,4 +1,6 @@
 ﻿using Application.Client.Dialogs.ReplaceDialog.Interfaces;
+using Application.Client.Dialogs.ReplaceDialog.Services;
+using Application.Client.Dialogs.ReplaceDialog.Services.Interfaces;
 using Application.Client.Dialogs.ReplaceDialog.Windows;
 using Application.Client.Dialogs.ReplaceDialog.Windows.ViewModels;
 using Application.Client.Dialogs.ReplaceDialog.Windows.ViewModels.Validator;
@@ -20,6 +22,8 @@ namespace Application.Client.Dialogs.ReplaceDialog.Extensions.DependencyInjectio
             {
                 DataContext = x.GetRequiredService<ReplaceWindowViewModel>()
             });
+
+            @this.AddSingleton<IReplaceDialogSettingsService, ReplaceDialogSettingsService>();
 
             return @this;
         }

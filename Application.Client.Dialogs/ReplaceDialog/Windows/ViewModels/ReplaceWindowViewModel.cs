@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows.Input;
 using Application.Client.Common.ViewModels;
+using Application.Client.Dialogs.ReplaceDialog.Services.Interfaces;
 using Application.Client.Dialogs.ReplaceDialog.Windows.Commands;
 using FluentValidation;
 using FluentValidation.Results;
@@ -14,9 +15,14 @@ namespace Application.Client.Dialogs.ReplaceDialog.Windows.ViewModels
     {
         private readonly IValidator<ReplaceWindowViewModel> _validator;
 
-        public ReplaceWindowViewModel(IValidator<ReplaceWindowViewModel> validator)
+        private readonly IReplaceDialogSettingsService _replaceDialogSettingsService;
+
+        public ReplaceWindowViewModel(IValidator<ReplaceWindowViewModel> validator, IReplaceDialogSettingsService replaceDialogSettingsService)
         {
             _validator = validator;
+            _replaceDialogSettingsService = replaceDialogSettingsService;
+
+            RefreshInputFieldsFromCache();
         }
 
         private ICommand? _cancelCommand;
@@ -97,6 +103,13 @@ namespace Application.Client.Dialogs.ReplaceDialog.Windows.ViewModels
 
                 return string.Empty;
             }
+        }
+
+        private void RefreshInputFieldsFromCache()
+        {
+            FindWhat = _replaceDialogSettingsService.FindWhat;
+            IsMatchCase = _replaceDialogSettingsService.IsMatchCase;
+            ReplaceWith = _replaceDialogSettingsService.ReplaceWith;
         }
     }
 }
