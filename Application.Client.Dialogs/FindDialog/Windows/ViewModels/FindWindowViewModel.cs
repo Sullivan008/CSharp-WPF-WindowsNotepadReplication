@@ -6,6 +6,7 @@ using System.Windows.Input;
 using Application.Client.Common.ViewModels;
 using Application.Client.Dialogs.FindDialog.Services.Interfaces;
 using Application.Client.Dialogs.FindDialog.Windows.Commands;
+using Application.Client.Dialogs.FindDialog.Windows.Commands.Shared;
 using Application.Client.Dialogs.FindDialog.Windows.ViewModels.Enums;
 using FluentValidation;
 using FluentValidation.Results;
@@ -22,15 +23,19 @@ namespace Application.Client.Dialogs.FindDialog.Windows.ViewModels
         {
             _validator = validator;
             _findDialogSettingsService = findDialogSettingsService;
-
-            RefreshInputFieldsFromCache();
         }
 
         private ICommand? _cancelCommand;
         public ICommand CancelCommand => _cancelCommand ??= new CancelCommand(this);
 
         private ICommand? _findNextCommand;
-        public ICommand FindNextCommand => _findNextCommand ??= new FindNextCommand(this, _validator, _findDialogSettingsService);
+        public ICommand FindNextCommand => _findNextCommand ??= new FindNextCommand(this, _validator);
+
+        private ICommand? _loadDialogSettingsFromCache;
+        public ICommand LoadDialogSettingsFromCache => _loadDialogSettingsFromCache ??= new LoadDialogSettingsFromCache(this, _findDialogSettingsService);
+
+        private ICommand? _updateDialogSettingsInCache;
+        public ICommand UpdateDialogSettingsInCache => _updateDialogSettingsInCache ??= new UpdateDialogSettingsInCache(this, _findDialogSettingsService);
 
 
         private string _findWhat = string.Empty;
@@ -98,13 +103,6 @@ namespace Application.Client.Dialogs.FindDialog.Windows.ViewModels
 
                 return string.Empty;
             }
-        }
-
-        private void RefreshInputFieldsFromCache()
-        {
-            FindWhat = _findDialogSettingsService.FindWhat;
-            IsMatchCase = _findDialogSettingsService.IsMatchCase;
-            DirectionType = (DirectionType)_findDialogSettingsService.DirectionType;
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Application.Client.Services.FindNext.SearchConditions.Exceptions
+namespace Application.Client.Services.FindNextAndReplaceConditions.Exceptions
 {
     internal class UnknownCacheDirectionTypeException : Exception
     {

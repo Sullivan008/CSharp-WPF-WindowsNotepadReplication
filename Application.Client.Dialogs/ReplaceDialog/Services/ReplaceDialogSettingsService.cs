@@ -1,94 +1,42 @@
-﻿using Application.Client.Cache.DataModels.FindNext.SearchConditions;
-using Application.Client.Cache.DataModels.FindNext.SearchConditions.Enums;
-using Application.Client.Cache.DataModels.Replace.ReplacementConditions;
-using Application.Client.Cache.Infrastructure.Repository.Interfaces;
-using Application.Client.Dialogs.ReplaceDialog.Services.Interfaces;
+﻿using Application.Client.Dialogs.ReplaceDialog.Services.Interfaces;
+using Application.Client.Services.FindNextAndReplaceConditions.Enums;
+using Application.Client.Services.FindNextAndReplaceConditions.Interfaces;
 
 namespace Application.Client.Dialogs.ReplaceDialog.Services
 {
     internal class ReplaceDialogSettingsService : IReplaceDialogSettingsService
     {
-        private readonly ICacheRepository<ReplacementConditionsDataModel> _replacementConditionsRepository;
+        private readonly IFindNextAndReplaceConditionsService _findNextAndReplaceConditionsService;
 
-        private readonly ICacheRepository<FindNextSearchConditionsDataModel> _findNextSearchConditionsRepository;
-        
-        public ReplaceDialogSettingsService(ICacheRepository<ReplacementConditionsDataModel> replacementConditionsRepository,
-            ICacheRepository<FindNextSearchConditionsDataModel> findNextSearchConditionsRepository)
+        public ReplaceDialogSettingsService(IFindNextAndReplaceConditionsService findNextAndReplaceConditionsService)
         {
-            _replacementConditionsRepository = replacementConditionsRepository;
-            _findNextSearchConditionsRepository = findNextSearchConditionsRepository;
+            _findNextAndReplaceConditionsService = findNextAndReplaceConditionsService;
         }
 
-        public string FindWhat
-        {
-            get
-            {
-                FindNextSearchConditionsDataModel findNextSearchConditions = _findNextSearchConditionsRepository.GetItem();
+        public string FindWhat => _findNextAndReplaceConditionsService.FindWhat;
 
-                return findNextSearchConditions.FindWhat;
-            }
-        }
+        public string ReplaceWith => _findNextAndReplaceConditionsService.ReplaceWith;
 
-        public string ReplaceWith
-        {
-            get
-            {
-                ReplacementConditionsDataModel replacementConditions = _replacementConditionsRepository.GetItem();
-
-                return replacementConditions.ReplaceWith;
-            }
-        }
-
-        public bool IsMatchCase
-        {
-            get
-            {
-                FindNextSearchConditionsDataModel findNextSearchConditions = _findNextSearchConditionsRepository.GetItem();
-
-                return findNextSearchConditions.IsMatchCase;
-            }
-        }
-
-        public DirectionType DirectionType 
-        {
-            get
-            {
-                FindNextSearchConditionsDataModel findNextSearchConditions = _findNextSearchConditionsRepository.GetItem();
-
-                return findNextSearchConditions.DirectionType;
-            }
-        }
+        public bool IsMatchCase => _findNextAndReplaceConditionsService.IsMatchCase;
 
         public void SetFindWhat(string findWhat)
         {
-            FindNextSearchConditionsDataModel findNextSearchConditions = _findNextSearchConditionsRepository.GetItem();
-            findNextSearchConditions.FindWhat = findWhat;
-
-            _findNextSearchConditionsRepository.SetItem(findNextSearchConditions);
+            _findNextAndReplaceConditionsService.SetFindWhat(findWhat);
         }
 
         public void SetReplaceWith(string replaceWith)
         {
-            ReplacementConditionsDataModel replacementConditions = _replacementConditionsRepository.GetItem();
-            replacementConditions.ReplaceWith = replaceWith;
-
-            _replacementConditionsRepository.SetItem(replacementConditions);
+            _findNextAndReplaceConditionsService.SetReplaceWith(replaceWith);
         }
 
         public void SetIsMatchCase(bool isMatchCase)
         {
-            FindNextSearchConditionsDataModel findNextSearchConditions = _findNextSearchConditionsRepository.GetItem();
-            findNextSearchConditions.IsMatchCase = isMatchCase;
-
-            _findNextSearchConditionsRepository.SetItem(findNextSearchConditions);
+            _findNextAndReplaceConditionsService.SetIsMatchCase(isMatchCase);
         }
 
-        public void SetDirectionType(DirectionType directionType)
+        public void SetDirectionTypeToDefaultValue()
         {
-            FindNextSearchConditionsDataModel findNextSearchConditions = _findNextSearchConditionsRepository.GetItem();
-            findNextSearchConditions.DirectionType = directionType;
-
-            _findNextSearchConditionsRepository.SetItem(findNextSearchConditions);
+            _findNextAndReplaceConditionsService.SetDirectionType(DirectionType.Up);
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using Application.Client.Cache.DataModels.FindNext.SearchConditions.Enums;
+﻿using Application.Client.Dialogs.FindDialog.Windows.ViewModels.Enums;
 
 namespace Application.Client.Dialogs.FindDialog.Services.Interfaces
 {

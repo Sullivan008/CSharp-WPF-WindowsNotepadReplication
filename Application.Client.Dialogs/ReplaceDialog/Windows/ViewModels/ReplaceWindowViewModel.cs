@@ -6,6 +6,7 @@ using System.Windows.Input;
 using Application.Client.Common.ViewModels;
 using Application.Client.Dialogs.ReplaceDialog.Services.Interfaces;
 using Application.Client.Dialogs.ReplaceDialog.Windows.Commands;
+using Application.Client.Dialogs.ReplaceDialog.Windows.Commands.Shared;
 using FluentValidation;
 using FluentValidation.Results;
 
@@ -21,21 +22,25 @@ namespace Application.Client.Dialogs.ReplaceDialog.Windows.ViewModels
         {
             _validator = validator;
             _replaceDialogSettingsService = replaceDialogSettingsService;
-
-            RefreshInputFieldsFromCache();
         }
 
         private ICommand? _cancelCommand;
         public ICommand CancelCommand => _cancelCommand ??= new CancelCommand(this);
-
-        private ICommand? _findNextCommand;
-        public ICommand FindNextCommand => _findNextCommand ??= new FindNextCommand(this, _validator, _replaceDialogSettingsService);
 
         private ICommand? _replaceCommand;
         public ICommand ReplaceCommand => _replaceCommand ??= new ReplaceCommand(this);
 
         private ICommand? _replaceAllCommand;
         public ICommand ReplaceAllCommand => _replaceAllCommand ??= new ReplaceAllCommand(this);
+
+        private ICommand? _findNextCommand;
+        public ICommand FindNextCommand => _findNextCommand ??= new FindNextCommand(this, _validator);
+
+        private ICommand? _loadDialogSettingsFromCache;
+        public ICommand LoadDialogSettingsFromCache => _loadDialogSettingsFromCache ??= new LoadDialogSettingsFromCache(this, _replaceDialogSettingsService);
+
+        private ICommand? _updateDialogSettingsInCache;
+        public ICommand UpdateDialogSettingsInCache => _updateDialogSettingsInCache ??= new UpdateDialogSettingsInCache(this, _replaceDialogSettingsService);
 
 
         private string _findWhat = string.Empty;
@@ -103,13 +108,6 @@ namespace Application.Client.Dialogs.ReplaceDialog.Windows.ViewModels
 
                 return string.Empty;
             }
-        }
-
-        private void RefreshInputFieldsFromCache()
-        {
-            FindWhat = _replaceDialogSettingsService.FindWhat;
-            IsMatchCase = _replaceDialogSettingsService.IsMatchCase;
-            ReplaceWith = _replaceDialogSettingsService.ReplaceWith;
         }
     }
 }

@@ -12,7 +12,7 @@ using Application.Client.Dialogs.SaveFileDialog.Interfaces;
 using Application.Client.Messenger.GenericMessages.DialogMessages;
 using Application.Client.Messenger.GenericMessages.InputTextBoxMessages;
 using Application.Client.Services.DocInfo.Interfaces;
-using Application.Client.Services.FindNext.SearchConditions.Interfaces;
+using Application.Client.Services.FindNextAndReplaceConditions.Interfaces;
 using Application.Client.Windows.Main.Commands.EditMenu;
 using Application.Client.Windows.Main.Commands.FileMenu;
 using Application.Client.Windows.Main.Commands.FormatMenu;
@@ -50,11 +50,11 @@ namespace Application.Client.Windows.Main.ViewModels
 
         private readonly IDocInfoService _docInfoService;
         
-        private readonly IFindNextSearchConditionsService _findNextSearchConditionsService;
+        private readonly IFindNextAndReplaceConditionsService _findNextSearchConditionsService;
 
         public MainWindowViewModel(WindowSettingsViewModel windowSettingsViewModel, InputTextBoxViewModel inputTextBoxViewModel, StatusBarViewModel statusBarViewModel, IFontDialog fontDialog,
             IFindDialog findDialog, IColorDialog colorDialog, IMessageDialog messageDialog, IReplaceDialog replaceDialog, IOpenFileDialog openFileDialog, ISaveFileDialog saveFileDialog,
-            IGoToLineDialog goToLineDialog, ITextFileWriter textFileWriter, ITextFileReader textFileReader, IDocInfoService docInfoService, IFindNextSearchConditionsService findNextSearchConditionsService)
+            IGoToLineDialog goToLineDialog, ITextFileWriter textFileWriter, ITextFileReader textFileReader, IDocInfoService docInfoService, IFindNextAndReplaceConditionsService findNextSearchConditionsService)
         {
             _fontDialog = fontDialog;
             _findDialog = findDialog;

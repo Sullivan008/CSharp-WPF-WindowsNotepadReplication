@@ -4,8 +4,8 @@ using System.Windows;
 using Application.Client.Common.Commands;
 using Application.Client.Dialogs.MessageDialog.Interfaces;
 using Application.Client.Dialogs.MessageDialog.Models;
-using Application.Client.Services.FindNext.SearchConditions.Enums;
-using Application.Client.Services.FindNext.SearchConditions.Interfaces;
+using Application.Client.Services.FindNextAndReplaceConditions.Enums;
+using Application.Client.Services.FindNextAndReplaceConditions.Interfaces;
 using Application.Client.Windows.Main.ViewModels;
 
 namespace Application.Client.Windows.Main.Commands.EditMenu
@@ -14,9 +14,9 @@ namespace Application.Client.Windows.Main.Commands.EditMenu
     {
         private readonly IMessageDialog _messageDialog;
 
-        private readonly IFindNextSearchConditionsService _findNextSearchConditionsService;
+        private readonly IFindNextAndReplaceConditionsService _findNextSearchConditionsService;
 
-        public FindNextCommand(MainWindowViewModel callerViewModel, IMessageDialog messageDialog, IFindNextSearchConditionsService findNextSearchConditionsService) : base(callerViewModel)
+        public FindNextCommand(MainWindowViewModel callerViewModel, IMessageDialog messageDialog, IFindNextAndReplaceConditionsService findNextSearchConditionsService) : base(callerViewModel)
         {
             _messageDialog = messageDialog;
             _findNextSearchConditionsService = findNextSearchConditionsService;
@@ -29,12 +29,12 @@ namespace Application.Client.Windows.Main.Commands.EditMenu
             if (searchedTextStartIndex == -1)
             {
                 await _messageDialog.ShowDialogAsync(
-                    new MessageDialogOptions { Title = "Notepad", Content = $"'{_findNextSearchConditionsService.Text}' was not found!", Button = MessageBoxButton.OK, Icon = MessageBoxImage.Information });
+                    new MessageDialogOptions { Title = "Notepad", Content = $"'{_findNextSearchConditionsService.FindWhat}' was not found!", Button = MessageBoxButton.OK, Icon = MessageBoxImage.Information });
             }
             else
             {
                 CallerViewModel.InputTextBoxViewModel.CaretIndex = searchedTextStartIndex;
-                CallerViewModel.InputTextBoxViewModel.SelectionLength = _findNextSearchConditionsService.Text.Length;
+                CallerViewModel.InputTextBoxViewModel.SelectionLength = _findNextSearchConditionsService.FindWhat.Length;
             }
 
             CallerViewModel.WindowSettingsViewModel.Activated = true;
@@ -69,7 +69,7 @@ namespace Application.Client.Windows.Main.Commands.EditMenu
             : CallerViewModel.InputTextBoxViewModel.Content.ToLower();
 
         private string SearchedText => _findNextSearchConditionsService.IsMatchCase
-            ? _findNextSearchConditionsService.Text
-            : _findNextSearchConditionsService.Text.ToLower();
+            ? _findNextSearchConditionsService.FindWhat
+            : _findNextSearchConditionsService.FindWhat.ToLower();
     }
 }

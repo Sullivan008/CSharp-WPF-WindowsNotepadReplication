@@ -1,71 +1,68 @@
-﻿using Application.Client.Cache.DataModels.FindNext.SearchConditions;
-using Application.Client.Cache.DataModels.FindNext.SearchConditions.Enums;
-using Application.Client.Cache.Infrastructure.Repository.Interfaces;
+﻿using Application.Client.Dialogs.FindDialog.Services.Exceptions;
 using Application.Client.Dialogs.FindDialog.Services.Interfaces;
+using Application.Client.Dialogs.FindDialog.Windows.ViewModels.Enums;
+using Application.Client.Services.FindNextAndReplaceConditions.Interfaces;
 
 namespace Application.Client.Dialogs.FindDialog.Services
 {
     internal class FindDialogSettingsService : IFindDialogSettingsService
     {
-        private readonly ICacheRepository<FindNextSearchConditionsDataModel> _findNextSearchConditionsRepository;
+        private readonly IFindNextAndReplaceConditionsService _findNextAndReplaceConditionsService;
 
-        public FindDialogSettingsService(ICacheRepository<FindNextSearchConditionsDataModel> findNextSearchConditionsRepository)
+        public FindDialogSettingsService(IFindNextAndReplaceConditionsService findNextAndReplaceConditionsService)
         {
-            _findNextSearchConditionsRepository = findNextSearchConditionsRepository;
+            _findNextAndReplaceConditionsService = findNextAndReplaceConditionsService;
         }
 
-        public string FindWhat
-        {
-            get
-            {
-                FindNextSearchConditionsDataModel findNextSearchConditions = _findNextSearchConditionsRepository.GetItem();
-
-                return findNextSearchConditions.FindWhat;
-            }
-        }
+        public string FindWhat => _findNextAndReplaceConditionsService.FindWhat;
 
         public DirectionType DirectionType
         {
             get
             {
-                FindNextSearchConditionsDataModel findNextSearchConditions = _findNextSearchConditionsRepository.GetItem();
+                DirectionType result = MapServiceDirectionTypeToDialogDirectionType(_findNextAndReplaceConditionsService.DirectionType);
 
-                return findNextSearchConditions.DirectionType;
+                return result;
             }
         }
 
-        public bool IsMatchCase
+        private static DirectionType MapServiceDirectionTypeToDialogDirectionType(Client.Services.FindNextAndReplaceConditions.Enums.DirectionType directionType)
         {
-            get
+            return directionType switch
             {
-                FindNextSearchConditionsDataModel findNextSearchConditions = _findNextSearchConditionsRepository.GetItem();
-
-                return findNextSearchConditions.IsMatchCase;
-            }
+                Client.Services.FindNextAndReplaceConditions.Enums.DirectionType.Up => DirectionType.Up,
+                Client.Services.FindNextAndReplaceConditions.Enums.DirectionType.Down => DirectionType.Down,
+                _ => throw new UnknownServiceDirectionTypeException("An unknown error occurred while reading the direction type from service data!")
+            };
         }
+
+        public bool IsMatchCase => _findNextAndReplaceConditionsService.IsMatchCase;
 
         public void SetFindWhat(string findWhat)
         {
-            FindNextSearchConditionsDataModel findNextSearchConditions = _findNextSearchConditionsRepository.GetItem();
-            findNextSearchConditions.FindWhat = findWhat;
-
-            _findNextSearchConditionsRepository.SetItem(findNextSearchConditions);
+            _findNextAndReplaceConditionsService.SetFindWhat(findWhat);
         }
 
         public void SetDirectionType(DirectionType directionType)
         {
-            FindNextSearchConditionsDataModel findNextSearchConditions = _findNextSearchConditionsRepository.GetItem();
-            findNextSearchConditions.DirectionType = directionType;
+            Client.Services.FindNextAndReplaceConditions.Enums.DirectionType result = MapDialogDirectionTypeToServiceDirectionType(directionType);
+            
+            _findNextAndReplaceConditionsService.SetDirectionType(result);
+        }
 
-            _findNextSearchConditionsRepository.SetItem(findNextSearchConditions);
+        private static Client.Services.FindNextAndReplaceConditions.Enums.DirectionType MapDialogDirectionTypeToServiceDirectionType(DirectionType directionType)
+        {
+            return directionType switch
+            {
+                DirectionType.Up => Client.Services.FindNextAndReplaceConditions.Enums.DirectionType.Up,
+                DirectionType.Down => Client.Services.FindNextAndReplaceConditions.Enums.DirectionType.Down,
+                _ => throw new UnknownDialogDirectionTypeException("An unknown error occurred while reading the direction type from service data!")
+            };
         }
 
         public void SetIsMatchCase(bool isMatchCase)
         {
-            FindNextSearchConditionsDataModel findNextSearchConditions = _findNextSearchConditionsRepository.GetItem();
-            findNextSearchConditions.IsMatchCase = isMatchCase;
-
-            _findNextSearchConditionsRepository.SetItem(findNextSearchConditions);
+            _findNextAndReplaceConditionsService.SetIsMatchCase(isMatchCase);
         }
     }
 }

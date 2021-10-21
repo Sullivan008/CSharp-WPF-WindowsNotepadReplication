@@ -1,4 +1,4 @@
-﻿namespace Application.Client.Services.FindNext.SearchConditions.Enums
+﻿namespace Application.Client.Services.FindNextAndReplaceConditions.Enums
 {
     public enum DirectionType
     {

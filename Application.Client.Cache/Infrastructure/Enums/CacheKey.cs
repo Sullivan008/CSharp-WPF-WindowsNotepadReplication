@@ -13,10 +13,7 @@ namespace Application.Client.Cache.Infrastructure.Enums
         [EnumMember(Value = "FONT_DIALOG_SETTINGS")]
         FontDialogSettings = 3,
 
-        [EnumMember(Value = "FIND_NEXT_SEARCH_CONDITIONS")]
-        FindNextSearchConditions = 4,
-
-        [EnumMember(Value = "REPLACEMENT_CONDITIONS")]
-        ReplacementConditions = 5
+        [EnumMember(Value = "FIND_NEXT_AND_REPLACE_CONDITIONS")]
+        FindNextAndReplaceConditions = 4,
     }
 }

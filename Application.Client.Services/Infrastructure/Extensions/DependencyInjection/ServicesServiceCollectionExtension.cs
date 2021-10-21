@@ -1,7 +1,7 @@
 ﻿using Application.Client.Services.DocInfo;
 using Application.Client.Services.DocInfo.Interfaces;
-using Application.Client.Services.FindNext.SearchConditions;
-using Application.Client.Services.FindNext.SearchConditions.Interfaces;
+using Application.Client.Services.FindNextAndReplaceConditions;
+using Application.Client.Services.FindNextAndReplaceConditions.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Application.Client.Services.Infrastructure.Extensions.DependencyInjection
@@ -11,7 +11,7 @@ namespace Application.Client.Services.Infrastructure.Extensions.DependencyInject
         public static IServiceCollection AddServices(this IServiceCollection @this)
         {
             @this.AddSingleton<IDocInfoService, DocInfoService>();
-            @this.AddSingleton<IFindNextSearchConditionsService, FindNextSearchConditionsService>();
+            @this.AddSingleton<IFindNextAndReplaceConditionsService, FindNextAndReplaceConditionsService>();
 
             return @this;
         }
