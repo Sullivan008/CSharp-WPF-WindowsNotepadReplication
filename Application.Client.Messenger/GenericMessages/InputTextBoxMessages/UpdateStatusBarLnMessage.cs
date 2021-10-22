@@ -3,9 +3,9 @@ using GalaSoft.MvvmLight.Messaging;
 
 namespace Application.Client.Messenger.GenericMessages.InputTextBoxMessages
 {
-    public class RefreshStatusBarMessage : GenericMessage<RefreshStatusBarMessageContent?>
+    public class UpdateStatusBarLnMessage : GenericMessage<UpdateStatusBarLnMessageContent?>
     {
-        public RefreshStatusBarMessage(object sender) : base(sender, default)
+        public UpdateStatusBarLnMessage(object sender) : base(sender, default)
         { }
     }
 }

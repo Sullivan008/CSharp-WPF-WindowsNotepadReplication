@@ -26,6 +26,8 @@ namespace Application.Client.Windows.Main.ViewModels.InputTextBox
                 _content = value;
                 OnPropertyChanged();
 
+                _docInfoService.SetContentLength(_content.Length);
+
                 if (!_docInfoService.IsModifiedDocument)
                 {
                     _docInfoService.SetModifiedDocumentState();
@@ -41,8 +43,6 @@ namespace Application.Client.Windows.Main.ViewModels.InputTextBox
             {
                 _selectedText = value;
                 OnPropertyChanged();
-
-                GalaSoft.MvvmLight.Messaging.Messenger.Default.Send(new RefreshStatusBarMessage(this));
             }
         }
 
@@ -54,6 +54,33 @@ namespace Application.Client.Windows.Main.ViewModels.InputTextBox
             {
                 _caretIndex = value;
                 OnPropertyChanged();
+            }
+        }
+
+        private int _lineIndex;
+        public int LineIndex
+        {
+            get => _lineIndex;
+            set
+            {
+                _lineIndex = value;
+                OnPropertyChanged();
+
+                _docInfoService.SetContentLines(_lineIndex + 1);
+                GalaSoft.MvvmLight.Messaging.Messenger.Default.Send(new UpdateStatusBarLnMessage(this));
+            }
+        }
+
+        private int _columnIndex;
+        public int ColumnIndex
+        {
+            get => _columnIndex;
+            set
+            {
+                _columnIndex = value;
+                OnPropertyChanged();
+
+                GalaSoft.MvvmLight.Messaging.Messenger.Default.Send(new UpdateStatusBarColMessage(this));
             }
         }
 

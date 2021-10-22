@@ -73,6 +73,21 @@ namespace Application.Client.Windows.Main.ViewModels
             InputTextBoxViewModel = inputTextBoxViewModel;
             WindowSettingsViewModel = windowSettingsViewModel;
 
+            InitMessengerRegistrations();
+        }
+
+        private void InitMessengerRegistrations()
+        {
+            GalaSoft.MvvmLight.Messaging.Messenger.Default.Register<UpdateStatusBarLnMessage>(this, message =>
+            {
+                Dispatcher.CurrentDispatcher.Invoke(() => StatusBarViewModel.OnUpdateLn(((InputTextBoxViewModel)message.Sender).LineIndex));
+            });
+
+            GalaSoft.MvvmLight.Messaging.Messenger.Default.Register<UpdateStatusBarColMessage>(this, message =>
+            {
+                Dispatcher.CurrentDispatcher.Invoke(() => StatusBarViewModel.OnUpdateCol(((InputTextBoxViewModel)message.Sender).ColumnIndex));
+            });
+
             GalaSoft.MvvmLight.Messaging.Messenger.Default.Register<FindNextMessage>(this, _ =>
             {
                 Dispatcher.CurrentDispatcher.Invoke(() =>
@@ -83,12 +98,7 @@ namespace Application.Client.Windows.Main.ViewModels
                     }
                 });
             });
-
-            GalaSoft.MvvmLight.Messaging.Messenger.Default.Register<RefreshStatusBarMessage>(this, message =>
-            {
-                Dispatcher.CurrentDispatcher.Invoke(() => StatusBarViewModel.RefreshOutputData(((InputTextBoxViewModel)message.Sender).Content));
-            });
-
+            
             GalaSoft.MvvmLight.Messaging.Messenger.Default.Register<ReplaceNextMessage>(this, _ =>
             {
                 Dispatcher.CurrentDispatcher.Invoke(() =>

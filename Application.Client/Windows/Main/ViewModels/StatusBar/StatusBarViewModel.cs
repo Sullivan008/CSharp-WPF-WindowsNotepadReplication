@@ -1,18 +1,12 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using Application.Client.Common.ViewModels;
-using Application.Client.Services.DocInfo.Interfaces;
 
 namespace Application.Client.Windows.Main.ViewModels.StatusBar
 {
     public class StatusBarViewModel : ViewModelBase
     {
-        private readonly IDocInfoService _docInfoService;
-
-        public StatusBarViewModel(IDocInfoService docInfoService)
-        {
-            _docInfoService = docInfoService;
-        }
+        public StatusBarViewModel()
+        { }
 
         private Visibility _visibility = Visibility.Visible;
         public Visibility Visibility
@@ -25,42 +19,36 @@ namespace Application.Client.Windows.Main.ViewModels.StatusBar
             }
         }
 
-        private int _length;
-        public int Length
+        private int _ln = default(int) + 1;
+        public int Ln
         {
-            get => _length;
+            get => _ln;
             private set
             {
-                _length = value;
+                _ln = value;
                 OnPropertyChanged();
             }
         }
 
-        private int _lines = default(int) + 1;
-        public int Lines
+        private int _col = default(int) + 1;
+        public int Col
         {
-            get => _lines;
+            get => _col;
             private set
             {
-                _lines = value;
+                _col = value;
                 OnPropertyChanged();
             }
         }
 
-        public void RefreshOutputData(string content)
+        public void OnUpdateLn(int lineIndex)
         {
-            Lines = GetContentLines(content);
-            Length = GetContentLength(content);
-
-            _docInfoService.SetContentLines(Lines);
-            _docInfoService.SetContentLength(Length);
+            Ln = lineIndex + 1;
         }
 
-        private static int GetContentLength(string content) => content.Length;
-
-        private static int GetContentLines(string content)
+        public void OnUpdateCol(int columnIndex)
         {
-            return content.Split(Environment.NewLine).Length;
+            Col = columnIndex + 1;
         }
     }
 }

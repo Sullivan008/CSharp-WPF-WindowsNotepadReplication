@@ -27,7 +27,7 @@ namespace Application.Client.Dialogs.GoToLineDialog.Windows.Commands
 
         public override async Task ExecuteAsync(GoToLineWindow window)
         {
-            if (IsLineNumberGreaterThanLines(CallerViewModel.LineNumber!.Value, _docInfoService.ContentLines))
+            if (IsLineNumberGreaterThanDocumentLines(CallerViewModel.LineNumber!.Value, _docInfoService.ContentLines))
             {
                 MessageDialogOptions dialogOptions = new() { Content = "The line number exceeds the total line number", Title = window.Title, Button = MessageBoxButton.OK, Icon = MessageBoxImage.Warning };
                 await _messageDialog.ShowDialogAsync(dialogOptions);
@@ -38,9 +38,9 @@ namespace Application.Client.Dialogs.GoToLineDialog.Windows.Commands
             window.DialogResult = true;
         }
 
-        private static bool IsLineNumberGreaterThanLines(int lineNumber, int lines)
+        private static bool IsLineNumberGreaterThanDocumentLines(int lineNumber, int documentLines)
         {
-            return lineNumber > lines;
+            return lineNumber > documentLines;
         }
 
         public override Predicate<object?> CanExecute => _ => _validator.Validate(CallerViewModel).IsValid;
