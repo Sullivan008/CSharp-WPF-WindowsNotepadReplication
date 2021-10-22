@@ -54,22 +54,30 @@ namespace Application.Client.Windows.Main.Commands.EditMenu
 
         private int GetNextTextStartIndex()
         {
-            return Content.IndexOf(SearchedText, CallerViewModel.InputTextBoxViewModel.CaretIndex + CallerViewModel.InputTextBoxViewModel.SelectionLength,
-                StringComparison.CurrentCulture);
+            if (_findNextAndReplaceConditionsService.IsMatchCase)
+            {
+                return CallerViewModel.InputTextBoxViewModel.Content.IndexOf(_findNextAndReplaceConditionsService.FindWhat,
+                                                                             CallerViewModel.InputTextBoxViewModel.CaretIndex + CallerViewModel.InputTextBoxViewModel.SelectionLength,
+                                                                             StringComparison.CurrentCulture);
+            }
+
+            return CallerViewModel.InputTextBoxViewModel.Content.IndexOf(_findNextAndReplaceConditionsService.FindWhat,
+                                                                         CallerViewModel.InputTextBoxViewModel.CaretIndex + CallerViewModel.InputTextBoxViewModel.SelectionLength,
+                                                                         StringComparison.CurrentCultureIgnoreCase);
         }
 
         private int GetPreviousTextStartIndex()
         {
-            return Content.LastIndexOf(SearchedText, CallerViewModel.InputTextBoxViewModel.CaretIndex,
-                StringComparison.CurrentCulture);
+            if (_findNextAndReplaceConditionsService.IsMatchCase)
+            {
+                return CallerViewModel.InputTextBoxViewModel.Content.LastIndexOf(_findNextAndReplaceConditionsService.FindWhat,
+                                                                                 CallerViewModel.InputTextBoxViewModel.CaretIndex,
+                                                                                 StringComparison.CurrentCulture);
+            }
+
+            return CallerViewModel.InputTextBoxViewModel.Content.LastIndexOf(_findNextAndReplaceConditionsService.FindWhat,
+                                                                             CallerViewModel.InputTextBoxViewModel.CaretIndex,
+                                                                             StringComparison.CurrentCultureIgnoreCase);
         }
-
-        private string Content => _findNextAndReplaceConditionsService.IsMatchCase
-            ? CallerViewModel.InputTextBoxViewModel.Content
-            : CallerViewModel.InputTextBoxViewModel.Content.ToLower();
-
-        private string SearchedText => _findNextAndReplaceConditionsService.IsMatchCase
-            ? _findNextAndReplaceConditionsService.FindWhat
-            : _findNextAndReplaceConditionsService.FindWhat.ToLower();
     }
 }
