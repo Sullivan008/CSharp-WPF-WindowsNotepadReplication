@@ -33,5 +33,8 @@ namespace Application.Client.Windows.Main.Commands.EditMenu
 
             await Task.CompletedTask;
         }
+
+        public override Predicate<object?> CanExecute => _ => CallerViewModel.InputTextBoxViewModel.Content.Length != 0 &&
+                                                              _findNextAndReplaceConditionsService.HasSearchTerms;
     }
 }

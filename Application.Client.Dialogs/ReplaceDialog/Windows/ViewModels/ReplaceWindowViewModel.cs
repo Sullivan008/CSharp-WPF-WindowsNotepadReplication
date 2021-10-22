@@ -28,13 +28,13 @@ namespace Application.Client.Dialogs.ReplaceDialog.Windows.ViewModels
         public ICommand CancelCommand => _cancelCommand ??= new CancelCommand(this);
 
         private ICommand? _replaceCommand;
-        public ICommand ReplaceCommand => _replaceCommand ??= new ReplaceCommand(this);
-
-        private ICommand? _replaceAllCommand;
-        public ICommand ReplaceAllCommand => _replaceAllCommand ??= new ReplaceAllCommand(this, _validator);
+        public ICommand ReplaceCommand => _replaceCommand ??= new ReplaceCommand(this, _validator);
 
         private ICommand? _findNextCommand;
         public ICommand FindNextCommand => _findNextCommand ??= new FindNextCommand(this, _validator);
+
+        private ICommand? _replaceAllCommand;
+        public ICommand ReplaceAllCommand => _replaceAllCommand ??= new ReplaceAllCommand(this, _validator);
 
         private ICommand? _loadDialogSettingsFromCache;
         public ICommand LoadDialogSettingsFromCache => _loadDialogSettingsFromCache ??= new LoadDialogSettingsFromCache(this, _replaceDialogSettingsService);

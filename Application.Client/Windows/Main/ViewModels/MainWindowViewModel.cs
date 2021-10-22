@@ -89,6 +89,17 @@ namespace Application.Client.Windows.Main.ViewModels
                 Dispatcher.CurrentDispatcher.Invoke(() => StatusBarViewModel.RefreshOutputData(((InputTextBoxViewModel)message.Sender).Content));
             });
 
+            GalaSoft.MvvmLight.Messaging.Messenger.Default.Register<ReplaceNextMessage>(this, _ =>
+            {
+                Dispatcher.CurrentDispatcher.Invoke(() =>
+                {
+                    if (ReplaceNextCommand.CanExecute(default))
+                    {
+                        ReplaceNextCommand.Execute(default);
+                    }
+                });
+            });
+
             GalaSoft.MvvmLight.Messaging.Messenger.Default.Register<ReplaceAllMessage>(this, _ =>
             {
                 Dispatcher.CurrentDispatcher.Invoke(() =>
@@ -157,6 +168,8 @@ namespace Application.Client.Windows.Main.ViewModels
         public ICommand ReplaceCommand => _replaceCommand ??= new ReplaceCommand(this, _replaceDialog);
 
         private ICommand ReplaceAllCommand => new ReplaceAllCommand(this, _findNextSearchConditionsService);
+
+        private ICommand ReplaceNextCommand => new ReplaceNextCommand(this, _messageDialog, _findNextSearchConditionsService);
 
         private ICommand? _findNextCommand;
         public ICommand FindNextCommand => _findNextCommand ??= new FindNextCommand(this, _messageDialog, _findNextSearchConditionsService);
