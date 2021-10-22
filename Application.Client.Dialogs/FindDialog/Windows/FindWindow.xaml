@@ -170,6 +170,11 @@
                     <Button.Content>
                         <TextBlock HorizontalAlignment="Center"><Underline>F</Underline>ind next</TextBlock>
                     </Button.Content>
+                    <behaviors:Interaction.Triggers>
+                        <behaviors:EventTrigger EventName="Click">
+                            <behaviors:InvokeCommandAction Command="{Binding UpdateDialogSettingsInCache}"/>
+                        </behaviors:EventTrigger>
+                    </behaviors:Interaction.Triggers>
                 </Button>
                 <Button Content="Cancel" Width="70" Height="23" Margin="5,5,5,5" Command="{Binding CancelCommand}" 
                         CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}">

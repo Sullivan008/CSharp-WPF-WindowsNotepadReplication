@@ -88,6 +88,17 @@ namespace Application.Client.Windows.Main.ViewModels
             {
                 Dispatcher.CurrentDispatcher.Invoke(() => StatusBarViewModel.RefreshOutputData(((InputTextBoxViewModel)message.Sender).Content));
             });
+
+            GalaSoft.MvvmLight.Messaging.Messenger.Default.Register<ReplaceAllMessage>(this, _ =>
+            {
+                Dispatcher.CurrentDispatcher.Invoke(() =>
+                {
+                    if (ReplaceAllCommand.CanExecute(default))
+                    {
+                        ReplaceAllCommand.Execute(default);
+                    }
+                });
+            });
         }
 
         private static WindowSettingsViewModel? _windowSettingsViewModel;
@@ -145,9 +156,11 @@ namespace Application.Client.Windows.Main.ViewModels
         private ICommand? _replaceCommand;
         public ICommand ReplaceCommand => _replaceCommand ??= new ReplaceCommand(this, _replaceDialog);
 
+        private ICommand ReplaceAllCommand => new ReplaceAllCommand(this, _findNextSearchConditionsService);
+
         private ICommand? _findNextCommand;
         public ICommand FindNextCommand => _findNextCommand ??= new FindNextCommand(this, _messageDialog, _findNextSearchConditionsService);
-
+        
         private ICommand? _goToLineCommand;
         public ICommand GoToLineCommand => _goToLineCommand ??= new GoToLineCommand(this, _goToLineDialog);
 
@@ -156,6 +169,7 @@ namespace Application.Client.Windows.Main.ViewModels
 
         private ICommand? _putDateTimeTextCommand;
         public ICommand PutDateTimeTextCommand => _putDateTimeTextCommand ??= new PutDateTimeTextCommand(this);
+
 
 
         private ICommand? _fontsCommand;

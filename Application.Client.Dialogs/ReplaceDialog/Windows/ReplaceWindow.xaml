@@ -130,16 +130,31 @@
                     <Button.Content>
                         <TextBlock HorizontalAlignment="Center"><Underline>F</Underline>ind next</TextBlock>
                     </Button.Content>
+                    <behaviors:Interaction.Triggers>
+                        <behaviors:EventTrigger EventName="Click">
+                            <behaviors:InvokeCommandAction Command="{Binding UpdateDialogSettingsInCache}"/>
+                        </behaviors:EventTrigger>
+                    </behaviors:Interaction.Triggers>
                 </Button>
                 <Button Width="70" Height="23" Margin="5,5,5,5" Command="{Binding ReplaceCommand}">
                     <Button.Content>
                         <TextBlock HorizontalAlignment="Center"><Underline>R</Underline>eplace</TextBlock>
                     </Button.Content>
+                    <behaviors:Interaction.Triggers>
+                        <behaviors:EventTrigger EventName="Click">
+                            <behaviors:InvokeCommandAction Command="{Binding UpdateDialogSettingsInCache}"/>
+                        </behaviors:EventTrigger>
+                    </behaviors:Interaction.Triggers>
                 </Button>
                 <Button Width="70" Height="23" Margin="5,5,5,5" Command="{Binding ReplaceAllCommand}">
                     <Button.Content>
                         <TextBlock HorizontalAlignment="Center">Replace <Underline>A</Underline>ll</TextBlock>
                     </Button.Content>
+                    <behaviors:Interaction.Triggers>
+                        <behaviors:EventTrigger EventName="Click">
+                            <behaviors:InvokeCommandAction Command="{Binding UpdateDialogSettingsInCache}"/>
+                        </behaviors:EventTrigger>
+                    </behaviors:Interaction.Triggers>
                 </Button>
                 <Button Content="Cancel" Width="70" Height="23" Margin="5,5,5,5" Command="{Binding CancelCommand}" 
                         CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}">

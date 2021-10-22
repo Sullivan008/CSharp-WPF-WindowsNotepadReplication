@@ -86,7 +86,7 @@ namespace Application.Client.Services.FindNextAndReplaceConditions
         public void SetReplaceWith(string replaceWith)
         {
             FindNextAndReplaceConditionsDataModel findNextAndReplaceConditions = _findNextAndReplaceConditionsCacheRepository.GetItem();
-            findNextAndReplaceConditions.FindWhat = replaceWith;
+            findNextAndReplaceConditions.ReplaceWith = replaceWith;
 
             _findNextAndReplaceConditionsCacheRepository.SetItem(findNextAndReplaceConditions);
         }

@@ -14,12 +14,12 @@ namespace Application.Client.Windows.Main.Commands.EditMenu
     {
         private readonly IMessageDialog _messageDialog;
 
-        private readonly IFindNextAndReplaceConditionsService _findNextSearchConditionsService;
+        private readonly IFindNextAndReplaceConditionsService _findNextAndReplaceConditionsService;
 
-        public FindNextCommand(MainWindowViewModel callerViewModel, IMessageDialog messageDialog, IFindNextAndReplaceConditionsService findNextSearchConditionsService) : base(callerViewModel)
+        public FindNextCommand(MainWindowViewModel callerViewModel, IMessageDialog messageDialog, IFindNextAndReplaceConditionsService findNextAndReplaceConditionsService) : base(callerViewModel)
         {
             _messageDialog = messageDialog;
-            _findNextSearchConditionsService = findNextSearchConditionsService;
+            _findNextAndReplaceConditionsService = findNextAndReplaceConditionsService;
         }
 
         public override async Task ExecuteAsync()
@@ -29,12 +29,12 @@ namespace Application.Client.Windows.Main.Commands.EditMenu
             if (searchedTextStartIndex == -1)
             {
                 await _messageDialog.ShowDialogAsync(
-                    new MessageDialogOptions { Title = "Notepad", Content = $"'{_findNextSearchConditionsService.FindWhat}' was not found!", Button = MessageBoxButton.OK, Icon = MessageBoxImage.Information });
+                    new MessageDialogOptions { Title = "Notepad", Content = $"'{_findNextAndReplaceConditionsService.FindWhat}' was not found!", Button = MessageBoxButton.OK, Icon = MessageBoxImage.Information });
             }
             else
             {
                 CallerViewModel.InputTextBoxViewModel.CaretIndex = searchedTextStartIndex;
-                CallerViewModel.InputTextBoxViewModel.SelectionLength = _findNextSearchConditionsService.FindWhat.Length;
+                CallerViewModel.InputTextBoxViewModel.SelectionLength = _findNextAndReplaceConditionsService.FindWhat.Length;
             }
 
             CallerViewModel.WindowSettingsViewModel.Activated = true;
@@ -43,11 +43,11 @@ namespace Application.Client.Windows.Main.Commands.EditMenu
         }
 
         public override Predicate<object?> CanExecute => _ => CallerViewModel.InputTextBoxViewModel.Content.Length != 0 &&
-                                                              _findNextSearchConditionsService.HasSearchTerms;
+                                                              _findNextAndReplaceConditionsService.HasSearchTerms;
 
         private int GetSearchedTextStartIndex()
         {
-            return _findNextSearchConditionsService.DirectionType == DirectionType.Up
+            return _findNextAndReplaceConditionsService.DirectionType == DirectionType.Up
                 ? GetNextTextStartIndex()
                 : GetPreviousTextStartIndex();
         }
@@ -64,12 +64,12 @@ namespace Application.Client.Windows.Main.Commands.EditMenu
                 StringComparison.CurrentCulture);
         }
 
-        private string Content => _findNextSearchConditionsService.IsMatchCase
+        private string Content => _findNextAndReplaceConditionsService.IsMatchCase
             ? CallerViewModel.InputTextBoxViewModel.Content
             : CallerViewModel.InputTextBoxViewModel.Content.ToLower();
 
-        private string SearchedText => _findNextSearchConditionsService.IsMatchCase
-            ? _findNextSearchConditionsService.FindWhat
-            : _findNextSearchConditionsService.FindWhat.ToLower();
+        private string SearchedText => _findNextAndReplaceConditionsService.IsMatchCase
+            ? _findNextAndReplaceConditionsService.FindWhat
+            : _findNextAndReplaceConditionsService.FindWhat.ToLower();
     }
 }

@@ -31,7 +31,7 @@ namespace Application.Client.Dialogs.ReplaceDialog.Windows.ViewModels
         public ICommand ReplaceCommand => _replaceCommand ??= new ReplaceCommand(this);
 
         private ICommand? _replaceAllCommand;
-        public ICommand ReplaceAllCommand => _replaceAllCommand ??= new ReplaceAllCommand(this);
+        public ICommand ReplaceAllCommand => _replaceAllCommand ??= new ReplaceAllCommand(this, _validator);
 
         private ICommand? _findNextCommand;
         public ICommand FindNextCommand => _findNextCommand ??= new FindNextCommand(this, _validator);
