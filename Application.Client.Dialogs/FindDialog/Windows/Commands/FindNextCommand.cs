@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Application.Client.Common.Commands;
 using Application.Client.Dialogs.FindDialog.Windows.ViewModels;
-using Application.Client.Messenger.GenericMessages.DialogMessages;
+using Application.Client.Messenger.GenericMessages.DialogMessages.Shared;
 using FluentValidation;
 
 namespace Application.Client.Dialogs.FindDialog.Windows.Commands
