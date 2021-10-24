@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Threading;
 using Application.Client.Cache.Infrastructure.Repository.Extensions.DependencyInjection;
 using Application.Client.Cache.Infrastructure.Services.Extensions.DependencyInjection;
+using Application.Client.Dialogs.AboutDialog.Extensions.DependencyInjection;
 using Application.Client.Dialogs.ColorDialog.Extensions.DependencyInjection;
 using Application.Client.Dialogs.FindDialog.Extensions.DependencyInjection;
 using Application.Client.Dialogs.FontDialog.Extensions.DependencyInjection;
@@ -108,6 +109,7 @@ namespace Application.Client
             services.AddColorDialog();
             services.AddReplaceDialog();
             services.AddGoToLineDialog();
+            services.AddAboutDialog();
 
             services.AddServices();
 

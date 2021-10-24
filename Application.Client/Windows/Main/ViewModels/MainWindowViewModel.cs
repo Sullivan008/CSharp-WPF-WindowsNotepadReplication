@@ -1,6 +1,7 @@
 ﻿using System.Windows.Input;
 using System.Windows.Threading;
 using Application.Client.Common.ViewModels;
+using Application.Client.Dialogs.AboutDialog.Interfaces;
 using Application.Client.Dialogs.ColorDialog.Interfaces;
 using Application.Client.Dialogs.FindDialog.Interfaces;
 using Application.Client.Dialogs.FontDialog.Interfaces;
@@ -17,6 +18,7 @@ using Application.Client.Services.FindNextAndReplaceConditions.Interfaces;
 using Application.Client.Windows.Main.Commands.EditMenu;
 using Application.Client.Windows.Main.Commands.FileMenu;
 using Application.Client.Windows.Main.Commands.FormatMenu;
+using Application.Client.Windows.Main.Commands.HelpMenu;
 using Application.Client.Windows.Main.Commands.Shared;
 using Application.Client.Windows.Main.Commands.ViewMenu;
 using Application.Client.Windows.Main.ViewModels.InputTextBox;
@@ -35,10 +37,12 @@ namespace Application.Client.Windows.Main.ViewModels
 
         private readonly IColorDialog _colorDialog;
 
+        private readonly IAboutDialog _aboutDialog;
+
         private readonly IMessageDialog _messageDialog;
 
         private readonly IReplaceDialog _replaceDialog;
-
+        
         private readonly IOpenFileDialog _openFileDialog;
 
         private readonly ISaveFileDialog _saveFileDialog;
@@ -54,12 +58,14 @@ namespace Application.Client.Windows.Main.ViewModels
         private readonly IFindNextAndReplaceConditionsService _findNextSearchConditionsService;
 
         public MainWindowViewModel(WindowSettingsViewModel windowSettingsViewModel, InputTextBoxViewModel inputTextBoxViewModel, StatusBarViewModel statusBarViewModel, IFontDialog fontDialog,
-            IFindDialog findDialog, IColorDialog colorDialog, IMessageDialog messageDialog, IReplaceDialog replaceDialog, IOpenFileDialog openFileDialog, ISaveFileDialog saveFileDialog,
-            IGoToLineDialog goToLineDialog, ITextFileWriter textFileWriter, ITextFileReader textFileReader, IDocInfoService docInfoService, IFindNextAndReplaceConditionsService findNextSearchConditionsService)
+            IFindDialog findDialog, IColorDialog colorDialog, IAboutDialog aboutDialog, IMessageDialog messageDialog, IReplaceDialog replaceDialog, IOpenFileDialog openFileDialog, 
+            ISaveFileDialog saveFileDialog, IGoToLineDialog goToLineDialog, ITextFileWriter textFileWriter, ITextFileReader textFileReader, IDocInfoService docInfoService, 
+            IFindNextAndReplaceConditionsService findNextSearchConditionsService)
         {
             _fontDialog = fontDialog;
             _findDialog = findDialog;
             _colorDialog = colorDialog;
+            _aboutDialog = aboutDialog;
             _messageDialog = messageDialog;
             _replaceDialog = replaceDialog;
             _openFileDialog = openFileDialog;
@@ -208,5 +214,9 @@ namespace Application.Client.Windows.Main.ViewModels
 
         private ICommand? _changeStatusBarVisibilityCommand;
         public ICommand ChangeStatusBarVisibilityCommand => _changeStatusBarVisibilityCommand ??= new ChangeStatusBarVisibilityCommand(this);
+
+
+        private ICommand? _aboutCommand;
+        public ICommand AboutCommand => _aboutCommand ??= new AboutCommand(this, _aboutDialog);
     }
 }

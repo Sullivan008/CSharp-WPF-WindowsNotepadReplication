@@ -121,6 +121,9 @@
                 <MenuItem Template="{DynamicResource MainMenuItemControlTemplate}" Header="View">
                     <MenuItem Header="_Status bar" IsCheckable="True" IsChecked="True" Command="{Binding ChangeStatusBarVisibilityCommand}"/>
                 </MenuItem>
+                <MenuItem Template="{DynamicResource MainMenuItemControlTemplate}" Header="Help">
+                    <MenuItem Header="_About" Command="{Binding AboutCommand}"/>
+                </MenuItem>
             </Menu>
             <StatusBar DockPanel.Dock="Bottom" Visibility="{Binding StatusBarViewModel.Visibility}">
                 <StatusBar.ItemsPanel>
