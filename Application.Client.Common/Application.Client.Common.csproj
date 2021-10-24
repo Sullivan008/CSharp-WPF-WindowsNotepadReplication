@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<AssemblyName>Application.Client.Common</AssemblyName>
+		<RootNamespace>Application.Client.Common</RootNamespace>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Application.Utilities\Application.Utilities.csproj" />
+	</ItemGroup>
+
+</Project>

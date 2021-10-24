@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<UseWPF>true</UseWPF>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Remove="AboutDialog\Windows\Assets\Images\application-icon.png" />
+		<None Remove="FindDialog\Windows\FindWindow.xaml" />
+		<None Remove="GoToLineDialog\Windows\GoToLineWindow.xaml" />
+		<None Remove="ReplaceDialog\Windows\ReplaceWindow.xaml" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<FrameworkReference Include="Microsoft.WindowsDesktop.App.Wpf" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="FluentValidation" Version="10.3.3" />
+		<PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.37" />
+		<PackageReference Include="MvvmLightLibsStd10" Version="5.4.1.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Application.Client.Behaviors\Application.Client.Behaviors.csproj" />
+		<ProjectReference Include="..\Application.Client.Common\Application.Client.Common.csproj" />
+		<ProjectReference Include="..\Application.Client.Converters\Application.Client.Converters.csproj" />
+		<ProjectReference Include="..\Application.Client.Messenger\Application.Client.Messenger.csproj" />
+		<ProjectReference Include="..\Application.Client.Services\Application.Client.Services.csproj" />
+		<ProjectReference Include="..\Application.Utilities\Application.Utilities.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Resource Include="AboutDialog\Windows\Assets\Images\application-icon.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Resource>
+	</ItemGroup>
+</Project>
