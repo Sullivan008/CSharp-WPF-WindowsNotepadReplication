@@ -166,6 +166,19 @@
                      textBoxBehaviors:LineIndexBehavior.LineIndex="{Binding InputTextBoxViewModel.LineIndex, UpdateSourceTrigger=PropertyChanged}"
                      textBoxBehaviors:ColumnIndexBehavior.ColumnIndex="{Binding InputTextBoxViewModel.ColumnIndex}"
                      textBoxBehaviors:SelectionLengthBehavior.SelectionLength="{Binding InputTextBoxViewModel.SelectionLength}">
+                <TextBox.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Redo" Command="ApplicationCommands.Redo"/>
+                        <MenuItem Header="Undo" Command="ApplicationCommands.Undo"/>
+                        <Separator/>
+                        <MenuItem Header="Cut" Command="ApplicationCommands.Cut"/>
+                        <MenuItem Header="Copy" Command="ApplicationCommands.Copy"/>
+                        <MenuItem Header="Paste" Command="ApplicationCommands.Paste"/>
+                        <MenuItem Header="Delete" InputGestureText="Del" Command="{Binding DeleteTextCommand}"/>
+                        <Separator/>
+                        <MenuItem Header="_Select All" Command="ApplicationCommands.SelectAll"/>
+                    </ContextMenu>
+                </TextBox.ContextMenu>
             </TextBox>
         </DockPanel>
 
