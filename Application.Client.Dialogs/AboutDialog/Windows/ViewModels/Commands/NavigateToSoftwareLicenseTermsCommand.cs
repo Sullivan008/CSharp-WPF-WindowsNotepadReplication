@@ -11,7 +11,7 @@ namespace Application.Client.Dialogs.AboutDialog.Windows.ViewModels.Commands
 
         public override async Task ExecuteAsync()
         {
-            const string URL = "https://github.com/Sullivan008/CSharp-WFA-WindowsNotepadReplication/blob/master/LICENSE";
+            const string URL = "https://github.com/Sullivan008/CSharp-WPF-WindowsNotepadReplication/blob/master/LICENSE";
 
             ProcessStartInfo processStartInfo = new(URL) { UseShellExecute = true };
             Process process = Process.Start(processStartInfo)!;
